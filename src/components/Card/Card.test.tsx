@@ -25,7 +25,7 @@ describe('Card', () => {
     it('should apply custom styles', () => {
       render(<Card style={{ backgroundColor: 'red' }}>Content</Card>);
       const card = screen.getByText('Content').closest('div');
-      expect(card).toHaveStyle({ backgroundColor: 'red' });
+      expect(card).toHaveStyle({ backgroundColor: 'rgb(255, 0, 0)' });
     });
   });
 
