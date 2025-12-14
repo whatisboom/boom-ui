@@ -1,0 +1,28 @@
+:root {
+  /* Base spacing unit: 4px */
+  --boom-spacing-0: 0;
+  --boom-spacing-1: 0.25rem; /* 4px */
+  --boom-spacing-2: 0.5rem;  /* 8px */
+  --boom-spacing-3: 0.75rem; /* 12px */
+  --boom-spacing-4: 1rem;    /* 16px */
+  --boom-spacing-5: 1.25rem; /* 20px */
+  --boom-spacing-6: 1.5rem;  /* 24px */
+  --boom-spacing-8: 2rem;    /* 32px */
+  --boom-spacing-10: 2.5rem; /* 40px */
+  --boom-spacing-12: 3rem;   /* 48px */
+  --boom-spacing-16: 4rem;   /* 64px */
+  --boom-spacing-20: 5rem;   /* 80px */
+
+  /* Border radius */
+  --boom-radius-none: 0;
+  --boom-radius-sm: 0.125rem;
+  --boom-radius-md: 0.375rem;
+  --boom-radius-lg: 0.5rem;
+  --boom-radius-xl: 0.75rem;
+  --boom-radius-full: 9999px;
+
+  /* Transitions */
+  --boom-transition-fast: 150ms ease;
+  --boom-transition-base: 200ms ease;
+  --boom-transition-slow: 300ms ease;
+}
