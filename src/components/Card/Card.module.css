@@ -1,4 +1,5 @@
 .card {
+  display: block;
   background-color: var(--boom-color-bg-primary);
   border-radius: var(--boom-radius-lg);
   transition: all var(--boom-transition-base);
