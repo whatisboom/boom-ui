@@ -1,0 +1,48 @@
+.card {
+  background-color: var(--boom-color-bg-primary);
+  border-radius: var(--boom-radius-lg);
+  transition: all var(--boom-transition-base);
+}
+
+/* Variants */
+.flat {
+  border: 1px solid var(--boom-color-border);
+  box-shadow: none;
+}
+
+.raised {
+  border: 1px solid var(--boom-color-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.elevated {
+  border: 1px solid var(--boom-color-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Hoverable state */
+.hoverable {
+  cursor: pointer;
+}
+
+.hoverable.flat:hover {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.hoverable.raised:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.hoverable.elevated:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
