@@ -69,7 +69,7 @@ export const NoPadding: Story = {
     children: (
       <div>
         <img
-          src="https://via.placeholder.com/400x200"
+          src="https://placehold.co/400x200"
           alt="Placeholder"
           style={{ width: '100%', display: 'block' }}
         />
@@ -130,7 +130,7 @@ export const ProductCard: Story = {
     <Card hoverable style={{ maxWidth: '300px' }}>
       <Stack spacing={3}>
         <img
-          src="https://via.placeholder.com/300x200"
+          src="https://placehold.co/300x200"
           alt="Product"
           style={{ width: '100%', borderRadius: 'var(--boom-radius-md)' }}
         />
