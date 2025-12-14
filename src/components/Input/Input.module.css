@@ -1,0 +1,203 @@
+/* Wrapper - contains label, input, and helper/error text */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--boom-spacing-1);
+  font-family: var(--boom-font-sans);
+}
+
+.wrapper.fullWidth {
+  width: 100%;
+}
+
+/* Label */
+.label {
+  display: block;
+  font-size: var(--boom-font-size-sm);
+  font-weight: var(--boom-font-weight-medium);
+  color: var(--boom-color-text-primary);
+  cursor: pointer;
+}
+
+.label.disabled {
+  color: var(--boom-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.required {
+  color: var(--boom-color-error-500);
+  margin-left: var(--boom-spacing-1);
+}
+
+/* Input container - holds icons and input */
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Base input styles */
+.input {
+  display: block;
+  width: 100%;
+  font-family: var(--boom-font-sans);
+  color: var(--boom-color-text-primary);
+  background-color: var(--boom-color-bg-primary);
+  border: 1px solid var(--boom-color-border);
+  transition: all var(--boom-transition-base);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--boom-color-text-disabled);
+}
+
+/* Size variants */
+.sm {
+  height: 2rem;
+  padding: 0 var(--boom-spacing-3);
+  font-size: var(--boom-font-size-sm);
+  border-radius: var(--boom-radius-md);
+}
+
+.md {
+  height: 2.5rem;
+  padding: 0 var(--boom-spacing-4);
+  font-size: var(--boom-font-size-base);
+  border-radius: var(--boom-radius-md);
+}
+
+.lg {
+  height: 3rem;
+  padding: 0 var(--boom-spacing-4);
+  font-size: var(--boom-font-size-lg);
+  border-radius: var(--boom-radius-lg);
+}
+
+/* Adjust padding for icons */
+.input.hasLeftIcon.sm {
+  padding-left: var(--boom-spacing-8);
+}
+
+.input.hasLeftIcon.md {
+  padding-left: var(--boom-spacing-10);
+}
+
+.input.hasLeftIcon.lg {
+  padding-left: var(--boom-spacing-12);
+}
+
+.input.hasRightIcon.sm {
+  padding-right: var(--boom-spacing-8);
+}
+
+.input.hasRightIcon.md {
+  padding-right: var(--boom-spacing-10);
+}
+
+.input.hasRightIcon.lg {
+  padding-right: var(--boom-spacing-12);
+}
+
+/* States */
+.input:hover:not(:disabled):not(:focus):not(.error) {
+  border-color: var(--boom-color-neutral-400);
+}
+
+.input:focus {
+  border-color: var(--boom-color-border-focus);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.input:disabled {
+  background-color: var(--boom-color-neutral-100);
+  color: var(--boom-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.input:read-only {
+  background-color: var(--boom-color-neutral-50);
+  cursor: default;
+}
+
+.input.error {
+  border-color: var(--boom-color-error-500);
+}
+
+.input.error:focus {
+  border-color: var(--boom-color-error-500);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Icons */
+.leftIcon,
+.rightIcon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--boom-color-text-secondary);
+  pointer-events: none;
+}
+
+.leftIcon {
+  left: var(--boom-spacing-3);
+}
+
+.rightIcon {
+  right: var(--boom-spacing-3);
+}
+
+.disabled .leftIcon,
+.disabled .rightIcon {
+  color: var(--boom-color-text-disabled);
+}
+
+.error .leftIcon,
+.error .rightIcon {
+  color: var(--boom-color-error-500);
+}
+
+/* Icon sizes */
+.leftIcon.sm,
+.rightIcon.sm {
+  font-size: var(--boom-font-size-sm);
+}
+
+.leftIcon.md,
+.rightIcon.md {
+  font-size: var(--boom-font-size-base);
+}
+
+.leftIcon.lg,
+.rightIcon.lg {
+  font-size: var(--boom-font-size-lg);
+}
+
+/* Helper text and error message */
+.helperText,
+.errorText {
+  font-size: var(--boom-font-size-sm);
+  margin-top: var(--boom-spacing-1);
+}
+
+.helperText {
+  color: var(--boom-color-text-secondary);
+}
+
+.errorText {
+  color: var(--boom-color-error-500);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .input {
+    transition: none;
+  }
+}
+
+/* Focus-visible for keyboard navigation */
+.input:focus-visible {
+  outline: 2px solid var(--boom-color-focus-ring);
+  outline-offset: 2px;
+}

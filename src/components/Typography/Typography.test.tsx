@@ -62,7 +62,6 @@ describe('Typography', () => {
         <Typography>Body text</Typography>
       </div>
     );
-    // @ts-expect-error - vitest-axe types are not fully compatible with vitest
     expect(await axe(container)).toHaveNoViolations();
   });
 });

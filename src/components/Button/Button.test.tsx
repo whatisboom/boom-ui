@@ -93,13 +93,11 @@ describe('Button', () => {
 
   it('should have no accessibility violations', async () => {
     const { container } = render(<Button>Accessible Button</Button>);
-    // @ts-expect-error - vitest-axe types are not fully compatible with vitest
     expect(await axe(container)).toHaveNoViolations();
   });
 
   it('should have no accessibility violations when disabled', async () => {
     const { container } = render(<Button disabled>Disabled Button</Button>);
-    // @ts-expect-error - vitest-axe types are not fully compatible with vitest
     expect(await axe(container)).toHaveNoViolations();
   });
 });
