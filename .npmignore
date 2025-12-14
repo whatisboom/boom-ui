@@ -1,0 +1,16 @@
+src
+tests
+stories
+.storybook
+docs
+*.config.ts
+*.config.js
+.eslintrc.cjs
+.prettierrc
+tsconfig.json
+tsconfig.node.json
+.github
+coverage
+*.test.tsx
+*.test.ts
+*.stories.tsx
