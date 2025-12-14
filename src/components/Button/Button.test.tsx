@@ -77,6 +77,20 @@ describe('Button', () => {
     expect(button).toHaveAttribute('aria-busy', 'true');
   });
 
+  it('should add aria-label when loading with string children', () => {
+    render(<Button loading>Submit</Button>);
+    const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('aria-label', 'Submit - Loading');
+  });
+
+  it('should disable animation when disableAnimation is true', () => {
+    const { container } = render(<Button disableAnimation>No Animation</Button>);
+    const button = container.querySelector('button');
+    expect(button?.tagName).toBe('BUTTON');
+    // Verify it's a regular button, not a motion.button (which would have additional motion props)
+    expect(button).not.toHaveAttribute('data-framer-component');
+  });
+
   it('should have no accessibility violations', async () => {
     const { container } = render(<Button>Accessible Button</Button>);
     // @ts-expect-error - vitest-axe types are not fully compatible with vitest
