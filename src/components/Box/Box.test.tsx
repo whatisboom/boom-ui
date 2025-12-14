@@ -67,7 +67,6 @@ describe('Box', () => {
 
   it('should have no accessibility violations', async () => {
     const { container } = render(<Box>Content</Box>);
-    // @ts-expect-error - vitest-axe types are not fully compatible with vitest
     expect(await axe(container)).toHaveNoViolations();
   });
 });
