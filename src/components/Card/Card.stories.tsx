@@ -91,7 +91,7 @@ export const Hoverable: Story = {
 
 export const HoverableLink: Story = {
   render: () => (
-    <Card as="a" href="#" hoverable>
+    <Card as="a" href="#" hoverable style={{ textDecoration: 'none', color: 'inherit' }}>
       <Typography variant="h4">Clickable Card</Typography>
       <Typography>This card is a link. Hover to see the effect.</Typography>
     </Card>
@@ -247,7 +247,7 @@ export const DifferentPadding: Story = {
 export const InteractiveCards: Story = {
   render: () => (
     <Box display="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--boom-spacing-4)' }}>
-      <Card as="a" href="#" hoverable>
+      <Card as="a" href="#" hoverable style={{ textDecoration: 'none', color: 'inherit' }}>
         <Typography variant="h4">Link Card</Typography>
         <Typography>Navigates to a new page</Typography>
       </Card>
