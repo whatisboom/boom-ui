@@ -111,10 +111,18 @@
   transform: translate(-50%, -50%);
   width: 1rem;
   height: 1rem;
-  border: 2px solid currentColor;
+  border: 2px solid var(--boom-color-text-inverse);
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
+}
+
+/* Spinner colors for different variants */
+.secondary .spinner,
+.outline .spinner,
+.ghost .spinner,
+.link .spinner {
+  border-color: var(--boom-color-primary-600);
 }
 
 @keyframes spin {

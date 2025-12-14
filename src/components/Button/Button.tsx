@@ -44,6 +44,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className: buttonClassName,
       disabled: disabled || loading,
       'aria-busy': loading,
+      'aria-label': loading && typeof children === 'string'
+        ? `${children} - Loading`
+        : props['aria-label'],
       ...props,
     };
 
