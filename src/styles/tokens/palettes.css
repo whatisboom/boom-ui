@@ -84,14 +84,14 @@
   --boom-palette-error-50: hsl(var(--boom-hue-error) 86% 97%);   /* was: #fef2f2 */
 
   /* Info - Teal (saturated for clarity) */
-  --boom-palette-info-700: #0f766e;
-  --boom-palette-info-600: #0d9488;
-  --boom-palette-info-500: #14b8a6;
-  --boom-palette-info-400: #2dd4bf;
-  --boom-palette-info-300: #5eead4;
-  --boom-palette-info-200: #99f6e4;
-  --boom-palette-info-100: #ccfbf1;
-  --boom-palette-info-50: #f0fdfa;
+  --boom-palette-info-700: hsl(var(--boom-hue-info) 78% 26%);  /* was: #0f766e */
+  --boom-palette-info-600: hsl(var(--boom-hue-info) 84% 32%);  /* was: #0d9488 */
+  --boom-palette-info-500: hsl(var(--boom-hue-info) 80% 39%);  /* was: #14b8a6 */
+  --boom-palette-info-400: hsl(var(--boom-hue-info) 74% 50%);  /* was: #2dd4bf */
+  --boom-palette-info-300: hsl(var(--boom-hue-info) 73% 65%);  /* was: #5eead4 */
+  --boom-palette-info-200: hsl(var(--boom-hue-info) 76% 79%);  /* was: #99f6e4 */
+  --boom-palette-info-100: hsl(var(--boom-hue-info) 84% 90%);  /* was: #ccfbf1 */
+  --boom-palette-info-50: hsl(var(--boom-hue-info) 80% 97%);   /* was: #f0fdfa */
 }
 
 /* ==========================================================================
