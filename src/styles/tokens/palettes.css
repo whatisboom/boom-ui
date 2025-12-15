@@ -42,16 +42,16 @@
   --boom-palette-slate-50: hsl(0 0% 100%);                         /* was: #ffffff */
 
   /* Muted Slate-Blue Primary - Moderately desaturated, sophisticated */
-  --boom-palette-blue-900: #1e3a5f;
-  --boom-palette-blue-800: #2e4a6f;
-  --boom-palette-blue-700: #3e5a7f;
-  --boom-palette-blue-600: #4e6a8f;
-  --boom-palette-blue-500: #60a5fa;
-  --boom-palette-blue-400: #7dbdfc;
-  --boom-palette-blue-300: #93c5fd;
-  --boom-palette-blue-200: #bfdbfe;
-  --boom-palette-blue-100: #dbeafe;
-  --boom-palette-blue-50: #eff6ff;
+  --boom-palette-blue-900: hsl(var(--boom-hue-blue) 52% 24%);   /* was: #1e3a5f */
+  --boom-palette-blue-800: hsl(var(--boom-hue-blue) 42% 30%);   /* was: #2e4a6f */
+  --boom-palette-blue-700: hsl(var(--boom-hue-blue) 36% 36%);   /* was: #3e5a7f */
+  --boom-palette-blue-600: hsl(var(--boom-hue-blue) 30% 43%);   /* was: #4e6a8f */
+  --boom-palette-blue-500: hsl(var(--boom-hue-blue) 94% 68%);   /* was: #60a5fa */
+  --boom-palette-blue-400: hsl(var(--boom-hue-blue) 96% 75%);   /* was: #7dbdfc */
+  --boom-palette-blue-300: hsl(var(--boom-hue-blue) 96% 80%);   /* was: #93c5fd */
+  --boom-palette-blue-200: hsl(var(--boom-hue-blue) 96% 87%);   /* was: #bfdbfe */
+  --boom-palette-blue-100: hsl(var(--boom-hue-blue) 100% 93%);  /* was: #dbeafe */
+  --boom-palette-blue-50: hsl(var(--boom-hue-blue) 100% 97%);   /* was: #eff6ff */
 
   /* Success - Green (saturated for clarity) */
   --boom-palette-success-700: #15803d;
