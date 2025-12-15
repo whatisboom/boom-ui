@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect } from 'react';
 import { useTheme } from './ThemeProvider';
 import { Button } from '../Button';
 import { Card } from '../Card';
@@ -132,3 +133,114 @@ export default meta;
 type Story = StoryObj<typeof ThemeShowcase>;
 
 export const Default: Story = {};
+
+export const CustomHues: Story = {
+  render: (args) => {
+    const { theme, setTheme } = useTheme();
+
+    // Apply hue customizations
+    useEffect(() => {
+      if (args.primaryHue !== undefined) {
+        document.documentElement.style.setProperty('--boom-hue-blue', String(args.primaryHue));
+      }
+      if (args.successHue !== undefined) {
+        document.documentElement.style.setProperty('--boom-hue-success', String(args.successHue));
+      }
+      if (args.errorHue !== undefined) {
+        document.documentElement.style.setProperty('--boom-hue-error', String(args.errorHue));
+      }
+
+      return () => {
+        // Reset on unmount
+        document.documentElement.style.removeProperty('--boom-hue-blue');
+        document.documentElement.style.removeProperty('--boom-hue-success');
+        document.documentElement.style.removeProperty('--boom-hue-error');
+      };
+    }, [args.primaryHue, args.successHue, args.errorHue]);
+
+    return (
+      <div className={styles.container}>
+        <div className={styles.section}>
+          <h1 className={styles.title}>Hue Customization Demo</h1>
+          <p className={styles.subtitle}>
+            Adjust the hue controls to see brand colors change dynamically.
+          </p>
+
+          <div className={styles.controls}>
+            <Button onClick={() => setTheme('light')} variant={theme === 'light' ? 'primary' : 'secondary'}>
+              Light
+            </Button>
+            <Button onClick={() => setTheme('dark')} variant={theme === 'dark' ? 'primary' : 'secondary'}>
+              Dark
+            </Button>
+            <Button onClick={() => setTheme('system')} variant={theme === 'system' ? 'primary' : 'secondary'}>
+              System
+            </Button>
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <h2>Interactive Elements</h2>
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+            <Button variant="primary">Primary Button</Button>
+            <Button variant="secondary">Secondary Button</Button>
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <h2>Semantic Colors</h2>
+          <div className={styles.semanticGrid}>
+            <Card className={styles.semanticCard} style={{ borderLeft: '4px solid var(--boom-theme-success-bg)' }}>
+              <h3>Success</h3>
+              <p style={{ color: 'var(--boom-theme-success-text)' }}>Operation completed successfully</p>
+            </Card>
+            <Card className={styles.semanticCard} style={{ borderLeft: '4px solid var(--boom-theme-error-bg)' }}>
+              <h3>Error</h3>
+              <p style={{ color: 'var(--boom-theme-error-text)' }}>Something went wrong</p>
+            </Card>
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <h2>Color Palette</h2>
+          <div className={styles.colorSection}>
+            <h3>Primary (Blue)</h3>
+            <div className={styles.colorGrid}>
+              {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => (
+                <div key={shade} className={styles.colorSwatch}>
+                  <div
+                    className={styles.colorBox}
+                    style={{ backgroundColor: `var(--boom-palette-blue-${shade})` }}
+                  />
+                  <span className={styles.colorLabel}>{shade}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    primaryHue: {
+      control: { type: 'range', min: 0, max: 360, step: 1 },
+      defaultValue: 213,
+      description: 'Primary brand hue (0-360)',
+    },
+    successHue: {
+      control: { type: 'range', min: 0, max: 360, step: 1 },
+      defaultValue: 142,
+      description: 'Success state hue (0-360)',
+    },
+    errorHue: {
+      control: { type: 'range', min: 0, max: 360, step: 1 },
+      defaultValue: 0,
+      description: 'Error state hue (0-360)',
+    },
+  },
+  args: {
+    primaryHue: 213,
+    successHue: 142,
+    errorHue: 0,
+  },
+};
