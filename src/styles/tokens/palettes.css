@@ -54,14 +54,14 @@
   --boom-palette-blue-50: hsl(var(--boom-hue-blue) 100% 97%);   /* was: #eff6ff */
 
   /* Success - Green (saturated for clarity) */
-  --boom-palette-success-700: #15803d;
-  --boom-palette-success-600: #16a34a;
-  --boom-palette-success-500: #22c55e;
-  --boom-palette-success-400: #4ade80;
-  --boom-palette-success-300: #86efac;
-  --boom-palette-success-200: #bbf7d0;
-  --boom-palette-success-100: #dcfce7;
-  --boom-palette-success-50: #f0fdf4;
+  --boom-palette-success-700: hsl(var(--boom-hue-success) 73% 29%);  /* was: #15803d */
+  --boom-palette-success-600: hsl(var(--boom-hue-success) 72% 37%);  /* was: #16a34a */
+  --boom-palette-success-500: hsl(var(--boom-hue-success) 71% 45%);  /* was: #22c55e */
+  --boom-palette-success-400: hsl(var(--boom-hue-success) 69% 58%);  /* was: #4ade80 */
+  --boom-palette-success-300: hsl(var(--boom-hue-success) 75% 73%);  /* was: #86efac */
+  --boom-palette-success-200: hsl(var(--boom-hue-success) 73% 85%);  /* was: #bbf7d0 */
+  --boom-palette-success-100: hsl(var(--boom-hue-success) 84% 93%);  /* was: #dcfce7 */
+  --boom-palette-success-50: hsl(var(--boom-hue-success) 86% 97%);   /* was: #f0fdf4 */
 
   /* Warning - Amber (saturated for clarity) */
   --boom-palette-warning-700: #b45309;
