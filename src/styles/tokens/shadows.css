@@ -7,42 +7,28 @@
  */
 
 :root {
-  /* Small shadow - subtle elevation */
-  --boom-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  /* Small shadow - subtle depth */
+  --boom-shadow-sm: 0 1px 2px 0 var(--boom-theme-shadow-color-subtle);
 
-  /* Medium shadow - standard cards and panels */
-  --boom-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* Medium shadow - cards, dropdowns */
+  --boom-shadow-md:
+    0 4px 6px -1px var(--boom-theme-shadow-color),
+    0 2px 4px -1px var(--boom-theme-shadow-color-subtle);
 
-  /* Large shadow - modals and popovers */
-  --boom-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* Large shadow - modals, popovers */
+  --boom-shadow-lg:
+    0 10px 15px -3px var(--boom-theme-shadow-color),
+    0 4px 6px -2px var(--boom-theme-shadow-color-subtle);
 
-  /* Extra large shadow - highest elevation */
-  --boom-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  /* Extra large shadow - full-screen overlays */
+  --boom-shadow-xl:
+    0 20px 25px -5px var(--boom-theme-shadow-color),
+    0 10px 10px -5px var(--boom-theme-shadow-color-subtle);
 
-  /* Focus ring shadow */
-  --boom-shadow-focus: 0 0 0 3px var(--boom-theme-focus-ring);
+  /* Focus shadow - for focus rings */
+  --boom-shadow-focus: 0 0 0 3px var(--boom-theme-focus-ring-shadow);
 
-  /* Inner shadow for inset elements */
-  --boom-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  /* Inner shadow - inset effects */
+  --boom-shadow-inner: inset 0 2px 4px 0 var(--boom-theme-shadow-color-subtle);
 }
 
-:root[data-theme='light'] {
-  /* Light theme has stronger, more defined shadows for better depth perception */
-  --boom-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-
-  --boom-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.15),
-    0 2px 4px -1px rgba(0, 0, 0, 0.1);
-
-  --boom-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.15),
-    0 4px 6px -2px rgba(0, 0, 0, 0.08);
-
-  --boom-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.15),
-    0 10px 10px -5px rgba(0, 0, 0, 0.06);
-
-  --boom-shadow-focus: 0 0 0 3px var(--boom-theme-focus-ring);
-
-  --boom-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-}
