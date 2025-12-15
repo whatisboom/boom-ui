@@ -8,11 +8,26 @@
  * Light theme overrides with [data-theme="light"]
  */
 
-/* ==========================================================================
-   DARK THEME (Default)
-   ========================================================================== */
-
 :root {
+  /* ==========================================================================
+     HUE VARIABLES - Brand Customization Entry Points
+     ========================================================================== */
+
+  /* Neutral colors - slate blue tint */
+  --boom-hue-slate: 215;
+
+  /* Primary brand color */
+  --boom-hue-blue: 213;
+
+  /* Semantic state colors */
+  --boom-hue-success: 142;   /* green */
+  --boom-hue-warning: 38;    /* amber */
+  --boom-hue-error: 0;       /* red */
+  --boom-hue-info: 173;      /* teal */
+
+  /* ==========================================================================
+     DARK THEME (Default)
+     ========================================================================== */
   /* Slate Gray Backgrounds - For dark theme layering */
   --boom-palette-slate-950: #0f172a;
   --boom-palette-slate-900: #1e293b;
