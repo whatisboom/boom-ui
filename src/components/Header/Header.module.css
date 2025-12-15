@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: var(--boom-header-height, 64px);
+  padding: 0 24px;
+  background-color: var(--boom-theme-bg-primary);
+  border-bottom: 1px solid var(--boom-theme-border-color);
+  z-index: var(--boom-z-header, 1000);
+}
+
+.header.sticky {
+  position: sticky;
+  top: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 16px;
+    gap: 16px;
+  }
+}
