@@ -101,32 +101,32 @@
 
 /* States */
 .input:hover:not(:disabled):not(:focus):not(.error) {
-  border-color: var(--boom-color-neutral-400);
+  border-color: var(--boom-theme-border-default);
 }
 
 .input:focus {
-  border-color: var(--boom-color-border-focus);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  border-color: var(--boom-theme-border-focus);
+  box-shadow: 0 0 0 3px var(--boom-theme-focus-ring-shadow);
 }
 
 .input:disabled {
-  background-color: var(--boom-color-neutral-100);
-  color: var(--boom-color-text-disabled);
+  background-color: var(--boom-theme-bg-secondary);
+  color: var(--boom-theme-text-disabled);
   cursor: not-allowed;
 }
 
 .input:read-only {
-  background-color: var(--boom-color-neutral-50);
+  background-color: var(--boom-theme-bg-elevated);
   cursor: default;
 }
 
 .input.error {
-  border-color: var(--boom-color-error-500);
+  border-color: var(--boom-theme-error-border);
 }
 
 .input.error:focus {
-  border-color: var(--boom-color-error-500);
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  border-color: var(--boom-theme-error-border);
+  box-shadow: 0 0 0 3px hsl(var(--boom-hue-error) 84% 60% / 0.15);
 }
 
 /* Icons */
@@ -136,7 +136,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--boom-color-text-secondary);
+  color: var(--boom-theme-text-secondary);
   pointer-events: none;
 }
 
@@ -150,12 +150,12 @@
 
 .disabled .leftIcon,
 .disabled .rightIcon {
-  color: var(--boom-color-text-disabled);
+  color: var(--boom-theme-text-disabled);
 }
 
 .error .leftIcon,
 .error .rightIcon {
-  color: var(--boom-color-error-500);
+  color: var(--boom-theme-error-text);
 }
 
 /* Icon sizes */
@@ -182,11 +182,11 @@
 }
 
 .helperText {
-  color: var(--boom-color-text-secondary);
+  color: var(--boom-theme-text-secondary);
 }
 
 .errorText {
-  color: var(--boom-color-error-500);
+  color: var(--boom-theme-error-text);
 }
 
 /* Respect reduced motion preference */
@@ -198,6 +198,6 @@
 
 /* Focus-visible for keyboard navigation */
 .input:focus-visible {
-  outline: 2px solid var(--boom-color-focus-ring);
+  outline: 2px solid var(--boom-theme-focus-ring);
   outline-offset: 2px;
 }
