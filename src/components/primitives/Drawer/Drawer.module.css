@@ -1,0 +1,16 @@
+.drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background-color: var(--boom-theme-bg-primary);
+  box-shadow: var(--boom-shadow-xl);
+  overflow-y: auto;
+}
+
+.drawer.left {
+  left: 0;
+}
+
+.drawer.right {
+  right: 0;
+}
