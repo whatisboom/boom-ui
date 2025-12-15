@@ -1,3 +1,14 @@
+/**
+ * Token Imports
+ *
+ * Import order matters:
+ * 1. colors.css imports palettes.css and theme.css internally
+ * 2. shadows.css (uses theme tokens)
+ * 3. typography.css
+ * 4. spacing.css
+ */
+
 @import './colors.css';
-@import './spacing.css';
+@import './shadows.css';
 @import './typography.css';
+@import './spacing.css';

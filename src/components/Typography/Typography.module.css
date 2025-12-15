@@ -1,7 +1,7 @@
 .typography {
   margin: 0;
   font-family: var(--boom-font-sans);
-  color: var(--boom-color-text-primary);
+  color: var(--boom-theme-text-primary);
 }
 
 /* Variants */
@@ -53,7 +53,7 @@
   font-size: var(--boom-font-size-sm);
   font-weight: var(--boom-font-weight-normal);
   line-height: var(--boom-line-height-normal);
-  color: var(--boom-color-text-secondary);
+  color: var(--boom-theme-text-secondary);
 }
 
 .label {

@@ -1,0 +1,134 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { useTheme } from './ThemeProvider';
+import { Button } from '../Button';
+import { Card } from '../Card';
+import styles from './Theme.stories.module.css';
+
+function ThemeShowcase() {
+  const { theme, resolvedTheme, setTheme } = useTheme();
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.section}>
+        <h1 className={styles.title}>boom-ui Theme System</h1>
+        <p className={styles.subtitle}>
+          Current theme: <strong>{theme}</strong> (resolved: <strong>{resolvedTheme}</strong>)
+        </p>
+
+        <div className={styles.controls}>
+          <Button onClick={() => setTheme('light')} variant={theme === 'light' ? 'primary' : 'secondary'}>
+            Light
+          </Button>
+          <Button onClick={() => setTheme('dark')} variant={theme === 'dark' ? 'primary' : 'secondary'}>
+            Dark
+          </Button>
+          <Button onClick={() => setTheme('system')} variant={theme === 'system' ? 'primary' : 'secondary'}>
+            System
+          </Button>
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <h2>Color Palette</h2>
+
+        <div className={styles.colorSection}>
+          <h3>Muted Slate-Blue (Primary)</h3>
+          <div className={styles.colorGrid}>
+            {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => (
+              <div key={shade} className={styles.colorSwatch}>
+                <div
+                  className={styles.colorBox}
+                  style={{ backgroundColor: `var(--boom-palette-blue-${shade})` }}
+                />
+                <span className={styles.colorLabel}>{shade}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.colorSection}>
+          <h3>Slate (Backgrounds & Text)</h3>
+          <div className={styles.colorGrid}>
+            {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((shade) => (
+              <div key={shade} className={styles.colorSwatch}>
+                <div
+                  className={styles.colorBox}
+                  style={{ backgroundColor: `var(--boom-palette-slate-${shade})` }}
+                />
+                <span className={styles.colorLabel}>{shade}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <h2>Semantic Colors</h2>
+        <div className={styles.semanticGrid}>
+          <Card className={styles.semanticCard} style={{ borderLeft: '4px solid var(--boom-theme-success-bg)' }}>
+            <h3>Success</h3>
+            <p style={{ color: 'var(--boom-theme-success-text)' }}>Operation completed successfully</p>
+          </Card>
+          <Card className={styles.semanticCard} style={{ borderLeft: '4px solid var(--boom-theme-warning-bg)' }}>
+            <h3>Warning</h3>
+            <p style={{ color: 'var(--boom-theme-warning-text)' }}>Please review this carefully</p>
+          </Card>
+          <Card className={styles.semanticCard} style={{ borderLeft: '4px solid var(--boom-theme-error-bg)' }}>
+            <h3>Error</h3>
+            <p style={{ color: 'var(--boom-theme-error-text)' }}>Something went wrong</p>
+          </Card>
+          <Card className={styles.semanticCard} style={{ borderLeft: '4px solid var(--boom-theme-info-bg)' }}>
+            <h3>Info</h3>
+            <p style={{ color: 'var(--boom-theme-info-text)' }}>For your information</p>
+          </Card>
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <h2>Typography (DM Sans)</h2>
+        <div className={styles.typeSection}>
+          <h1 style={{ fontWeight: 700 }}>Heading 1 - Bold</h1>
+          <h2 style={{ fontWeight: 600 }}>Heading 2 - SemiBold</h2>
+          <h3 style={{ fontWeight: 600 }}>Heading 3 - SemiBold</h3>
+          <p style={{ fontWeight: 500 }}>Body text - Medium weight for UI elements</p>
+          <p style={{ fontWeight: 400 }}>Body text - Regular weight for general content</p>
+          <p style={{ fontSize: 'var(--boom-font-size-sm)', color: 'var(--boom-theme-text-secondary)' }}>
+            Small text - Secondary color
+          </p>
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <h2>Elevation & Shadows</h2>
+        <div className={styles.shadowGrid}>
+          <Card style={{ boxShadow: 'var(--boom-shadow-sm)' }}>
+            <h4>Small Shadow</h4>
+            <p>Subtle elevation</p>
+          </Card>
+          <Card style={{ boxShadow: 'var(--boom-shadow-md)' }}>
+            <h4>Medium Shadow</h4>
+            <p>Standard cards</p>
+          </Card>
+          <Card style={{ boxShadow: 'var(--boom-shadow-lg)' }}>
+            <h4>Large Shadow</h4>
+            <p>Modals & popovers</p>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const meta: Meta<typeof ThemeShowcase> = {
+  title: 'Theme/Showcase',
+  component: ThemeShowcase,
+  parameters: {
+    layout: 'fullscreen',
+  },
+};
+
+export default meta;
+
+type Story = StoryObj<typeof ThemeShowcase>;
+
+export const Default: Story = {};

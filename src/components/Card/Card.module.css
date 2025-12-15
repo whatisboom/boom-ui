@@ -1,25 +1,24 @@
 .card {
   display: block;
-  background-color: var(--boom-color-bg-primary);
+  background-color: var(--boom-theme-bg-elevated);
   border-radius: var(--boom-radius-lg);
   transition: all var(--boom-transition-base);
 }
 
 /* Variants */
 .flat {
-  border: 1px solid var(--boom-color-border);
+  border: 1px solid var(--boom-theme-border-default);
   box-shadow: none;
 }
 
 .raised {
-  border: 1px solid var(--boom-color-border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--boom-theme-border-default);
+  box-shadow: var(--boom-shadow-sm);
 }
 
 .elevated {
-  border: 1px solid var(--boom-color-border);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--boom-theme-border-default);
+  box-shadow: var(--boom-shadow-md);
 }
 
 /* Hoverable state */
@@ -28,17 +27,15 @@
 }
 
 .hoverable.flat:hover {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--boom-shadow-sm);
 }
 
 .hoverable.raised:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--boom-shadow-md);
 }
 
 .hoverable.elevated:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--boom-shadow-lg);
 }
 
 /* Respect reduced motion preference */

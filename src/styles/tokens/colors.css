@@ -1,53 +1,14 @@
-:root {
-  /* Primary colors */
-  --boom-color-primary-50: #eff6ff;
-  --boom-color-primary-100: #dbeafe;
-  --boom-color-primary-200: #bfdbfe;
-  --boom-color-primary-300: #93c5fd;
-  --boom-color-primary-400: #60a5fa;
-  --boom-color-primary-500: #3b82f6;
-  --boom-color-primary-600: #2563eb;
-  --boom-color-primary-700: #1d4ed8;
-  --boom-color-primary-800: #1e40af;
-  --boom-color-primary-900: #1e3a8a;
+/**
+ * Color Tokens
+ *
+ * This file exists only to maintain the token file structure.
+ * All color definitions are now in palettes.css and theme.css.
+ *
+ * Components should use:
+ * - --boom-theme-* for semantic tokens (bg-primary, text-primary, etc.)
+ * - --boom-palette-* for direct palette access (rare, usually not needed)
+ * - --boom-shadow-* for shadows
+ */
 
-  /* Neutral colors */
-  --boom-color-neutral-50: #f9fafb;
-  --boom-color-neutral-100: #f3f4f6;
-  --boom-color-neutral-200: #e5e7eb;
-  --boom-color-neutral-300: #d1d5db;
-  --boom-color-neutral-400: #9ca3af;
-  --boom-color-neutral-500: #6b7280;
-  --boom-color-neutral-600: #4b5563;
-  --boom-color-neutral-700: #374151;
-  --boom-color-neutral-800: #1f2937;
-  --boom-color-neutral-900: #111827;
-
-  /* Semantic colors */
-  --boom-color-success-500: #10b981;
-  --boom-color-success-600: #059669;
-  --boom-color-warning-500: #f59e0b;
-  --boom-color-warning-600: #d97706;
-  --boom-color-error-500: #ef4444;
-  --boom-color-error-600: #dc2626;
-  --boom-color-info-500: #3b82f6;
-  --boom-color-info-600: #2563eb;
-
-  /* Text colors */
-  --boom-color-text-primary: var(--boom-color-neutral-900);
-  --boom-color-text-secondary: var(--boom-color-neutral-600);
-  --boom-color-text-disabled: var(--boom-color-neutral-400);
-  --boom-color-text-inverse: #ffffff;
-
-  /* Background colors */
-  --boom-color-bg-primary: #ffffff;
-  --boom-color-bg-secondary: var(--boom-color-neutral-50);
-  --boom-color-bg-tertiary: var(--boom-color-neutral-100);
-
-  /* Border colors */
-  --boom-color-border: var(--boom-color-neutral-300);
-  --boom-color-border-focus: var(--boom-color-primary-500);
-
-  /* Focus ring */
-  --boom-color-focus-ring: var(--boom-color-primary-500);
-}
+@import './palettes.css';
+@import './theme.css';

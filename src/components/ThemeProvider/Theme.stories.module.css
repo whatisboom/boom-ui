@@ -1,0 +1,129 @@
+.container {
+  padding: var(--boom-spacing-8);
+  background-color: var(--boom-theme-bg-primary);
+  color: var(--boom-theme-text-primary);
+  min-height: 100vh;
+}
+
+.section {
+  margin-bottom: var(--boom-spacing-12);
+}
+
+.title {
+  font-size: var(--boom-font-size-4xl);
+  font-weight: var(--boom-font-weight-bold);
+  margin-bottom: var(--boom-spacing-2);
+  color: var(--boom-theme-text-primary);
+}
+
+.subtitle {
+  font-size: var(--boom-font-size-lg);
+  color: var(--boom-theme-text-secondary);
+  margin-bottom: var(--boom-spacing-6);
+}
+
+.controls {
+  display: flex;
+  gap: var(--boom-spacing-3);
+}
+
+.section h2 {
+  font-size: var(--boom-font-size-2xl);
+  font-weight: var(--boom-font-weight-semibold);
+  margin-bottom: var(--boom-spacing-4);
+  color: var(--boom-theme-text-primary);
+}
+
+.section h3 {
+  font-size: var(--boom-font-size-lg);
+  font-weight: var(--boom-font-weight-medium);
+  margin-bottom: var(--boom-spacing-3);
+  color: var(--boom-theme-text-secondary);
+}
+
+.colorSection {
+  margin-bottom: var(--boom-spacing-8);
+}
+
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--boom-spacing-3);
+}
+
+.colorSwatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--boom-spacing-2);
+}
+
+.colorBox {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--boom-border-radius-md);
+  border: 1px solid var(--boom-theme-border-default);
+}
+
+.colorLabel {
+  font-size: var(--boom-font-size-sm);
+  color: var(--boom-theme-text-tertiary);
+}
+
+.semanticGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--boom-spacing-4);
+}
+
+.semanticCard {
+  padding: var(--boom-spacing-4);
+}
+
+.semanticCard h3 {
+  margin-top: 0;
+  margin-bottom: var(--boom-spacing-2);
+  font-size: var(--boom-font-size-lg);
+  font-weight: var(--boom-font-weight-semibold);
+}
+
+.semanticCard p {
+  margin: 0;
+}
+
+.typeSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--boom-spacing-4);
+}
+
+.typeSection h1,
+.typeSection h2,
+.typeSection h3 {
+  margin: 0;
+}
+
+.typeSection p {
+  margin: 0;
+}
+
+.shadowGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--boom-spacing-6);
+}
+
+.shadowGrid > div {
+  padding: var(--boom-spacing-4);
+}
+
+.shadowGrid h4 {
+  margin: 0 0 var(--boom-spacing-2) 0;
+  font-size: var(--boom-font-size-lg);
+  font-weight: var(--boom-font-weight-semibold);
+}
+
+.shadowGrid p {
+  margin: 0;
+  color: var(--boom-theme-text-secondary);
+}

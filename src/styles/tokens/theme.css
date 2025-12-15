@@ -1,0 +1,198 @@
+/**
+ * Theme Tokens
+ *
+ * Tier 2: Semantic token mappings that reference palette variables.
+ * These are theme-agnostic names that components should use.
+ *
+ * Theme switching happens automatically because these reference
+ * palette variables that change between light/dark themes.
+ */
+
+:root {
+  /* ==========================================================================
+     BACKGROUNDS
+     ========================================================================== */
+
+  /* Base application background */
+  --boom-theme-bg-base: var(--boom-palette-slate-900);
+
+  /* Primary background (same as base) */
+  --boom-theme-bg-primary: var(--boom-palette-slate-900);
+
+  /* Elevated surfaces (cards, modals, panels) */
+  --boom-theme-bg-elevated: var(--boom-palette-slate-800);
+
+  /* Secondary background for nested elements */
+  --boom-theme-bg-secondary: var(--boom-palette-slate-800);
+
+  /* Tertiary background for even more nested elements */
+  --boom-theme-bg-tertiary: var(--boom-palette-slate-700);
+
+  /* Overlay background (modals, popovers) */
+  --boom-theme-bg-overlay: var(--boom-palette-slate-800);
+
+  /* Inverse background (for dark elements on light backgrounds) */
+  --boom-theme-bg-inverse: var(--boom-palette-slate-100);
+
+  /* ==========================================================================
+     TEXT COLORS
+     ========================================================================== */
+
+  /* Primary text color */
+  --boom-theme-text-primary: var(--boom-palette-slate-300);
+
+  /* Secondary text color (less emphasis) */
+  --boom-theme-text-secondary: var(--boom-palette-slate-400);
+
+  /* Tertiary text color (even less emphasis) */
+  --boom-theme-text-tertiary: var(--boom-palette-slate-500);
+
+  /* Disabled text color */
+  --boom-theme-text-disabled: var(--boom-palette-slate-600);
+
+  /* Inverse text (for light text on dark backgrounds) */
+  --boom-theme-text-inverse: var(--boom-palette-slate-900);
+
+  /* Text on primary colored backgrounds */
+  --boom-theme-text-on-primary: var(--boom-palette-slate-50);
+
+  /* ==========================================================================
+     BORDERS
+     ========================================================================== */
+
+  /* Default border color */
+  --boom-theme-border-default: var(--boom-palette-slate-600);
+
+  /* Subtle border (less emphasis) */
+  --boom-theme-border-subtle: var(--boom-palette-slate-700);
+
+  /* Focus border/ring color */
+  --boom-theme-border-focus: var(--boom-palette-blue-400);
+
+  /* Error border color */
+  --boom-theme-border-error: var(--boom-palette-error-500);
+
+  /* ==========================================================================
+     PRIMARY INTERACTIVE COLORS
+     ========================================================================== */
+
+  /* Primary brand color */
+  --boom-theme-primary: var(--boom-palette-blue-500);
+
+  /* Primary hover state */
+  --boom-theme-primary-hover: var(--boom-palette-blue-400);
+
+  /* Primary active/pressed state */
+  --boom-theme-primary-active: var(--boom-palette-blue-600);
+
+  /* Primary disabled state */
+  --boom-theme-primary-disabled: var(--boom-palette-slate-600);
+
+  /* ==========================================================================
+     SECONDARY INTERACTIVE COLORS
+     ========================================================================== */
+
+  /* Secondary color */
+  --boom-theme-secondary: var(--boom-palette-slate-700);
+
+  /* Secondary hover state */
+  --boom-theme-secondary-hover: var(--boom-palette-slate-600);
+
+  /* Secondary active/pressed state */
+  --boom-theme-secondary-active: var(--boom-palette-slate-800);
+
+  /* ==========================================================================
+     SEMANTIC STATE COLORS
+     ========================================================================== */
+
+  /* Success */
+  --boom-theme-success-bg: var(--boom-palette-success-500);
+  --boom-theme-success-text: var(--boom-palette-success-400);
+  --boom-theme-success-border: var(--boom-palette-success-500);
+
+  /* Warning */
+  --boom-theme-warning-bg: var(--boom-palette-warning-500);
+  --boom-theme-warning-text: var(--boom-palette-warning-400);
+  --boom-theme-warning-border: var(--boom-palette-warning-500);
+
+  /* Error */
+  --boom-theme-error-bg: var(--boom-palette-error-500);
+  --boom-theme-error-text: var(--boom-palette-error-400);
+  --boom-theme-error-border: var(--boom-palette-error-500);
+
+  /* Info */
+  --boom-theme-info-bg: var(--boom-palette-info-500);
+  --boom-theme-info-text: var(--boom-palette-info-400);
+  --boom-theme-info-border: var(--boom-palette-info-500);
+
+  /* ==========================================================================
+     FOCUS STATES
+     ========================================================================== */
+
+  /* Focus ring color */
+  --boom-theme-focus-ring: var(--boom-palette-blue-400);
+
+  /* Focus ring with opacity for better visibility */
+  --boom-theme-focus-ring-offset: var(--boom-palette-slate-900);
+}
+
+/* ==========================================================================
+   LIGHT THEME OVERRIDES
+   ========================================================================== */
+
+:root[data-theme='light'] {
+  /* Backgrounds */
+  --boom-theme-bg-base: var(--boom-palette-slate-50);
+  --boom-theme-bg-primary: var(--boom-palette-slate-50);
+  --boom-theme-bg-elevated: var(--boom-palette-slate-100);
+  --boom-theme-bg-secondary: var(--boom-palette-slate-100);
+  --boom-theme-bg-tertiary: var(--boom-palette-slate-200);
+  --boom-theme-bg-overlay: var(--boom-palette-slate-100);
+  --boom-theme-bg-inverse: var(--boom-palette-slate-900);
+
+  /* Text */
+  --boom-theme-text-primary: var(--boom-palette-slate-700);
+  --boom-theme-text-secondary: var(--boom-palette-slate-600);
+  --boom-theme-text-tertiary: var(--boom-palette-slate-500);
+  --boom-theme-text-disabled: var(--boom-palette-slate-400);
+  --boom-theme-text-inverse: var(--boom-palette-slate-50);
+  --boom-theme-text-on-primary: var(--boom-palette-slate-50);
+
+  /* Borders */
+  --boom-theme-border-default: var(--boom-palette-slate-300);
+  --boom-theme-border-subtle: var(--boom-palette-slate-200);
+  --boom-theme-border-focus: var(--boom-palette-blue-600);
+  --boom-theme-border-error: var(--boom-palette-error-600);
+
+  /* Primary interactive - use darker shades for light theme */
+  --boom-theme-primary: var(--boom-palette-blue-600);
+  --boom-theme-primary-hover: var(--boom-palette-blue-700);
+  --boom-theme-primary-active: var(--boom-palette-blue-800);
+  --boom-theme-primary-disabled: var(--boom-palette-slate-400);
+
+  /* Secondary interactive */
+  --boom-theme-secondary: var(--boom-palette-slate-200);
+  --boom-theme-secondary-hover: var(--boom-palette-slate-300);
+  --boom-theme-secondary-active: var(--boom-palette-slate-400);
+
+  /* Semantic states - use darker shades for better contrast */
+  --boom-theme-success-bg: var(--boom-palette-success-600);
+  --boom-theme-success-text: var(--boom-palette-success-700);
+  --boom-theme-success-border: var(--boom-palette-success-600);
+
+  --boom-theme-warning-bg: var(--boom-palette-warning-600);
+  --boom-theme-warning-text: var(--boom-palette-warning-700);
+  --boom-theme-warning-border: var(--boom-palette-warning-600);
+
+  --boom-theme-error-bg: var(--boom-palette-error-600);
+  --boom-theme-error-text: var(--boom-palette-error-700);
+  --boom-theme-error-border: var(--boom-palette-error-600);
+
+  --boom-theme-info-bg: var(--boom-palette-info-600);
+  --boom-theme-info-text: var(--boom-palette-info-700);
+  --boom-theme-info-border: var(--boom-palette-info-600);
+
+  /* Focus */
+  --boom-theme-focus-ring: var(--boom-palette-blue-600);
+  --boom-theme-focus-ring-offset: var(--boom-palette-slate-50);
+}
