@@ -1,0 +1,9 @@
+.popover {
+  position: fixed;
+  z-index: var(--boom-z-popover, 3000);
+  background-color: var(--boom-theme-bg-primary);
+  border: 1px solid var(--boom-theme-border-color);
+  border-radius: 8px;
+  box-shadow: var(--boom-shadow-lg);
+  padding: 8px;
+}
