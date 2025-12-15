@@ -48,7 +48,7 @@ export const WithLogo: Story = {
   args: {
     logo: (
       <img
-        src="https://via.placeholder.com/120x40/4F46E5/ffffff?text=Logo"
+        src="https://placehold.co/200x40/000000/FFF?text=Logo"
         alt="Logo"
         style={{ height: '40px' }}
       />

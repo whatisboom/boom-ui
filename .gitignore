@@ -6,3 +6,4 @@ coverage
 .storybook-out
 storybook-static
 .vite
+.claude
