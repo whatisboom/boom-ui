@@ -1,0 +1,121 @@
+.nav {
+  display: flex;
+}
+
+.nav.horizontal {
+  flex-direction: row;
+  gap: 8px;
+}
+
+.nav.vertical {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navList {
+  display: flex;
+  gap: inherit;
+  flex-direction: inherit;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink,
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: none;
+  border: none;
+  color: var(--boom-theme-text-secondary);
+  text-decoration: none;
+  font-size: var(--boom-font-size-sm);
+  font-weight: var(--boom-font-weight-medium);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.navLink:hover,
+.navButton:hover {
+  background-color: var(--boom-theme-bg-secondary);
+  color: var(--boom-theme-text-primary);
+}
+
+.navLink.active {
+  color: var(--boom-theme-text-primary);
+  background-color: var(--boom-theme-bg-secondary);
+}
+
+.navLink:focus-visible,
+.navButton:focus-visible {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: 2px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background-color: var(--boom-theme-accent);
+  color: white;
+  font-size: 12px;
+  font-weight: var(--boom-font-weight-semibold);
+}
+
+.dropdownIcon {
+  margin-left: 4px;
+  transition: transform 0.2s;
+}
+
+.dropdownIcon.open {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  min-width: 200px;
+  background-color: var(--boom-theme-bg-primary);
+  border: 1px solid var(--boom-theme-border-color);
+  border-radius: 8px;
+  box-shadow: var(--boom-shadow-lg);
+  padding: 4px;
+  z-index: 1000;
+}
+
+.vertical .dropdown {
+  top: 0;
+  left: 100%;
+  margin-top: 0;
+  margin-left: 4px;
+}
+
+.dropdownList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdownItem {
+  /* inherits navLink styles */
+}
