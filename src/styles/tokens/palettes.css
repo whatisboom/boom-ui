@@ -64,14 +64,14 @@
   --boom-palette-success-50: hsl(var(--boom-hue-success) 86% 97%);   /* was: #f0fdf4 */
 
   /* Warning - Amber (saturated for clarity) */
-  --boom-palette-warning-700: #b45309;
-  --boom-palette-warning-600: #d97706;
-  --boom-palette-warning-500: #f59e0b;
-  --boom-palette-warning-400: #fbbf24;
-  --boom-palette-warning-300: #fcd34d;
-  --boom-palette-warning-200: #fde68a;
-  --boom-palette-warning-100: #fef3c7;
-  --boom-palette-warning-50: #fefce8;
+  --boom-palette-warning-700: hsl(var(--boom-hue-warning) 91% 38%);  /* was: #b45309 */
+  --boom-palette-warning-600: hsl(var(--boom-hue-warning) 95% 44%);  /* was: #d97706 */
+  --boom-palette-warning-500: hsl(var(--boom-hue-warning) 96% 51%);  /* was: #f59e0b */
+  --boom-palette-warning-400: hsl(var(--boom-hue-warning) 92% 57%);  /* was: #fbbf24 */
+  --boom-palette-warning-300: hsl(var(--boom-hue-warning) 92% 65%);  /* was: #fcd34d */
+  --boom-palette-warning-200: hsl(var(--boom-hue-warning) 93% 76%);  /* was: #fde68a */
+  --boom-palette-warning-100: hsl(var(--boom-hue-warning) 91% 89%);  /* was: #fef3c7 */
+  --boom-palette-warning-50: hsl(var(--boom-hue-warning) 80% 96%);   /* was: #fefce8 */
 
   /* Error - Red (saturated for clarity) */
   --boom-palette-error-700: #b91c1c;
