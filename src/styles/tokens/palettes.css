@@ -74,14 +74,14 @@
   --boom-palette-warning-50: hsl(var(--boom-hue-warning) 80% 96%);   /* was: #fefce8 */
 
   /* Error - Red (saturated for clarity) */
-  --boom-palette-error-700: #b91c1c;
-  --boom-palette-error-600: #dc2626;
-  --boom-palette-error-500: #ef4444;
-  --boom-palette-error-400: #f87171;
-  --boom-palette-error-300: #fca5a5;
-  --boom-palette-error-200: #fecaca;
-  --boom-palette-error-100: #fee2e2;
-  --boom-palette-error-50: #fef2f2;
+  --boom-palette-error-700: hsl(var(--boom-hue-error) 74% 42%);  /* was: #b91c1c */
+  --boom-palette-error-600: hsl(var(--boom-hue-error) 72% 51%);  /* was: #dc2626 */
+  --boom-palette-error-500: hsl(var(--boom-hue-error) 84% 60%);  /* was: #ef4444 */
+  --boom-palette-error-400: hsl(var(--boom-hue-error) 91% 71%);  /* was: #f87171 */
+  --boom-palette-error-300: hsl(var(--boom-hue-error) 96% 81%);  /* was: #fca5a5 */
+  --boom-palette-error-200: hsl(var(--boom-hue-error) 93% 88%);  /* was: #fecaca */
+  --boom-palette-error-100: hsl(var(--boom-hue-error) 93% 94%);  /* was: #fee2e2 */
+  --boom-palette-error-50: hsl(var(--boom-hue-error) 86% 97%);   /* was: #fef2f2 */
 
   /* Info - Teal (saturated for clarity) */
   --boom-palette-info-700: #0f766e;
