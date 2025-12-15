@@ -1,0 +1,105 @@
+/**
+ * Color Palettes
+ *
+ * Tier 1: Raw color values that change between themes.
+ * These are the actual color definitions used by semantic tokens.
+ *
+ * Dark theme is default (:root)
+ * Light theme overrides with [data-theme="light"]
+ */
+
+/* ==========================================================================
+   DARK THEME (Default)
+   ========================================================================== */
+
+:root {
+  /* Slate Gray Backgrounds - For dark theme layering */
+  --boom-palette-slate-950: #0f172a;
+  --boom-palette-slate-900: #1e293b;
+  --boom-palette-slate-800: #334155;
+  --boom-palette-slate-700: #475569;
+  --boom-palette-slate-600: #64748b;
+  --boom-palette-slate-500: #94a3b8;
+  --boom-palette-slate-400: #cbd5e1;
+  --boom-palette-slate-300: #e2e8f0;
+  --boom-palette-slate-200: #f1f5f9;
+  --boom-palette-slate-100: #f8fafc;
+  --boom-palette-slate-50: #ffffff;
+
+  /* Muted Slate-Blue Primary - Moderately desaturated, sophisticated */
+  --boom-palette-blue-900: #1e3a5f;
+  --boom-palette-blue-800: #2e4a6f;
+  --boom-palette-blue-700: #3e5a7f;
+  --boom-palette-blue-600: #4e6a8f;
+  --boom-palette-blue-500: #60a5fa;
+  --boom-palette-blue-400: #7dbdfc;
+  --boom-palette-blue-300: #93c5fd;
+  --boom-palette-blue-200: #bfdbfe;
+  --boom-palette-blue-100: #dbeafe;
+  --boom-palette-blue-50: #eff6ff;
+
+  /* Success - Green (saturated for clarity) */
+  --boom-palette-success-700: #15803d;
+  --boom-palette-success-600: #16a34a;
+  --boom-palette-success-500: #22c55e;
+  --boom-palette-success-400: #4ade80;
+  --boom-palette-success-300: #86efac;
+  --boom-palette-success-200: #bbf7d0;
+  --boom-palette-success-100: #dcfce7;
+  --boom-palette-success-50: #f0fdf4;
+
+  /* Warning - Amber (saturated for clarity) */
+  --boom-palette-warning-700: #b45309;
+  --boom-palette-warning-600: #d97706;
+  --boom-palette-warning-500: #f59e0b;
+  --boom-palette-warning-400: #fbbf24;
+  --boom-palette-warning-300: #fcd34d;
+  --boom-palette-warning-200: #fde68a;
+  --boom-palette-warning-100: #fef3c7;
+  --boom-palette-warning-50: #fefce8;
+
+  /* Error - Red (saturated for clarity) */
+  --boom-palette-error-700: #b91c1c;
+  --boom-palette-error-600: #dc2626;
+  --boom-palette-error-500: #ef4444;
+  --boom-palette-error-400: #f87171;
+  --boom-palette-error-300: #fca5a5;
+  --boom-palette-error-200: #fecaca;
+  --boom-palette-error-100: #fee2e2;
+  --boom-palette-error-50: #fef2f2;
+
+  /* Info - Teal (saturated for clarity) */
+  --boom-palette-info-700: #0f766e;
+  --boom-palette-info-600: #0d9488;
+  --boom-palette-info-500: #14b8a6;
+  --boom-palette-info-400: #2dd4bf;
+  --boom-palette-info-300: #5eead4;
+  --boom-palette-info-200: #99f6e4;
+  --boom-palette-info-100: #ccfbf1;
+  --boom-palette-info-50: #f0fdfa;
+}
+
+/* ==========================================================================
+   LIGHT THEME
+   ========================================================================== */
+
+:root[data-theme='light'] {
+  /* Neutral Backgrounds - Inverted from dark theme */
+  --boom-palette-slate-50: #ffffff;
+  --boom-palette-slate-100: #f8fafc;
+  --boom-palette-slate-200: #f1f5f9;
+  --boom-palette-slate-300: #e2e8f0;
+  --boom-palette-slate-400: #cbd5e1;
+  --boom-palette-slate-500: #94a3b8;
+  --boom-palette-slate-600: #64748b;
+  --boom-palette-slate-700: #475569;
+  --boom-palette-slate-800: #334155;
+  --boom-palette-slate-900: #1e293b;
+  --boom-palette-slate-950: #0f172a;
+
+  /* Primary blue palette stays the same, usage differs */
+  /* We'll use darker shades (600-900) for interactive elements in light theme */
+
+  /* Semantic colors stay the same, usage differs */
+  /* We'll use darker shades for better contrast on light backgrounds */
+}

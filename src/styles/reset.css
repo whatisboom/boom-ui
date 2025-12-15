@@ -16,8 +16,8 @@ body {
   font-family: var(--boom-font-sans);
   font-size: var(--boom-font-size-base);
   line-height: var(--boom-line-height-normal);
-  color: var(--boom-color-text-primary);
-  background-color: var(--boom-color-bg-primary);
+  color: var(--boom-theme-text-primary);
+  background-color: var(--boom-theme-bg-primary);
 }
 
 /* Accessibility utilities */
@@ -35,6 +35,6 @@ body {
 
 /* Focus visible styles */
 :focus-visible {
-  outline: 2px solid var(--boom-color-focus-ring);
+  outline: 2px solid var(--boom-theme-focus-ring);
   outline-offset: 2px;
 }
