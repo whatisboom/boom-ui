@@ -1,0 +1,133 @@
+.container {
+  width: 90vw;
+  max-width: 640px;
+  max-height: 80vh;
+  background-color: var(--boom-theme-bg-primary);
+  border-radius: 12px;
+  box-shadow: var(--boom-shadow-xl);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.searchContainer {
+  padding: 16px;
+  border-bottom: 1px solid var(--boom-theme-border-color);
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  font-size: var(--boom-font-size-md);
+  color: var(--boom-theme-text-primary);
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--boom-theme-text-tertiary);
+}
+
+.resultsContainer {
+  overflow-y: auto;
+  max-height: calc(80vh - 80px);
+  padding: 8px;
+}
+
+.category {
+  padding: 8px 12px;
+  font-size: var(--boom-font-size-xs);
+  font-weight: var(--boom-font-weight-semibold);
+  color: var(--boom-theme-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.resultsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.resultItem {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  transition: background-color 0.15s;
+}
+
+.resultItem:hover,
+.resultItem:focus {
+  background-color: var(--boom-theme-bg-secondary);
+  outline: none;
+}
+
+.resultIcon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background-color: var(--boom-theme-bg-tertiary);
+  color: var(--boom-theme-text-secondary);
+}
+
+.resultContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.resultTitle {
+  font-size: var(--boom-font-size-sm);
+  font-weight: var(--boom-font-weight-medium);
+  color: var(--boom-theme-text-primary);
+  margin: 0;
+}
+
+.resultSubtitle {
+  font-size: var(--boom-font-size-xs);
+  color: var(--boom-theme-text-secondary);
+  margin: 2px 0 0;
+}
+
+.emptyState,
+.loadingState {
+  padding: 32px;
+  text-align: center;
+  color: var(--boom-theme-text-secondary);
+}
+
+.kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  border: 1px solid var(--boom-theme-border-color);
+  border-radius: 4px;
+  font-size: var(--boom-font-size-xs);
+  font-family: monospace;
+  background-color: var(--boom-theme-bg-secondary);
+}
+
+.footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--boom-theme-border-color);
+  display: flex;
+  gap: 16px;
+  font-size: var(--boom-font-size-xs);
+  color: var(--boom-theme-text-tertiary);
+}
+
+.footerItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
