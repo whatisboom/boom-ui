@@ -1,0 +1,76 @@
+.modal {
+  background-color: var(--boom-theme-bg-primary);
+  border-radius: 8px;
+  box-shadow: var(--boom-shadow-lg);
+  max-height: 90vh;
+  overflow: auto;
+  position: relative;
+}
+
+.modal.sm {
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal.md {
+  width: 90%;
+  max-width: 600px;
+}
+
+.modal.lg {
+  width: 90%;
+  max-width: 800px;
+}
+
+.modal.full {
+  width: 95vw;
+  height: 95vh;
+  max-height: 95vh;
+}
+
+.header {
+  padding: 24px;
+  border-bottom: 1px solid var(--boom-theme-border-color);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--boom-font-size-lg);
+  font-weight: var(--boom-font-weight-semibold);
+  color: var(--boom-theme-text-primary);
+}
+
+.description {
+  margin: 8px 0 0;
+  font-size: var(--boom-font-size-sm);
+  color: var(--boom-theme-text-secondary);
+}
+
+.body {
+  padding: 24px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--boom-theme-text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  background-color: var(--boom-theme-bg-secondary);
+  color: var(--boom-theme-text-primary);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: 2px;
+}
