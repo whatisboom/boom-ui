@@ -29,17 +29,17 @@
      DARK THEME (Default)
      ========================================================================== */
   /* Slate Gray Backgrounds - For dark theme layering */
-  --boom-palette-slate-950: #0f172a;
-  --boom-palette-slate-900: #1e293b;
-  --boom-palette-slate-800: #334155;
-  --boom-palette-slate-700: #475569;
-  --boom-palette-slate-600: #64748b;
-  --boom-palette-slate-500: #94a3b8;
-  --boom-palette-slate-400: #cbd5e1;
-  --boom-palette-slate-300: #e2e8f0;
-  --boom-palette-slate-200: #f1f5f9;
-  --boom-palette-slate-100: #f8fafc;
-  --boom-palette-slate-50: #ffffff;
+  --boom-palette-slate-950: hsl(var(--boom-hue-slate) 61% 11%);   /* was: #0f172a */
+  --boom-palette-slate-900: hsl(var(--boom-hue-slate) 39% 18%);   /* was: #1e293b */
+  --boom-palette-slate-800: hsl(var(--boom-hue-slate) 25% 27%);   /* was: #334155 */
+  --boom-palette-slate-700: hsl(var(--boom-hue-slate) 17% 36%);   /* was: #475569 */
+  --boom-palette-slate-600: hsl(var(--boom-hue-slate) 14% 47%);   /* was: #64748b */
+  --boom-palette-slate-500: hsl(var(--boom-hue-slate) 13% 66%);   /* was: #94a3b8 */
+  --boom-palette-slate-400: hsl(var(--boom-hue-slate) 26% 84%);   /* was: #cbd5e1 */
+  --boom-palette-slate-300: hsl(var(--boom-hue-slate) 20% 91%);   /* was: #e2e8f0 */
+  --boom-palette-slate-200: hsl(var(--boom-hue-slate) 18% 95%);   /* was: #f1f5f9 */
+  --boom-palette-slate-100: hsl(var(--boom-hue-slate) 20% 98%);   /* was: #f8fafc */
+  --boom-palette-slate-50: hsl(0 0% 100%);                         /* was: #ffffff */
 
   /* Muted Slate-Blue Primary - Moderately desaturated, sophisticated */
   --boom-palette-blue-900: #1e3a5f;
@@ -100,17 +100,17 @@
 
 :root[data-theme='light'] {
   /* Neutral Backgrounds - Inverted from dark theme */
-  --boom-palette-slate-50: #ffffff;
-  --boom-palette-slate-100: #f8fafc;
-  --boom-palette-slate-200: #f1f5f9;
-  --boom-palette-slate-300: #e2e8f0;
-  --boom-palette-slate-400: #cbd5e1;
-  --boom-palette-slate-500: #94a3b8;
-  --boom-palette-slate-600: #64748b;
-  --boom-palette-slate-700: #475569;
-  --boom-palette-slate-800: #334155;
-  --boom-palette-slate-900: #1e293b;
-  --boom-palette-slate-950: #0f172a;
+  --boom-palette-slate-50: hsl(0 0% 100%);
+  --boom-palette-slate-100: hsl(var(--boom-hue-slate) 20% 98%);
+  --boom-palette-slate-200: hsl(var(--boom-hue-slate) 18% 95%);
+  --boom-palette-slate-300: hsl(var(--boom-hue-slate) 20% 91%);
+  --boom-palette-slate-400: hsl(var(--boom-hue-slate) 26% 84%);
+  --boom-palette-slate-500: hsl(var(--boom-hue-slate) 13% 66%);
+  --boom-palette-slate-600: hsl(var(--boom-hue-slate) 14% 47%);
+  --boom-palette-slate-700: hsl(var(--boom-hue-slate) 17% 36%);
+  --boom-palette-slate-800: hsl(var(--boom-hue-slate) 25% 27%);
+  --boom-palette-slate-900: hsl(var(--boom-hue-slate) 39% 18%);
+  --boom-palette-slate-950: hsl(var(--boom-hue-slate) 61% 11%);
 
   /* Primary blue palette stays the same, usage differs */
   /* We'll use darker shades (600-900) for interactive elements in light theme */
