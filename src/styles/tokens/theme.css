@@ -134,6 +134,44 @@
 
   /* Focus ring with opacity for better visibility */
   --boom-theme-focus-ring-offset: var(--boom-palette-slate-900);
+
+  /* ==========================================================================
+     ACCENT COLORS
+     ========================================================================== */
+
+  /* Accent color - for badges, notification dots, highlights */
+  --boom-theme-accent: var(--boom-palette-blue-400);
+  --boom-theme-accent-subtle: hsl(var(--boom-hue-blue) 94% 68% / 0.15);
+
+  /* ==========================================================================
+     BORDER ALIASES
+     ========================================================================== */
+
+  /* Border color alias (for clarity) */
+  --boom-theme-border-color: var(--boom-theme-border-default);
+
+  /* ==========================================================================
+     SHADOW COLORS
+     ========================================================================== */
+
+  /* Shadow color tokens - themeable shadow tinting */
+  --boom-theme-shadow-color: hsl(var(--boom-hue-slate) 39% 18% / 0.3);
+  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-slate) 39% 18% / 0.1);
+  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-slate) 39% 18% / 0.5);
+
+  /* ==========================================================================
+     OVERLAY COLORS
+     ========================================================================== */
+
+  /* Overlay backdrop */
+  --boom-theme-overlay-backdrop: hsl(var(--boom-hue-slate) 39% 18% / 0.7);
+
+  /* ==========================================================================
+     FOCUS RING COLORS
+     ========================================================================== */
+
+  /* Focus ring with opacity */
+  --boom-theme-focus-ring-shadow: hsl(var(--boom-hue-blue) 94% 68% / 0.3);
 }
 
 /* ==========================================================================
@@ -195,4 +233,19 @@
   /* Focus */
   --boom-theme-focus-ring: var(--boom-palette-blue-600);
   --boom-theme-focus-ring-offset: var(--boom-palette-slate-50);
+
+  /* Accent */
+  --boom-theme-accent: var(--boom-palette-blue-600);
+  --boom-theme-accent-subtle: hsl(var(--boom-hue-blue) 52% 24% / 0.1);
+
+  /* Shadows - light theme uses darker shadows */
+  --boom-theme-shadow-color: hsl(var(--boom-hue-slate) 61% 11% / 0.4);
+  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-slate) 61% 11% / 0.15);
+  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-slate) 61% 11% / 0.6);
+
+  /* Overlay */
+  --boom-theme-overlay-backdrop: hsl(var(--boom-hue-slate) 61% 11% / 0.6);
+
+  /* Focus ring */
+  --boom-theme-focus-ring-shadow: hsl(var(--boom-hue-blue) 52% 24% / 0.25);
 }
