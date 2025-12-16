@@ -520,48 +520,48 @@ export const ThemeCustomizer: Story = {
             <div className={styles.familyGroup}>
               <h3>Base (Neutrals)</h3>
               <Slider label="Hue" value={baseHue} onChange={setBaseHue} min={0} max={360} />
-              <Slider label="Saturation" value={baseSat} onChange={setBaseSat} min={0} max={50} />
-              <Slider label="Lightness" value={baseLight} onChange={setBaseLight} min={30} max={90} />
+              <Slider label="Saturation" value={baseSat} onChange={setBaseSat} min={0} max={100} />
+              <Slider label="Lightness" value={baseLight} onChange={setBaseLight} min={0} max={100} />
             </div>
 
             {/* Accent */}
             <div className={styles.familyGroup}>
               <h3>Accent (Primary)</h3>
               <Slider label="Hue" value={accentHue} onChange={setAccentHue} min={0} max={360} />
-              <Slider label="Saturation" value={accentSat} onChange={setAccentSat} min={40} max={100} />
-              <Slider label="Lightness" value={accentLight} onChange={setAccentLight} min={40} max={90} />
+              <Slider label="Saturation" value={accentSat} onChange={setAccentSat} min={0} max={100} />
+              <Slider label="Lightness" value={accentLight} onChange={setAccentLight} min={0} max={100} />
             </div>
 
             {/* Success */}
             <div className={styles.familyGroup}>
               <h3>Success</h3>
               <Slider label="Hue" value={successHue} onChange={setSuccessHue} min={0} max={360} />
-              <Slider label="Saturation" value={successSat} onChange={setSuccessSat} min={40} max={100} />
-              <Slider label="Lightness" value={successLight} onChange={setSuccessLight} min={30} max={80} />
+              <Slider label="Saturation" value={successSat} onChange={setSuccessSat} min={0} max={100} />
+              <Slider label="Lightness" value={successLight} onChange={setSuccessLight} min={0} max={100} />
             </div>
 
             {/* Warning */}
             <div className={styles.familyGroup}>
               <h3>Warning</h3>
               <Slider label="Hue" value={warningHue} onChange={setWarningHue} min={0} max={360} />
-              <Slider label="Saturation" value={warningSat} onChange={setWarningSat} min={40} max={100} />
-              <Slider label="Lightness" value={warningLight} onChange={setWarningLight} min={30} max={80} />
+              <Slider label="Saturation" value={warningSat} onChange={setWarningSat} min={0} max={100} />
+              <Slider label="Lightness" value={warningLight} onChange={setWarningLight} min={0} max={100} />
             </div>
 
             {/* Error */}
             <div className={styles.familyGroup}>
               <h3>Error</h3>
               <Slider label="Hue" value={errorHue} onChange={setErrorHue} min={0} max={360} />
-              <Slider label="Saturation" value={errorSat} onChange={setErrorSat} min={40} max={100} />
-              <Slider label="Lightness" value={errorLight} onChange={setErrorLight} min={40} max={90} />
+              <Slider label="Saturation" value={errorSat} onChange={setErrorSat} min={0} max={100} />
+              <Slider label="Lightness" value={errorLight} onChange={setErrorLight} min={0} max={100} />
             </div>
 
             {/* Info */}
             <div className={styles.familyGroup}>
               <h3>Info</h3>
               <Slider label="Hue" value={infoHue} onChange={setInfoHue} min={0} max={360} />
-              <Slider label="Saturation" value={infoSat} onChange={setInfoSat} min={40} max={100} />
-              <Slider label="Lightness" value={infoLight} onChange={setInfoLight} min={30} max={80} />
+              <Slider label="Saturation" value={infoSat} onChange={setInfoSat} min={0} max={100} />
+              <Slider label="Lightness" value={infoLight} onChange={setInfoLight} min={0} max={100} />
             </div>
           </div>
         </div>
