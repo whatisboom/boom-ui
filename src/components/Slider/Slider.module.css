@@ -82,7 +82,10 @@
   border: 2px solid var(--boom-theme-primary);
   border-radius: var(--boom-radius-full);
   cursor: grab;
-  transition: all var(--boom-transition-base);
+  transition: background-color var(--boom-transition-base),
+              border-color var(--boom-transition-base),
+              box-shadow var(--boom-transition-base),
+              transform var(--boom-transition-base);
   box-shadow: var(--boom-shadow-sm);
 }
 
