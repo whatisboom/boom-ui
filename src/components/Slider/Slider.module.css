@@ -1,0 +1,159 @@
+/* Wrapper - contains label, slider, and helper/error text */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--boom-spacing-1);
+  font-family: var(--boom-font-sans);
+}
+
+.wrapper.fullWidth {
+  width: 100%;
+}
+
+/* Label with inline value display */
+.label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--boom-font-size-sm);
+  font-weight: var(--boom-font-weight-medium);
+  color: var(--boom-theme-text-primary);
+}
+
+.label.disabled {
+  color: var(--boom-theme-text-disabled);
+}
+
+.valueDisplay {
+  font-weight: var(--boom-font-weight-normal);
+  color: var(--boom-theme-text-secondary);
+}
+
+/* Slider container */
+.sliderContainer {
+  position: relative;
+  padding: var(--boom-spacing-3) 0;
+  cursor: pointer;
+}
+
+.sliderContainer.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.sliderContainer.readOnly {
+  cursor: default;
+}
+
+/* Track - background rail */
+.track {
+  position: relative;
+  width: 100%;
+  background-color: var(--boom-theme-bg-secondary);
+  border-radius: var(--boom-radius-full);
+  overflow: visible;
+}
+
+/* Size variants for track height */
+.track.sm { height: 4px; }
+.track.md { height: 6px; }
+.track.lg { height: 8px; }
+
+/* Filled track - shows progress */
+.filledTrack {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: var(--boom-theme-primary);
+  border-radius: var(--boom-radius-full);
+  transition: background-color var(--boom-transition-base);
+}
+
+.filledTrack.disabled {
+  background-color: var(--boom-theme-primary-disabled);
+}
+
+/* Handle - draggable thumb */
+.handle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--boom-theme-bg-primary);
+  border: 2px solid var(--boom-theme-primary);
+  border-radius: var(--boom-radius-full);
+  cursor: grab;
+  transition: all var(--boom-transition-base);
+  box-shadow: var(--boom-shadow-sm);
+}
+
+.handle:active {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.handle:focus-visible {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--boom-theme-focus-ring-shadow);
+}
+
+/* Size variants for handle */
+.handle.sm { width: 16px; height: 16px; }
+.handle.md { width: 20px; height: 20px; }
+.handle.lg { width: 24px; height: 24px; }
+
+.handle.disabled {
+  cursor: not-allowed;
+  border-color: var(--boom-theme-primary-disabled);
+}
+
+/* Markers/ticks */
+.markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  pointer-events: none;
+}
+
+.marker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 8px;
+  background-color: var(--boom-theme-border-default);
+}
+
+/* Error state */
+.track.error .filledTrack {
+  background-color: var(--boom-theme-error-bg);
+}
+
+.handle.error {
+  border-color: var(--boom-theme-error-border);
+}
+
+/* Helper/error text */
+.helperText,
+.errorText {
+  font-size: var(--boom-font-size-sm);
+  margin-top: var(--boom-spacing-1);
+}
+
+.helperText {
+  color: var(--boom-theme-text-secondary);
+}
+
+.errorText {
+  color: var(--boom-theme-error-text);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .handle,
+  .filledTrack {
+    transition: none;
+  }
+}

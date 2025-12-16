@@ -158,11 +158,6 @@
   margin-top: var(--boom-spacing-1);
 }
 
-.familyGroup input[type='range'] {
-  width: 100%;
-  accent-color: var(--boom-theme-primary);
-}
-
 .tabs {
   display: flex;
   gap: var(--boom-spacing-2);

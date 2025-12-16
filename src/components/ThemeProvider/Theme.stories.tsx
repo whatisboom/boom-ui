@@ -4,6 +4,7 @@ import { useTheme } from './ThemeProvider';
 import { Button } from '../Button';
 import { Card } from '../Card';
 import { Input } from '../Input';
+import { Slider } from '../Slider';
 import styles from './Theme.stories.module.css';
 
 function ThemeShowcase() {
@@ -518,145 +519,49 @@ export const ThemeCustomizer: Story = {
             {/* Base */}
             <div className={styles.familyGroup}>
               <h3>Base (Neutrals)</h3>
-              <label>Hue: {baseHue}</label>
-              <input type="range" min="0" max="360" value={baseHue} onChange={(e) => setBaseHue(Number(e.target.value))} />
-              <label>Saturation: {baseSat}</label>
-              <input type="range" min="0" max="50" value={baseSat} onChange={(e) => setBaseSat(Number(e.target.value))} />
-              <label>Lightness: {baseLight}</label>
-              <input type="range" min="30" max="90" value={baseLight} onChange={(e) => setBaseLight(Number(e.target.value))} />
+              <Slider label="Hue" value={baseHue} onChange={setBaseHue} min={0} max={360} />
+              <Slider label="Saturation" value={baseSat} onChange={setBaseSat} min={0} max={50} />
+              <Slider label="Lightness" value={baseLight} onChange={setBaseLight} min={30} max={90} />
             </div>
 
             {/* Accent */}
             <div className={styles.familyGroup}>
               <h3>Accent (Primary)</h3>
-              <label>Hue: {accentHue}</label>
-              <input
-                type="range"
-                min="0"
-                max="360"
-                value={accentHue}
-                onChange={(e) => setAccentHue(Number(e.target.value))}
-              />
-              <label>Saturation: {accentSat}</label>
-              <input
-                type="range"
-                min="40"
-                max="100"
-                value={accentSat}
-                onChange={(e) => setAccentSat(Number(e.target.value))}
-              />
-              <label>Lightness: {accentLight}</label>
-              <input
-                type="range"
-                min="40"
-                max="90"
-                value={accentLight}
-                onChange={(e) => setAccentLight(Number(e.target.value))}
-              />
+              <Slider label="Hue" value={accentHue} onChange={setAccentHue} min={0} max={360} />
+              <Slider label="Saturation" value={accentSat} onChange={setAccentSat} min={40} max={100} />
+              <Slider label="Lightness" value={accentLight} onChange={setAccentLight} min={40} max={90} />
             </div>
 
             {/* Success */}
             <div className={styles.familyGroup}>
               <h3>Success</h3>
-              <label>Hue: {successHue}</label>
-              <input
-                type="range"
-                min="0"
-                max="360"
-                value={successHue}
-                onChange={(e) => setSuccessHue(Number(e.target.value))}
-              />
-              <label>Saturation: {successSat}</label>
-              <input
-                type="range"
-                min="40"
-                max="100"
-                value={successSat}
-                onChange={(e) => setSuccessSat(Number(e.target.value))}
-              />
-              <label>Lightness: {successLight}</label>
-              <input
-                type="range"
-                min="30"
-                max="80"
-                value={successLight}
-                onChange={(e) => setSuccessLight(Number(e.target.value))}
-              />
+              <Slider label="Hue" value={successHue} onChange={setSuccessHue} min={0} max={360} />
+              <Slider label="Saturation" value={successSat} onChange={setSuccessSat} min={40} max={100} />
+              <Slider label="Lightness" value={successLight} onChange={setSuccessLight} min={30} max={80} />
             </div>
 
             {/* Warning */}
             <div className={styles.familyGroup}>
               <h3>Warning</h3>
-              <label>Hue: {warningHue}</label>
-              <input
-                type="range"
-                min="0"
-                max="360"
-                value={warningHue}
-                onChange={(e) => setWarningHue(Number(e.target.value))}
-              />
-              <label>Saturation: {warningSat}</label>
-              <input
-                type="range"
-                min="40"
-                max="100"
-                value={warningSat}
-                onChange={(e) => setWarningSat(Number(e.target.value))}
-              />
-              <label>Lightness: {warningLight}</label>
-              <input
-                type="range"
-                min="30"
-                max="80"
-                value={warningLight}
-                onChange={(e) => setWarningLight(Number(e.target.value))}
-              />
+              <Slider label="Hue" value={warningHue} onChange={setWarningHue} min={0} max={360} />
+              <Slider label="Saturation" value={warningSat} onChange={setWarningSat} min={40} max={100} />
+              <Slider label="Lightness" value={warningLight} onChange={setWarningLight} min={30} max={80} />
             </div>
 
             {/* Error */}
             <div className={styles.familyGroup}>
               <h3>Error</h3>
-              <label>Hue: {errorHue}</label>
-              <input type="range" min="0" max="360" value={errorHue} onChange={(e) => setErrorHue(Number(e.target.value))} />
-              <label>Saturation: {errorSat}</label>
-              <input
-                type="range"
-                min="40"
-                max="100"
-                value={errorSat}
-                onChange={(e) => setErrorSat(Number(e.target.value))}
-              />
-              <label>Lightness: {errorLight}</label>
-              <input
-                type="range"
-                min="40"
-                max="90"
-                value={errorLight}
-                onChange={(e) => setErrorLight(Number(e.target.value))}
-              />
+              <Slider label="Hue" value={errorHue} onChange={setErrorHue} min={0} max={360} />
+              <Slider label="Saturation" value={errorSat} onChange={setErrorSat} min={40} max={100} />
+              <Slider label="Lightness" value={errorLight} onChange={setErrorLight} min={40} max={90} />
             </div>
 
             {/* Info */}
             <div className={styles.familyGroup}>
               <h3>Info</h3>
-              <label>Hue: {infoHue}</label>
-              <input type="range" min="0" max="360" value={infoHue} onChange={(e) => setInfoHue(Number(e.target.value))} />
-              <label>Saturation: {infoSat}</label>
-              <input
-                type="range"
-                min="40"
-                max="100"
-                value={infoSat}
-                onChange={(e) => setInfoSat(Number(e.target.value))}
-              />
-              <label>Lightness: {infoLight}</label>
-              <input
-                type="range"
-                min="30"
-                max="80"
-                value={infoLight}
-                onChange={(e) => setInfoLight(Number(e.target.value))}
-              />
+              <Slider label="Hue" value={infoHue} onChange={setInfoHue} min={0} max={360} />
+              <Slider label="Saturation" value={infoSat} onChange={setInfoSat} min={40} max={100} />
+              <Slider label="Lightness" value={infoLight} onChange={setInfoLight} min={30} max={80} />
             </div>
           </div>
         </div>

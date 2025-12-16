@@ -8,6 +8,7 @@ export { Box } from './components/Box';
 export { Stack } from './components/Stack';
 export { Input } from './components/Input';
 export { Card } from './components/Card';
+export { Slider } from './components/Slider';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 
 // Types
@@ -17,6 +18,7 @@ export type { BoxProps } from './components/Box';
 export type { StackProps } from './components/Stack';
 export type { InputProps } from './components/Input';
 export type { CardProps, CardVariant } from './components/Card';
+export type { SliderProps, SingleSliderProps, RangeSliderProps } from './components/Slider';
 export type {
   Theme,
   ResolvedTheme,
