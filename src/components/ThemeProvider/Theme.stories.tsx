@@ -498,13 +498,9 @@ export const ThemeCustomizer: Story = {
 
     return (
       <div className={styles.container}>
-        {/* Controls Section */}
-        <div className={styles.section}>
+        {/* Header */}
+        <div className={styles.customizerHeader}>
           <h1 className={styles.title}>Theme Customizer</h1>
-          <p className={styles.subtitle}>
-            Adjust HSL values and copy the generated code to customize your theme.
-          </p>
-
           <div className={styles.controls}>
             <Button onClick={() => setTheme('light')} variant={theme === 'light' ? 'primary' : 'secondary'}>
               Light
@@ -513,9 +509,14 @@ export const ThemeCustomizer: Story = {
               Dark
             </Button>
           </div>
+        </div>
 
-          {/* 6 color family groups */}
-          <div className={styles.controlsGrid}>
+        {/* 3-Column Layout */}
+        <div className={styles.threeColumnLayout}>
+          {/* Column 1: Sliders */}
+          <div className={styles.slidersColumn}>
+            <h2>Color Controls</h2>
+
             {/* Base */}
             <div className={styles.familyGroup}>
               <h3>Base (Neutrals)</h3>
@@ -564,57 +565,57 @@ export const ThemeCustomizer: Story = {
               <Slider label="Lightness" value={infoLight} onChange={setInfoLight} min={0} max={100} />
             </div>
           </div>
-        </div>
 
-        {/* Code Output Section */}
-        <div className={styles.section}>
-          <h2>Generated Code</h2>
-          <div className={styles.tabs}>
-            <button onClick={() => setActiveTab('css')} className={activeTab === 'css' ? styles.activeTab : ''}>
-              CSS
-            </button>
-            <button onClick={() => setActiveTab('js')} className={activeTab === 'js' ? styles.activeTab : ''}>
-              JavaScript
-            </button>
-          </div>
-          <pre className={styles.codeBlock}>
-            <code>{activeTab === 'css' ? cssOutput : jsOutput}</code>
-          </pre>
-        </div>
+          {/* Column 2: Live Examples */}
+          <div className={styles.examplesColumn}>
+            <h2>Live Preview</h2>
 
-        {/* Live Preview Section */}
-        <div className={styles.section}>
-          <h2>Live Preview</h2>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
+              <Button variant="primary">Primary Button</Button>
+              <Button variant="secondary">Secondary Button</Button>
+            </div>
 
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
-            <Button variant="primary">Primary Button</Button>
-            <Button variant="secondary">Secondary Button</Button>
-          </div>
+            <div style={{ marginTop: '2rem' }}>
+              <Input label="Test Input" placeholder="Type here..." />
+              <div style={{ marginTop: '1rem' }}>
+                <Input label="Error State" error="This field has an error" defaultValue="Invalid input" />
+              </div>
+            </div>
 
-          <div style={{ marginTop: '2rem', maxWidth: '400px' }}>
-            <Input label="Test Input" placeholder="Type here..." />
-            <div style={{ marginTop: '1rem' }}>
-              <Input label="Error State" error="This field has an error" defaultValue="Invalid input" />
+            <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <Card style={{ borderLeft: '4px solid var(--boom-theme-success-bg)' }}>
+                <h3>Success</h3>
+                <p style={{ color: 'var(--boom-theme-success-text)' }}>Operation completed successfully</p>
+              </Card>
+              <Card style={{ borderLeft: '4px solid var(--boom-theme-warning-bg)' }}>
+                <h3>Warning</h3>
+                <p style={{ color: 'var(--boom-theme-warning-text)' }}>Please review this carefully</p>
+              </Card>
+              <Card style={{ borderLeft: '4px solid var(--boom-theme-error-bg)' }}>
+                <h3>Error</h3>
+                <p style={{ color: 'var(--boom-theme-error-text)' }}>Something went wrong</p>
+              </Card>
+              <Card style={{ borderLeft: '4px solid var(--boom-theme-info-bg)' }}>
+                <h3>Info</h3>
+                <p style={{ color: 'var(--boom-theme-info-text)' }}>For your information</p>
+              </Card>
             </div>
           </div>
 
-          <div className={styles.semanticGrid} style={{ marginTop: '2rem' }}>
-            <Card className={styles.semanticCard} style={{ borderLeft: '4px solid var(--boom-theme-success-bg)' }}>
-              <h3>Success</h3>
-              <p style={{ color: 'var(--boom-theme-success-text)' }}>Operation completed successfully</p>
-            </Card>
-            <Card className={styles.semanticCard} style={{ borderLeft: '4px solid var(--boom-theme-warning-bg)' }}>
-              <h3>Warning</h3>
-              <p style={{ color: 'var(--boom-theme-warning-text)' }}>Please review this carefully</p>
-            </Card>
-            <Card className={styles.semanticCard} style={{ borderLeft: '4px solid var(--boom-theme-error-bg)' }}>
-              <h3>Error</h3>
-              <p style={{ color: 'var(--boom-theme-error-text)' }}>Something went wrong</p>
-            </Card>
-            <Card className={styles.semanticCard} style={{ borderLeft: '4px solid var(--boom-theme-info-bg)' }}>
-              <h3>Info</h3>
-              <p style={{ color: 'var(--boom-theme-info-text)' }}>For your information</p>
-            </Card>
+          {/* Column 3: Generated Code */}
+          <div className={styles.codeColumn}>
+            <h2>Generated Code</h2>
+            <div className={styles.tabs}>
+              <button onClick={() => setActiveTab('css')} className={activeTab === 'css' ? styles.activeTab : ''}>
+                CSS
+              </button>
+              <button onClick={() => setActiveTab('js')} className={activeTab === 'js' ? styles.activeTab : ''}>
+                JavaScript
+              </button>
+            </div>
+            <pre className={styles.codeBlock}>
+              <code>{activeTab === 'css' ? cssOutput : jsOutput}</code>
+            </pre>
           </div>
         </div>
       </div>
