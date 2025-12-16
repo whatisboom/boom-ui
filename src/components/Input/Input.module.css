@@ -126,7 +126,7 @@
 
 .input.error:focus {
   border-color: var(--boom-theme-error-border);
-  box-shadow: 0 0 0 3px hsl(var(--boom-hue-error) 84% 60% / 0.15);
+  box-shadow: 0 0 0 3px hsl(var(--boom-hue-error) calc(var(--boom-sat-error) * 1.0%) calc(var(--boom-light-error) * 1.0%) / 0.15);
 }
 
 /* Icons */
