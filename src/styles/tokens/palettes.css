@@ -26,72 +26,100 @@
   --boom-hue-info: 173;      /* teal */
 
   /* ==========================================================================
+     SATURATION & LIGHTNESS VARIABLES - Advanced Theme Customization
+     ========================================================================== */
+
+  /* Base - Neutral saturation/lightness (reference: base-500) */
+  --boom-sat-base: 13;
+  --boom-light-base: 66;
+
+  /* Accent - Primary brand saturation/lightness (reference: accent-500) */
+  --boom-sat-accent: 94;
+  --boom-light-accent: 68;
+
+  /* Success - Green saturation/lightness (reference: success-500) */
+  --boom-sat-success: 71;
+  --boom-light-success: 45;
+
+  /* Warning - Amber saturation/lightness (reference: warning-500) */
+  --boom-sat-warning: 96;
+  --boom-light-warning: 51;
+
+  /* Error - Red saturation/lightness (reference: error-500) */
+  --boom-sat-error: 84;
+  --boom-light-error: 60;
+
+  /* Info - Teal saturation/lightness (reference: info-500) */
+  --boom-sat-info: 80;
+  --boom-light-info: 39;
+
+  /* ==========================================================================
      DARK THEME (Default)
      ========================================================================== */
   /* Base - Neutral colors for backgrounds, text, borders */
-  --boom-palette-base-950: hsl(var(--boom-hue-base) 61% 11%);   /* was: #0f172a */
-  --boom-palette-base-900: hsl(var(--boom-hue-base) 39% 18%);   /* was: #1e293b */
-  --boom-palette-base-800: hsl(var(--boom-hue-base) 25% 27%);   /* was: #334155 */
-  --boom-palette-base-700: hsl(var(--boom-hue-base) 17% 36%);   /* was: #475569 */
-  --boom-palette-base-600: hsl(var(--boom-hue-base) 14% 47%);   /* was: #64748b */
-  --boom-palette-base-500: hsl(var(--boom-hue-base) 13% 66%);   /* was: #94a3b8 */
-  --boom-palette-base-400: hsl(var(--boom-hue-base) 26% 84%);   /* was: #cbd5e1 */
-  --boom-palette-base-300: hsl(var(--boom-hue-base) 20% 91%);   /* was: #e2e8f0 */
-  --boom-palette-base-200: hsl(var(--boom-hue-base) 18% 95%);   /* was: #f1f5f9 */
-  --boom-palette-base-100: hsl(var(--boom-hue-base) 20% 98%);   /* was: #f8fafc */
-  --boom-palette-base-50: hsl(0 0% 100%);                        /* was: #ffffff */
+  --boom-palette-base-950: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 4.7%) calc(var(--boom-light-base) * 0.17%));
+  --boom-palette-base-900: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 3.0%) calc(var(--boom-light-base) * 0.27%));
+  --boom-palette-base-800: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.9%) calc(var(--boom-light-base) * 0.41%));
+  --boom-palette-base-700: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.3%) calc(var(--boom-light-base) * 0.55%));
+  --boom-palette-base-600: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.1%) calc(var(--boom-light-base) * 0.71%));
+  --boom-palette-base-500: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.0%) calc(var(--boom-light-base) * 1.0%));
+  --boom-palette-base-400: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 2.0%) calc(var(--boom-light-base) * 1.27%));
+  --boom-palette-base-300: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.5%) calc(var(--boom-light-base) * 1.38%));
+  --boom-palette-base-200: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.4%) calc(var(--boom-light-base) * 1.44%));
+  --boom-palette-base-100: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.5%) calc(var(--boom-light-base) * 1.48%));
+  --boom-palette-base-50: hsl(0 0% 100%);  /* pure white - hardcoded */
 
   /* Accent - Primary brand color for interactive elements */
-  --boom-palette-accent-900: hsl(var(--boom-hue-accent) 52% 24%);   /* was: #1e3a5f */
-  --boom-palette-accent-800: hsl(var(--boom-hue-accent) 42% 30%);   /* was: #2e4a6f */
-  --boom-palette-accent-700: hsl(var(--boom-hue-accent) 36% 36%);   /* was: #3e5a7f */
-  --boom-palette-accent-600: hsl(var(--boom-hue-accent) 30% 43%);   /* was: #4e6a8f */
-  --boom-palette-accent-500: hsl(var(--boom-hue-accent) 94% 68%);   /* was: #60a5fa */
-  --boom-palette-accent-400: hsl(var(--boom-hue-accent) 96% 75%);   /* was: #7dbdfc */
-  --boom-palette-accent-300: hsl(var(--boom-hue-accent) 96% 80%);   /* was: #93c5fd */
-  --boom-palette-accent-200: hsl(var(--boom-hue-accent) 96% 87%);   /* was: #bfdbfe */
-  --boom-palette-accent-100: hsl(var(--boom-hue-accent) 100% 93%);  /* was: #dbeafe */
-  --boom-palette-accent-50: hsl(var(--boom-hue-accent) 100% 97%);   /* was: #eff6ff */
+  --boom-palette-accent-900: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.55%) calc(var(--boom-light-accent) * 0.35%));
+  --boom-palette-accent-800: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.45%) calc(var(--boom-light-accent) * 0.44%));
+  --boom-palette-accent-700: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.38%) calc(var(--boom-light-accent) * 0.53%));
+  --boom-palette-accent-600: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.32%) calc(var(--boom-light-accent) * 0.63%));
+  --boom-palette-accent-500: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 1.0%) calc(var(--boom-light-accent) * 1.0%));
+  --boom-palette-accent-400: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 1.02%) calc(var(--boom-light-accent) * 1.1%));
+  --boom-palette-accent-300: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 1.02%) calc(var(--boom-light-accent) * 1.18%));
+  --boom-palette-accent-200: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 1.02%) calc(var(--boom-light-accent) * 1.28%));
+  --boom-palette-accent-100: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 1.06%) calc(var(--boom-light-accent) * 1.37%));
+  --boom-palette-accent-50: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 1.06%) calc(var(--boom-light-accent) * 1.43%));
 
   /* Success - Green (saturated for clarity) */
-  --boom-palette-success-700: hsl(var(--boom-hue-success) 73% 29%);  /* was: #15803d */
-  --boom-palette-success-600: hsl(var(--boom-hue-success) 72% 37%);  /* was: #16a34a */
-  --boom-palette-success-500: hsl(var(--boom-hue-success) 71% 45%);  /* was: #22c55e */
-  --boom-palette-success-400: hsl(var(--boom-hue-success) 69% 58%);  /* was: #4ade80 */
-  --boom-palette-success-300: hsl(var(--boom-hue-success) 75% 73%);  /* was: #86efac */
-  --boom-palette-success-200: hsl(var(--boom-hue-success) 73% 85%);  /* was: #bbf7d0 */
-  --boom-palette-success-100: hsl(var(--boom-hue-success) 84% 93%);  /* was: #dcfce7 */
-  --boom-palette-success-50: hsl(var(--boom-hue-success) 86% 97%);   /* was: #f0fdf4 */
+  --boom-palette-success-700: hsl(var(--boom-hue-success) calc(var(--boom-sat-success) * 1.03%) calc(var(--boom-light-success) * 0.64%));
+  --boom-palette-success-600: hsl(var(--boom-hue-success) calc(var(--boom-sat-success) * 1.01%) calc(var(--boom-light-success) * 0.82%));
+  --boom-palette-success-500: hsl(var(--boom-hue-success) calc(var(--boom-sat-success) * 1.0%) calc(var(--boom-light-success) * 1.0%));
+  --boom-palette-success-400: hsl(var(--boom-hue-success) calc(var(--boom-sat-success) * 0.97%) calc(var(--boom-light-success) * 1.29%));
+  --boom-palette-success-300: hsl(var(--boom-hue-success) calc(var(--boom-sat-success) * 1.06%) calc(var(--boom-light-success) * 1.62%));
+  --boom-palette-success-200: hsl(var(--boom-hue-success) calc(var(--boom-sat-success) * 1.03%) calc(var(--boom-light-success) * 1.89%));
+  --boom-palette-success-100: hsl(var(--boom-hue-success) calc(var(--boom-sat-success) * 1.18%) calc(var(--boom-light-success) * 2.07%));
+  --boom-palette-success-50: hsl(var(--boom-hue-success) calc(var(--boom-sat-success) * 1.21%) calc(var(--boom-light-success) * 2.16%));
 
   /* Warning - Amber (saturated for clarity) */
-  --boom-palette-warning-700: hsl(var(--boom-hue-warning) 91% 38%);  /* was: #b45309 */
-  --boom-palette-warning-600: hsl(var(--boom-hue-warning) 95% 44%);  /* was: #d97706 */
-  --boom-palette-warning-500: hsl(var(--boom-hue-warning) 96% 51%);  /* was: #f59e0b */
-  --boom-palette-warning-400: hsl(var(--boom-hue-warning) 92% 57%);  /* was: #fbbf24 */
-  --boom-palette-warning-300: hsl(var(--boom-hue-warning) 92% 65%);  /* was: #fcd34d */
-  --boom-palette-warning-200: hsl(var(--boom-hue-warning) 93% 76%);  /* was: #fde68a */
-  --boom-palette-warning-100: hsl(var(--boom-hue-warning) 91% 89%);  /* was: #fef3c7 */
-  --boom-palette-warning-50: hsl(var(--boom-hue-warning) 80% 96%);   /* was: #fefce8 */
+  --boom-palette-warning-700: hsl(var(--boom-hue-warning) calc(var(--boom-sat-warning) * 0.95%) calc(var(--boom-light-warning) * 0.75%));
+  --boom-palette-warning-600: hsl(var(--boom-hue-warning) calc(var(--boom-sat-warning) * 0.99%) calc(var(--boom-light-warning) * 0.86%));
+  --boom-palette-warning-500: hsl(var(--boom-hue-warning) calc(var(--boom-sat-warning) * 1.0%) calc(var(--boom-light-warning) * 1.0%));
+  --boom-palette-warning-400: hsl(var(--boom-hue-warning) calc(var(--boom-sat-warning) * 0.96%) calc(var(--boom-light-warning) * 1.12%));
+  --boom-palette-warning-300: hsl(var(--boom-hue-warning) calc(var(--boom-sat-warning) * 0.96%) calc(var(--boom-light-warning) * 1.27%));
+  --boom-palette-warning-200: hsl(var(--boom-hue-warning) calc(var(--boom-sat-warning) * 0.97%) calc(var(--boom-light-warning) * 1.49%));
+  --boom-palette-warning-100: hsl(var(--boom-hue-warning) calc(var(--boom-sat-warning) * 0.95%) calc(var(--boom-light-warning) * 1.75%));
+  --boom-palette-warning-50: hsl(var(--boom-hue-warning) calc(var(--boom-sat-warning) * 0.83%) calc(var(--boom-light-warning) * 1.88%));
 
   /* Error - Red (saturated for clarity) */
-  --boom-palette-error-700: hsl(var(--boom-hue-error) 74% 42%);  /* was: #b91c1c */
-  --boom-palette-error-600: hsl(var(--boom-hue-error) 72% 51%);  /* was: #dc2626 */
-  --boom-palette-error-500: hsl(var(--boom-hue-error) 84% 60%);  /* was: #ef4444 */
-  --boom-palette-error-400: hsl(var(--boom-hue-error) 91% 71%);  /* was: #f87171 */
-  --boom-palette-error-300: hsl(var(--boom-hue-error) 96% 81%);  /* was: #fca5a5 */
-  --boom-palette-error-200: hsl(var(--boom-hue-error) 93% 88%);  /* was: #fecaca */
-  --boom-palette-error-100: hsl(var(--boom-hue-error) 93% 94%);  /* was: #fee2e2 */
-  --boom-palette-error-50: hsl(var(--boom-hue-error) 86% 97%);   /* was: #fef2f2 */
+  --boom-palette-error-700: hsl(var(--boom-hue-error) calc(var(--boom-sat-error) * 0.88%) calc(var(--boom-light-error) * 0.7%));
+  --boom-palette-error-600: hsl(var(--boom-hue-error) calc(var(--boom-sat-error) * 0.86%) calc(var(--boom-light-error) * 0.85%));
+  --boom-palette-error-500: hsl(var(--boom-hue-error) calc(var(--boom-sat-error) * 1.0%) calc(var(--boom-light-error) * 1.0%));
+  --boom-palette-error-400: hsl(var(--boom-hue-error) calc(var(--boom-sat-error) * 1.08%) calc(var(--boom-light-error) * 1.18%));
+  --boom-palette-error-300: hsl(var(--boom-hue-error) calc(var(--boom-sat-error) * 1.14%) calc(var(--boom-light-error) * 1.35%));
+  --boom-palette-error-200: hsl(var(--boom-hue-error) calc(var(--boom-sat-error) * 1.11%) calc(var(--boom-light-error) * 1.47%));
+  --boom-palette-error-100: hsl(var(--boom-hue-error) calc(var(--boom-sat-error) * 1.11%) calc(var(--boom-light-error) * 1.57%));
+  --boom-palette-error-50: hsl(var(--boom-hue-error) calc(var(--boom-sat-error) * 1.02%) calc(var(--boom-light-error) * 1.62%));
 
   /* Info - Teal (saturated for clarity) */
-  --boom-palette-info-700: hsl(var(--boom-hue-info) 78% 26%);  /* was: #0f766e */
-  --boom-palette-info-600: hsl(var(--boom-hue-info) 84% 32%);  /* was: #0d9488 */
-  --boom-palette-info-500: hsl(var(--boom-hue-info) 80% 39%);  /* was: #14b8a6 */
-  --boom-palette-info-400: hsl(var(--boom-hue-info) 74% 50%);  /* was: #2dd4bf */
-  --boom-palette-info-300: hsl(var(--boom-hue-info) 73% 65%);  /* was: #5eead4 */
-  --boom-palette-info-200: hsl(var(--boom-hue-info) 76% 79%);  /* was: #99f6e4 */
-  --boom-palette-info-100: hsl(var(--boom-hue-info) 84% 90%);  /* was: #ccfbf1 */
-  --boom-palette-info-50: hsl(var(--boom-hue-info) 80% 97%);   /* was: #f0fdfa */
+  --boom-palette-info-700: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 0.97%) calc(var(--boom-light-info) * 0.67%));
+  --boom-palette-info-600: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 1.05%) calc(var(--boom-light-info) * 0.82%));
+  --boom-palette-info-500: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 1.0%) calc(var(--boom-light-info) * 1.0%));
+  --boom-palette-info-400: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 0.93%) calc(var(--boom-light-info) * 1.28%));
+  --boom-palette-info-300: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 0.91%) calc(var(--boom-light-info) * 1.67%));
+  --boom-palette-info-200: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 0.95%) calc(var(--boom-light-info) * 2.03%));
+  --boom-palette-info-100: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 1.05%) calc(var(--boom-light-info) * 2.31%));
+  --boom-palette-info-50: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 1.0%) calc(var(--boom-light-info) * 2.49%));
 }
 
 /* ==========================================================================
@@ -101,16 +129,16 @@
 :root[data-theme='light'] {
   /* Base - Neutral colors inverted from dark theme */
   --boom-palette-base-50: hsl(0 0% 100%);
-  --boom-palette-base-100: hsl(var(--boom-hue-base) 20% 98%);
-  --boom-palette-base-200: hsl(var(--boom-hue-base) 18% 95%);
-  --boom-palette-base-300: hsl(var(--boom-hue-base) 20% 91%);
-  --boom-palette-base-400: hsl(var(--boom-hue-base) 26% 84%);
-  --boom-palette-base-500: hsl(var(--boom-hue-base) 13% 66%);
-  --boom-palette-base-600: hsl(var(--boom-hue-base) 14% 47%);
-  --boom-palette-base-700: hsl(var(--boom-hue-base) 17% 36%);
-  --boom-palette-base-800: hsl(var(--boom-hue-base) 25% 27%);
-  --boom-palette-base-900: hsl(var(--boom-hue-base) 39% 18%);
-  --boom-palette-base-950: hsl(var(--boom-hue-base) 61% 11%);
+  --boom-palette-base-100: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.5%) calc(var(--boom-light-base) * 1.48%));
+  --boom-palette-base-200: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.4%) calc(var(--boom-light-base) * 1.44%));
+  --boom-palette-base-300: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.5%) calc(var(--boom-light-base) * 1.38%));
+  --boom-palette-base-400: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 2.0%) calc(var(--boom-light-base) * 1.27%));
+  --boom-palette-base-500: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.0%) calc(var(--boom-light-base) * 1.0%));
+  --boom-palette-base-600: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.1%) calc(var(--boom-light-base) * 0.71%));
+  --boom-palette-base-700: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.3%) calc(var(--boom-light-base) * 0.55%));
+  --boom-palette-base-800: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.9%) calc(var(--boom-light-base) * 0.41%));
+  --boom-palette-base-900: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 3.0%) calc(var(--boom-light-base) * 0.27%));
+  --boom-palette-base-950: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 4.7%) calc(var(--boom-light-base) * 0.17%));
 
   /* Accent palette stays the same, usage differs */
   /* We'll use darker shades (600-900) for interactive elements in light theme */
