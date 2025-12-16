@@ -8,27 +8,27 @@ You can customize any color family by overriding its hue variable:
 
 ```css
 :root {
-  /* Change primary from blue to purple */
-  --boom-hue-blue: 280;
+  /* Change accent from default to purple */
+  --boom-hue-accent: 280;
 
-  /* Change success from green to teal */
+  /* Change success from default to teal */
   --boom-hue-success: 180;
 
-  /* Change error from red to pink */
+  /* Change error from default to pink */
   --boom-hue-error: 340;
 }
 ```
 
 ## Available Hue Variables
 
-| Variable | Default | Color Family | Usage |
-|----------|---------|--------------|-------|
-| `--boom-hue-slate` | 215 | Slate blue | Neutral backgrounds, text, borders |
-| `--boom-hue-blue` | 213 | Blue | Primary brand color, interactive elements |
-| `--boom-hue-success` | 142 | Green | Success states, confirmations |
-| `--boom-hue-warning` | 38 | Amber | Warning states, cautions |
-| `--boom-hue-error` | 0 | Red | Error states, destructive actions |
-| `--boom-hue-info` | 173 | Teal | Info states, notifications |
+| Variable | Default | Usage |
+|----------|---------|-------|
+| `--boom-hue-base` | 215 | Neutral backgrounds, text, borders |
+| `--boom-hue-accent` | 213 | Primary brand color, interactive elements |
+| `--boom-hue-success` | 142 | Success states, confirmations |
+| `--boom-hue-warning` | 38 | Warning states, cautions |
+| `--boom-hue-error` | 0 | Error states, destructive actions |
+| `--boom-hue-info` | 173 | Info states, notifications |
 
 ## How It Works
 
@@ -43,14 +43,14 @@ All palette colors use their family's hue variable, so changing one hue updates 
 
 ```css
 :root {
-  --boom-hue-blue: 280;
+  --boom-hue-accent: 280;
 }
 ```
 
 This changes:
-- All buttons from blue to purple
-- Focus rings from blue to purple
-- Primary interactive elements from blue to purple
+- All buttons to purple
+- Focus rings to purple
+- Primary interactive elements to purple
 - Light/dark theme variants automatically adjust
 
 ## Best Practices
@@ -66,6 +66,6 @@ You can override hue variables at any scope:
 
 ```css
 .my-component {
-  --boom-hue-blue: 340;  /* Pink primary only for this component */
+  --boom-hue-accent: 340;  /* Pink accent only for this component */
 }
 ```
