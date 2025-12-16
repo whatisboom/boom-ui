@@ -160,6 +160,7 @@
 
 .familyGroup input[type='range'] {
   width: 100%;
+  accent-color: var(--boom-theme-primary);
 }
 
 .tabs {
