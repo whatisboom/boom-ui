@@ -33,13 +33,13 @@ function ThemeShowcase() {
         <h2>Color Palette</h2>
 
         <div className={styles.colorSection}>
-          <h3>Muted Slate-Blue (Primary)</h3>
+          <h3>Accent (Primary Brand)</h3>
           <div className={styles.colorGrid}>
             {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => (
               <div key={shade} className={styles.colorSwatch}>
                 <div
                   className={styles.colorBox}
-                  style={{ backgroundColor: `var(--boom-palette-blue-${shade})` }}
+                  style={{ backgroundColor: `var(--boom-palette-accent-${shade})` }}
                 />
                 <span className={styles.colorLabel}>{shade}</span>
               </div>
@@ -48,13 +48,13 @@ function ThemeShowcase() {
         </div>
 
         <div className={styles.colorSection}>
-          <h3>Slate (Backgrounds & Text)</h3>
+          <h3>Base (Neutrals)</h3>
           <div className={styles.colorGrid}>
             {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((shade) => (
               <div key={shade} className={styles.colorSwatch}>
                 <div
                   className={styles.colorBox}
-                  style={{ backgroundColor: `var(--boom-palette-slate-${shade})` }}
+                  style={{ backgroundColor: `var(--boom-palette-base-${shade})` }}
                 />
                 <span className={styles.colorLabel}>{shade}</span>
               </div>
@@ -141,7 +141,7 @@ export const CustomHues: Story = {
     // Apply hue customizations
     useEffect(() => {
       if (args.primaryHue !== undefined) {
-        document.documentElement.style.setProperty('--boom-hue-blue', String(args.primaryHue));
+        document.documentElement.style.setProperty('--boom-hue-accent', String(args.primaryHue));
       }
       if (args.successHue !== undefined) {
         document.documentElement.style.setProperty('--boom-hue-success', String(args.successHue));
@@ -152,7 +152,7 @@ export const CustomHues: Story = {
 
       return () => {
         // Reset on unmount
-        document.documentElement.style.removeProperty('--boom-hue-blue');
+        document.documentElement.style.removeProperty('--boom-hue-accent');
         document.documentElement.style.removeProperty('--boom-hue-success');
         document.documentElement.style.removeProperty('--boom-hue-error');
       };
@@ -204,13 +204,13 @@ export const CustomHues: Story = {
         <div className={styles.section}>
           <h2>Color Palette</h2>
           <div className={styles.colorSection}>
-            <h3>Primary (Blue)</h3>
+            <h3>Accent (Primary Brand)</h3>
             <div className={styles.colorGrid}>
               {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => (
                 <div key={shade} className={styles.colorSwatch}>
                   <div
                     className={styles.colorBox}
-                    style={{ backgroundColor: `var(--boom-palette-blue-${shade})` }}
+                    style={{ backgroundColor: `var(--boom-palette-accent-${shade})` }}
                   />
                   <span className={styles.colorLabel}>{shade}</span>
                 </div>

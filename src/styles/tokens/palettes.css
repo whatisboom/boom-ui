@@ -13,11 +13,11 @@
      HUE VARIABLES - Brand Customization Entry Points
      ========================================================================== */
 
-  /* Neutral colors - slate blue tint */
-  --boom-hue-slate: 215;
+  /* Base - Neutral colors for backgrounds, text, borders */
+  --boom-hue-base: 215;
 
-  /* Primary brand color */
-  --boom-hue-blue: 213;
+  /* Accent - Primary brand color for interactive elements */
+  --boom-hue-accent: 213;
 
   /* Semantic state colors */
   --boom-hue-success: 142;   /* green */
@@ -28,30 +28,30 @@
   /* ==========================================================================
      DARK THEME (Default)
      ========================================================================== */
-  /* Slate Gray Backgrounds - For dark theme layering */
-  --boom-palette-slate-950: hsl(var(--boom-hue-slate) 61% 11%);   /* was: #0f172a */
-  --boom-palette-slate-900: hsl(var(--boom-hue-slate) 39% 18%);   /* was: #1e293b */
-  --boom-palette-slate-800: hsl(var(--boom-hue-slate) 25% 27%);   /* was: #334155 */
-  --boom-palette-slate-700: hsl(var(--boom-hue-slate) 17% 36%);   /* was: #475569 */
-  --boom-palette-slate-600: hsl(var(--boom-hue-slate) 14% 47%);   /* was: #64748b */
-  --boom-palette-slate-500: hsl(var(--boom-hue-slate) 13% 66%);   /* was: #94a3b8 */
-  --boom-palette-slate-400: hsl(var(--boom-hue-slate) 26% 84%);   /* was: #cbd5e1 */
-  --boom-palette-slate-300: hsl(var(--boom-hue-slate) 20% 91%);   /* was: #e2e8f0 */
-  --boom-palette-slate-200: hsl(var(--boom-hue-slate) 18% 95%);   /* was: #f1f5f9 */
-  --boom-palette-slate-100: hsl(var(--boom-hue-slate) 20% 98%);   /* was: #f8fafc */
-  --boom-palette-slate-50: hsl(0 0% 100%);                         /* was: #ffffff */
+  /* Base - Neutral colors for backgrounds, text, borders */
+  --boom-palette-base-950: hsl(var(--boom-hue-base) 61% 11%);   /* was: #0f172a */
+  --boom-palette-base-900: hsl(var(--boom-hue-base) 39% 18%);   /* was: #1e293b */
+  --boom-palette-base-800: hsl(var(--boom-hue-base) 25% 27%);   /* was: #334155 */
+  --boom-palette-base-700: hsl(var(--boom-hue-base) 17% 36%);   /* was: #475569 */
+  --boom-palette-base-600: hsl(var(--boom-hue-base) 14% 47%);   /* was: #64748b */
+  --boom-palette-base-500: hsl(var(--boom-hue-base) 13% 66%);   /* was: #94a3b8 */
+  --boom-palette-base-400: hsl(var(--boom-hue-base) 26% 84%);   /* was: #cbd5e1 */
+  --boom-palette-base-300: hsl(var(--boom-hue-base) 20% 91%);   /* was: #e2e8f0 */
+  --boom-palette-base-200: hsl(var(--boom-hue-base) 18% 95%);   /* was: #f1f5f9 */
+  --boom-palette-base-100: hsl(var(--boom-hue-base) 20% 98%);   /* was: #f8fafc */
+  --boom-palette-base-50: hsl(0 0% 100%);                        /* was: #ffffff */
 
-  /* Muted Slate-Blue Primary - Moderately desaturated, sophisticated */
-  --boom-palette-blue-900: hsl(var(--boom-hue-blue) 52% 24%);   /* was: #1e3a5f */
-  --boom-palette-blue-800: hsl(var(--boom-hue-blue) 42% 30%);   /* was: #2e4a6f */
-  --boom-palette-blue-700: hsl(var(--boom-hue-blue) 36% 36%);   /* was: #3e5a7f */
-  --boom-palette-blue-600: hsl(var(--boom-hue-blue) 30% 43%);   /* was: #4e6a8f */
-  --boom-palette-blue-500: hsl(var(--boom-hue-blue) 94% 68%);   /* was: #60a5fa */
-  --boom-palette-blue-400: hsl(var(--boom-hue-blue) 96% 75%);   /* was: #7dbdfc */
-  --boom-palette-blue-300: hsl(var(--boom-hue-blue) 96% 80%);   /* was: #93c5fd */
-  --boom-palette-blue-200: hsl(var(--boom-hue-blue) 96% 87%);   /* was: #bfdbfe */
-  --boom-palette-blue-100: hsl(var(--boom-hue-blue) 100% 93%);  /* was: #dbeafe */
-  --boom-palette-blue-50: hsl(var(--boom-hue-blue) 100% 97%);   /* was: #eff6ff */
+  /* Accent - Primary brand color for interactive elements */
+  --boom-palette-accent-900: hsl(var(--boom-hue-accent) 52% 24%);   /* was: #1e3a5f */
+  --boom-palette-accent-800: hsl(var(--boom-hue-accent) 42% 30%);   /* was: #2e4a6f */
+  --boom-palette-accent-700: hsl(var(--boom-hue-accent) 36% 36%);   /* was: #3e5a7f */
+  --boom-palette-accent-600: hsl(var(--boom-hue-accent) 30% 43%);   /* was: #4e6a8f */
+  --boom-palette-accent-500: hsl(var(--boom-hue-accent) 94% 68%);   /* was: #60a5fa */
+  --boom-palette-accent-400: hsl(var(--boom-hue-accent) 96% 75%);   /* was: #7dbdfc */
+  --boom-palette-accent-300: hsl(var(--boom-hue-accent) 96% 80%);   /* was: #93c5fd */
+  --boom-palette-accent-200: hsl(var(--boom-hue-accent) 96% 87%);   /* was: #bfdbfe */
+  --boom-palette-accent-100: hsl(var(--boom-hue-accent) 100% 93%);  /* was: #dbeafe */
+  --boom-palette-accent-50: hsl(var(--boom-hue-accent) 100% 97%);   /* was: #eff6ff */
 
   /* Success - Green (saturated for clarity) */
   --boom-palette-success-700: hsl(var(--boom-hue-success) 73% 29%);  /* was: #15803d */
@@ -99,20 +99,20 @@
    ========================================================================== */
 
 :root[data-theme='light'] {
-  /* Neutral Backgrounds - Inverted from dark theme */
-  --boom-palette-slate-50: hsl(0 0% 100%);
-  --boom-palette-slate-100: hsl(var(--boom-hue-slate) 20% 98%);
-  --boom-palette-slate-200: hsl(var(--boom-hue-slate) 18% 95%);
-  --boom-palette-slate-300: hsl(var(--boom-hue-slate) 20% 91%);
-  --boom-palette-slate-400: hsl(var(--boom-hue-slate) 26% 84%);
-  --boom-palette-slate-500: hsl(var(--boom-hue-slate) 13% 66%);
-  --boom-palette-slate-600: hsl(var(--boom-hue-slate) 14% 47%);
-  --boom-palette-slate-700: hsl(var(--boom-hue-slate) 17% 36%);
-  --boom-palette-slate-800: hsl(var(--boom-hue-slate) 25% 27%);
-  --boom-palette-slate-900: hsl(var(--boom-hue-slate) 39% 18%);
-  --boom-palette-slate-950: hsl(var(--boom-hue-slate) 61% 11%);
+  /* Base - Neutral colors inverted from dark theme */
+  --boom-palette-base-50: hsl(0 0% 100%);
+  --boom-palette-base-100: hsl(var(--boom-hue-base) 20% 98%);
+  --boom-palette-base-200: hsl(var(--boom-hue-base) 18% 95%);
+  --boom-palette-base-300: hsl(var(--boom-hue-base) 20% 91%);
+  --boom-palette-base-400: hsl(var(--boom-hue-base) 26% 84%);
+  --boom-palette-base-500: hsl(var(--boom-hue-base) 13% 66%);
+  --boom-palette-base-600: hsl(var(--boom-hue-base) 14% 47%);
+  --boom-palette-base-700: hsl(var(--boom-hue-base) 17% 36%);
+  --boom-palette-base-800: hsl(var(--boom-hue-base) 25% 27%);
+  --boom-palette-base-900: hsl(var(--boom-hue-base) 39% 18%);
+  --boom-palette-base-950: hsl(var(--boom-hue-base) 61% 11%);
 
-  /* Primary blue palette stays the same, usage differs */
+  /* Accent palette stays the same, usage differs */
   /* We'll use darker shades (600-900) for interactive elements in light theme */
 
   /* Semantic colors stay the same, usage differs */

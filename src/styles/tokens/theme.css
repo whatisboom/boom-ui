@@ -14,60 +14,60 @@
      ========================================================================== */
 
   /* Base application background */
-  --boom-theme-bg-base: var(--boom-palette-slate-900);
+  --boom-theme-bg-base: var(--boom-palette-base-900);
 
   /* Primary background (same as base) */
-  --boom-theme-bg-primary: var(--boom-palette-slate-900);
+  --boom-theme-bg-primary: var(--boom-palette-base-900);
 
   /* Elevated surfaces (cards, modals, panels) */
-  --boom-theme-bg-elevated: var(--boom-palette-slate-800);
+  --boom-theme-bg-elevated: var(--boom-palette-base-800);
 
   /* Secondary background for nested elements */
-  --boom-theme-bg-secondary: var(--boom-palette-slate-800);
+  --boom-theme-bg-secondary: var(--boom-palette-base-800);
 
   /* Tertiary background for even more nested elements */
-  --boom-theme-bg-tertiary: var(--boom-palette-slate-700);
+  --boom-theme-bg-tertiary: var(--boom-palette-base-700);
 
   /* Overlay background (modals, popovers) */
-  --boom-theme-bg-overlay: var(--boom-palette-slate-800);
+  --boom-theme-bg-overlay: var(--boom-palette-base-800);
 
   /* Inverse background (for dark elements on light backgrounds) */
-  --boom-theme-bg-inverse: var(--boom-palette-slate-100);
+  --boom-theme-bg-inverse: var(--boom-palette-base-100);
 
   /* ==========================================================================
      TEXT COLORS
      ========================================================================== */
 
   /* Primary text color */
-  --boom-theme-text-primary: var(--boom-palette-slate-300);
+  --boom-theme-text-primary: var(--boom-palette-base-300);
 
   /* Secondary text color (less emphasis) */
-  --boom-theme-text-secondary: var(--boom-palette-slate-400);
+  --boom-theme-text-secondary: var(--boom-palette-base-400);
 
   /* Tertiary text color (even less emphasis) */
-  --boom-theme-text-tertiary: var(--boom-palette-slate-500);
+  --boom-theme-text-tertiary: var(--boom-palette-base-500);
 
   /* Disabled text color */
-  --boom-theme-text-disabled: var(--boom-palette-slate-600);
+  --boom-theme-text-disabled: var(--boom-palette-base-600);
 
   /* Inverse text (for light text on dark backgrounds) */
-  --boom-theme-text-inverse: var(--boom-palette-slate-900);
+  --boom-theme-text-inverse: var(--boom-palette-base-900);
 
   /* Text on primary colored backgrounds */
-  --boom-theme-text-on-primary: var(--boom-palette-slate-50);
+  --boom-theme-text-on-primary: var(--boom-palette-base-50);
 
   /* ==========================================================================
      BORDERS
      ========================================================================== */
 
   /* Default border color */
-  --boom-theme-border-default: var(--boom-palette-slate-600);
+  --boom-theme-border-default: var(--boom-palette-base-600);
 
   /* Subtle border (less emphasis) */
-  --boom-theme-border-subtle: var(--boom-palette-slate-700);
+  --boom-theme-border-subtle: var(--boom-palette-base-700);
 
   /* Focus border/ring color */
-  --boom-theme-border-focus: var(--boom-palette-blue-400);
+  --boom-theme-border-focus: var(--boom-palette-accent-400);
 
   /* Error border color */
   --boom-theme-border-error: var(--boom-palette-error-500);
@@ -77,29 +77,29 @@
      ========================================================================== */
 
   /* Primary brand color */
-  --boom-theme-primary: var(--boom-palette-blue-500);
+  --boom-theme-primary: var(--boom-palette-accent-500);
 
   /* Primary hover state */
-  --boom-theme-primary-hover: var(--boom-palette-blue-400);
+  --boom-theme-primary-hover: var(--boom-palette-accent-400);
 
   /* Primary active/pressed state */
-  --boom-theme-primary-active: var(--boom-palette-blue-600);
+  --boom-theme-primary-active: var(--boom-palette-accent-600);
 
   /* Primary disabled state */
-  --boom-theme-primary-disabled: var(--boom-palette-slate-600);
+  --boom-theme-primary-disabled: var(--boom-palette-base-600);
 
   /* ==========================================================================
      SECONDARY INTERACTIVE COLORS
      ========================================================================== */
 
   /* Secondary color */
-  --boom-theme-secondary: var(--boom-palette-slate-700);
+  --boom-theme-secondary: var(--boom-palette-base-700);
 
   /* Secondary hover state */
-  --boom-theme-secondary-hover: var(--boom-palette-slate-600);
+  --boom-theme-secondary-hover: var(--boom-palette-base-600);
 
   /* Secondary active/pressed state */
-  --boom-theme-secondary-active: var(--boom-palette-slate-800);
+  --boom-theme-secondary-active: var(--boom-palette-base-800);
 
   /* ==========================================================================
      SEMANTIC STATE COLORS
@@ -130,18 +130,18 @@
      ========================================================================== */
 
   /* Focus ring color */
-  --boom-theme-focus-ring: var(--boom-palette-blue-400);
+  --boom-theme-focus-ring: var(--boom-palette-accent-400);
 
   /* Focus ring with opacity for better visibility */
-  --boom-theme-focus-ring-offset: var(--boom-palette-slate-900);
+  --boom-theme-focus-ring-offset: var(--boom-palette-base-900);
 
   /* ==========================================================================
      ACCENT COLORS
      ========================================================================== */
 
   /* Accent color - for badges, notification dots, highlights */
-  --boom-theme-accent: var(--boom-palette-blue-400);
-  --boom-theme-accent-subtle: hsl(var(--boom-hue-blue) 94% 68% / 0.15);
+  --boom-theme-accent: var(--boom-palette-accent-400);
+  --boom-theme-accent-subtle: hsl(var(--boom-hue-accent) 94% 68% / 0.15);
 
   /* ==========================================================================
      BORDER ALIASES
@@ -155,23 +155,23 @@
      ========================================================================== */
 
   /* Shadow color tokens - themeable shadow tinting */
-  --boom-theme-shadow-color: hsl(var(--boom-hue-slate) 39% 18% / 0.3);
-  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-slate) 39% 18% / 0.1);
-  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-slate) 39% 18% / 0.5);
+  --boom-theme-shadow-color: hsl(var(--boom-hue-base) 39% 18% / 0.3);
+  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-base) 39% 18% / 0.1);
+  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-base) 39% 18% / 0.5);
 
   /* ==========================================================================
      OVERLAY COLORS
      ========================================================================== */
 
   /* Overlay backdrop */
-  --boom-theme-overlay-backdrop: hsl(var(--boom-hue-slate) 39% 18% / 0.7);
+  --boom-theme-overlay-backdrop: hsl(var(--boom-hue-base) 39% 18% / 0.7);
 
   /* ==========================================================================
      FOCUS RING COLORS
      ========================================================================== */
 
   /* Focus ring with opacity */
-  --boom-theme-focus-ring-shadow: hsl(var(--boom-hue-blue) 94% 68% / 0.3);
+  --boom-theme-focus-ring-shadow: hsl(var(--boom-hue-accent) 94% 68% / 0.3);
 }
 
 /* ==========================================================================
@@ -180,38 +180,38 @@
 
 :root[data-theme='light'] {
   /* Backgrounds */
-  --boom-theme-bg-base: var(--boom-palette-slate-50);
-  --boom-theme-bg-primary: var(--boom-palette-slate-50);
-  --boom-theme-bg-elevated: var(--boom-palette-slate-100);
-  --boom-theme-bg-secondary: var(--boom-palette-slate-100);
-  --boom-theme-bg-tertiary: var(--boom-palette-slate-200);
-  --boom-theme-bg-overlay: var(--boom-palette-slate-100);
-  --boom-theme-bg-inverse: var(--boom-palette-slate-900);
+  --boom-theme-bg-base: var(--boom-palette-base-50);
+  --boom-theme-bg-primary: var(--boom-palette-base-50);
+  --boom-theme-bg-elevated: var(--boom-palette-base-100);
+  --boom-theme-bg-secondary: var(--boom-palette-base-100);
+  --boom-theme-bg-tertiary: var(--boom-palette-base-200);
+  --boom-theme-bg-overlay: var(--boom-palette-base-100);
+  --boom-theme-bg-inverse: var(--boom-palette-base-900);
 
   /* Text */
-  --boom-theme-text-primary: var(--boom-palette-slate-700);
-  --boom-theme-text-secondary: var(--boom-palette-slate-600);
-  --boom-theme-text-tertiary: var(--boom-palette-slate-500);
-  --boom-theme-text-disabled: var(--boom-palette-slate-400);
-  --boom-theme-text-inverse: var(--boom-palette-slate-50);
-  --boom-theme-text-on-primary: var(--boom-palette-slate-50);
+  --boom-theme-text-primary: var(--boom-palette-base-700);
+  --boom-theme-text-secondary: var(--boom-palette-base-600);
+  --boom-theme-text-tertiary: var(--boom-palette-base-500);
+  --boom-theme-text-disabled: var(--boom-palette-base-400);
+  --boom-theme-text-inverse: var(--boom-palette-base-50);
+  --boom-theme-text-on-primary: var(--boom-palette-base-50);
 
   /* Borders */
-  --boom-theme-border-default: var(--boom-palette-slate-300);
-  --boom-theme-border-subtle: var(--boom-palette-slate-200);
-  --boom-theme-border-focus: var(--boom-palette-blue-600);
+  --boom-theme-border-default: var(--boom-palette-base-300);
+  --boom-theme-border-subtle: var(--boom-palette-base-200);
+  --boom-theme-border-focus: var(--boom-palette-accent-600);
   --boom-theme-border-error: var(--boom-palette-error-600);
 
   /* Primary interactive - use darker shades for light theme */
-  --boom-theme-primary: var(--boom-palette-blue-600);
-  --boom-theme-primary-hover: var(--boom-palette-blue-700);
-  --boom-theme-primary-active: var(--boom-palette-blue-800);
-  --boom-theme-primary-disabled: var(--boom-palette-slate-400);
+  --boom-theme-primary: var(--boom-palette-accent-600);
+  --boom-theme-primary-hover: var(--boom-palette-accent-700);
+  --boom-theme-primary-active: var(--boom-palette-accent-800);
+  --boom-theme-primary-disabled: var(--boom-palette-base-400);
 
   /* Secondary interactive */
-  --boom-theme-secondary: var(--boom-palette-slate-200);
-  --boom-theme-secondary-hover: var(--boom-palette-slate-300);
-  --boom-theme-secondary-active: var(--boom-palette-slate-400);
+  --boom-theme-secondary: var(--boom-palette-base-200);
+  --boom-theme-secondary-hover: var(--boom-palette-base-300);
+  --boom-theme-secondary-active: var(--boom-palette-base-400);
 
   /* Semantic states - use darker shades for better contrast */
   --boom-theme-success-bg: var(--boom-palette-success-600);
@@ -231,21 +231,21 @@
   --boom-theme-info-border: var(--boom-palette-info-600);
 
   /* Focus */
-  --boom-theme-focus-ring: var(--boom-palette-blue-600);
-  --boom-theme-focus-ring-offset: var(--boom-palette-slate-50);
+  --boom-theme-focus-ring: var(--boom-palette-accent-600);
+  --boom-theme-focus-ring-offset: var(--boom-palette-base-50);
 
   /* Accent */
-  --boom-theme-accent: var(--boom-palette-blue-600);
-  --boom-theme-accent-subtle: hsl(var(--boom-hue-blue) 52% 24% / 0.1);
+  --boom-theme-accent: var(--boom-palette-accent-600);
+  --boom-theme-accent-subtle: hsl(var(--boom-hue-accent) 52% 24% / 0.1);
 
   /* Shadows - light theme uses darker shadows */
-  --boom-theme-shadow-color: hsl(var(--boom-hue-slate) 61% 11% / 0.4);
-  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-slate) 61% 11% / 0.15);
-  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-slate) 61% 11% / 0.6);
+  --boom-theme-shadow-color: hsl(var(--boom-hue-base) 61% 11% / 0.4);
+  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-base) 61% 11% / 0.15);
+  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-base) 61% 11% / 0.6);
 
   /* Overlay */
-  --boom-theme-overlay-backdrop: hsl(var(--boom-hue-slate) 61% 11% / 0.6);
+  --boom-theme-overlay-backdrop: hsl(var(--boom-hue-base) 61% 11% / 0.6);
 
   /* Focus ring */
-  --boom-theme-focus-ring-shadow: hsl(var(--boom-hue-blue) 52% 24% / 0.25);
+  --boom-theme-focus-ring-shadow: hsl(var(--boom-hue-accent) 52% 24% / 0.25);
 }
