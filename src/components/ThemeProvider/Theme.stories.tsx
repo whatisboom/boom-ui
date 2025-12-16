@@ -244,3 +244,117 @@ export const CustomHues: Story = {
     errorHue: 0,
   },
 };
+
+export const AdvancedCustomization: Story = {
+  render: (args) => {
+    const { theme, setTheme } = useTheme();
+
+    useEffect(() => {
+      if (args.baseSaturation !== undefined) {
+        document.documentElement.style.setProperty('--boom-sat-base', String(args.baseSaturation));
+      }
+      if (args.baseLightness !== undefined) {
+        document.documentElement.style.setProperty('--boom-light-base', String(args.baseLightness));
+      }
+      if (args.accentSaturation !== undefined) {
+        document.documentElement.style.setProperty('--boom-sat-accent', String(args.accentSaturation));
+      }
+      if (args.accentLightness !== undefined) {
+        document.documentElement.style.setProperty('--boom-light-accent', String(args.accentLightness));
+      }
+
+      return () => {
+        document.documentElement.style.removeProperty('--boom-sat-base');
+        document.documentElement.style.removeProperty('--boom-light-base');
+        document.documentElement.style.removeProperty('--boom-sat-accent');
+        document.documentElement.style.removeProperty('--boom-light-accent');
+      };
+    }, [args.baseSaturation, args.baseLightness, args.accentSaturation, args.accentLightness]);
+
+    return (
+      <div className={styles.container}>
+        <div className={styles.section}>
+          <h1 className={styles.title}>Advanced S/L Customization</h1>
+          <p className={styles.subtitle}>
+            Fine-tune saturation and lightness for precise brand matching.
+          </p>
+
+          <div className={styles.controls}>
+            <Button onClick={() => setTheme('light')} variant={theme === 'light' ? 'primary' : 'secondary'}>
+              Light
+            </Button>
+            <Button onClick={() => setTheme('dark')} variant={theme === 'dark' ? 'primary' : 'secondary'}>
+              Dark
+            </Button>
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <h2>Base (Neutrals)</h2>
+          <div className={styles.colorGrid}>
+            {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((shade) => (
+              <div key={shade} className={styles.colorSwatch}>
+                <div
+                  className={styles.colorBox}
+                  style={{ backgroundColor: `var(--boom-palette-base-${shade})` }}
+                />
+                <span className={styles.colorLabel}>{shade}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <h2>Accent (Primary)</h2>
+          <div className={styles.colorGrid}>
+            {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => (
+              <div key={shade} className={styles.colorSwatch}>
+                <div
+                  className={styles.colorBox}
+                  style={{ backgroundColor: `var(--boom-palette-accent-${shade})` }}
+                />
+                <span className={styles.colorLabel}>{shade}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <h2>Interactive Elements</h2>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <Button variant="primary">Primary Button</Button>
+            <Button variant="secondary">Secondary Button</Button>
+          </div>
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    baseSaturation: {
+      control: { type: 'range', min: 0, max: 50, step: 1 },
+      defaultValue: 13,
+      description: 'Base saturation (0-50, default: 13)',
+    },
+    baseLightness: {
+      control: { type: 'range', min: 30, max: 90, step: 1 },
+      defaultValue: 66,
+      description: 'Base lightness (30-90, default: 66)',
+    },
+    accentSaturation: {
+      control: { type: 'range', min: 40, max: 100, step: 1 },
+      defaultValue: 94,
+      description: 'Accent saturation (40-100, default: 94)',
+    },
+    accentLightness: {
+      control: { type: 'range', min: 40, max: 90, step: 1 },
+      defaultValue: 68,
+      description: 'Accent lightness (40-90, default: 68)',
+    },
+  },
+  args: {
+    baseSaturation: 13,
+    baseLightness: 66,
+    accentSaturation: 94,
+    accentLightness: 68,
+  },
+};
