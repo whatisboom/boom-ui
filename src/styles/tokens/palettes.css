@@ -127,6 +127,26 @@
    ========================================================================== */
 
 :root[data-theme='light'] {
+  /* Override HSL variables for light theme */
+  --boom-hue-base: 210;
+  --boom-sat-base: 2;
+  --boom-light-base: 50;
+  --boom-hue-accent: 210;
+  --boom-sat-accent: 100;
+  --boom-light-accent: 55;
+  --boom-hue-success: 142;
+  --boom-sat-success: 63;
+  --boom-light-success: 51;
+  --boom-hue-warning: 38;
+  --boom-sat-warning: 75;
+  --boom-light-warning: 75;
+  --boom-hue-error: 0;
+  --boom-sat-error: 84;
+  --boom-light-error: 60;
+  --boom-hue-info: 189;
+  --boom-sat-info: 80;
+  --boom-light-info: 52;
+
   /* Base - Neutral colors inverted from dark theme */
   --boom-palette-base-50: hsl(0 0% 100%);
   --boom-palette-base-100: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.5%) calc(var(--boom-light-base) * 1.48%));
