@@ -141,7 +141,7 @@
 
   /* Accent color - for badges, notification dots, highlights */
   --boom-theme-accent: var(--boom-palette-accent-400);
-  --boom-theme-accent-subtle: hsl(var(--boom-hue-accent) 94% 68% / 0.15);
+  --boom-theme-accent-subtle: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 1.0%) calc(var(--boom-light-accent) * 1.0%) / 0.15);
 
   /* ==========================================================================
      BORDER ALIASES
@@ -155,23 +155,23 @@
      ========================================================================== */
 
   /* Shadow color tokens - themeable shadow tinting */
-  --boom-theme-shadow-color: hsl(var(--boom-hue-base) 39% 18% / 0.3);
-  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-base) 39% 18% / 0.1);
-  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-base) 39% 18% / 0.5);
+  --boom-theme-shadow-color: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 3.0%) calc(var(--boom-light-base) * 0.27%) / 0.3);
+  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 3.0%) calc(var(--boom-light-base) * 0.27%) / 0.1);
+  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 3.0%) calc(var(--boom-light-base) * 0.27%) / 0.5);
 
   /* ==========================================================================
      OVERLAY COLORS
      ========================================================================== */
 
   /* Overlay backdrop */
-  --boom-theme-overlay-backdrop: hsl(var(--boom-hue-base) 39% 18% / 0.7);
+  --boom-theme-overlay-backdrop: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 3.0%) calc(var(--boom-light-base) * 0.27%) / 0.7);
 
   /* ==========================================================================
      FOCUS RING COLORS
      ========================================================================== */
 
   /* Focus ring with opacity */
-  --boom-theme-focus-ring-shadow: hsl(var(--boom-hue-accent) 94% 68% / 0.3);
+  --boom-theme-focus-ring-shadow: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 1.0%) calc(var(--boom-light-accent) * 1.0%) / 0.3);
 }
 
 /* ==========================================================================
@@ -236,16 +236,16 @@
 
   /* Accent */
   --boom-theme-accent: var(--boom-palette-accent-600);
-  --boom-theme-accent-subtle: hsl(var(--boom-hue-accent) 52% 24% / 0.1);
+  --boom-theme-accent-subtle: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.55%) calc(var(--boom-light-accent) * 0.35%) / 0.1);
 
   /* Shadows - light theme uses darker shadows */
-  --boom-theme-shadow-color: hsl(var(--boom-hue-base) 61% 11% / 0.4);
-  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-base) 61% 11% / 0.15);
-  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-base) 61% 11% / 0.6);
+  --boom-theme-shadow-color: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 4.7%) calc(var(--boom-light-base) * 0.17%) / 0.4);
+  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 4.7%) calc(var(--boom-light-base) * 0.17%) / 0.15);
+  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 4.7%) calc(var(--boom-light-base) * 0.17%) / 0.6);
 
   /* Overlay */
-  --boom-theme-overlay-backdrop: hsl(var(--boom-hue-base) 61% 11% / 0.6);
+  --boom-theme-overlay-backdrop: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 4.7%) calc(var(--boom-light-base) * 0.17%) / 0.6);
 
   /* Focus ring */
-  --boom-theme-focus-ring-shadow: hsl(var(--boom-hue-accent) 52% 24% / 0.25);
+  --boom-theme-focus-ring-shadow: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.55%) calc(var(--boom-light-accent) * 0.35%) / 0.25);
 }
