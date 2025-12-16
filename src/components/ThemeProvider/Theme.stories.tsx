@@ -366,27 +366,27 @@ export const ThemeCustomizer: Story = {
     const { theme, setTheme } = useTheme();
 
     // State for all 18 HSL values
-    const [baseHue, setBaseHue] = useState(215);
-    const [baseSat, setBaseSat] = useState(13);
-    const [baseLight, setBaseLight] = useState(66);
+    const [baseHue, setBaseHue] = useState(210);
+    const [baseSat, setBaseSat] = useState(2);
+    const [baseLight, setBaseLight] = useState(33);
 
-    const [accentHue, setAccentHue] = useState(213);
-    const [accentSat, setAccentSat] = useState(94);
-    const [accentLight, setAccentLight] = useState(68);
+    const [accentHue, setAccentHue] = useState(215);
+    const [accentSat, setAccentSat] = useState(47);
+    const [accentLight, setAccentLight] = useState(28);
 
     const [successHue, setSuccessHue] = useState(142);
-    const [successSat, setSuccessSat] = useState(71);
-    const [successLight, setSuccessLight] = useState(45);
+    const [successSat, setSuccessSat] = useState(38);
+    const [successLight, setSuccessLight] = useState(41);
 
     const [warningHue, setWarningHue] = useState(38);
-    const [warningSat, setWarningSat] = useState(96);
-    const [warningLight, setWarningLight] = useState(51);
+    const [warningSat, setWarningSat] = useState(63);
+    const [warningLight, setWarningLight] = useState(32);
 
     const [errorHue, setErrorHue] = useState(0);
     const [errorSat, setErrorSat] = useState(84);
     const [errorLight, setErrorLight] = useState(60);
 
-    const [infoHue, setInfoHue] = useState(173);
+    const [infoHue, setInfoHue] = useState(189);
     const [infoSat, setInfoSat] = useState(80);
     const [infoLight, setInfoLight] = useState(39);
 

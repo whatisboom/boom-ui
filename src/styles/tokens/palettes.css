@@ -14,36 +14,36 @@
      ========================================================================== */
 
   /* Base - Neutral colors for backgrounds, text, borders */
-  --boom-hue-base: 215;
+  --boom-hue-base: 210;
 
   /* Accent - Primary brand color for interactive elements */
-  --boom-hue-accent: 213;
+  --boom-hue-accent: 215;
 
   /* Semantic state colors */
   --boom-hue-success: 142;   /* green */
   --boom-hue-warning: 38;    /* amber */
   --boom-hue-error: 0;       /* red */
-  --boom-hue-info: 173;      /* teal */
+  --boom-hue-info: 189;      /* teal */
 
   /* ==========================================================================
      SATURATION & LIGHTNESS VARIABLES - Advanced Theme Customization
      ========================================================================== */
 
   /* Base - Neutral saturation/lightness (reference: base-500) */
-  --boom-sat-base: 13;
-  --boom-light-base: 66;
+  --boom-sat-base: 2;
+  --boom-light-base: 33;
 
   /* Accent - Primary brand saturation/lightness (reference: accent-500) */
-  --boom-sat-accent: 94;
-  --boom-light-accent: 68;
+  --boom-sat-accent: 47;
+  --boom-light-accent: 28;
 
   /* Success - Green saturation/lightness (reference: success-500) */
-  --boom-sat-success: 71;
-  --boom-light-success: 45;
+  --boom-sat-success: 38;
+  --boom-light-success: 41;
 
   /* Warning - Amber saturation/lightness (reference: warning-500) */
-  --boom-sat-warning: 96;
-  --boom-light-warning: 51;
+  --boom-sat-warning: 63;
+  --boom-light-warning: 32;
 
   /* Error - Red saturation/lightness (reference: error-500) */
   --boom-sat-error: 84;
