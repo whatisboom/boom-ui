@@ -1,11 +1,12 @@
-import type { Preview } from '@storybook/react';
-import { themes } from '@storybook/theming';
+import type { Preview } from '@storybook/react-vite';
+import { themes } from 'storybook/theming';
 import '../src/styles/index.css';
 import { ThemeDecorator } from './decorators/ThemeDecorator';
 import { DocsContainer } from './containers/DocsContainer';
 
 const preview: Preview = {
   decorators: [ThemeDecorator],
+
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -15,17 +16,17 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: 'dark',
-      values: [
-        {
+      options: {
+        dark: {
           name: 'dark',
           value: '#1e293b',
         },
-        {
+
+        light: {
           name: 'light',
           value: '#ffffff',
-        },
-      ],
+        }
+      }
     },
     docs: {
       container: DocsContainer,
@@ -50,6 +51,14 @@ const preview: Preview = {
       },
     },
   },
+
+  initialGlobals: {
+    backgrounds: {
+      value: 'dark'
+    }
+  },
+
+  tags: ['autodocs']
 };
 
 export default preview;

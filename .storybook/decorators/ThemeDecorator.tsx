@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import type { Decorator } from '@storybook/react';
-import { useDarkMode } from 'storybook-dark-mode';
+import type { Decorator } from '@storybook/react-vite';
+import { useDarkMode } from '@storybook-community/storybook-dark-mode';
 import { ThemeProvider } from '../../src/components/ThemeProvider';
 
 export const ThemeDecorator: Decorator = (Story) => {
