@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { DocsContainer as BaseContainer } from '@storybook/addon-docs';
-import { addons } from '@storybook/preview-api';
-import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
+import { DocsContainer as BaseContainer } from '@storybook/addon-docs/blocks';
+import { addons } from 'storybook/preview-api';
+import { DARK_MODE_EVENT_NAME } from '@storybook-community/storybook-dark-mode';
 
 const getInitialTheme = () => {
   try {
@@ -36,15 +36,13 @@ export const DocsContainer = ({ children, context }: any) => {
 
     // Style all Storybook Docs elements
     const selectors = [
-      '.sbdocs-content',
-      '.sbdocs-wrapper',
-      '.sbdocs',
-      '.docblock-argstable',
-      '.docblock-argstable table',
-      '.docblock-argstable thead',
-      '.docblock-argstable tbody tr',
+      '.sb-wrapper',
+      '.sb-argstableBlock',
+      '.sb-argstableBlock table',
+      '.sb-argstableBlock thead',
+      '.sb-argstableBlock tbody tr',
       '.sb-previewBlock',
-      '.docs-story',
+      '.sb-heading',
     ];
 
     selectors.forEach(selector => {
@@ -56,19 +54,19 @@ export const DocsContainer = ({ children, context }: any) => {
     });
 
     // Style headings specifically
-    document.querySelectorAll('.sbdocs h1, .sbdocs h2, .sbdocs h3, .sbdocs h4, .sbdocs h5, .sbdocs h6').forEach(el => {
+    document.querySelectorAll('.sb-wrapper h1, .sb-wrapper h2, .sb-wrapper h3, .sb-wrapper h4, .sb-wrapper h5, .sb-wrapper h6').forEach(el => {
       (el as HTMLElement).style.color = textColor;
     });
 
     // Style table headers with secondary background
-    document.querySelectorAll('.docblock-argstable th').forEach(el => {
+    document.querySelectorAll('.sb-argstableBlock th').forEach(el => {
       (el as HTMLElement).style.backgroundColor = secondaryBg;
       (el as HTMLElement).style.color = textColor;
       (el as HTMLElement).style.borderColor = borderColor;
     });
 
     // Style table cells
-    document.querySelectorAll('.docblock-argstable td').forEach(el => {
+    document.querySelectorAll('.sb-argstableBlock td').forEach(el => {
       (el as HTMLElement).style.backgroundColor = backgroundColor;
       (el as HTMLElement).style.color = textColor;
       (el as HTMLElement).style.borderColor = borderColor;
@@ -76,12 +74,12 @@ export const DocsContainer = ({ children, context }: any) => {
 
     // Style form controls (inputs, textareas, selects, buttons)
     const controlSelectors = [
-      '.docblock-argstable input',
-      '.docblock-argstable textarea',
-      '.docblock-argstable select',
-      '.sbdocs input',
-      '.sbdocs textarea',
-      '.sbdocs select',
+      '.sb-argstableBlock input',
+      '.sb-argstableBlock textarea',
+      '.sb-argstableBlock select',
+      '.sb-wrapper input',
+      '.sb-wrapper textarea',
+      '.sb-wrapper select',
     ];
 
     controlSelectors.forEach(selector => {
@@ -93,7 +91,7 @@ export const DocsContainer = ({ children, context }: any) => {
     });
 
     // Style buttons
-    document.querySelectorAll('.docblock-argstable button, .sbdocs button').forEach(el => {
+    document.querySelectorAll('.sb-argstableBlock button, .sb-wrapper button').forEach(el => {
       (el as HTMLElement).style.backgroundColor = secondaryBg;
       (el as HTMLElement).style.color = textColor;
       (el as HTMLElement).style.borderColor = borderColor;

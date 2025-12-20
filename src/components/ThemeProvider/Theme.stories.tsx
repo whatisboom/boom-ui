@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 import { useTheme } from './ThemeProvider';
 import { Button } from '../Button';
@@ -134,10 +134,23 @@ export default meta;
 
 type Story = StoryObj<typeof ThemeShowcase>;
 
+interface HueCustomizationArgs {
+  primaryHue?: number;
+  successHue?: number;
+  errorHue?: number;
+}
+
+interface AdvancedCustomizationArgs {
+  baseSaturation?: number;
+  baseLightness?: number;
+  accentSaturation?: number;
+  accentLightness?: number;
+}
+
 export const Default: Story = {};
 
-export const CustomHues: Story = {
-  render: (args) => {
+export const CustomHues: StoryObj<HueCustomizationArgs> = {
+  render: (args: HueCustomizationArgs) => {
     const { theme, setTheme } = useTheme();
 
     // Apply hue customizations
@@ -247,8 +260,8 @@ export const CustomHues: Story = {
   },
 };
 
-export const AdvancedCustomization: Story = {
-  render: (args) => {
+export const AdvancedCustomization: StoryObj<AdvancedCustomizationArgs> = {
+  render: (args: AdvancedCustomizationArgs) => {
     const { theme, setTheme } = useTheme();
 
     useEffect(() => {

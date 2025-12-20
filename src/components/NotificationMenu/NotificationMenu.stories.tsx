@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   NotificationMenu,
   NotificationMenuTrigger,
@@ -54,6 +54,9 @@ const mockNotifications: Notification[] = [
 ];
 
 export const Default: Story = {
+  args: {
+    children: undefined,
+  },
   render: () => (
     <NotificationMenu>
       <NotificationMenuTrigger unreadCount={2} onClick={() => {}} />
@@ -68,6 +71,9 @@ export const Default: Story = {
 };
 
 export const NoNotifications: Story = {
+  args: {
+    children: undefined,
+  },
   render: () => (
     <NotificationMenu>
       <NotificationMenuTrigger unreadCount={0} onClick={() => {}} />
@@ -77,6 +83,9 @@ export const NoNotifications: Story = {
 };
 
 export const ManyNotifications: Story = {
+  args: {
+    children: undefined,
+  },
   render: () => {
     const manyNotifications: Notification[] = Array.from(
       { length: 10 },
