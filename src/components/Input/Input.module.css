@@ -141,11 +141,11 @@
 }
 
 .leftIcon {
-  left: var(--boom-spacing-3);
+  left: 0;
 }
 
 .rightIcon {
-  right: var(--boom-spacing-3);
+  right: 0;
 }
 
 .disabled .leftIcon,
