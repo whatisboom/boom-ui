@@ -4,13 +4,7 @@ import { NavigationProps, NavItem } from './Navigation.types';
 import { cn } from '@/utils/classnames';
 import styles from './Navigation.module.css';
 
-function NavItemComponent({
-  item,
-  orientation,
-}: {
-  item: NavItem;
-  orientation: 'horizontal' | 'vertical';
-}) {
+function NavItemComponent({ item }: { item: NavItem }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const hasDropdown = item.dropdown && item.dropdown.length > 0;
@@ -148,7 +142,7 @@ export function Navigation({
     <nav className={cn(styles.nav, styles[orientation], className)}>
       <ul className={styles.navList}>
         {items.map((item, index) => (
-          <NavItemComponent key={index} item={item} orientation={orientation} />
+          <NavItemComponent key={index} item={item} />
         ))}
       </ul>
     </nav>

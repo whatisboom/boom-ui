@@ -10,6 +10,7 @@ export { Input } from './components/Input';
 export { Card } from './components/Card';
 export { Slider } from './components/Slider';
 export { Checkbox } from './components/Checkbox';
+export { Switch } from './components/Switch';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 
 // Primitives
@@ -28,6 +29,7 @@ export type { InputProps } from './components/Input';
 export type { CardProps, CardVariant } from './components/Card';
 export type { SliderProps, SingleSliderProps, RangeSliderProps } from './components/Slider';
 export type { CheckboxProps } from './components/Checkbox';
+export type { SwitchProps } from './components/Switch';
 export type {
   Theme,
   ResolvedTheme,
