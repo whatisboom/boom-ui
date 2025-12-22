@@ -1,0 +1,168 @@
+.wrapper {
+  display: inline-block;
+}
+
+.wrapper.fullWidth {
+  display: block;
+  width: 100%;
+}
+
+/* Label container */
+.checkboxLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--boom-spacing-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkboxLabel.labelLeft {
+  flex-direction: row-reverse;
+}
+
+/* Native checkbox - visually hidden but accessible */
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Custom visual checkbox */
+.checkboxVisual {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid var(--boom-color-border);
+  border-radius: var(--boom-border-radius-sm);
+  background-color: var(--boom-color-background);
+  transition: all 0.2s ease;
+}
+
+/* Size variants */
+.checkboxVisual.sm {
+  width: 16px;
+  height: 16px;
+}
+
+.checkboxVisual.md {
+  width: 20px;
+  height: 20px;
+}
+
+.checkboxVisual.lg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Checked state */
+.checkboxVisual.checked {
+  background-color: var(--boom-color-primary);
+  border-color: var(--boom-color-primary);
+}
+
+/* Checkmark icon */
+.checkmark {
+  color: var(--boom-color-primary-contrast);
+}
+
+/* Size-specific checkmark scaling */
+.checkboxVisual.sm .checkmark {
+  width: 10px;
+  height: 8px;
+}
+
+.checkboxVisual.md .checkmark {
+  width: 12px;
+  height: 10px;
+}
+
+.checkboxVisual.lg .checkmark {
+  width: 14px;
+  height: 12px;
+}
+
+/* Hover state */
+.checkboxLabel:hover .checkboxVisual:not(.error) {
+  border-color: var(--boom-color-primary);
+}
+
+.checkboxLabel:hover .checkboxVisual.checked {
+  background-color: var(--boom-color-primary-hover);
+  border-color: var(--boom-color-primary-hover);
+}
+
+/* Focus state */
+.checkbox:focus-visible + .checkboxVisual {
+  outline: 2px solid var(--boom-color-primary);
+  outline-offset: 2px;
+}
+
+/* Error state */
+.checkboxVisual.error {
+  border-color: var(--boom-color-error);
+}
+
+.checkboxLabel:hover .checkboxVisual.error {
+  border-color: var(--boom-color-error);
+}
+
+.checkboxVisual.checked.error {
+  background-color: var(--boom-color-error);
+  border-color: var(--boom-color-error);
+}
+
+/* Disabled state */
+.wrapper.disabled .checkboxLabel {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.wrapper.disabled .checkboxVisual {
+  cursor: not-allowed;
+}
+
+/* Label text */
+.labelText {
+  font-size: var(--boom-font-size-body);
+  color: var(--boom-color-text);
+  line-height: 1.5;
+}
+
+.checkboxLabel.sm .labelText {
+  font-size: var(--boom-font-size-sm);
+}
+
+.checkboxLabel.lg .labelText {
+  font-size: var(--boom-font-size-lg);
+}
+
+.wrapper.disabled .labelText {
+  color: var(--boom-color-text-disabled);
+}
+
+/* Required indicator */
+.required {
+  color: var(--boom-color-error);
+  margin-left: var(--boom-spacing-1);
+}
+
+/* Error text */
+.errorText {
+  display: block;
+  margin-top: var(--boom-spacing-1);
+  font-size: var(--boom-font-size-sm);
+  color: var(--boom-color-error);
+}
+
+/* Helper text */
+.helperText {
+  display: block;
+  margin-top: var(--boom-spacing-1);
+  font-size: var(--boom-font-size-sm);
+  color: var(--boom-color-text-secondary);
+}
