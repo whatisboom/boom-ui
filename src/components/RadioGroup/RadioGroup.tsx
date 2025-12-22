@@ -87,7 +87,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
                   className={styles.radio}
                 />
                 <span
-                  className={cn(styles.radioVisual, error && styles.error)}
+                  className={styles.radioVisual}
                   aria-hidden="true"
                 />
                 <span className={styles.radioLabel}>{option.label}</span>
