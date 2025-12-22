@@ -1,0 +1,350 @@
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { axe } from 'vitest-axe';
+import { Checkbox } from './Checkbox';
+import styles from './Checkbox.module.css';
+
+describe('Checkbox', () => {
+  // Basic Rendering Tests
+  it('should render checkbox element', () => {
+    const handleChange = vi.fn();
+    render(<Checkbox checked={false} onChange={handleChange} />);
+
+    expect(screen.getByRole('checkbox')).toBeInTheDocument();
+  });
+
+  it('should render with label', () => {
+    const handleChange = vi.fn();
+    render(<Checkbox checked={false} onChange={handleChange} label="Accept terms" />);
+
+    expect(screen.getByLabelText('Accept terms')).toBeInTheDocument();
+  });
+
+  it('should render checked state', () => {
+    const handleChange = vi.fn();
+    render(<Checkbox checked={true} onChange={handleChange} />);
+
+    expect(screen.getByRole('checkbox')).toBeChecked();
+  });
+
+  it('should render unchecked state', () => {
+    const handleChange = vi.fn();
+    render(<Checkbox checked={false} onChange={handleChange} />);
+
+    expect(screen.getByRole('checkbox')).not.toBeChecked();
+  });
+
+  it('should auto-generate id for aria-describedby when not provided', () => {
+    const handleChange = vi.fn();
+    render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Subscribe"
+        helperText="Receive updates"
+      />
+    );
+
+    const checkbox = screen.getByRole('checkbox');
+    const helperText = screen.getByText('Receive updates');
+    expect(checkbox).toHaveAttribute('aria-describedby', helperText.id);
+    expect(helperText.id).toBeTruthy();
+  });
+
+  it('should use provided id for error and helper text ids', () => {
+    const handleChange = vi.fn();
+    render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Accept"
+        id="terms"
+        error="Required field"
+      />
+    );
+
+    const checkbox = screen.getByRole('checkbox');
+    const errorMessage = screen.getByRole('alert');
+    expect(errorMessage.id).toBe('terms-error');
+    expect(checkbox).toHaveAttribute('aria-describedby', 'terms-error');
+  });
+
+  // Size Variants
+  it('should render with different sizes', () => {
+    const handleChange = vi.fn();
+    const { rerender, container } = render(
+      <Checkbox checked={false} onChange={handleChange} size="sm" />
+    );
+    expect(container.querySelector(`.${styles.sm}`)).toBeInTheDocument();
+
+    rerender(<Checkbox checked={false} onChange={handleChange} size="md" />);
+    expect(container.querySelector(`.${styles.md}`)).toBeInTheDocument();
+
+    rerender(<Checkbox checked={false} onChange={handleChange} size="lg" />);
+    expect(container.querySelector(`.${styles.lg}`)).toBeInTheDocument();
+  });
+
+  it('should default to md size', () => {
+    const handleChange = vi.fn();
+    const { container } = render(<Checkbox checked={false} onChange={handleChange} />);
+
+    expect(container.querySelector(`.${styles.md}`)).toBeInTheDocument();
+  });
+
+  // Label Position
+  it('should render label on the right by default', () => {
+    const handleChange = vi.fn();
+    const { container } = render(
+      <Checkbox checked={false} onChange={handleChange} label="Right label" />
+    );
+
+    expect(container.querySelector(`.${styles.labelLeft}`)).not.toBeInTheDocument();
+  });
+
+  it('should render label on the left when specified', () => {
+    const handleChange = vi.fn();
+    const { container } = render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Left label"
+        labelPosition="left"
+      />
+    );
+
+    expect(container.querySelector(`.${styles.labelLeft}`)).toBeInTheDocument();
+  });
+
+  // State Props
+  it('should render disabled state', () => {
+    const handleChange = vi.fn();
+    render(<Checkbox checked={false} onChange={handleChange} disabled label="Disabled" />);
+
+    expect(screen.getByLabelText('Disabled')).toBeDisabled();
+  });
+
+  it('should render required indicator', () => {
+    const handleChange = vi.fn();
+    render(<Checkbox checked={false} onChange={handleChange} label="Required" required />);
+
+    expect(screen.getByText('*')).toBeInTheDocument();
+  });
+
+  it('should render with error message', () => {
+    const handleChange = vi.fn();
+    render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Terms"
+        error="You must accept the terms"
+      />
+    );
+
+    expect(screen.getByRole('alert')).toHaveTextContent('You must accept the terms');
+  });
+
+  it('should set aria-invalid when error is present', () => {
+    const handleChange = vi.fn();
+    render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Terms"
+        error="Required"
+      />
+    );
+
+    const checkbox = screen.getByLabelText('Terms');
+    expect(checkbox).toHaveAttribute('aria-invalid', 'true');
+  });
+
+  it('should link error message with aria-describedby', () => {
+    const handleChange = vi.fn();
+    render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Terms"
+        id="terms"
+        error="Required"
+      />
+    );
+
+    const checkbox = screen.getByLabelText('Terms');
+    const errorMessage = screen.getByRole('alert');
+    expect(checkbox).toHaveAttribute('aria-describedby', errorMessage.id);
+  });
+
+  it('should render helper text', () => {
+    const handleChange = vi.fn();
+    render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Subscribe"
+        helperText="Receive weekly updates"
+      />
+    );
+
+    expect(screen.getByText('Receive weekly updates')).toBeInTheDocument();
+  });
+
+  it('should hide helper text when error is present', () => {
+    const handleChange = vi.fn();
+    render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Terms"
+        helperText="Please accept"
+        error="Required field"
+      />
+    );
+
+    expect(screen.queryByText('Please accept')).not.toBeInTheDocument();
+    expect(screen.getByRole('alert')).toHaveTextContent('Required field');
+  });
+
+  // Layout
+  it('should render full width', () => {
+    const handleChange = vi.fn();
+    const { container } = render(
+      <Checkbox checked={false} onChange={handleChange} fullWidth />
+    );
+
+    expect(container.querySelector(`.${styles.fullWidth}`)).toBeInTheDocument();
+  });
+
+  it('should apply custom className', () => {
+    const handleChange = vi.fn();
+    const { container } = render(
+      <Checkbox checked={false} onChange={handleChange} className="custom-checkbox" />
+    );
+
+    expect(container.querySelector('.custom-checkbox')).toBeInTheDocument();
+  });
+
+  // User Interaction
+  it('should call onChange with true when clicked to check', async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+
+    render(<Checkbox checked={false} onChange={handleChange} label="Click me" />);
+
+    await user.click(screen.getByLabelText('Click me'));
+
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(handleChange).toHaveBeenCalledWith(true);
+  });
+
+  it('should call onChange with false when clicked to uncheck', async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+
+    render(<Checkbox checked={true} onChange={handleChange} label="Click me" />);
+
+    await user.click(screen.getByLabelText('Click me'));
+
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(handleChange).toHaveBeenCalledWith(false);
+  });
+
+  it('should not call onChange when disabled', async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+
+    render(<Checkbox checked={false} onChange={handleChange} disabled label="Disabled" />);
+
+    await user.click(screen.getByLabelText('Disabled'));
+
+    expect(handleChange).not.toHaveBeenCalled();
+  });
+
+  it('should toggle with keyboard space key', async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+
+    render(<Checkbox checked={false} onChange={handleChange} label="Press space" />);
+
+    const checkbox = screen.getByRole('checkbox');
+    checkbox.focus();
+
+    await user.keyboard(' ');
+
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(handleChange).toHaveBeenCalledWith(true);
+  });
+
+  it('should not respond to keyboard when disabled', async () => {
+    const user = userEvent.setup();
+    const handleChange = vi.fn();
+
+    render(<Checkbox checked={false} onChange={handleChange} disabled label="Disabled" />);
+
+    const checkbox = screen.getByRole('checkbox');
+    checkbox.focus();
+
+    await user.keyboard(' ');
+
+    expect(handleChange).not.toHaveBeenCalled();
+  });
+
+  // Accessibility Tests
+  it('should have no accessibility violations (unchecked)', async () => {
+    const handleChange = vi.fn();
+    const { container } = render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Accept terms"
+        helperText="Please read before accepting"
+      />
+    );
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('should have no accessibility violations (checked)', async () => {
+    const handleChange = vi.fn();
+    const { container } = render(
+      <Checkbox
+        checked={true}
+        onChange={handleChange}
+        label="Subscribed"
+        helperText="You will receive updates"
+      />
+    );
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('should have no accessibility violations when disabled', async () => {
+    const handleChange = vi.fn();
+    const { container } = render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Disabled option"
+        disabled
+      />
+    );
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('should have no accessibility violations with error', async () => {
+    const handleChange = vi.fn();
+    const { container } = render(
+      <Checkbox
+        checked={false}
+        onChange={handleChange}
+        label="Accept terms"
+        error="You must accept to continue"
+      />
+    );
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
+});
