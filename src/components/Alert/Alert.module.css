@@ -1,0 +1,91 @@
+.alert {
+  display: flex;
+  gap: var(--boom-spacing-3);
+  padding: var(--boom-spacing-4);
+  border-radius: var(--boom-border-radius-md);
+  border: 1px solid;
+  font-size: var(--boom-font-size-sm);
+  line-height: var(--boom-line-height-normal);
+}
+
+/* Variant styles */
+.info {
+  background-color: var(--boom-theme-info-bg);
+  border-color: var(--boom-theme-info-border);
+  color: var(--boom-theme-info-text);
+}
+
+.success {
+  background-color: var(--boom-theme-success-bg);
+  border-color: var(--boom-theme-success-border);
+  color: var(--boom-theme-success-text);
+}
+
+.warning {
+  background-color: var(--boom-theme-warning-bg);
+  border-color: var(--boom-theme-warning-border);
+  color: var(--boom-theme-warning-text);
+}
+
+.error {
+  background-color: var(--boom-theme-error-bg);
+  border-color: var(--boom-theme-error-border);
+  color: var(--boom-theme-error-text);
+}
+
+/* Icon */
+.icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: var(--boom-font-weight-semibold);
+  margin-bottom: var(--boom-spacing-1);
+}
+
+.message {
+  color: inherit;
+}
+
+/* Close button */
+.closeButton {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  padding: var(--boom-spacing-1);
+  cursor: pointer;
+  color: currentColor;
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+  border-radius: var(--boom-border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-top: -2px;
+}
+
+.closeButton:hover {
+  opacity: 1;
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--boom-theme-primary);
+  outline-offset: 2px;
+  opacity: 1;
+}
+
+.closeIcon {
+  width: 16px;
+  height: 16px;
+}
