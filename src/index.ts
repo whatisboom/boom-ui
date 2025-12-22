@@ -16,6 +16,7 @@ export { Textarea } from './components/Textarea';
 export { Select } from './components/Select';
 export { Alert } from './components/Alert';
 export { Progress } from './components/Progress';
+export { Toast, ToastProvider, useToast } from './components/Toast';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 
 // Primitives
@@ -40,6 +41,14 @@ export type { TextareaProps } from './components/Textarea';
 export type { SelectProps, SelectOption } from './components/Select';
 export type { AlertProps, AlertVariant } from './components/Alert';
 export type { ProgressProps, ProgressVariant } from './components/Progress';
+export type {
+  ToastProps,
+  ToastVariant,
+  ToastPosition,
+  ToastOptions,
+  ToastProviderProps,
+  ToastContextValue,
+} from './components/Toast';
 export type {
   Theme,
   ResolvedTheme,
