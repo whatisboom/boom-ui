@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Typography } from './Typography';
 
 const meta = {
-  title: 'Components/Typography',
+  title: 'Components/Data Display/Typography',
   component: Typography,
   tags: ['autodocs'],
   argTypes: {
