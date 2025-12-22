@@ -29,7 +29,7 @@
 .lg {
   width: 56px;
   height: 56px;
-  font-size: var(--boom-font-size-md);
+  font-size: var(--boom-font-size-base);
 }
 
 .xl {
