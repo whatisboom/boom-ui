@@ -18,6 +18,7 @@ export { Alert } from './components/Alert';
 export { Progress } from './components/Progress';
 export { Toast, ToastProvider, useToast } from './components/Toast';
 export { Badge } from './components/Badge';
+export { Tooltip } from './components/Tooltip';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 
 // Primitives
@@ -51,6 +52,7 @@ export type {
   ToastContextValue,
 } from './components/Toast';
 export type { BadgeProps, BadgeVariant, BadgePosition } from './components/Badge';
+export type { TooltipProps, TooltipPlacement } from './components/Tooltip';
 export type {
   Theme,
   ResolvedTheme,

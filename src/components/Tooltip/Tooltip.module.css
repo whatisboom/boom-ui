@@ -1,0 +1,13 @@
+.tooltip {
+  background-color: var(--boom-theme-text-primary);
+  color: var(--boom-theme-bg-primary);
+  padding: var(--boom-spacing-2) var(--boom-spacing-3);
+  border-radius: var(--boom-border-radius-sm);
+  font-size: var(--boom-font-size-sm);
+  line-height: var(--boom-line-height-normal);
+  max-width: 300px;
+  word-wrap: break-word;
+  box-shadow: var(--boom-shadow-md);
+  z-index: 9998;
+  pointer-events: none;
+}
