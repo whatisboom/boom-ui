@@ -12,6 +12,7 @@ export { Slider } from './components/Slider';
 export { Checkbox } from './components/Checkbox';
 export { Switch } from './components/Switch';
 export { RadioGroup } from './components/RadioGroup';
+export { Textarea } from './components/Textarea';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 
 // Primitives
@@ -32,6 +33,7 @@ export type { SliderProps, SingleSliderProps, RangeSliderProps } from './compone
 export type { CheckboxProps } from './components/Checkbox';
 export type { SwitchProps } from './components/Switch';
 export type { RadioGroupProps, RadioOption } from './components/RadioGroup';
+export type { TextareaProps } from './components/Textarea';
 export type {
   Theme,
   ResolvedTheme,
