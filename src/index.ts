@@ -15,6 +15,7 @@ export { RadioGroup } from './components/RadioGroup';
 export { Textarea } from './components/Textarea';
 export { Select } from './components/Select';
 export { Alert } from './components/Alert';
+export { Progress } from './components/Progress';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 
 // Primitives
@@ -38,6 +39,7 @@ export type { RadioGroupProps, RadioOption } from './components/RadioGroup';
 export type { TextareaProps } from './components/Textarea';
 export type { SelectProps, SelectOption } from './components/Select';
 export type { AlertProps, AlertVariant } from './components/Alert';
+export type { ProgressProps, ProgressVariant } from './components/Progress';
 export type {
   Theme,
   ResolvedTheme,

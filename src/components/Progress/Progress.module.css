@@ -1,0 +1,143 @@
+/* Container */
+.progress {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--boom-spacing-2);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* Linear variant */
+.linear {
+  flex-direction: row;
+}
+
+.linearTrack {
+  flex: 1;
+  height: 8px;
+  background-color: var(--boom-theme-bg-secondary);
+  border-radius: var(--boom-border-radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.linearTrack.sm {
+  height: 4px;
+}
+
+.linearTrack.md {
+  height: 8px;
+}
+
+.linearTrack.lg {
+  height: 12px;
+}
+
+.linearFill {
+  height: 100%;
+  background-color: var(--boom-theme-primary);
+  border-radius: var(--boom-border-radius-full);
+  transition: width 300ms ease-in-out;
+}
+
+/* Indeterminate linear animation */
+.linearIndeterminate .linearFill {
+  width: 40% !important;
+  animation: linearIndeterminate 1.5s ease-in-out infinite;
+}
+
+@keyframes linearIndeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(250%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Circular variant */
+.circular {
+  flex-direction: column;
+  gap: var(--boom-spacing-1);
+  position: relative;
+}
+
+.circularSvg {
+  transform: rotate(-90deg);
+}
+
+.circularSvg.sm {
+  width: 32px;
+  height: 32px;
+}
+
+.circularSvg.md {
+  width: 48px;
+  height: 48px;
+}
+
+.circularSvg.lg {
+  width: 64px;
+  height: 64px;
+}
+
+.circularTrack {
+  fill: none;
+  stroke: var(--boom-theme-bg-secondary);
+}
+
+.circularFill {
+  fill: none;
+  stroke: var(--boom-theme-primary);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 300ms ease-in-out;
+}
+
+/* Indeterminate circular animation */
+.circularIndeterminate .circularSvg {
+  animation: circularRotate 1.4s linear infinite;
+}
+
+.circularIndeterminate .circularFill {
+  animation: circularDash 1.4s ease-in-out infinite;
+  stroke-dasharray: 80px, 200px;
+  stroke-dashoffset: 0;
+}
+
+@keyframes circularRotate {
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes circularDash {
+  0% {
+    stroke-dasharray: 1px, 200px;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -15px;
+  }
+  100% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+/* Label */
+.label {
+  font-size: var(--boom-font-size-sm);
+  color: var(--boom-theme-text-secondary);
+  white-space: nowrap;
+  min-width: fit-content;
+}
+
+.circular .label {
+  text-align: center;
+}
