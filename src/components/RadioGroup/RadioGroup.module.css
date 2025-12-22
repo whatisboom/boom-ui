@@ -1,0 +1,173 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--boom-spacing-2);
+}
+
+.wrapper.fullWidth {
+  width: 100%;
+}
+
+.label {
+  font-size: var(--boom-font-size-sm);
+  font-weight: var(--boom-font-weight-medium);
+  color: var(--boom-theme-text-primary);
+  margin-bottom: var(--boom-spacing-1);
+}
+
+.label.disabled {
+  color: var(--boom-theme-text-disabled);
+}
+
+.required {
+  color: var(--boom-theme-error-text);
+  margin-left: var(--boom-spacing-1);
+}
+
+.radioGroup {
+  display: flex;
+  gap: var(--boom-spacing-3);
+}
+
+.radioGroup.vertical {
+  flex-direction: column;
+}
+
+.radioGroup.horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.radioGroup.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Individual radio option */
+.radioOption {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: var(--boom-spacing-2);
+  position: relative;
+}
+
+.radioOption.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Hidden native radio input */
+.radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Custom radio visual */
+.radioVisual {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--boom-theme-border-default);
+  border-radius: var(--boom-radius-full);
+  background-color: var(--boom-theme-bg-elevated);
+  position: relative;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.radioVisual::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 10px;
+  height: 10px;
+  border-radius: var(--boom-radius-full);
+  background-color: var(--boom-theme-primary);
+  transition: transform 0.2s ease;
+}
+
+.radio:checked + .radioVisual {
+  border-color: var(--boom-theme-primary);
+}
+
+.radio:checked + .radioVisual::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.radio:focus-visible + .radioVisual {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: 2px;
+}
+
+.radioVisual.error {
+  border-color: var(--boom-theme-border-error);
+}
+
+/* Sizes */
+.radioOption.sm .radioVisual {
+  width: 16px;
+  height: 16px;
+}
+
+.radioOption.sm .radioVisual::after {
+  width: 8px;
+  height: 8px;
+}
+
+.radioOption.sm .radioLabel {
+  font-size: var(--boom-font-size-sm);
+}
+
+.radioOption.md .radioVisual {
+  width: 20px;
+  height: 20px;
+}
+
+.radioOption.md .radioVisual::after {
+  width: 10px;
+  height: 10px;
+}
+
+.radioOption.md .radioLabel {
+  font-size: var(--boom-font-size-base);
+}
+
+.radioOption.lg .radioVisual {
+  width: 24px;
+  height: 24px;
+}
+
+.radioOption.lg .radioVisual::after {
+  width: 12px;
+  height: 12px;
+}
+
+.radioOption.lg .radioLabel {
+  font-size: var(--boom-font-size-lg);
+}
+
+.radioLabel {
+  color: var(--boom-theme-text-primary);
+  user-select: none;
+}
+
+.radioOption.disabled .radioLabel {
+  color: var(--boom-theme-text-disabled);
+}
+
+/* Helper text and error */
+.helperText {
+  font-size: var(--boom-font-size-xs);
+  color: var(--boom-theme-text-secondary);
+  margin-top: var(--boom-spacing-1);
+}
+
+.errorText {
+  font-size: var(--boom-font-size-xs);
+  color: var(--boom-theme-error-text);
+  margin-top: var(--boom-spacing-1);
+}

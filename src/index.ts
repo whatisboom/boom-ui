@@ -11,6 +11,7 @@ export { Card } from './components/Card';
 export { Slider } from './components/Slider';
 export { Checkbox } from './components/Checkbox';
 export { Switch } from './components/Switch';
+export { RadioGroup } from './components/RadioGroup';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 
 // Primitives
@@ -30,6 +31,7 @@ export type { CardProps, CardVariant } from './components/Card';
 export type { SliderProps, SingleSliderProps, RangeSliderProps } from './components/Slider';
 export type { CheckboxProps } from './components/Checkbox';
 export type { SwitchProps } from './components/Switch';
+export type { RadioGroupProps, RadioOption } from './components/RadioGroup';
 export type {
   Theme,
   ResolvedTheme,
