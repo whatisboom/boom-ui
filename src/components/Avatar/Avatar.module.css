@@ -4,7 +4,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--boom-border-radius-full);
+  border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
   background-color: var(--boom-theme-border-default);
@@ -64,7 +64,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  border-radius: var(--boom-border-radius-full);
+  border-radius: 50%;
   border: 2px solid var(--boom-theme-bg-primary);
 }
 

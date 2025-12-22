@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   font-weight: var(--boom-font-weight-semibold);
-  border-radius: var(--boom-border-radius-full);
+  border-radius: 9999px;
   white-space: nowrap;
   font-size: var(--boom-font-size-xs);
   line-height: 1;
