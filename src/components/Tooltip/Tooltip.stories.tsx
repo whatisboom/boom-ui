@@ -89,9 +89,7 @@ export const OnDifferentElements: Story = {
         </Tooltip>
 
         <Tooltip content="You have 3 notifications">
-          <Badge content="3">
-            <Button>Notifications</Button>
-          </Badge>
+          <Badge variant="error">3</Badge>
         </Tooltip>
 
         <Tooltip content="Click to perform action">
