@@ -51,7 +51,7 @@ export type {
   ToastProviderProps,
   ToastContextValue,
 } from './components/Toast';
-export type { BadgeProps, BadgeVariant, BadgePosition } from './components/Badge';
+export type { BadgeProps, BadgeVariant } from './components/Badge';
 export type { TooltipProps, TooltipPlacement } from './components/Tooltip';
 export type {
   Theme,

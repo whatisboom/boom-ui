@@ -1,11 +1,3 @@
-/* Wrapper for positioned badges */
-.wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
 /* Badge element */
 .badge {
   display: inline-flex;
@@ -16,47 +8,9 @@
   white-space: nowrap;
   font-size: var(--boom-font-size-xs);
   line-height: 1;
-}
-
-/* Standalone badge */
-.standalone {
   padding: 2px 8px;
   min-width: 20px;
   height: 20px;
-}
-
-/* Positioned badge (wrapping children) */
-.positioned {
-  position: absolute;
-  padding: 2px 6px;
-  min-width: 18px;
-  height: 18px;
-  border: 2px solid var(--boom-theme-bg-primary);
-}
-
-/* Position variants */
-.topRight {
-  top: 0;
-  right: 0;
-  transform: translate(50%, -50%);
-}
-
-.topLeft {
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-}
-
-.bottomRight {
-  bottom: 0;
-  right: 0;
-  transform: translate(50%, 50%);
-}
-
-.bottomLeft {
-  bottom: 0;
-  left: 0;
-  transform: translate(-50%, 50%);
 }
 
 /* Sizes */
@@ -79,29 +33,6 @@
   min-width: 24px;
   height: 24px;
   padding: 3px 8px;
-}
-
-/* Dot variant */
-.dot {
-  min-width: 8px;
-  width: 8px;
-  height: 8px;
-  padding: 0;
-}
-
-.dot.sm {
-  width: 6px;
-  height: 6px;
-}
-
-.dot.md {
-  width: 8px;
-  height: 8px;
-}
-
-.dot.lg {
-  width: 10px;
-  height: 10px;
 }
 
 /* Variant colors */
