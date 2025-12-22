@@ -1,14 +1,17 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { createRef } from 'react';
 import { Popover } from './Popover';
 
 describe('Popover', () => {
   it('should render popover when open', () => {
     const anchor = document.createElement('button');
     document.body.appendChild(anchor);
+    const anchorRef = createRef<HTMLElement>();
+    (anchorRef as { current: HTMLElement }).current = anchor;
 
     render(
-      <Popover isOpen={true} onClose={vi.fn()} anchorEl={anchor}>
+      <Popover isOpen={true} onClose={vi.fn()} anchorEl={anchorRef}>
         <div>Popover Content</div>
       </Popover>
     );
@@ -20,9 +23,11 @@ describe('Popover', () => {
 
   it('should not render when closed', () => {
     const anchor = document.createElement('button');
+    const anchorRef = createRef<HTMLElement>();
+    (anchorRef as { current: HTMLElement }).current = anchor;
 
     render(
-      <Popover isOpen={false} onClose={vi.fn()} anchorEl={anchor}>
+      <Popover isOpen={false} onClose={vi.fn()} anchorEl={anchorRef}>
         <div>Popover Content</div>
       </Popover>
     );
@@ -34,9 +39,11 @@ describe('Popover', () => {
     const onClose = vi.fn();
     const anchor = document.createElement('button');
     document.body.appendChild(anchor);
+    const anchorRef = createRef<HTMLElement>();
+    (anchorRef as { current: HTMLElement }).current = anchor;
 
     render(
-      <Popover isOpen={true} onClose={onClose} anchorEl={anchor}>
+      <Popover isOpen={true} onClose={onClose} anchorEl={anchorRef}>
         <div>Content</div>
       </Popover>
     );

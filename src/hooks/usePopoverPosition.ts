@@ -54,7 +54,8 @@ export function usePopoverPosition(
       window.removeEventListener('scroll', updatePosition, true);
       window.removeEventListener('resize', updatePosition);
     };
-  }, [popoverRef, anchorRef, placement, offset]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [popoverRef, anchorRef, anchorRef.current, placement, offset]);
 
   return position;
 }
