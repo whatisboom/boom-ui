@@ -37,9 +37,10 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 2px solid var(--boom-color-border);
-  border-radius: var(--boom-border-radius-sm);
-  background-color: var(--boom-color-background);
+  border: 2px solid var(--boom-theme-border-default);
+  border-radius: var(--boom-radius-md);
+  background-color: var(--boom-theme-bg-elevated);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
   transition: all 0.2s ease;
 }
 
@@ -61,13 +62,14 @@
 
 /* Checked state */
 .checkboxVisual.checked {
-  background-color: var(--boom-color-primary);
-  border-color: var(--boom-color-primary);
+  background-color: var(--boom-theme-primary);
+  border-color: var(--boom-theme-primary);
+  box-shadow: none;
 }
 
 /* Checkmark icon */
 .checkmark {
-  color: var(--boom-color-primary-contrast);
+  color: var(--boom-theme-text-on-primary);
 }
 
 /* Size-specific checkmark scaling */
@@ -87,33 +89,34 @@
 }
 
 /* Hover state */
-.checkboxLabel:hover .checkboxVisual:not(.error) {
-  border-color: var(--boom-color-primary);
+.checkboxLabel:hover .checkboxVisual:not(.error):not(.checked) {
+  border-color: var(--boom-theme-primary);
+  background-color: var(--boom-theme-bg-secondary);
 }
 
 .checkboxLabel:hover .checkboxVisual.checked {
-  background-color: var(--boom-color-primary-hover);
-  border-color: var(--boom-color-primary-hover);
+  background-color: var(--boom-theme-primary-hover);
+  border-color: var(--boom-theme-primary-hover);
 }
 
 /* Focus state */
 .checkbox:focus-visible + .checkboxVisual {
-  outline: 2px solid var(--boom-color-primary);
+  outline: 2px solid var(--boom-theme-focus-ring);
   outline-offset: 2px;
 }
 
 /* Error state */
 .checkboxVisual.error {
-  border-color: var(--boom-color-error);
+  border-color: var(--boom-theme-error-border);
 }
 
 .checkboxLabel:hover .checkboxVisual.error {
-  border-color: var(--boom-color-error);
+  border-color: var(--boom-theme-error-border);
 }
 
 .checkboxVisual.checked.error {
-  background-color: var(--boom-color-error);
-  border-color: var(--boom-color-error);
+  background-color: var(--boom-theme-error-border);
+  border-color: var(--boom-theme-error-border);
 }
 
 /* Disabled state */
@@ -128,8 +131,8 @@
 
 /* Label text */
 .labelText {
-  font-size: var(--boom-font-size-body);
-  color: var(--boom-color-text);
+  font-size: var(--boom-font-size-base);
+  color: var(--boom-theme-text-primary);
   line-height: 1.5;
 }
 
@@ -142,12 +145,12 @@
 }
 
 .wrapper.disabled .labelText {
-  color: var(--boom-color-text-disabled);
+  color: var(--boom-theme-text-disabled);
 }
 
 /* Required indicator */
 .required {
-  color: var(--boom-color-error);
+  color: var(--boom-theme-error-text);
   margin-left: var(--boom-spacing-1);
 }
 
@@ -156,7 +159,7 @@
   display: block;
   margin-top: var(--boom-spacing-1);
   font-size: var(--boom-font-size-sm);
-  color: var(--boom-color-error);
+  color: var(--boom-theme-error-text);
 }
 
 /* Helper text */
@@ -164,5 +167,5 @@
   display: block;
   margin-top: var(--boom-spacing-1);
   font-size: var(--boom-font-size-sm);
-  color: var(--boom-color-text-secondary);
+  color: var(--boom-theme-text-secondary);
 }
