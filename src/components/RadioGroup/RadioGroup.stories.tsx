@@ -118,7 +118,7 @@ export const WithError: Story = {
         onChange={setValue}
         options={planOptions}
         label="Select your plan"
-        error="Please select a plan to continue"
+        error={!value ? "Please select a plan to continue" : undefined}
         required
       />
     );
