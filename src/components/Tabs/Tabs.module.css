@@ -52,7 +52,7 @@
 .tab:focus-visible {
   outline: 2px solid var(--boom-theme-primary);
   outline-offset: 2px;
-  border-radius: var(--boom-radius-sm);
+  border-radius: var(--boom-border-radius-sm);
 }
 
 .tab.active {

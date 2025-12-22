@@ -18,7 +18,7 @@
   flex: 1;
   height: 8px;
   background-color: var(--boom-theme-bg-secondary);
-  border-radius: var(--boom-radius-full);
+  border-radius: var(--boom-border-radius-full);
   overflow: hidden;
   position: relative;
 }
@@ -38,7 +38,7 @@
 .linearFill {
   height: 100%;
   background-color: var(--boom-theme-primary);
-  border-radius: var(--boom-radius-full);
+  border-radius: var(--boom-border-radius-full);
   transition: width 300ms ease-in-out;
 }
 

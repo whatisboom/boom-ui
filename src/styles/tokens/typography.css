@@ -7,6 +7,7 @@
   --boom-font-size-xs: 0.75rem;    /* 12px */
   --boom-font-size-sm: 0.875rem;   /* 14px */
   --boom-font-size-base: 1rem;     /* 16px */
+  --boom-font-size-md: 1rem;       /* 16px - alias for base */
   --boom-font-size-lg: 1.125rem;   /* 18px */
   --boom-font-size-xl: 1.25rem;    /* 20px */
   --boom-font-size-2xl: 1.5rem;    /* 24px */

@@ -70,7 +70,7 @@
   width: 20px;
   height: 20px;
   border: 2px solid var(--boom-theme-border-default);
-  border-radius: var(--boom-radius-full);
+  border-radius: var(--boom-border-radius-full);
   background-color: var(--boom-theme-bg-elevated);
   position: relative;
   flex-shrink: 0;
@@ -85,7 +85,7 @@
   transform: translate(-50%, -50%) scale(0);
   width: 10px;
   height: 10px;
-  border-radius: var(--boom-radius-full);
+  border-radius: var(--boom-border-radius-full);
   background-color: var(--boom-theme-primary);
   transition: transform 0.2s ease;
 }

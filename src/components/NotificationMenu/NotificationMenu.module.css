@@ -53,7 +53,7 @@
 }
 
 .headerTitle {
-  font-size: var(--boom-font-size-base);
+  font-size: var(--boom-font-size-md);
   font-weight: var(--boom-font-weight-semibold);
   color: var(--boom-theme-text-primary);
   margin: 0;
