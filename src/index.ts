@@ -53,6 +53,8 @@ export type {
 } from './components/Toast';
 export type { BadgeProps, BadgeVariant } from './components/Badge';
 export type { TooltipProps, TooltipPlacement } from './components/Tooltip';
+export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';
+export type { TabsProps, TabListProps, TabProps, TabPanelProps } from './components/Tabs';
 export type {
   Theme,
   ResolvedTheme,
