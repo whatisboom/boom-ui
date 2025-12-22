@@ -1,7 +1,7 @@
 .card {
   display: block;
   background-color: var(--boom-theme-bg-elevated);
-  border-radius: var(--boom-radius-lg);
+  border-radius: var(--boom-border-radius-lg);
   transition: all var(--boom-transition-base);
 }
 

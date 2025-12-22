@@ -22,21 +22,21 @@
   height: 2rem;
   padding: 0 var(--boom-spacing-3);
   font-size: var(--boom-font-size-sm);
-  border-radius: var(--boom-radius-md);
+  border-radius: var(--boom-border-radius-md);
 }
 
 .md {
   height: 2.5rem;
   padding: 0 var(--boom-spacing-4);
   font-size: var(--boom-font-size-base);
-  border-radius: var(--boom-radius-md);
+  border-radius: var(--boom-border-radius-md);
 }
 
 .lg {
   height: 3rem;
   padding: 0 var(--boom-spacing-6);
   font-size: var(--boom-font-size-lg);
-  border-radius: var(--boom-radius-lg);
+  border-radius: var(--boom-border-radius-lg);
 }
 
 /* Variants */

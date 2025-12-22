@@ -14,12 +14,12 @@
   --boom-spacing-20: 5rem;   /* 80px */
 
   /* Border radius */
-  --boom-radius-none: 0;
-  --boom-radius-sm: 0.125rem;
-  --boom-radius-md: 0.375rem;
-  --boom-radius-lg: 0.5rem;
-  --boom-radius-xl: 0.75rem;
-  --boom-radius-full: 9999px;
+  --boom-border-radius-none: 0;
+  --boom-border-radius-sm: 0.125rem;
+  --boom-border-radius-md: 0.375rem;
+  --boom-border-radius-lg: 0.5rem;
+  --boom-border-radius-xl: 0.75rem;
+  --boom-border-radius-full: 9999px;
 
   /* Transitions */
   --boom-transition-fast: 150ms ease;

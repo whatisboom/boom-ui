@@ -41,7 +41,7 @@
   color: var(--boom-theme-text-primary);
   background-color: var(--boom-theme-bg-elevated);
   border: 1px solid var(--boom-theme-border-default);
-  border-radius: var(--boom-radius-md);
+  border-radius: var(--boom-border-radius-md);
   outline: none;
   cursor: pointer;
   appearance: none;

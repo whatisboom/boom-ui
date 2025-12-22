@@ -167,7 +167,7 @@
   gap: var(--boom-spacing-2);
   padding: var(--boom-spacing-4);
   background-color: var(--boom-theme-bg-elevated);
-  border-radius: var(--boom-radius-lg);
+  border-radius: var(--boom-border-radius-lg);
 }
 
 .familyGroup h3 {
@@ -230,7 +230,7 @@
 .codeBlock {
   background-color: var(--boom-theme-bg-secondary);
   padding: var(--boom-spacing-4);
-  border-radius: var(--boom-radius-md);
+  border-radius: var(--boom-border-radius-md);
   overflow-x: auto;
   font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
   font-size: var(--boom-font-size-sm);

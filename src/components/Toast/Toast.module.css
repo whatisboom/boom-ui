@@ -50,7 +50,7 @@
   align-items: flex-start;
   gap: var(--boom-spacing-3);
   padding: var(--boom-spacing-4);
-  border-radius: var(--boom-radius-md);
+  border-radius: var(--boom-border-radius-md);
   border: 1px solid;
   font-size: var(--boom-font-size-sm);
   line-height: var(--boom-line-height-normal);
@@ -123,7 +123,7 @@
   color: currentColor;
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
-  border-radius: var(--boom-radius-sm);
+  border-radius: var(--boom-border-radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;

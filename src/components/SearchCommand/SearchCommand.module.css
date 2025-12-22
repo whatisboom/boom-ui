@@ -20,7 +20,7 @@
   padding: 12px 16px;
   border: none;
   background: none;
-  font-size: var(--boom-font-size-base);
+  font-size: var(--boom-font-size-md);
   color: var(--boom-theme-text-primary);
   outline: none;
 }
