@@ -4,7 +4,7 @@ import { Switch } from './Switch';
 import { Stack } from '../Stack';
 
 const meta: Meta<typeof Switch> = {
-  title: 'Components/Switch',
+  title: 'Components/Inputs/Switch',
   component: Switch,
   tags: ['autodocs'],
   argTypes: {
