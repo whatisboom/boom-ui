@@ -1,0 +1,124 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--boom-spacing-1);
+}
+
+.wrapper.fullWidth {
+  width: 100%;
+}
+
+.wrapper.disabled {
+  opacity: 0.6;
+}
+
+.label {
+  font-size: var(--boom-font-size-sm);
+  font-weight: var(--boom-font-weight-medium);
+  color: var(--boom-theme-text-primary);
+}
+
+.label.disabled {
+  color: var(--boom-theme-text-disabled);
+}
+
+.required {
+  color: var(--boom-theme-error-text);
+  margin-left: var(--boom-spacing-1);
+}
+
+.textarea {
+  width: 100%;
+  padding: var(--boom-spacing-2) var(--boom-spacing-3);
+  font-family: inherit;
+  font-size: var(--boom-font-size-base);
+  line-height: 1.5;
+  color: var(--boom-theme-text-primary);
+  background-color: var(--boom-theme-bg-elevated);
+  border: 1px solid var(--boom-theme-border-default);
+  border-radius: var(--boom-radius-md);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  resize: vertical;
+}
+
+.textarea::placeholder {
+  color: var(--boom-theme-text-tertiary);
+}
+
+.textarea:hover:not(:disabled):not(:read-only) {
+  border-color: var(--boom-theme-border-focus);
+}
+
+.textarea:focus {
+  border-color: var(--boom-theme-border-focus);
+  box-shadow: 0 0 0 3px var(--boom-theme-focus-ring-shadow);
+}
+
+.textarea:disabled {
+  cursor: not-allowed;
+  background-color: var(--boom-theme-bg-secondary);
+  color: var(--boom-theme-text-disabled);
+}
+
+.textarea:read-only {
+  cursor: default;
+  background-color: var(--boom-theme-bg-secondary);
+}
+
+.textarea.error {
+  border-color: var(--boom-theme-border-error);
+}
+
+.textarea.error:focus {
+  box-shadow: 0 0 0 3px hsl(var(--boom-hue-base) 50% 50% / 0.2);
+}
+
+/* Sizes */
+.textarea.sm {
+  padding: var(--boom-spacing-1) var(--boom-spacing-2);
+  font-size: var(--boom-font-size-sm);
+}
+
+.textarea.md {
+  padding: var(--boom-spacing-2) var(--boom-spacing-3);
+  font-size: var(--boom-font-size-base);
+}
+
+.textarea.lg {
+  padding: var(--boom-spacing-3) var(--boom-spacing-4);
+  font-size: var(--boom-font-size-lg);
+}
+
+/* Resize options */
+.textarea.resizeNone {
+  resize: none;
+}
+
+.textarea.resizeVertical {
+  resize: vertical;
+}
+
+.textarea.resizeHorizontal {
+  resize: horizontal;
+}
+
+.textarea.resizeBoth {
+  resize: both;
+}
+
+.textarea.resizeAuto {
+  resize: none;
+  overflow: hidden;
+}
+
+/* Helper text and error */
+.helperText {
+  font-size: var(--boom-font-size-xs);
+  color: var(--boom-theme-text-secondary);
+}
+
+.errorText {
+  font-size: var(--boom-font-size-xs);
+  color: var(--boom-theme-error-text);
+}
