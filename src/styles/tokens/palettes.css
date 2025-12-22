@@ -30,8 +30,8 @@
      ========================================================================== */
 
   /* Base - Neutral saturation/lightness (reference: base-500) */
-  --boom-sat-base: 2;
-  --boom-light-base: 33;
+  --boom-sat-base: 13;
+  --boom-light-base: 66;
 
   /* Accent - Primary brand saturation/lightness (reference: accent-500) */
   --boom-sat-accent: 47;
@@ -62,6 +62,7 @@
   --boom-palette-base-800: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.9%) calc(var(--boom-light-base) * 0.41%));
   --boom-palette-base-700: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.3%) calc(var(--boom-light-base) * 0.55%));
   --boom-palette-base-600: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.1%) calc(var(--boom-light-base) * 0.71%));
+  --boom-palette-base-550: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.05%) calc(var(--boom-light-base) * 0.70%));
   --boom-palette-base-500: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.0%) calc(var(--boom-light-base) * 1.0%));
   --boom-palette-base-400: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 2.0%) calc(var(--boom-light-base) * 1.27%));
   --boom-palette-base-300: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.5%) calc(var(--boom-light-base) * 1.38%));
