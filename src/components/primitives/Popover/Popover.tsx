@@ -16,12 +16,11 @@ export function Popover({
   offset = 8,
 }: PopoverProps) {
   const popoverRef = useRef<HTMLDivElement>(null);
-  const anchorRef = useRef(anchorEl);
 
   useClickOutside(popoverRef, onClose, isOpen);
   useKeyboardShortcut('Escape', onClose, { enabled: isOpen });
 
-  const position = usePopoverPosition(popoverRef, anchorRef, placement, offset);
+  const position = usePopoverPosition(popoverRef, anchorEl, placement, offset);
 
   return (
     <Portal>

@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { usePopoverPosition } from './usePopoverPosition';
-import { useRef } from 'react';
 
 describe('usePopoverPosition', () => {
   let anchor: HTMLDivElement;

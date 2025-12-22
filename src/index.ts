@@ -11,6 +11,13 @@ export { Card } from './components/Card';
 export { Slider } from './components/Slider';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 
+// Primitives
+export { Popover } from './components/primitives/Popover';
+export { Modal } from './components/primitives/Modal';
+export { Drawer } from './components/primitives/Drawer';
+export { Portal } from './components/primitives/Portal';
+export { Overlay } from './components/primitives/Overlay';
+
 // Types
 export type { ButtonProps } from './components/Button';
 export type { TypographyProps, TypographyVariant } from './components/Typography';
@@ -25,6 +32,10 @@ export type {
   ThemeProviderProps,
   ThemeProviderContextValue,
 } from './components/ThemeProvider';
+
+// Primitive types
+export type { PopoverProps, ModalProps, DrawerProps, OverlayProps } from './components/primitives/types';
+export type { PortalProps } from './components/primitives/Portal';
 
 // Shared types
 export type { Size, Variant, PolymorphicProps } from './types';

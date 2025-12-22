@@ -11,7 +11,7 @@ import styles from './NotificationMenu.module.css';
 interface NotificationMenuContextValue {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  triggerRef: React.RefObject<HTMLButtonElement> | null;
+  triggerRef: React.RefObject<HTMLButtonElement>;
 }
 
 const NotificationMenuContext = createContext<NotificationMenuContextValue | undefined>(
@@ -164,7 +164,7 @@ export function NotificationMenuPanel({
     <Popover
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
-      anchorEl={triggerRef.current}
+      anchorEl={triggerRef}
       placement="bottom"
       offset={8}
     >
