@@ -48,7 +48,7 @@
   --boom-theme-text-tertiary: var(--boom-palette-base-500);
 
   /* Disabled text color */
-  --boom-theme-text-disabled: var(--boom-palette-base-600);
+  --boom-theme-text-disabled: var(--boom-palette-base-550);
 
   /* Inverse text (for light text on dark backgrounds) */
   --boom-theme-text-inverse: var(--boom-palette-base-900);
