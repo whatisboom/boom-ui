@@ -1,0 +1,195 @@
+.wrapper {
+  display: inline-block;
+}
+
+.wrapper.fullWidth {
+  display: block;
+  width: 100%;
+}
+
+/* Label container */
+.switchLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--boom-spacing-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.switchLabel.labelLeft {
+  flex-direction: row-reverse;
+}
+
+/* Native input - visually hidden but accessible */
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Track - pill-shaped background */
+.track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  border: 2px solid var(--boom-theme-border-default);
+  background-color: var(--boom-theme-bg-elevated);
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Size variants for track */
+.track.sm {
+  width: 32px;
+  height: 18px;
+  padding: 2px;
+}
+
+.track.md {
+  width: 40px;
+  height: 22px;
+  padding: 2px;
+}
+
+.track.lg {
+  width: 48px;
+  height: 26px;
+  padding: 2px;
+}
+
+/* Checked state for track */
+.track.checked {
+  background-color: var(--boom-theme-primary);
+  border-color: var(--boom-theme-primary);
+  box-shadow: none;
+}
+
+/* Thumb - sliding circle */
+.thumb {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Size variants for thumb */
+.thumb.sm {
+  width: 14px;
+  height: 14px;
+}
+
+.thumb.md {
+  width: 18px;
+  height: 18px;
+}
+
+.thumb.lg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Thumb position - unchecked (left) */
+.thumb {
+  transform: translateX(0);
+}
+
+/* Thumb position - checked (right) */
+.thumb.checked.sm {
+  transform: translateX(14px);
+}
+
+.thumb.checked.md {
+  transform: translateX(18px);
+}
+
+.thumb.checked.lg {
+  transform: translateX(22px);
+}
+
+/* Hover state */
+.switchLabel:hover .track:not(.error):not(.checked) {
+  border-color: var(--boom-theme-primary);
+  background-color: var(--boom-theme-bg-secondary);
+}
+
+.switchLabel:hover .track.checked {
+  background-color: var(--boom-theme-primary-hover);
+  border-color: var(--boom-theme-primary-hover);
+}
+
+/* Focus state */
+.input:focus-visible + .track {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Error state */
+.track.error {
+  border-color: var(--boom-theme-error-border);
+}
+
+.switchLabel:hover .track.error {
+  border-color: var(--boom-theme-error-border);
+}
+
+.track.checked.error {
+  background-color: var(--boom-theme-error-border);
+  border-color: var(--boom-theme-error-border);
+}
+
+/* Disabled state */
+.wrapper.disabled .switchLabel {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.wrapper.disabled .track {
+  cursor: not-allowed;
+}
+
+/* Label text */
+.labelText {
+  font-size: var(--boom-font-size-base);
+  color: var(--boom-theme-text-primary);
+  line-height: 1.5;
+}
+
+.switchLabel.sm .labelText {
+  font-size: var(--boom-font-size-sm);
+}
+
+.switchLabel.lg .labelText {
+  font-size: var(--boom-font-size-lg);
+}
+
+.wrapper.disabled .labelText {
+  color: var(--boom-theme-text-disabled);
+}
+
+/* Required indicator */
+.required {
+  color: var(--boom-theme-error-text);
+  margin-left: var(--boom-spacing-1);
+}
+
+/* Error text */
+.errorText {
+  display: block;
+  margin-top: var(--boom-spacing-1);
+  font-size: var(--boom-font-size-sm);
+  color: var(--boom-theme-error-text);
+}
+
+/* Helper text */
+.helperText {
+  display: block;
+  margin-top: var(--boom-spacing-1);
+  font-size: var(--boom-font-size-sm);
+  color: var(--boom-theme-text-secondary);
+}
