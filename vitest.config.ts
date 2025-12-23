@@ -8,13 +8,6 @@ export default mergeConfig(
       globals: true,
       environment: 'jsdom',
       setupFiles: './tests/setup.ts',
-      // Use threads with single worker for better memory efficiency in CI
-      pool: 'threads',
-      poolOptions: {
-        threads: {
-          singleThread: true,
-        },
-      },
       coverage: {
         provider: 'v8',
         reporter: ['text', 'json', 'html'],
