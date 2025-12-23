@@ -306,6 +306,52 @@ Focus management utilities: `src/utils/focus-management.ts`
 - Read the [theming documentation](./docs/theming.md)
 - Open an issue for questions or bugs
 
+## Publishing & Releases
+
+### Automated Publishing
+
+This package automatically publishes to npm when a version tag is pushed to GitHub.
+
+**To release a new version:**
+
+1. **Update the version** in `package.json`
+   ```bash
+   npm version patch  # or minor, or major
+   ```
+
+2. **Push the tag to GitHub**
+   ```bash
+   git push origin main --tags
+   ```
+
+3. **GitHub Actions will automatically:**
+   - Run type checking
+   - Run all tests
+   - Build the package
+   - Publish to npm registry
+
+### Setting up NPM_TOKEN (maintainers only)
+
+For automated publishing to work, maintainers must configure an npm access token:
+
+1. **Generate an npm token**
+   - Go to https://www.npmjs.com
+   - Settings → Access Tokens → Generate New Token
+   - Choose "Automation" token type
+
+2. **Add to GitHub Secrets**
+   - Go to repository Settings → Secrets and variables → Actions
+   - Click "New repository secret"
+   - Name: `NPM_TOKEN`
+   - Value: Your npm token
+
+### Manual Publishing
+
+To publish manually (requires npm login):
+```bash
+npm publish --access public
+```
+
 ## Questions?
 
 Feel free to open an issue for questions, bug reports, or feature requests. We appreciate your contributions!
