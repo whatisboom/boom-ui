@@ -8,15 +8,13 @@ export default mergeConfig(
       globals: true,
       environment: 'jsdom',
       setupFiles: './tests/setup.ts',
-      // Run tests with isolated processes to prevent memory accumulation
-      pool: 'forks',
+      // Use threads with single worker for better memory efficiency in CI
+      pool: 'threads',
       poolOptions: {
-        forks: {
-          maxForks: 1,
-          minForks: 1,
+        threads: {
+          singleThread: true,
         },
       },
-      isolate: true,
       coverage: {
         provider: 'v8',
         reporter: ['text', 'json', 'html'],
