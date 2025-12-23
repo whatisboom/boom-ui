@@ -55,6 +55,8 @@ export function usePopoverPosition(
       window.removeEventListener('resize', updatePosition);
     };
     // Refs shouldn't be in deps - updatePosition closure captures latest values
+    // Including refs causes infinite re-renders since tests pass new ref objects
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placement, offset]);
 
   return position;

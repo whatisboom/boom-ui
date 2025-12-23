@@ -163,10 +163,11 @@ export const FormLayout: Story = {
     children: (
       <>
         <div>
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>
+          <label htmlFor="form-name" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>
             Name
           </label>
           <input
+            id="form-name"
             type="text"
             placeholder="Enter your name"
             style={{
@@ -178,10 +179,11 @@ export const FormLayout: Story = {
           />
         </div>
         <div>
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>
+          <label htmlFor="form-email" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>
             Email
           </label>
           <input
+            id="form-email"
             type="email"
             placeholder="Enter your email"
             style={{
@@ -251,10 +253,10 @@ export const AsNav: Story = {
     spacing: 3,
     children: (
       <>
-        <a href="#" style={{ color: 'var(--boom-color-primary)', textDecoration: 'none' }}>Home</a>
-        <a href="#" style={{ color: 'var(--boom-color-primary)', textDecoration: 'none' }}>About</a>
-        <a href="#" style={{ color: 'var(--boom-color-primary)', textDecoration: 'none' }}>Services</a>
-        <a href="#" style={{ color: 'var(--boom-color-primary)', textDecoration: 'none' }}>Contact</a>
+        <a href="/home" style={{ color: 'var(--boom-color-primary)', textDecoration: 'none' }}>Home</a>
+        <a href="/about" style={{ color: 'var(--boom-color-primary)', textDecoration: 'none' }}>About</a>
+        <a href="/services" style={{ color: 'var(--boom-color-primary)', textDecoration: 'none' }}>Services</a>
+        <a href="/contact" style={{ color: 'var(--boom-color-primary)', textDecoration: 'none' }}>Contact</a>
       </>
     ),
   },

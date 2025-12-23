@@ -49,6 +49,8 @@ export const TabList = ({ children, className }: TabListProps) => {
   };
 
   return (
+    // Individual tabs are focusable, not the tablist container
+    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
       role="tablist"
       aria-orientation={orientation}

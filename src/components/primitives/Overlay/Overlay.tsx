@@ -47,6 +47,8 @@ export function Overlay({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
+            {/* Backdrop is not interactive - click-to-close is handled, but keyboard users use ESC or close button */}
+            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
             <div
               className={styles.backdrop}
               onMouseDown={handleBackdropClick}
