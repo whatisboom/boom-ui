@@ -8,6 +8,15 @@ export default mergeConfig(
       globals: true,
       environment: 'jsdom',
       setupFiles: './tests/setup.ts',
+      // Run tests with isolated processes to prevent memory accumulation
+      pool: 'forks',
+      poolOptions: {
+        forks: {
+          maxForks: 1,
+          minForks: 1,
+        },
+      },
+      isolate: true,
       coverage: {
         provider: 'v8',
         reporter: ['text', 'json', 'html'],

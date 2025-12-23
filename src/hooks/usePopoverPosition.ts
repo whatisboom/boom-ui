@@ -54,8 +54,8 @@ export function usePopoverPosition(
       window.removeEventListener('scroll', updatePosition, true);
       window.removeEventListener('resize', updatePosition);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [popoverRef, anchorRef, anchorRef.current, placement, offset]);
+    // Refs shouldn't be in deps - updatePosition closure captures latest values
+  }, [placement, offset]);
 
   return position;
 }

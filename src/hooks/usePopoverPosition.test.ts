@@ -27,7 +27,7 @@ describe('usePopoverPosition', () => {
 
     expect(result.current).toEqual({
       top: 128, // 100 + 20 + 8
-      left: 25, // 100 + 50 - 75 (centered)
+      left: 75, // 100 + 50 - 75 (centered)
     });
   });
 
@@ -38,7 +38,7 @@ describe('usePopoverPosition', () => {
 
     expect(result.current).toEqual({
       top: -8, // 100 - 100 - 8
-      left: 25,
+      left: 75,
     });
   });
 });
