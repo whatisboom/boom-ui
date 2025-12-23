@@ -37,8 +37,8 @@ export function Card<E extends ElementType = 'div'>({
   const shouldAnimate = hoverable && !disableAnimation;
 
   if (shouldAnimate) {
-    // Cast Component to motion component
-    const MotionComponent = motion[Component as keyof typeof motion] || motion.div;
+    // Use motion.create for dynamic components in v12+
+    const MotionComponent = motion.create(Component);
 
     return (
       <MotionComponent
