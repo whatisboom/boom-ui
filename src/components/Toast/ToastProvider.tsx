@@ -11,6 +11,7 @@ import {
 } from './Toast.types';
 import styles from './Toast.module.css';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const ToastContext = createContext<ToastContextValue | undefined>(undefined);
 
 export const ToastProvider = ({

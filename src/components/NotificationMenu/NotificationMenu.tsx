@@ -91,10 +91,22 @@ export function NotificationMenuItem({
     return `${days}d ago`;
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick();
+    }
+  };
+
   return (
     <li
       className={`${styles.notificationItem} ${!notification.read ? styles.unread : ''}`}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      // Notification items are list items semantically, but need button role for interactivity
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+      role="button"
+      tabIndex={0}
     >
       <div className={styles.notificationHeader}>
         {notification.icon && (

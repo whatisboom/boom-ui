@@ -168,7 +168,7 @@ export const NoIcon: Story = {
         This alert has no icon, just the message.
       </Alert>
       <Alert variant="success" icon={null} title="Success">
-        Sometimes you don't need an icon.
+        Sometimes you don&apos;t need an icon.
       </Alert>
       <Alert variant="warning" icon={null}>
         The message can stand on its own.

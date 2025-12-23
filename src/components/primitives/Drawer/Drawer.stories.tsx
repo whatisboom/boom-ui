@@ -104,7 +104,7 @@ export const WithNavigation: Story = {
                 {['Dashboard', 'Projects', 'Team', 'Settings', 'Help'].map((item) => (
                   <li key={item} style={{ marginBottom: '0.5rem' }}>
                     <a
-                      href="#"
+                      href={`/${item.toLowerCase()}`}
                       style={{
                         display: 'block',
                         padding: '0.75rem 1rem',

@@ -66,7 +66,7 @@ export const Default: Story = {
                   Portaled Content
                 </Typography>
                 <Typography>
-                  This content is rendered via Portal, so it appears outside the parent's overflow constraint.
+                  This content is rendered via Portal, so it appears outside the parent&apos;s overflow constraint.
                 </Typography>
                 <Typography style={{ marginTop: '0.5rem', fontSize: '0.875rem', opacity: 0.7 }}>
                   Check the DOM - this is rendered as a direct child of document.body!

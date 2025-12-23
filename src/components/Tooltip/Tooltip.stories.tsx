@@ -119,6 +119,7 @@ export const InteractiveExample: Story = {
         <div>
           <Tooltip content="Enter your full name as it appears on your ID">
             <label
+              htmlFor="tooltip-name"
               style={{
                 display: 'inline-block',
                 cursor: 'help',
@@ -129,6 +130,7 @@ export const InteractiveExample: Story = {
             </label>
           </Tooltip>
           <input
+            id="tooltip-name"
             type="text"
             style={{
               display: 'block',
@@ -144,6 +146,7 @@ export const InteractiveExample: Story = {
         <div>
           <Tooltip content="Your email will be used for account recovery and notifications">
             <label
+              htmlFor="tooltip-email"
               style={{
                 display: 'inline-block',
                 cursor: 'help',
@@ -154,6 +157,7 @@ export const InteractiveExample: Story = {
             </label>
           </Tooltip>
           <input
+            id="tooltip-email"
             type="email"
             style={{
               display: 'block',
