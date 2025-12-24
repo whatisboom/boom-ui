@@ -1,6 +1,6 @@
-# Contributing to @boom/ui
+# Contributing to @whatisboom/boom-ui
 
-Thank you for your interest in contributing to @boom/ui! This guide will help you get started with development, testing, and submitting changes.
+Thank you for your interest in contributing to @whatisboom/boom-ui! This guide will help you get started with development, testing, and submitting changes.
 
 ## Development Setup
 

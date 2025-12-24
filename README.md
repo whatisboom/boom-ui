@@ -1,14 +1,14 @@
-# @boom/ui
+# @whatisboom/boom-ui
 
 **Accessibility-First React Component Library**
 
 Production-ready React components built from the ground up for accessibility, with comprehensive WCAG 2.1 AA compliance and beautiful theming.
 
-[![npm version](https://img.shields.io/npm/v/@boom/ui.svg)](https://www.npmjs.com/package/@boom/ui)
+[![npm version](https://img.shields.io/npm/v/@whatisboom/boom-ui.svg)](https://www.npmjs.com/package/@whatisboom/boom-ui)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Why @boom/ui?
+## Why @whatisboom/boom-ui?
 
 - ♿ **Accessibility-First**: Every component tested with vitest-axe, keyboard navigable, and screen reader optimized
 - 🎨 **Theme System**: Built on CSS design tokens with light/dark mode support
@@ -19,15 +19,15 @@ Production-ready React components built from the ground up for accessibility, wi
 ## Installation
 
 ```bash
-npm install @boom/ui
+npm install @whatisboom/boom-ui
 ```
 
 ```bash
-yarn add @boom/ui
+yarn add @whatisboom/boom-ui
 ```
 
 ```bash
-pnpm add @boom/ui
+pnpm add @whatisboom/boom-ui
 ```
 
 ## Quick Start
@@ -35,8 +35,8 @@ pnpm add @boom/ui
 Wrap your application with `ThemeProvider` and import the styles:
 
 ```tsx
-import { ThemeProvider, Button } from '@boom/ui';
-import '@boom/ui/styles';
+import { ThemeProvider, Button } from '@whatisboom/boom-ui';
+import '@whatisboom/boom-ui/styles';
 
 function App() {
   return (
@@ -49,7 +49,7 @@ function App() {
 
 ## Accessibility Highlights
 
-Every component in @boom/ui is built with accessibility as a core requirement, not an afterthought:
+Every component in @whatisboom/boom-ui is built with accessibility as a core requirement, not an afterthought:
 
 ### Automated Testing
 - **vitest-axe integration**: All components pass automated accessibility audits in CI/CD
@@ -77,7 +77,7 @@ Every component in @boom/ui is built with accessibility as a core requirement, n
 ### Forms
 
 ```tsx
-import { Input, Checkbox, Switch, Select, Textarea } from '@boom/ui';
+import { Input, Checkbox, Switch, Select, Textarea } from '@whatisboom/boom-ui';
 
 // Input with validation
 <Input
@@ -117,7 +117,7 @@ import { Input, Checkbox, Switch, Select, Textarea } from '@boom/ui';
 ### Buttons
 
 ```tsx
-import { Button } from '@boom/ui';
+import { Button } from '@whatisboom/boom-ui';
 
 // Primary action button
 <Button variant="primary" size="md">
@@ -138,7 +138,7 @@ import { Button } from '@boom/ui';
 ### Feedback
 
 ```tsx
-import { Alert, Toast, ToastProvider, useToast, Progress } from '@boom/ui';
+import { Alert, Toast, ToastProvider, useToast, Progress } from '@whatisboom/boom-ui';
 
 // Alert with variants
 <Alert variant="success">
@@ -168,7 +168,7 @@ function MyComponent() {
 ### Modals & Overlays
 
 ```tsx
-import { Modal, Drawer, Popover, Tooltip } from '@boom/ui';
+import { Modal, Drawer, Popover, Tooltip } from '@whatisboom/boom-ui';
 
 // Modal with focus trap
 <Modal
@@ -198,7 +198,7 @@ import { Modal, Drawer, Popover, Tooltip } from '@boom/ui';
 ### Layout
 
 ```tsx
-import { Box, Stack, Card } from '@boom/ui';
+import { Box, Stack, Card } from '@whatisboom/boom-ui';
 
 // Flexible box primitive
 <Box padding="lg" backgroundColor="surface">
@@ -214,10 +214,10 @@ import { Box, Stack, Card } from '@boom/ui';
 
 ## Theming
 
-@boom/ui uses CSS design tokens for consistent theming:
+@whatisboom/boom-ui uses CSS design tokens for consistent theming:
 
 ```tsx
-import { ThemeProvider, useTheme } from '@boom/ui';
+import { ThemeProvider, useTheme } from '@whatisboom/boom-ui';
 
 function App() {
   return (
@@ -259,7 +259,7 @@ See the [theming documentation](./docs/theming.md) for all available tokens.
 All components are fully typed with TypeScript:
 
 ```tsx
-import type { ButtonProps, InputProps, SelectOption } from '@boom/ui';
+import type { ButtonProps, InputProps, SelectOption } from '@whatisboom/boom-ui';
 
 const options: SelectOption[] = [
   { value: '1', label: 'Option 1' },
