@@ -1,23 +1,34 @@
 #!/bin/bash
-set -e
 
 # Run each test file in complete isolation
 # Each vitest process terminates after running one file
 
-test_files=$(find src -name "*.test.ts" -o -name "*.test.tsx" | sort)
+# Use explicit parentheses for find OR condition
+test_files=$(find src -type f \( -name "*.test.ts" -o -name "*.test.tsx" \) | sort)
+
+if [ -z "$test_files" ]; then
+  echo "ERROR: No test files found!"
+  exit 1
+fi
+
+# Count total test files
+total=$(echo "$test_files" | wc -l)
+echo "Found $total test files"
+echo ""
 
 passed=0
 failed=0
 failed_files=()
 
 for file in $test_files; do
-  echo "Running: $file"
-  if npx vitest run --no-coverage "$file"; then
+  echo "[$((passed + failed + 1))/$total] Running: $file"
+  if npx vitest run --no-coverage "$file" 2>&1; then
     ((passed++))
   else
     ((failed++))
     failed_files+=("$file")
   fi
+  echo ""
 done
 
 echo ""
