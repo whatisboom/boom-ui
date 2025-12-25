@@ -4,7 +4,7 @@ import { StackProps } from './Stack.types';
 
 export function Stack<E extends ElementType = 'div'>({
   direction = 'column',
-  spacing = 0,
+  spacing = 4,
   align,
   justify,
   className,
