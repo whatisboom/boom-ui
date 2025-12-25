@@ -33,6 +33,43 @@ npm run storybook          # Opens at localhost:6006
 npm run build-storybook    # Build static Storybook
 ```
 
+### Local Development with npm link
+
+To develop boom-ui while using it in another project without publishing:
+
+**In boom-ui repository:**
+```bash
+# Build the library first
+npm run build
+
+# Create global symlink
+npm link
+```
+
+**In your consumer project:**
+```bash
+# Link to the local boom-ui
+npm link @whatisboom/boom-ui
+```
+
+**Development workflow:**
+```bash
+# In boom-ui: watch mode rebuilds on changes
+npm run dev
+
+# Changes automatically available in linked consumer project
+# Note: May need to restart consumer's dev server to pick up changes
+```
+
+**To unlink:**
+```bash
+# In consumer project
+npm unlink @whatisboom/boom-ui
+
+# In boom-ui (optional - removes global symlink)
+npm unlink
+```
+
 ### Running Single Tests
 ```bash
 # Run tests for specific file
@@ -66,6 +103,7 @@ ComponentName/
 4. **Theme System**: Use CSS tokens from `src/styles/tokens/` for colors, spacing, typography
 5. **forwardRef Pattern**: All interactive components use `React.forwardRef` for DOM access
 6. **Animation**: Use Framer Motion for transitions (already imported, follow existing patterns)
+7. **Export All Types**: Every component must export ALL its types (including base props, variants, context types) so consumers have full TypeScript support
 
 ### Design Tokens Location
 - Colors: `src/styles/tokens/colors.css` & `palettes.css`
@@ -110,10 +148,11 @@ ComponentName/
 1. Follow the component structure pattern exactly (see above)
 2. Use existing components as templates (Button, Checkbox, Switch are good examples)
 3. Define props in separate `.types.ts` file
-4. Export component and types from `index.ts`
-5. Add to main `src/index.ts` for public API
-6. Write comprehensive tests including `axe()` accessibility check
-7. Create Storybook stories showing all variants
+4. Export component and **ALL types** from component's `index.ts` (props, variants, base props, context types)
+5. Add component and **ALL its types** to main `src/index.ts` for public API
+6. Use shared types from `src/types/index.ts` where appropriate (Size, Variant, PolymorphicProps)
+7. Write comprehensive tests including `axe()` accessibility check
+8. Create Storybook stories showing all variants
 
 ### Style Implementation
 - Use CSS variables from tokens, never hardcode colors/spacing
@@ -130,6 +169,15 @@ Custom hooks live in `src/hooks/`:
 - `useKeyboardShortcut` - Keyboard event handling
 - `useDebounce` - Debounce values
 
+### Shared Types (`src/types/index.ts`)
+Common types used across components:
+- `Size` - Standard size variants: 'sm' | 'md' | 'lg'
+- `Variant` - Standard color variants: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link'
+- `PolymorphicProps<E>` - Allows components to render as different elements via `as` prop
+- `MotionProps` - Animation preferences (includes `disableAnimation` flag)
+
+Use these shared types for consistency. Components can extend or add their own specific variants.
+
 ### Accessibility Helpers
 - Focus management utils: `src/utils/focus-management.ts`
 - Use semantic HTML elements
@@ -144,12 +192,25 @@ Custom hooks live in `src/hooks/`:
 - **URL**: http://localhost:6006
 - Each story should demonstrate component variants and states
 
-## Pre-publish Checks
+## Publishing
 
-Before publishing (enforced by `prepublishOnly` hook):
-1. Type checking passes (`npm run typecheck`)
-2. All tests pass (`npm test`)
-3. Build succeeds (`npm run build`)
+**Automated via GitHub Actions** - Publishing to npm is automated via tag-based releases:
+
+1. Bump version in `package.json` (e.g., `0.3.0` → `0.3.1`)
+2. Commit changes
+3. Create and push a git tag: `git tag v0.3.1 && git push origin main && git push origin v0.3.1`
+4. GitHub Actions automatically publishes to npm when a tag starting with `v` is pushed
+
+**Pre-publish checks** (enforced by `prepublishOnly` hook):
+- Type checking passes (`npm run typecheck`)
+- All tests pass (`npm run test:ci`)
+- Build succeeds (`npm run build`)
+
+**Publishing workflow** (`.github/workflows/publish.yml`):
+- Triggers on tags matching `v*`
+- Uses npm OIDC with provenance (`--provenance` flag)
+- Publishes with public access
+- Runs on Node.js 24
 
 ## Important Notes
 
