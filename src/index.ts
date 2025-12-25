@@ -20,6 +20,7 @@ export { Toast, ToastProvider, useToast } from './components/Toast';
 export { Badge } from './components/Badge';
 export { Tooltip } from './components/Tooltip';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
+export { ErrorBoundary } from './components/ErrorBoundary';
 
 // Primitives
 export { Popover } from './components/primitives/Popover';
@@ -63,6 +64,7 @@ export type {
   ThemeProviderProps,
   ThemeProviderContextValue,
 } from './components/ThemeProvider';
+export type { ErrorBoundaryProps, FallbackProps } from './components/ErrorBoundary';
 
 // Primitive types
 export type { PopoverProps, ModalProps, DrawerProps, OverlayProps } from './components/primitives/types';
