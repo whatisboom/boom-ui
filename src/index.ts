@@ -21,6 +21,7 @@ export { Badge } from './components/Badge';
 export { Tooltip } from './components/Tooltip';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 export { ErrorBoundary } from './components/ErrorBoundary';
+export { Hero } from './components/Hero';
 
 // Primitives
 export { Popover } from './components/primitives/Popover';
@@ -83,6 +84,14 @@ export type {
   ThemeProviderContextValue,
 } from './components/ThemeProvider';
 export type { ErrorBoundaryProps, FallbackProps } from './components/ErrorBoundary';
+export type {
+  HeroProps,
+  HeroBaseProps,
+  HeroVariant,
+  HeroBackgroundMedia,
+  HeroVideoSource,
+  HeroCTA,
+} from './components/Hero';
 
 // Primitive types
 export type { PopoverProps, ModalProps, DrawerProps, OverlayProps } from './components/primitives/types';
