@@ -31,12 +31,23 @@ export { Overlay } from './components/primitives/Overlay';
 
 // Types
 export type { ButtonProps } from './components/Button';
-export type { TypographyProps, TypographyVariant } from './components/Typography';
-export type { BoxProps } from './components/Box';
+export type {
+  TypographyProps,
+  TypographyVariant,
+  TypographyAlign,
+  TypographyWeight,
+  TypographyBaseProps,
+} from './components/Typography';
+export type { BoxProps, BoxBaseProps } from './components/Box';
 export type { StackProps } from './components/Stack';
 export type { InputProps } from './components/Input';
-export type { CardProps, CardVariant } from './components/Card';
-export type { SliderProps, SingleSliderProps, RangeSliderProps } from './components/Slider';
+export type { CardProps, CardVariant, CardBaseProps } from './components/Card';
+export type {
+  SliderProps,
+  SingleSliderProps,
+  RangeSliderProps,
+  BaseSliderProps,
+} from './components/Slider';
 export type { CheckboxProps } from './components/Checkbox';
 export type { SwitchProps } from './components/Switch';
 export type { RadioGroupProps, RadioOption } from './components/RadioGroup';
@@ -45,6 +56,7 @@ export type { SelectProps, SelectOption } from './components/Select';
 export type { AlertProps, AlertVariant } from './components/Alert';
 export type { ProgressProps, ProgressVariant } from './components/Progress';
 export type {
+  ToastType,
   ToastProps,
   ToastVariant,
   ToastPosition,
@@ -55,7 +67,13 @@ export type {
 export type { BadgeProps, BadgeVariant } from './components/Badge';
 export type { TooltipProps, TooltipPlacement } from './components/Tooltip';
 export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';
-export type { TabsProps, TabListProps, TabProps, TabPanelProps } from './components/Tabs';
+export type {
+  TabsProps,
+  TabListProps,
+  TabProps,
+  TabPanelProps,
+  TabsContextValue,
+} from './components/Tabs';
 export { Avatar } from './components/Avatar';
 export type { AvatarProps, AvatarSize, AvatarStatus } from './components/Avatar';
 export type {

@@ -1,2 +1,8 @@
 export { Typography } from './Typography';
-export type { TypographyProps, TypographyVariant } from './Typography.types';
+export type {
+  TypographyProps,
+  TypographyVariant,
+  TypographyAlign,
+  TypographyWeight,
+  TypographyBaseProps,
+} from './Typography.types';
