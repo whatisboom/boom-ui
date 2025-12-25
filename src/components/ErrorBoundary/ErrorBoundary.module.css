@@ -1,0 +1,104 @@
+.errorBoundary {
+  width: 100%;
+}
+
+.defaultFallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--boom-spacing-8);
+  gap: var(--boom-spacing-4);
+  min-height: 300px;
+  background-color: var(--boom-theme-error-bg);
+  border: 1px solid var(--boom-theme-error-border);
+  border-radius: var(--boom-border-radius-lg);
+  text-align: center;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  color: var(--boom-theme-error-text);
+}
+
+.content {
+  max-width: 500px;
+}
+
+.title {
+  font-size: var(--boom-font-size-2xl);
+  font-weight: var(--boom-font-weight-semibold);
+  color: var(--boom-theme-text-primary);
+  margin: 0 0 var(--boom-spacing-2) 0;
+}
+
+.message {
+  font-size: var(--boom-font-size-base);
+  color: var(--boom-theme-text-secondary);
+  margin: 0;
+  line-height: var(--boom-line-height-relaxed);
+}
+
+.details {
+  margin-top: var(--boom-spacing-4);
+  text-align: left;
+  background-color: var(--boom-theme-bg-elevated);
+  border: 1px solid var(--boom-theme-border-default);
+  border-radius: var(--boom-border-radius-md);
+  padding: var(--boom-spacing-3);
+}
+
+.details summary {
+  cursor: pointer;
+  font-weight: var(--boom-font-weight-medium);
+  color: var(--boom-theme-text-primary);
+  user-select: none;
+}
+
+.details summary:hover {
+  color: var(--boom-theme-primary);
+}
+
+.errorStack {
+  margin: var(--boom-spacing-3) 0 0 0;
+  padding: var(--boom-spacing-3);
+  background-color: var(--boom-theme-bg-default);
+  border-radius: var(--boom-border-radius-sm);
+  font-family: var(--boom-font-mono);
+  font-size: var(--boom-font-size-sm);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.resetButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--boom-spacing-4);
+  height: 2.5rem;
+  background-color: var(--boom-theme-primary);
+  color: var(--boom-theme-text-on-primary);
+  border: none;
+  border-radius: var(--boom-border-radius-md);
+  font-size: var(--boom-font-size-base);
+  font-weight: var(--boom-font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--boom-transition-base);
+}
+
+.resetButton:hover {
+  background-color: var(--boom-theme-primary-hover);
+}
+
+.resetButton:focus-visible {
+  outline: 2px solid var(--boom-theme-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resetButton {
+    transition: none;
+  }
+}
