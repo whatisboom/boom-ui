@@ -160,6 +160,7 @@
 
   /* Base - Neutral colors inverted from dark theme */
   --boom-palette-base-50: hsl(0 0% 100%);
+  --boom-palette-base-75: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.2%) calc(var(--boom-light-base) * 1.96%));
   --boom-palette-base-100: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.5%) calc(var(--boom-light-base) * 1.48%));
   --boom-palette-base-200: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.4%) calc(var(--boom-light-base) * 1.44%));
   --boom-palette-base-300: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 1.5%) calc(var(--boom-light-base) * 1.38%));

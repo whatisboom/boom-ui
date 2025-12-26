@@ -3,7 +3,7 @@ import { HTMLAttributes } from 'react';
 export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Visual variant of the skeleton
-   * @default 'rect'
+   * @default 'text'
    */
   variant?: 'text' | 'circle' | 'rect' | 'custom';
 
@@ -19,6 +19,7 @@ export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
 
   /**
    * Border radius (CSS value or number in px)
+   * @default '3px'
    */
   borderRadius?: string | number;
 

@@ -47,6 +47,7 @@ export const Rectangle: Story = {
     variant: 'rect',
     width: '100%',
     height: 200,
+    borderRadius: 0,
   },
 };
 
@@ -73,7 +74,7 @@ export const CompositePattern: Story = {
       <Skeleton variant="circle" width={64} height={64} />
       <Skeleton variant="text" width="80%" />
       <Skeleton variant="text" width="60%" />
-      <Skeleton variant="rect" height={200} />
+      <Skeleton variant="rect" height={200} borderRadius={0} />
     </Stack>
   ),
 };

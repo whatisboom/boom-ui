@@ -3,10 +3,10 @@ import { SkeletonProps } from './Skeleton.types';
 import styles from './Skeleton.module.css';
 
 export function Skeleton({
-  variant = 'rect',
+  variant = 'text',
   width,
   height,
-  borderRadius,
+  borderRadius = '3px',
   lines = 1,
   disableAnimation = false,
   className = '',
