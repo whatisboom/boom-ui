@@ -197,7 +197,9 @@ export const CustomContent: Story = {
 };
 
 export const AllVariants: Story = {
-  args: {},
+  args: {
+    heading: 'All Variants',
+  },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Hero
