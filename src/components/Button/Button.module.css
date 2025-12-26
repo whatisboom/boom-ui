@@ -68,13 +68,13 @@
 
 .outline {
   background-color: transparent;
-  color: var(--boom-theme-primary);
+  color: var(--boom-palette-accent-300);
   border-color: var(--boom-theme-border-default);
 }
 
 .outline:hover:not(:disabled) {
   background-color: var(--boom-theme-bg-elevated);
-  border-color: var(--boom-theme-primary);
+  border-color: var(--boom-palette-accent-300);
 }
 
 .ghost {
