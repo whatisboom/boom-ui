@@ -1,0 +1,118 @@
+/* Tree container */
+.tree {
+  font-size: var(--boom-font-size-sm);
+  color: var(--boom-theme-text-primary);
+  user-select: none;
+}
+
+/* Tree item */
+.treeItem {
+  display: flex;
+  align-items: center;
+  gap: var(--boom-spacing-2);
+  padding: var(--boom-spacing-2) var(--boom-spacing-3);
+  cursor: pointer;
+  transition: background-color 75ms ease;
+  border-radius: var(--boom-border-radius-sm);
+  outline: none;
+}
+
+.treeItem:hover:not(.disabled) {
+  background-color: var(--boom-theme-secondary-hover);
+}
+
+.treeItem:focus-visible {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: -2px;
+}
+
+/* Selected state */
+.treeItem.selected {
+  background-color: var(--boom-theme-secondary-hover);
+  color: var(--boom-theme-primary);
+  font-weight: var(--boom-font-weight-medium);
+}
+
+.treeItem.selected:hover {
+  background-color: var(--boom-theme-secondary);
+}
+
+/* Disabled state */
+.treeItem.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Chevron button */
+.chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--boom-theme-text-secondary);
+  cursor: pointer;
+  transition: transform var(--boom-transition-fast);
+  flex-shrink: 0;
+}
+
+.chevron:hover:not(:disabled) {
+  color: var(--boom-theme-text-primary);
+}
+
+.chevron:disabled {
+  cursor: not-allowed;
+}
+
+/* Chevron rotation */
+.chevronExpanded {
+  transform: rotate(90deg);
+}
+
+/* Chevron placeholder for items without children */
+.chevronPlaceholder {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* Icon */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--boom-theme-text-secondary);
+}
+
+.treeItem.selected .icon {
+  color: var(--boom-theme-primary);
+}
+
+/* Label */
+.label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Light mode hover override */
+:root[data-theme='light'] .treeItem:hover:not(.disabled) {
+  background-color: var(--boom-palette-base-75);
+}
+
+:root[data-theme='light'] .treeItem.selected:hover {
+  background-color: var(--boom-palette-base-100);
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .treeItem,
+  .chevron {
+    transition: none;
+  }
+}
