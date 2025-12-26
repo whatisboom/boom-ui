@@ -64,3 +64,65 @@ export interface SkeletonTextProps {
    */
   className?: string;
 }
+
+export interface SkeletonAvatarProps {
+  /**
+   * Avatar size (matches Avatar component)
+   * @default 'md'
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Show text lines beside avatar
+   * @default false
+   */
+  withText?: boolean;
+
+  /**
+   * Number of text lines when withText is true
+   * @default 2
+   */
+  textLines?: number;
+
+  /**
+   * Disable shimmer animation
+   * @default false
+   */
+  disableAnimation?: boolean;
+
+  /**
+   * Additional CSS class name
+   */
+  className?: string;
+}
+
+export interface SkeletonCardProps {
+  /**
+   * Card variant (matches Card component)
+   * @default 'raised'
+   */
+  variant?: 'flat' | 'raised' | 'elevated';
+
+  /**
+   * Show image placeholder at top
+   * @default false
+   */
+  hasImage?: boolean;
+
+  /**
+   * Show action button placeholders
+   * @default false
+   */
+  hasActions?: boolean;
+
+  /**
+   * Disable shimmer animation
+   * @default false
+   */
+  disableAnimation?: boolean;
+
+  /**
+   * Additional CSS class name
+   */
+  className?: string;
+}

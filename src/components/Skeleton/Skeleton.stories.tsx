@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Skeleton } from './Skeleton';
+import { SkeletonText } from './SkeletonText';
+import { SkeletonAvatar } from './SkeletonAvatar';
+import { SkeletonCard } from './SkeletonCard';
 import { Stack } from '../Stack';
 
 const meta = {
@@ -72,5 +75,27 @@ export const CompositePattern: Story = {
       <Skeleton variant="text" width="60%" />
       <Skeleton variant="rect" height={200} />
     </Stack>
+  ),
+};
+
+export const SkeletonTextExample: Story = {
+  render: () => <SkeletonText lines={5} />,
+};
+
+export const SkeletonAvatarExample: Story = {
+  render: () => <SkeletonAvatar size="lg" withText textLines={2} />,
+};
+
+export const SkeletonCardExample: Story = {
+  render: () => <SkeletonCard hasImage hasActions />,
+};
+
+export const SkeletonCardGrid: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+      {[...Array(6)].map((_, i) => (
+        <SkeletonCard key={i} hasImage hasActions />
+      ))}
+    </div>
   ),
 };
