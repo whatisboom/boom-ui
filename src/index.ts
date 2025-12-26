@@ -19,9 +19,19 @@ export { Progress } from './components/Progress';
 export { Toast, ToastProvider, useToast } from './components/Toast';
 export { Badge } from './components/Badge';
 export { Tooltip } from './components/Tooltip';
+export { Tree } from './components/Tree';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 export { ErrorBoundary } from './components/ErrorBoundary';
 export { Hero } from './components/Hero';
+
+// Skeleton components
+export { Skeleton, SkeletonText, SkeletonAvatar, SkeletonCard } from './components/Skeleton';
+
+// Spinner
+export { Spinner } from './components/Spinner';
+
+// EmptyState
+export { EmptyState } from './components/EmptyState';
 
 // Primitives
 export { Popover } from './components/primitives/Popover';
@@ -67,6 +77,7 @@ export type {
 } from './components/Toast';
 export type { BadgeProps, BadgeVariant } from './components/Badge';
 export type { TooltipProps, TooltipPlacement } from './components/Tooltip';
+export type { TreeProps, TreeNode, TreeItemProps, TreeContextValue } from './components/Tree';
 export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';
 export type {
   TabsProps,
@@ -92,6 +103,20 @@ export type {
   HeroVideoSource,
   HeroCTA,
 } from './components/Hero';
+
+// Skeleton types
+export type {
+  SkeletonProps,
+  SkeletonTextProps,
+  SkeletonAvatarProps,
+  SkeletonCardProps
+} from './components/Skeleton';
+
+// Spinner types
+export type { SpinnerProps } from './components/Spinner';
+
+// EmptyState types
+export type { EmptyStateProps } from './components/EmptyState';
 
 // Primitive types
 export type { PopoverProps, ModalProps, DrawerProps, OverlayProps } from './components/primitives/types';
