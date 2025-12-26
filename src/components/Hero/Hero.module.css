@@ -14,7 +14,6 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  margin: 0 auto;
 }
 
 /* Background media shared styles */
@@ -72,6 +71,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
 }
 
 .centered .ctaContainer {

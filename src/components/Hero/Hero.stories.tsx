@@ -64,6 +64,7 @@ export const Default: Story = {
 };
 
 export const WithCTAs: Story = {
+  name: 'With CTAs',
   args: {
     heading: 'Get Started Today',
     subheading: 'Join thousands of developers building with Boom UI',
@@ -196,6 +197,7 @@ export const CustomContent: Story = {
 };
 
 export const AllVariants: Story = {
+  args: {},
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Hero

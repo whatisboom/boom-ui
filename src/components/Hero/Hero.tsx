@@ -124,11 +124,6 @@ export function Hero<E extends ElementType = 'section'>({
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   // Create heading and subheading elements
   const HeadingTag = headingAs;
   const SubheadingTag = subheadingAs;
