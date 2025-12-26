@@ -121,6 +121,16 @@
   --boom-palette-info-200: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 0.95%) calc(var(--boom-light-info) * 2.03%));
   --boom-palette-info-100: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 1.05%) calc(var(--boom-light-info) * 2.31%));
   --boom-palette-info-50: hsl(var(--boom-hue-info) calc(var(--boom-sat-info) * 1.0%) calc(var(--boom-light-info) * 2.49%));
+
+  /* Skeleton loading colors */
+  --boom-skeleton-base-light: hsl(var(--boom-hue-base), 10%, 85%);
+  --boom-skeleton-shimmer-light: hsl(var(--boom-hue-base), 10%, 90%);
+  --boom-skeleton-base-dark: hsl(var(--boom-hue-base), 8%, 20%);
+  --boom-skeleton-shimmer-dark: hsl(var(--boom-hue-base), 8%, 25%);
+
+  /* Dark theme (default) */
+  --skeleton-base-color: var(--boom-skeleton-base-dark);
+  --skeleton-shimmer-color: var(--boom-skeleton-shimmer-dark);
 }
 
 /* ==========================================================================
@@ -166,4 +176,8 @@
 
   /* Semantic colors stay the same, usage differs */
   /* We'll use darker shades for better contrast on light backgrounds */
+
+  /* Light theme skeleton colors */
+  --skeleton-base-color: var(--boom-skeleton-base-light);
+  --skeleton-shimmer-color: var(--boom-skeleton-shimmer-light);
 }
