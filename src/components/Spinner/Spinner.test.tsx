@@ -35,7 +35,7 @@ describe('Spinner', () => {
   });
 
   it('should render with overlay', () => {
-    const { container } = render(<Spinner overlay />);
+    render(<Spinner overlay />);
     // Portal renders outside container
     expect(document.body.querySelector('[role="status"]')).toBeInTheDocument();
   });

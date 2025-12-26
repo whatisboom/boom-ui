@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { Portal } from '../primitives/Portal';
-import { Overlay } from '../primitives/Overlay';
 import { useScrollLock } from '@/hooks/useScrollLock';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 import { SpinnerProps } from './Spinner.types';
@@ -40,9 +39,11 @@ export function Spinner({
   if (overlay) {
     return (
       <Portal>
-        <Overlay visible={true} />
-        <div ref={containerRef} className={styles.overlayContainer}>
-          {spinnerElement}
+        <div className={styles.overlayContainer}>
+          <div className={styles.backdrop} />
+          <div ref={containerRef} className={styles.spinnerWrapper}>
+            {spinnerElement}
+          </div>
         </div>
       </Portal>
     );
