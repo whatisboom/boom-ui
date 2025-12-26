@@ -344,25 +344,6 @@ describe('Hero', () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  // Note: Skipping axe test with video due to axe-core asset loading timeout issues
-  // Video elements are properly marked with aria-hidden="true" for accessibility
-  it.skip(
-    'should have no accessibility violations with background video',
-    async () => {
-      const { container } = render(
-        <Hero
-          heading="Hero with Video"
-          backgroundMedia={{
-            type: 'video',
-            sources: [{ src: '/test.mp4' }],
-          }}
-        />
-      );
-      expect(await axe(container)).toHaveNoViolations();
-    },
-    10000
-  );
-
   it('should pass additional video props to video element', () => {
     render(
       <Hero
