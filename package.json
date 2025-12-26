@@ -74,7 +74,7 @@
     "wcag-contrast": "^3.0.0"
   },
   "dependencies": {
-    "@storybook-community/storybook-dark-mode": "^7.0.3",
+    "@storybook-community/storybook-dark-mode": "^7.1.0",
     "framer-motion": "^12.23.26"
   },
   "keywords": [
