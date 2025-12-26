@@ -1,4 +1,6 @@
-export interface SkeletonProps {
+import { HTMLAttributes } from 'react';
+
+export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Visual variant of the skeleton
    * @default 'rect'
