@@ -20,7 +20,7 @@ export function Popover({
   useClickOutside(popoverRef, onClose, isOpen);
   useKeyboardShortcut('Escape', onClose, { enabled: isOpen });
 
-  const position = usePopoverPosition(popoverRef, anchorEl, placement, offset);
+  const position = usePopoverPosition(popoverRef, anchorEl, placement, offset, isOpen);
 
   return (
     <Portal>
