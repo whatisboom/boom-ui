@@ -37,7 +37,7 @@ export const Default: Story = {
           Trigger Error
         </button>
         <div style={{ marginTop: '1rem' }}>
-          <ErrorBoundary>
+          <ErrorBoundary onReset={() => setShouldThrow(false)}>
             <BuggyComponent shouldThrow={shouldThrow} />
           </ErrorBoundary>
         </div>
@@ -98,14 +98,21 @@ export const WithAutoReset: Story = {
   args: {} as never,
   render: () => {
     const [resetKey, setResetKey] = useState(0);
+    const [shouldThrow, setShouldThrow] = useState(true);
+
+    const handleResetKeyChange = () => {
+      setResetKey((k) => k + 1);
+      setShouldThrow(false);
+    };
+
     return (
       <div style={{ padding: '2rem' }}>
-        <button onClick={() => setResetKey((k) => k + 1)}>
+        <button onClick={handleResetKeyChange}>
           Change Reset Key (Auto-reset)
         </button>
         <p>Reset key: {resetKey}</p>
         <ErrorBoundary resetKey={resetKey}>
-          <BuggyComponent shouldThrow />
+          <BuggyComponent shouldThrow={shouldThrow} />
         </ErrorBoundary>
       </div>
     );
