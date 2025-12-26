@@ -39,3 +39,28 @@ export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
    */
   className?: string;
 }
+
+export interface SkeletonTextProps {
+  /**
+   * Number of text lines
+   * @default 3
+   */
+  lines?: number;
+
+  /**
+   * Width of the last line (for realistic paragraph ending)
+   * @default '75%'
+   */
+  lastLineWidth?: string;
+
+  /**
+   * Disable shimmer animation
+   * @default false
+   */
+  disableAnimation?: boolean;
+
+  /**
+   * Additional CSS class name
+   */
+  className?: string;
+}
