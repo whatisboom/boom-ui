@@ -29,11 +29,11 @@ const data: User[] = [
 describe('Table', () => {
   it('should render table with columns and data', () => {
     render(
-      <Table columns={columns} data={data} getRowId={(row) => String(row.id)}>
+      <Table<User> columns={columns} data={data} getRowId={(row) => String(row.id)}>
         <TableHead>
           <TableRow>
             {columns.map((col) => (
-              <TableHeaderCell key={col.id}>{col.header}</TableHeaderCell>
+              <TableHeaderCell key={col.id}>{typeof col.header === 'function' ? col.header(col) : col.header}</TableHeaderCell>
             ))}
           </TableRow>
         </TableHead>
@@ -59,7 +59,7 @@ describe('Table', () => {
 
   it('should have role="table"', () => {
     render(
-      <Table columns={columns} data={data} getRowId={(row) => String(row.id)} aria-label="Users">
+      <Table<User> columns={columns} data={data} getRowId={(row) => String(row.id)} aria-label="Users">
         <TableHead>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
@@ -79,7 +79,7 @@ describe('Table', () => {
 
   it('should apply density classes', () => {
     const { rerender } = render(
-      <Table columns={columns} data={data} getRowId={(row) => String(row.id)} density="compact">
+      <Table<User> columns={columns} data={data} getRowId={(row) => String(row.id)} density="compact">
         <TableHead>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
@@ -92,7 +92,7 @@ describe('Table', () => {
     expect(container).toHaveClass(styles.densityCompact);
 
     rerender(
-      <Table columns={columns} data={data} getRowId={(row) => String(row.id)} density="comfortable">
+      <Table<User> columns={columns} data={data} getRowId={(row) => String(row.id)} density="comfortable">
         <TableHead>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
@@ -107,7 +107,7 @@ describe('Table', () => {
 
   it('should apply striped class when striped prop is true', () => {
     render(
-      <Table columns={columns} data={data} getRowId={(row) => String(row.id)} striped>
+      <Table<User> columns={columns} data={data} getRowId={(row) => String(row.id)} striped>
         <TableHead>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
@@ -122,7 +122,7 @@ describe('Table', () => {
 
   it('should apply sticky header class when stickyHeader is true', () => {
     render(
-      <Table columns={columns} data={data} getRowId={(row) => String(row.id)} stickyHeader>
+      <Table<User> columns={columns} data={data} getRowId={(row) => String(row.id)} stickyHeader>
         <TableHead>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
@@ -137,11 +137,11 @@ describe('Table', () => {
 
   it('should have no accessibility violations', async () => {
     const { container } = render(
-      <Table columns={columns} data={data} getRowId={(row) => String(row.id)} aria-label="Users">
+      <Table<User> columns={columns} data={data} getRowId={(row) => String(row.id)} aria-label="Users">
         <TableHead>
           <TableRow>
             {columns.map((col) => (
-              <TableHeaderCell key={col.id}>{col.header}</TableHeaderCell>
+              <TableHeaderCell key={col.id}>{typeof col.header === 'function' ? col.header(col) : col.header}</TableHeaderCell>
             ))}
           </TableRow>
         </TableHead>

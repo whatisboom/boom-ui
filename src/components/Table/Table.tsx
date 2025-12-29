@@ -1,11 +1,11 @@
-import { forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo, ReactElement } from 'react';
 import { cn } from '@/utils/classnames';
 import { TableContext } from './TableContext';
-import { TableProps } from './Table.types';
+import { TableProps, TableContextValue } from './Table.types';
 import styles from './Table.module.css';
 
-export const Table = forwardRef<HTMLTableElement, TableProps>(
-  (
+const TableImpl = forwardRef(
+  <T,>(
     {
       columns,
       data,
@@ -23,8 +23,8 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
       'aria-labelledby': ariaLabelledby,
       children,
       ...props
-    },
-    ref
+    }: TableProps<T>,
+    ref: React.ForwardedRef<HTMLTableElement>
   ) => {
     const contextValue = useMemo(
       () => ({
@@ -39,7 +39,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
         loading,
         emptyState,
         disableAnimation,
-      }),
+      } as unknown as TableContextValue<unknown>),
       [
         columns,
         data,
@@ -87,4 +87,10 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
   }
 );
 
-Table.displayName = 'Table';
+TableImpl.displayName = 'Table';
+
+// Export as generic component type
+export const Table = TableImpl as unknown as {
+  <T,>(props: TableProps<T> & React.RefAttributes<HTMLTableElement>): ReactElement;
+  displayName: string;
+};
