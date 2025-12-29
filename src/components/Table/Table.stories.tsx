@@ -6,7 +6,7 @@ import { TableBody } from './TableBody';
 import { TableRow } from './TableRow';
 import { TableCell } from './TableCell';
 import { TableHeaderCell } from './TableHeaderCell';
-import { ColumnDef, SortState, SortDirection, RowSelectionState } from './Table.types';
+import { ColumnDef, SortState, SortDirection, RowSelectionState, PaginationState } from './Table.types';
 
 interface User {
   id: number;
@@ -719,6 +719,390 @@ export const ShiftClickRangeSelection: Story = {
         <div style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: '#666' }}>
           Tip: Click a row, then hold Shift and click another row to select a range
         </div>
+      </div>
+    );
+  },
+};
+
+/**
+ * Helper function to get paginated data
+ */
+function getPaginatedData<T>(data: T[], pagination: PaginationState): T[] {
+  const start = pagination.pageIndex * pagination.pageSize;
+  const end = start + pagination.pageSize;
+  return data.slice(start, end);
+}
+
+export const ClientSidePagination: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Client-side pagination where the Table component handles data slicing automatically. ' +
+          'All data is loaded at once, and pagination controls allow navigating through pages. ' +
+          'This is ideal for smaller datasets that can be loaded entirely into memory. ' +
+          'The component shows the current page (e.g., "Page 1 of 3") and provides previous/next navigation.',
+      },
+    },
+  },
+  render: () => {
+    const [pagination, setPagination] = useState<PaginationState>({
+      pageIndex: 0,
+      pageSize: 5,
+    });
+
+    // Client-side pagination: slice the data based on current page
+    const paginatedData = getPaginatedData(data, pagination);
+
+    return (
+      <div>
+        <div style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#666' }}>
+          Showing page {pagination.pageIndex + 1} of {Math.ceil(data.length / pagination.pageSize)} (
+          {data.length} total rows, {pagination.pageSize} per page)
+        </div>
+        <Table
+          columns={columns}
+          data={paginatedData}
+          getRowId={(row) => String(row.id)}
+          pagination={pagination}
+          onPaginationChange={setPagination}
+          manualPagination={false}
+          rowCount={data.length}
+          aria-label="Users (client-side pagination)"
+        >
+          <TableHead>
+            <TableRow>
+              {columns.map((col) => (
+                <TableHeaderCell key={col.id}>
+                  {typeof col.header === 'function' ? col.header(col) : col.header}
+                </TableHeaderCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {paginatedData.map((row) => (
+              <TableRow key={row.id}>
+                {columns.map((col) => (
+                  <TableCell key={col.id}>
+                    {String(row[col.accessorKey as keyof User])}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    );
+  },
+};
+
+export const ManualPagination: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Server-side/manual pagination where data fetching is controlled externally. ' +
+          'The Table component only receives the current page of data, while the total row count ' +
+          'and page count are provided separately. This is ideal for large datasets that cannot ' +
+          'be loaded entirely into memory. This example simulates an API call with a loading state ' +
+          'when changing pages.',
+      },
+    },
+  },
+  render: () => {
+    const [pagination, setPagination] = useState<PaginationState>({
+      pageIndex: 0,
+      pageSize: 5,
+    });
+    const [loading, setLoading] = useState(false);
+
+    // Simulate server-side data - only current page's rows
+    const serverTotalRows = 100; // Total rows on "server"
+    const serverPageData = getPaginatedData(data, pagination);
+
+    const handlePaginationChange = (newPagination: PaginationState) => {
+      // Simulate API call
+      setLoading(true);
+      setTimeout(() => {
+        setPagination(newPagination);
+        setLoading(false);
+      }, 500);
+    };
+
+    return (
+      <div>
+        <div style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#666' }}>
+          Server-side pagination: Showing page {pagination.pageIndex + 1} of{' '}
+          {Math.ceil(serverTotalRows / pagination.pageSize)} ({serverTotalRows} total rows on server)
+          {loading && ' - Loading...'}
+        </div>
+        <Table
+          columns={columns}
+          data={serverPageData}
+          getRowId={(row) => String(row.id)}
+          pagination={pagination}
+          onPaginationChange={handlePaginationChange}
+          manualPagination={true}
+          rowCount={serverTotalRows}
+          pageCount={Math.ceil(serverTotalRows / pagination.pageSize)}
+          loading={loading}
+          aria-label="Users (server-side pagination)"
+        >
+          <TableHead>
+            <TableRow>
+              {columns.map((col) => (
+                <TableHeaderCell key={col.id}>
+                  {typeof col.header === 'function' ? col.header(col) : col.header}
+                </TableHeaderCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {serverPageData.map((row) => (
+              <TableRow key={row.id}>
+                {columns.map((col) => (
+                  <TableCell key={col.id}>
+                    {String(row[col.accessorKey as keyof User])}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    );
+  },
+};
+
+export const PaginationWithCustomPageSizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Demonstrates custom page size options allowing users to control how many rows are displayed per page. ' +
+          'Users can choose from predefined page sizes (5, 10, 25, 50). ' +
+          'When the page size changes, the table automatically resets to page 0 to prevent showing an empty page. ' +
+          'This is useful for giving users control over data density.',
+      },
+    },
+  },
+  render: () => {
+    const [pagination, setPagination] = useState<PaginationState>({
+      pageIndex: 0,
+      pageSize: 10,
+    });
+
+    const paginatedData = getPaginatedData(data, pagination);
+    const pageSizeOptions = [5, 10, 25, 50];
+
+    const handlePageSizeChange = (newPageSize: number) => {
+      setPagination({
+        pageIndex: 0, // Reset to first page when changing page size
+        pageSize: newPageSize,
+      });
+    };
+
+    return (
+      <div>
+        <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <label htmlFor="page-size-select" style={{ fontSize: '0.875rem', color: '#666' }}>
+            Rows per page:
+          </label>
+          <select
+            id="page-size-select"
+            value={pagination.pageSize}
+            onChange={(e) => handlePageSizeChange(Number(e.target.value))}
+            style={{
+              padding: '0.25rem 0.5rem',
+              fontSize: '0.875rem',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+            }}
+          >
+            {pageSizeOptions.map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
+          <span style={{ fontSize: '0.875rem', color: '#666' }}>
+            (Page {pagination.pageIndex + 1} of {Math.ceil(data.length / pagination.pageSize)})
+          </span>
+        </div>
+        <Table
+          columns={columns}
+          data={paginatedData}
+          getRowId={(row) => String(row.id)}
+          pagination={pagination}
+          onPaginationChange={setPagination}
+          manualPagination={false}
+          rowCount={data.length}
+          aria-label="Users (custom page sizes)"
+        >
+          <TableHead>
+            <TableRow>
+              {columns.map((col) => (
+                <TableHeaderCell key={col.id}>
+                  {typeof col.header === 'function' ? col.header(col) : col.header}
+                </TableHeaderCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {paginatedData.map((row) => (
+              <TableRow key={row.id}>
+                {columns.map((col) => (
+                  <TableCell key={col.id}>
+                    {String(row[col.accessorKey as keyof User])}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    );
+  },
+};
+
+export const PaginationWithSortingAndSelection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Demonstrates all Table features working together: pagination, sorting, and multi-row selection. ' +
+          'This example shows how the Table component can handle complex data interactions: ' +
+          '(1) Sort by any column (click column headers). ' +
+          '(2) Select rows using checkboxes (with select-all support). ' +
+          '(3) Navigate through pages while maintaining sort order and selection state. ' +
+          'Selected rows persist across pages, and sorting applies to the entire dataset.',
+      },
+    },
+  },
+  render: () => {
+    const [sorting, setSorting] = useState<SortState[]>([]);
+    const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+    const [pagination, setPagination] = useState<PaginationState>({
+      pageIndex: 0,
+      pageSize: 5,
+    });
+
+    const sortableColumns: ColumnDef<User>[] = columns.map((col) => ({
+      ...col,
+      enableSorting: true,
+    }));
+
+    // Apply sorting first, then pagination
+    const sortedData = sortData(data, sorting, sortableColumns);
+    const paginatedData = getPaginatedData(sortedData, pagination);
+
+    const getSortDirection = (columnId: string): SortDirection => {
+      const sortState = sorting.find((s) => s.columnId === columnId);
+      return sortState ? sortState.direction : false;
+    };
+
+    const handleSort = (columnId: string) => {
+      const currentSort = sorting.find((s) => s.columnId === columnId);
+      let newSorting: SortState[];
+
+      if (!currentSort) {
+        newSorting = [{ columnId, direction: 'asc' }];
+      } else if (currentSort.direction === 'asc') {
+        newSorting = [{ columnId, direction: 'desc' }];
+      } else {
+        newSorting = [];
+      }
+
+      setSorting(newSorting);
+      // Reset to first page when sorting changes
+      setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+    };
+
+    const handleRowSelectionChange = (rowId: string, selected: boolean) => {
+      setRowSelection((prev) => ({
+        ...prev,
+        [rowId]: selected,
+      }));
+    };
+
+    const handleSelectAll = (selected: boolean) => {
+      if (selected) {
+        const allSelected: RowSelectionState = {};
+        data.forEach((row) => {
+          allSelected[String(row.id)] = true;
+        });
+        setRowSelection(allSelected);
+      } else {
+        setRowSelection({});
+      }
+    };
+
+    const selectedCount = Object.values(rowSelection).filter(Boolean).length;
+    const allSelected = selectedCount === data.length && data.length > 0;
+    const someSelected = selectedCount > 0 && selectedCount < data.length;
+
+    return (
+      <div>
+        <div style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#666' }}>
+          Page {pagination.pageIndex + 1} of {Math.ceil(data.length / pagination.pageSize)} | Selected:{' '}
+          {selectedCount} of {data.length} rows
+        </div>
+        <Table
+          columns={sortableColumns}
+          data={paginatedData}
+          getRowId={(row) => String(row.id)}
+          sorting={sorting}
+          onSortChange={setSorting}
+          rowSelection={rowSelection}
+          onRowSelectionChange={setRowSelection}
+          enableRowSelection
+          selectionMode="multiple"
+          pagination={pagination}
+          onPaginationChange={setPagination}
+          manualPagination={false}
+          rowCount={data.length}
+          aria-label="Users (pagination with sorting and selection)"
+        >
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell
+                isSelectAll={true}
+                allSelected={allSelected}
+                someSelected={someSelected}
+                onSelectAllChange={handleSelectAll}
+              />
+              {sortableColumns.map((col) => (
+                <TableHeaderCell
+                  key={col.id}
+                  sortable={col.enableSorting}
+                  sortDirection={getSortDirection(col.id)}
+                  onSort={() => handleSort(col.id)}
+                >
+                  {typeof col.header === 'function' ? col.header(col) : col.header}
+                </TableHeaderCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {paginatedData.map((row) => {
+              const rowId = String(row.id);
+              const isSelected = rowSelection[rowId] ?? false;
+              return (
+                <TableRow
+                  key={row.id}
+                  selected={isSelected}
+                  onSelectionChange={(selected) => handleRowSelectionChange(rowId, selected)}
+                >
+                  {sortableColumns.map((col) => (
+                    <TableCell key={col.id}>
+                      {String(row[col.accessorKey as keyof User])}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
       </div>
     );
   },
