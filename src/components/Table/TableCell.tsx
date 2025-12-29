@@ -8,7 +8,6 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
     return (
       <td
         ref={ref}
-        role="cell"
         className={cn(
           styles.cell,
           styles[`align${align.charAt(0).toUpperCase()}${align.slice(1)}`],
