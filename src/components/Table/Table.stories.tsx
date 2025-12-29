@@ -27,6 +27,13 @@ const data: User[] = [
   { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'User' },
   { id: 4, name: 'Alice Williams', email: 'alice@example.com', role: 'Manager' },
   { id: 5, name: 'Charlie Brown', email: 'charlie@example.com', role: 'User' },
+  { id: 6, name: 'David Lee', email: 'david@example.com', role: 'Manager' },
+  { id: 7, name: 'Emma Wilson', email: 'emma@example.com', role: 'Admin' },
+  { id: 8, name: 'Frank Miller', email: 'frank@example.com', role: 'User' },
+  { id: 9, name: 'Grace Davis', email: 'grace@example.com', role: 'Manager' },
+  { id: 10, name: 'Henry Taylor', email: 'henry@example.com', role: 'User' },
+  { id: 11, name: 'Ivy Anderson', email: 'ivy@example.com', role: 'Admin' },
+  { id: 12, name: 'Jack Thomas', email: 'jack@example.com', role: 'User' },
 ];
 
 const meta: Meta<typeof Table> = {
@@ -327,6 +334,18 @@ export const SingleColumnSort: Story = {
 };
 
 export const MultiColumnSort: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Multi-column sorting allows sorting by multiple columns with priority order. **Try this:** ' +
+          '(1) Click "Role" to sort by role. ' +
+          '(2) Then click "Name" - now data is sorted by Role first, then Name within each role group. ' +
+          '(3) Click a column again to toggle between ascending/descending/unsorted. ' +
+          'Notice how each column shows a sort arrow when active.',
+      },
+    },
+  },
   render: () => {
     const [sorting, setSorting] = useState<SortState[]>([]);
 
