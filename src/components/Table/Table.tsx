@@ -2,6 +2,7 @@ import { forwardRef, useMemo, ReactElement } from 'react';
 import { cn } from '@/utils/classnames';
 import { TableContext } from './TableContext';
 import { TableProps, TableContextValue } from './Table.types';
+import { Pagination } from './Pagination';
 import styles from './Table.module.css';
 
 const TableImpl = forwardRef(
@@ -38,6 +39,9 @@ const TableImpl = forwardRef(
     }: TableProps<T>,
     ref: React.ForwardedRef<HTMLTableElement>
   ) => {
+    // Determine if pagination should be shown
+    const showPagination = Boolean(pagination || onPaginationChange);
+
     const contextValue = useMemo(
       () => ({
         columns,
@@ -117,6 +121,18 @@ const TableImpl = forwardRef(
           >
             {children}
           </table>
+          {showPagination && onPaginationChange && (
+            <Pagination
+              pageIndex={contextValue.pagination.pageIndex}
+              pageSize={contextValue.pagination.pageSize}
+              pageCount={contextValue.pageCount}
+              rowCount={contextValue.rowCount}
+              onPageChange={(newIndex) =>
+                onPaginationChange({ pageIndex: newIndex, pageSize: contextValue.pagination.pageSize })
+              }
+              onPageSizeChange={(newSize) => onPaginationChange({ pageIndex: 0, pageSize: newSize })}
+            />
+          )}
         </div>
       </TableContext.Provider>
     );

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'vitest-axe';
 import { Table } from './Table';
@@ -160,5 +160,120 @@ describe('Table', () => {
     );
 
     expect(await axe(container)).toHaveNoViolations();
+  });
+
+  describe('Pagination Integration', () => {
+    it('should render Pagination when pagination prop and onPaginationChange are provided', () => {
+      const onPaginationChange = vi.fn();
+
+      render(
+        <Table<User>
+          columns={columns}
+          data={data}
+          getRowId={(row) => String(row.id)}
+          pagination={{ pageIndex: 0, pageSize: 10 }}
+          onPaginationChange={onPaginationChange}
+          aria-label="Users"
+        >
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell>Name</TableHeaderCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>John</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+
+      // Pagination component should be visible
+      expect(screen.getByText(/Showing 1-2 of 2 rows/i)).toBeInTheDocument();
+      expect(screen.getByLabelText('Previous page')).toBeInTheDocument();
+      expect(screen.getByLabelText('Next page')).toBeInTheDocument();
+    });
+
+    it('should not render Pagination when pagination prop is not provided', () => {
+      render(
+        <Table<User> columns={columns} data={data} getRowId={(row) => String(row.id)} aria-label="Users">
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell>Name</TableHeaderCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>John</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+
+      // Pagination should not be present
+      expect(screen.queryByLabelText('Previous page')).not.toBeInTheDocument();
+      expect(screen.queryByLabelText('Next page')).not.toBeInTheDocument();
+    });
+
+    it('should not render Pagination when onPaginationChange is not provided', () => {
+      render(
+        <Table<User>
+          columns={columns}
+          data={data}
+          getRowId={(row) => String(row.id)}
+          pagination={{ pageIndex: 0, pageSize: 10 }}
+          aria-label="Users"
+        >
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell>Name</TableHeaderCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>John</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+
+      // Pagination should not be present (onPaginationChange is required)
+      expect(screen.queryByLabelText('Previous page')).not.toBeInTheDocument();
+      expect(screen.queryByLabelText('Next page')).not.toBeInTheDocument();
+    });
+
+    it('should pass correct props to Pagination component', () => {
+      const onPaginationChange = vi.fn();
+
+      render(
+        <Table<User>
+          columns={columns}
+          data={data}
+          getRowId={(row) => String(row.id)}
+          pagination={{ pageIndex: 1, pageSize: 10 }}
+          onPaginationChange={onPaginationChange}
+          rowCount={100}
+          aria-label="Users"
+        >
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell>Name</TableHeaderCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>John</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+
+      // Check that Pagination receives correct values
+      expect(screen.getByText(/Showing 11-20 of 100 rows/i)).toBeInTheDocument();
+
+      // Page 2 button (pageIndex 1) should be active
+      const page2Button = screen.getByLabelText('2');
+      expect(page2Button).toHaveAttribute('aria-current', 'page');
+    });
   });
 });
