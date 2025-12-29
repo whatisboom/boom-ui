@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Table } from './Table';
 import { TableHead } from './TableHead';
 import { TableBody } from './TableBody';
@@ -177,7 +177,7 @@ export const StickyHeader: Story = {
       <Table
         columns={columns}
         data={[...data, ...data, ...data]}
-        getRowId={(row, index) => String(index)}
+        getRowId={(_row, index) => String(index)}
         stickyHeader
         aria-label="Users (sticky header)"
       >
@@ -191,11 +191,11 @@ export const StickyHeader: Story = {
           </TableRow>
         </TableHead>
         <TableBody>
-          {[...data, ...data, ...data].map((row, index) => (
+          {[...data, ...data, ...data].map((_row, index) => (
             <TableRow key={index}>
               {columns.map((col) => (
                 <TableCell key={col.id}>
-                  {String(row[col.accessorKey as keyof User])}
+                  {String(_row[col.accessorKey as keyof User])}
                 </TableCell>
               ))}
             </TableRow>
