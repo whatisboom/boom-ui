@@ -25,6 +25,11 @@ const TableImpl = forwardRef(
       onRowSelectionChange,
       enableRowSelection,
       selectionMode,
+      pagination,
+      onPaginationChange,
+      manualPagination,
+      rowCount,
+      pageCount,
       className,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledby,
@@ -53,6 +58,11 @@ const TableImpl = forwardRef(
         onRowSelectionChange,
         enableRowSelection: enableRowSelection ?? false,
         selectionMode: selectionMode ?? 'multiple',
+        pagination: pagination ?? { pageIndex: 0, pageSize: 10 },
+        onPaginationChange,
+        manualPagination: manualPagination ?? false,
+        rowCount: rowCount ?? data.length,
+        pageCount: pageCount ?? Math.ceil((rowCount ?? data.length) / (pagination?.pageSize ?? 10)),
       } as unknown as TableContextValue<unknown>),
       [
         columns,
@@ -73,6 +83,11 @@ const TableImpl = forwardRef(
         onRowSelectionChange,
         enableRowSelection,
         selectionMode,
+        pagination,
+        onPaginationChange,
+        manualPagination,
+        rowCount,
+        pageCount,
       ]
     );
 
