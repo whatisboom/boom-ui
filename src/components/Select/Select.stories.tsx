@@ -4,7 +4,7 @@ import { Select } from './Select';
 import { Stack } from '../Stack';
 
 const meta: Meta<typeof Select> = {
-  title: 'Components/Inputs/Select',
+  title: 'Forms & Validation/Select',
   component: Select,
   tags: ['autodocs'],
   argTypes: {
