@@ -18,6 +18,9 @@ const TableImpl = forwardRef(
       loading = false,
       emptyState,
       disableAnimation = false,
+      sorting,
+      onSortChange,
+      enableMultiSort,
       className,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledby,
@@ -39,6 +42,9 @@ const TableImpl = forwardRef(
         loading,
         emptyState,
         disableAnimation,
+        sorting: sorting ?? [],
+        onSortChange,
+        enableMultiSort: enableMultiSort ?? false,
       } as unknown as TableContextValue<unknown>),
       [
         columns,
@@ -52,6 +58,9 @@ const TableImpl = forwardRef(
         loading,
         emptyState,
         disableAnimation,
+        sorting,
+        onSortChange,
+        enableMultiSort,
       ]
     );
 
