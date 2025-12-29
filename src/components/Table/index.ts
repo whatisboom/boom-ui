@@ -22,6 +22,9 @@ export type {
   SortState,
   OnSortChange,
   SortingFn,
+  RowSelectionState,
+  OnRowSelectionChange,
+  SelectionMode,
 } from './Table.types';
 
 export type { SortIndicatorProps } from './SortIndicator.types';

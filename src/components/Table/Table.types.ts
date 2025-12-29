@@ -32,6 +32,21 @@ export type OnSortChange = (sorting: SortState[]) => void;
 export type SortingFn<T = unknown> = (rowA: T, rowB: T, columnId: string) => number;
 
 /**
+ * Row selection state (maps row IDs to selection status)
+ */
+export type RowSelectionState = Record<string, boolean>;
+
+/**
+ * Callback for row selection changes
+ */
+export type OnRowSelectionChange = (rowSelection: RowSelectionState) => void;
+
+/**
+ * Selection mode
+ */
+export type SelectionMode = 'single' | 'multiple';
+
+/**
  * Column definition for table
  */
 export interface ColumnDef<T = unknown> {
@@ -193,6 +208,28 @@ export interface TableProps<T = unknown> {
   enableMultiSort?: boolean;
 
   /**
+   * Current row selection state
+   */
+  rowSelection?: RowSelectionState;
+
+  /**
+   * Callback when row selection changes
+   */
+  onRowSelectionChange?: OnRowSelectionChange;
+
+  /**
+   * Enable row selection
+   * @default false
+   */
+  enableRowSelection?: boolean;
+
+  /**
+   * Selection mode (single or multiple)
+   * @default 'multiple'
+   */
+  selectionMode?: SelectionMode;
+
+  /**
    * Additional CSS class
    */
   className?: string;
@@ -231,6 +268,10 @@ export interface TableContextValue<T = unknown> {
   sorting: SortState[];
   onSortChange?: OnSortChange;
   enableMultiSort: boolean;
+  rowSelection: RowSelectionState;
+  onRowSelectionChange?: OnRowSelectionChange;
+  enableRowSelection: boolean;
+  selectionMode: SelectionMode;
 }
 
 /**
@@ -251,6 +292,16 @@ export interface TableBodyProps extends HTMLAttributes<HTMLTableSectionElement> 
  * TableRow props
  */
 export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
+  /**
+   * Is this row selected
+   */
+  selected?: boolean;
+
+  /**
+   * Callback when selection changes for this row
+   */
+  onSelectionChange?: (selected: boolean) => void;
+
   children?: ReactNode;
 }
 

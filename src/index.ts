@@ -103,6 +103,9 @@ export type {
   SortState,
   OnSortChange,
   SortingFn,
+  RowSelectionState,
+  OnRowSelectionChange,
+  SelectionMode,
   SortIndicatorProps,
 } from './components/Table';
 export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';
