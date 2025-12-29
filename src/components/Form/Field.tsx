@@ -6,6 +6,8 @@ import { Textarea } from '../Textarea';
 import { Checkbox } from '../Checkbox';
 import { Select } from '../Select';
 import { Switch } from '../Switch';
+import { cn } from '@/utils/classnames';
+import styles from './Form.module.css';
 
 export const Field: React.FC<FieldProps> = ({
   name,
@@ -22,7 +24,7 @@ export const Field: React.FC<FieldProps> = ({
   const error = form.formState.errors[name];
 
   return (
-    <div className={className}>
+    <div className={cn(styles.fieldGroup, className)}>
       <Controller
         name={name}
         control={form.control}
