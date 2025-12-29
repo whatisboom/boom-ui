@@ -1,6 +1,7 @@
 import { forwardRef, KeyboardEvent, MouseEvent } from 'react';
 import { cn } from '@/utils/classnames';
 import { TableHeaderCellProps } from './Table.types';
+import { SortIndicator } from './SortIndicator';
 import styles from './Table.module.css';
 
 export const TableHeaderCell = forwardRef<HTMLTableCellElement, TableHeaderCellProps>(
@@ -43,6 +44,7 @@ export const TableHeaderCell = forwardRef<HTMLTableCellElement, TableHeaderCellP
         {...props}
       >
         {children}
+        {sortable && <SortIndicator direction={sortDirection} />}
       </th>
     );
   }

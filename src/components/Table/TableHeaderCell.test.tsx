@@ -228,5 +228,58 @@ describe('TableHeaderCell', () => {
       const header = screen.getByRole('columnheader');
       expect(header).toHaveAttribute('aria-sort', 'none');
     });
+
+    it('should render SortIndicator when sortable', () => {
+      const { container } = render(
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell sortable>Name</TableHeaderCell>
+            </tr>
+          </thead>
+        </table>
+      );
+
+      // SortIndicator renders an SVG
+      const svg = container.querySelector('svg');
+      expect(svg).toBeInTheDocument();
+      expect(svg).toHaveClass(styles.sortIcon);
+    });
+
+    it('should pass correct direction to SortIndicator', () => {
+      const { container, rerender } = render(
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell sortable sortDirection="asc">
+                Name
+              </TableHeaderCell>
+            </tr>
+          </thead>
+        </table>
+      );
+
+      // Check for ascending indicator
+      let svg = container.querySelector('svg');
+      expect(svg).toBeInTheDocument();
+      expect(svg).toHaveClass(styles.sortIconAsc);
+
+      // Rerender with descending
+      rerender(
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell sortable sortDirection="desc">
+                Name
+              </TableHeaderCell>
+            </tr>
+          </thead>
+        </table>
+      );
+
+      svg = container.querySelector('svg');
+      expect(svg).toBeInTheDocument();
+      expect(svg).toHaveClass(styles.sortIconDesc);
+    });
   });
 });
