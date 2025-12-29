@@ -20,6 +20,14 @@ export { Toast, ToastProvider, useToast } from './components/Toast';
 export { Badge } from './components/Badge';
 export { Tooltip } from './components/Tooltip';
 export { Tree } from './components/Tree';
+export {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableHeaderCell,
+} from './components/Table';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 export { ErrorBoundary } from './components/ErrorBoundary';
 export { Hero } from './components/Hero';
@@ -78,6 +86,19 @@ export type {
 export type { BadgeProps, BadgeVariant } from './components/Badge';
 export type { TooltipProps, TooltipPlacement } from './components/Tooltip';
 export type { TreeProps, TreeNode, TreeItemProps, TreeContextValue } from './components/Tree';
+export type {
+  TableProps,
+  ColumnDef,
+  CellContext,
+  TableContextValue,
+  TableHeadProps,
+  TableBodyProps,
+  TableRowProps,
+  TableCellProps,
+  TableHeaderCellProps,
+  TableDensity,
+  TableLayout,
+} from './components/Table';
 export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';
 export type {
   TabsProps,
