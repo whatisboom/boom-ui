@@ -123,7 +123,7 @@ function ThemeShowcase() {
 }
 
 const meta: Meta<typeof ThemeShowcase> = {
-  title: 'Theme/Showcase',
+  title: 'Getting Started/Theme System',
   component: ThemeShowcase,
   parameters: {
     layout: 'fullscreen',
