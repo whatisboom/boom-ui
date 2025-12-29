@@ -21,6 +21,10 @@ const TableImpl = forwardRef(
       sorting,
       onSortChange,
       enableMultiSort,
+      rowSelection,
+      onRowSelectionChange,
+      enableRowSelection,
+      selectionMode,
       className,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledby,
@@ -45,6 +49,10 @@ const TableImpl = forwardRef(
         sorting: sorting ?? [],
         onSortChange,
         enableMultiSort: enableMultiSort ?? false,
+        rowSelection: rowSelection ?? {},
+        onRowSelectionChange,
+        enableRowSelection: enableRowSelection ?? false,
+        selectionMode: selectionMode ?? 'multiple',
       } as unknown as TableContextValue<unknown>),
       [
         columns,
@@ -61,6 +69,10 @@ const TableImpl = forwardRef(
         sorting,
         onSortChange,
         enableMultiSort,
+        rowSelection,
+        onRowSelectionChange,
+        enableRowSelection,
+        selectionMode,
       ]
     );
 
