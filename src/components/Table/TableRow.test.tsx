@@ -209,7 +209,6 @@ describe('TableRow', () => {
     });
 
     it('should prevent default behavior when Space key is pressed (no page scroll)', async () => {
-      const user = userEvent.setup();
       const onSelectionChange = vi.fn();
 
       render(
@@ -233,7 +232,6 @@ describe('TableRow', () => {
     });
 
     it('should not trigger selection when Space key is pressed and row is not selectable', async () => {
-      const user = userEvent.setup();
       const onSelectionChange = vi.fn();
 
       render(
@@ -246,8 +244,7 @@ describe('TableRow', () => {
         </table>
       );
 
-      const row = screen.getByRole('row');
-      await user.keyboard(' ');
+      await userEvent.keyboard(' ');
 
       expect(onSelectionChange).not.toHaveBeenCalled();
     });

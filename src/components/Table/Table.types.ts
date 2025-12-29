@@ -302,6 +302,12 @@ export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
    */
   onSelectionChange?: (selected: boolean) => void;
 
+  /**
+   * Index of this row in the data array.
+   * Used for implementing shift-click range selection.
+   */
+  rowIndex?: number;
+
   children?: ReactNode;
 }
 
