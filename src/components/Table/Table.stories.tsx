@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Table } from './Table';
 import { TableHead } from './TableHead';
 import { TableBody } from './TableBody';
 import { TableRow } from './TableRow';
 import { TableCell } from './TableCell';
 import { TableHeaderCell } from './TableHeaderCell';
-import { ColumnDef, SortState, SortDirection } from './Table.types';
+import { ColumnDef, SortState, SortDirection, RowSelectionState } from './Table.types';
 
 interface User {
   id: number;
@@ -423,6 +423,303 @@ export const MultiColumnSort: Story = {
           ))}
         </TableBody>
       </Table>
+    );
+  },
+};
+
+export const SingleRowSelection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Single-row selection mode allows only one row to be selected at a time. ' +
+          'Clicking a row selects it and deselects any previously selected row. ' +
+          'The selected row count is displayed below the table.',
+      },
+    },
+  },
+  render: () => {
+    const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+    const handleRowSelectionChange = (rowId: string, selected: boolean) => {
+      if (selected) {
+        // In single mode, clear all other selections
+        setRowSelection({ [rowId]: true });
+      } else {
+        // Deselect this row
+        setRowSelection({});
+      }
+    };
+
+    const selectedCount = Object.values(rowSelection).filter(Boolean).length;
+
+    return (
+      <div>
+        <Table
+          columns={columns}
+          data={data}
+          getRowId={(row) => String(row.id)}
+          selectionMode="single"
+          rowSelection={rowSelection}
+          onRowSelectionChange={setRowSelection}
+          enableRowSelection
+          aria-label="Users (single row selection)"
+        >
+          <TableHead>
+            <TableRow>
+              {columns.map((col) => (
+                <TableHeaderCell key={col.id}>
+                  {typeof col.header === 'function' ? col.header(col) : col.header}
+                </TableHeaderCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((row) => {
+              const rowId = String(row.id);
+              const isSelected = rowSelection[rowId] ?? false;
+              return (
+                <TableRow
+                  key={row.id}
+                  selected={isSelected}
+                  onSelectionChange={(selected) => handleRowSelectionChange(rowId, selected)}
+                >
+                  {columns.map((col) => (
+                    <TableCell key={col.id}>
+                      {String(row[col.accessorKey as keyof User])}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+        <div style={{ marginTop: '1rem', fontWeight: 'bold' }}>
+          Selected rows: {selectedCount}
+        </div>
+      </div>
+    );
+  },
+};
+
+export const MultipleRowSelection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Multiple-row selection mode (default) allows selecting multiple rows independently. ' +
+          'Each row shows a checkbox. Use the select-all checkbox in the header to select/deselect all rows at once. ' +
+          'The header checkbox shows an indeterminate state when some (but not all) rows are selected.',
+      },
+    },
+  },
+  render: () => {
+    const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+    const handleRowSelectionChange = (rowId: string, selected: boolean) => {
+      setRowSelection((prev) => ({
+        ...prev,
+        [rowId]: selected,
+      }));
+    };
+
+    const handleSelectAll = (selected: boolean) => {
+      if (selected) {
+        // Select all rows
+        const allSelected: RowSelectionState = {};
+        data.forEach((row) => {
+          allSelected[String(row.id)] = true;
+        });
+        setRowSelection(allSelected);
+      } else {
+        // Deselect all rows
+        setRowSelection({});
+      }
+    };
+
+    const selectedCount = Object.values(rowSelection).filter(Boolean).length;
+    const allSelected = selectedCount === data.length && data.length > 0;
+    const someSelected = selectedCount > 0 && selectedCount < data.length;
+
+    return (
+      <div>
+        <Table
+          columns={columns}
+          data={data}
+          getRowId={(row) => String(row.id)}
+          selectionMode="multiple"
+          rowSelection={rowSelection}
+          onRowSelectionChange={setRowSelection}
+          enableRowSelection
+          aria-label="Users (multiple row selection)"
+        >
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell
+                isSelectAll={true}
+                allSelected={allSelected}
+                someSelected={someSelected}
+                onSelectAllChange={handleSelectAll}
+              />
+              {columns.map((col) => (
+                <TableHeaderCell key={col.id}>
+                  {typeof col.header === 'function' ? col.header(col) : col.header}
+                </TableHeaderCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((row) => {
+              const rowId = String(row.id);
+              const isSelected = rowSelection[rowId] ?? false;
+              return (
+                <TableRow
+                  key={row.id}
+                  selected={isSelected}
+                  onSelectionChange={(selected) => handleRowSelectionChange(rowId, selected)}
+                >
+                  {columns.map((col) => (
+                    <TableCell key={col.id}>
+                      {String(row[col.accessorKey as keyof User])}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+        <div style={{ marginTop: '1rem', fontWeight: 'bold' }}>
+          Selected rows: {selectedCount} of {data.length}
+        </div>
+      </div>
+    );
+  },
+};
+
+export const ShiftClickRangeSelection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Demonstrates shift-click range selection in multiple-row selection mode. ' +
+          '**How to use:** ' +
+          '(1) Click a row to select it. ' +
+          '(2) Hold Shift and click another row - all rows between the first and second click will be selected. ' +
+          '(3) You can continue shift-clicking to select different ranges. ' +
+          'This is useful for quickly selecting large groups of rows.',
+      },
+    },
+  },
+  render: () => {
+    const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+    const lastSelectedIndexRef = useRef<number | null>(null);
+
+    const handleRowSelectionChange = (
+      rowId: string,
+      selected: boolean,
+      rowIndex: number,
+      event?: React.MouseEvent
+    ) => {
+      if (event?.shiftKey && lastSelectedIndexRef.current !== null) {
+        // Shift-click: select range
+        const start = Math.min(lastSelectedIndexRef.current, rowIndex);
+        const end = Math.max(lastSelectedIndexRef.current, rowIndex);
+
+        const newSelection: RowSelectionState = { ...rowSelection };
+        for (let i = start; i <= end; i++) {
+          const rangeRowId = String(data[i].id);
+          newSelection[rangeRowId] = true;
+        }
+        setRowSelection(newSelection);
+      } else {
+        // Normal click: toggle individual row
+        setRowSelection((prev) => ({
+          ...prev,
+          [rowId]: selected,
+        }));
+        lastSelectedIndexRef.current = selected ? rowIndex : null;
+      }
+    };
+
+    const handleSelectAll = (selected: boolean) => {
+      if (selected) {
+        const allSelected: RowSelectionState = {};
+        data.forEach((row) => {
+          allSelected[String(row.id)] = true;
+        });
+        setRowSelection(allSelected);
+      } else {
+        setRowSelection({});
+      }
+      lastSelectedIndexRef.current = null;
+    };
+
+    const selectedCount = Object.values(rowSelection).filter(Boolean).length;
+    const allSelected = selectedCount === data.length && data.length > 0;
+    const someSelected = selectedCount > 0 && selectedCount < data.length;
+
+    return (
+      <div>
+        <Table
+          columns={columns}
+          data={data}
+          getRowId={(row) => String(row.id)}
+          selectionMode="multiple"
+          rowSelection={rowSelection}
+          onRowSelectionChange={setRowSelection}
+          enableRowSelection
+          aria-label="Users (shift-click range selection)"
+        >
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell
+                isSelectAll={true}
+                allSelected={allSelected}
+                someSelected={someSelected}
+                onSelectAllChange={handleSelectAll}
+              />
+              {columns.map((col) => (
+                <TableHeaderCell key={col.id}>
+                  {typeof col.header === 'function' ? col.header(col) : col.header}
+                </TableHeaderCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((row, index) => {
+              const rowId = String(row.id);
+              const isSelected = rowSelection[rowId] ?? false;
+              return (
+                <TableRow
+                  key={row.id}
+                  selected={isSelected}
+                  onSelectionChange={(selected) => handleRowSelectionChange(rowId, selected, index)}
+                  rowIndex={index}
+                  onClick={(e) => {
+                    // Handle shift-click on row (not just checkbox)
+                    if (e.shiftKey) {
+                      e.preventDefault();
+                      handleRowSelectionChange(rowId, true, index, e);
+                    }
+                  }}
+                >
+                  {columns.map((col) => (
+                    <TableCell key={col.id}>
+                      {String(row[col.accessorKey as keyof User])}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+        <div style={{ marginTop: '1rem', fontWeight: 'bold' }}>
+          Selected rows: {selectedCount} of {data.length}
+        </div>
+        <div style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: '#666' }}>
+          Tip: Click a row, then hold Shift and click another row to select a range
+        </div>
+      </div>
     );
   },
 };
