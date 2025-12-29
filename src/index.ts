@@ -30,6 +30,20 @@ export {
   SortIndicator,
   Pagination,
 } from './components/Table';
+
+// Form components
+export {
+  Form,
+  Field,
+  FieldArray,
+  FormActions,
+  FormMessage,
+  FormStepper,
+  FormStep,
+  useFormContext,
+  useFormStep,
+} from './components/Form';
+
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 export { ErrorBoundary } from './components/ErrorBoundary';
 export { Hero } from './components/Hero';
@@ -112,6 +126,22 @@ export type {
   SortIndicatorProps,
   PaginationProps,
 } from './components/Table';
+
+export type {
+  FormProps,
+  FormContextValue,
+  FieldProps,
+  FieldComponent,
+  FieldArrayProps,
+  FormActionsProps,
+  FormActionsAlignment,
+  FormMessageProps,
+  FormMessageType,
+  FormStepperProps,
+  FormStepperContextValue,
+  FormStepProps,
+} from './components/Form';
+
 export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';
 export type {
   TabsProps,

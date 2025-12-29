@@ -19,7 +19,7 @@ describe('FieldArray', () => {
     render(
       <Form schema={arraySchema} onSubmit={handleSubmit} defaultValues={{ items: [] }}>
         <FieldArray name="items">
-          {(field, index) => (
+          {(_field, index) => (
             <Field name={`items.${index}.name`} label="Name" />
           )}
         </FieldArray>
@@ -36,7 +36,7 @@ describe('FieldArray', () => {
     render(
       <Form schema={arraySchema} onSubmit={handleSubmit} defaultValues={{ items: [] }}>
         <FieldArray name="items">
-          {(field, index) => (
+          {(_field, index) => (
             <Field name={`items.${index}.name`} label={`Name ${index + 1}`} />
           )}
         </FieldArray>
@@ -55,7 +55,7 @@ describe('FieldArray', () => {
     render(
       <Form schema={arraySchema} onSubmit={handleSubmit} defaultValues={{ items: [{ name: 'Item 1' }] }}>
         <FieldArray name="items">
-          {(field, index, actions) => (
+          {(_field, index, actions) => (
             <div>
               <Field name={`items.${index}.name`} label="Name" />
               <button type="button" onClick={actions.remove}>Remove</button>

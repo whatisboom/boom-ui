@@ -49,7 +49,7 @@ export const Field: React.FC<FieldProps> = ({
                 <Checkbox
                   {...field}
                   checked={field.value || false}
-                  onChange={(e) => field.onChange(e.target.checked)}
+                  onChange={(checked: boolean) => field.onChange(checked)}
                   label={label}
                   disabled={disabled}
                 />
