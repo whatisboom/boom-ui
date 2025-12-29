@@ -29,7 +29,7 @@ export function SearchCommand({
     if (debouncedQuery) {
       onSearch(debouncedQuery);
     }
-  }, [debouncedQuery, onSearch]);
+  }, [debouncedQuery]);
 
   const displayResults = query ? results : recentSearches;
 
