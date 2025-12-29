@@ -126,9 +126,44 @@
   border-width: 0;
 }
 
+/* Sorting */
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--boom-transition-fast);
+}
+
+.sortable:hover {
+  background-color: var(--boom-theme-bg-tertiary);
+}
+
+.sortable:focus {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: -2px;
+}
+
+.sortIcon {
+  display: inline-flex;
+  align-items: center;
+  margin-left: var(--boom-spacing-2);
+  vertical-align: middle;
+}
+
+.sortIconAsc {
+  /* Modifier for ascending sort indicator */
+}
+
+.sortIconDesc {
+  /* Modifier for descending sort indicator */
+}
+
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   .hoverable .row:hover {
+    transition: none;
+  }
+
+  .sortable {
     transition: none;
   }
 }
