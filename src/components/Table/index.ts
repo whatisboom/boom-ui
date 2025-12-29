@@ -17,4 +17,8 @@ export type {
   TableHeaderCellProps,
   TableDensity,
   TableLayout,
+  SortDirection,
+  SortState,
+  OnSortChange,
+  SortingFn,
 } from './Table.types';

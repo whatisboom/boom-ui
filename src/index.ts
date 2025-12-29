@@ -98,6 +98,10 @@ export type {
   TableHeaderCellProps,
   TableDensity,
   TableLayout,
+  SortDirection,
+  SortState,
+  OnSortChange,
+  SortingFn,
 } from './components/Table';
 export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';
 export type {
