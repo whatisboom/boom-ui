@@ -157,6 +157,33 @@
   /* Modifier for descending sort indicator */
 }
 
+/* Selection */
+.selectionCheckbox {
+  margin-right: var(--boom-spacing-3);
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.selectAllCheckbox {
+  margin-right: var(--boom-spacing-3);
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.rowSelectable {
+  cursor: pointer;
+  transition: background-color var(--boom-transition-fast);
+}
+
+.rowSelectable:hover {
+  background-color: var(--boom-theme-bg-tertiary);
+}
+
+.rowSelected {
+  background-color: var(--boom-theme-bg-tertiary);
+  border-left: 3px solid var(--boom-theme-focus-ring);
+}
+
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   .hoverable .row:hover {
@@ -164,6 +191,14 @@
   }
 
   .sortable {
+    transition: none;
+  }
+
+  .rowSelectable {
+    transition: none;
+  }
+
+  .rowSelectable:hover {
     transition: none;
   }
 }
