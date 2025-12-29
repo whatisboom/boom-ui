@@ -11,7 +11,7 @@ import { FormStep } from './FormStep';
 import { Button } from '../Button';
 
 const meta: Meta<typeof Form> = {
-  title: 'Components/Form',
+  title: 'Forms & Validation/Form',
   component: Form,
   parameters: {
     docs: {
