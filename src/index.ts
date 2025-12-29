@@ -28,6 +28,7 @@ export {
   TableCell,
   TableHeaderCell,
   SortIndicator,
+  Pagination,
 } from './components/Table';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 export { ErrorBoundary } from './components/ErrorBoundary';
@@ -109,6 +110,7 @@ export type {
   PaginationState,
   OnPaginationChange,
   SortIndicatorProps,
+  PaginationProps,
 } from './components/Table';
 export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';
 export type {

@@ -5,6 +5,7 @@ export { TableRow } from './TableRow';
 export { TableCell } from './TableCell';
 export { TableHeaderCell } from './TableHeaderCell';
 export { SortIndicator } from './SortIndicator';
+export { Pagination } from './Pagination';
 
 export type {
   TableProps,
@@ -30,3 +31,4 @@ export type {
 } from './Table.types';
 
 export type { SortIndicatorProps } from './SortIndicator.types';
+export type { PaginationProps } from './Pagination.types';
