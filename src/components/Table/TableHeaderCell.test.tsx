@@ -282,4 +282,117 @@ describe('TableHeaderCell', () => {
       expect(svg).toHaveClass(styles.sortIconDesc);
     });
   });
+
+  describe('Select All', () => {
+    it('should render checkbox when isSelectAll prop is provided', () => {
+      render(
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell isSelectAll />
+            </tr>
+          </thead>
+        </table>
+      );
+
+      const checkbox = screen.getByRole('checkbox');
+      expect(checkbox).toBeInTheDocument();
+    });
+
+    it('should have checkbox checked when allSelected is true', () => {
+      render(
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell isSelectAll allSelected={true} />
+            </tr>
+          </thead>
+        </table>
+      );
+
+      const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
+      expect(checkbox.checked).toBe(true);
+    });
+
+    it('should have checkbox indeterminate when someSelected is true and allSelected is false', () => {
+      render(
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell isSelectAll someSelected={true} allSelected={false} />
+            </tr>
+          </thead>
+        </table>
+      );
+
+      const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
+      expect(checkbox.indeterminate).toBe(true);
+    });
+
+    it('should call onSelectAllChange when checkbox is clicked', async () => {
+      const user = userEvent.setup();
+      const onSelectAllChange = vi.fn();
+
+      render(
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell isSelectAll onSelectAllChange={onSelectAllChange} />
+            </tr>
+          </thead>
+        </table>
+      );
+
+      const checkbox = screen.getByRole('checkbox');
+      await user.click(checkbox);
+
+      expect(onSelectAllChange).toHaveBeenCalledTimes(1);
+      expect(onSelectAllChange).toHaveBeenCalledWith(true);
+    });
+
+    it('should have proper aria-label for select-all checkbox', () => {
+      render(
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell isSelectAll />
+            </tr>
+          </thead>
+        </table>
+      );
+
+      const checkbox = screen.getByRole('checkbox');
+      expect(checkbox).toHaveAccessibleName('Select all rows');
+    });
+
+    it('should have no accessibility violations with select-all enabled', async () => {
+      const { container } = render(
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell isSelectAll />
+            </tr>
+          </thead>
+        </table>
+      );
+
+      expect(await axe(container)).toHaveNoViolations();
+    });
+
+    it('should not render sort indicator when isSelectAll is true', () => {
+      const { container } = render(
+        <table>
+          <thead>
+            <tr>
+              <TableHeaderCell isSelectAll sortable sortDirection="asc" />
+            </tr>
+          </thead>
+        </table>
+      );
+
+      // SortIndicator renders an SVG, should not be present
+      const svg = container.querySelector('svg');
+      expect(svg).not.toBeInTheDocument();
+    });
+  });
 });

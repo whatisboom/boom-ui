@@ -1,11 +1,33 @@
-import { forwardRef, KeyboardEvent, MouseEvent } from 'react';
+import { forwardRef, KeyboardEvent, MouseEvent, useEffect, useRef } from 'react';
 import { cn } from '@/utils/classnames';
 import { TableHeaderCellProps } from './Table.types';
 import { SortIndicator } from './SortIndicator';
+import { Checkbox } from '../Checkbox';
 import styles from './Table.module.css';
 
 export const TableHeaderCell = forwardRef<HTMLTableCellElement, TableHeaderCellProps>(
-  ({ align = 'left', className, children, sortable, sortDirection, onSort, ...props }, ref) => {
+  ({
+    align = 'left',
+    className,
+    children,
+    sortable,
+    sortDirection,
+    onSort,
+    isSelectAll,
+    allSelected,
+    someSelected,
+    onSelectAllChange,
+    ...props
+  }, ref) => {
+    const checkboxRef = useRef<HTMLInputElement>(null);
+
+    // Set indeterminate state on checkbox
+    useEffect(() => {
+      if (checkboxRef.current && isSelectAll) {
+        checkboxRef.current.indeterminate = Boolean(someSelected && !allSelected);
+      }
+    }, [isSelectAll, someSelected, allSelected]);
+
     const handleClick = (e: MouseEvent<HTMLTableCellElement>) => {
       if (sortable && onSort) {
         onSort();
@@ -34,17 +56,29 @@ export const TableHeaderCell = forwardRef<HTMLTableCellElement, TableHeaderCellP
         className={cn(
           styles.headerCell,
           styles[`align${align.charAt(0).toUpperCase()}${align.slice(1)}`],
-          sortable && styles.sortable,
+          sortable && !isSelectAll && styles.sortable,
           className
         )}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        tabIndex={sortable ? 0 : undefined}
+        tabIndex={sortable && !isSelectAll ? 0 : undefined}
         aria-sort={getAriaSort()}
         {...props}
       >
-        {children}
-        {sortable && <SortIndicator direction={sortDirection ?? false} />}
+        {isSelectAll ? (
+          <Checkbox
+            ref={checkboxRef}
+            checked={allSelected ?? false}
+            onChange={(checked) => onSelectAllChange?.(checked)}
+            aria-label="Select all rows"
+            className={styles.selectAllCheckbox}
+          />
+        ) : (
+          <>
+            {children}
+            {sortable && <SortIndicator direction={sortDirection ?? false} />}
+          </>
+        )}
       </th>
     );
   }

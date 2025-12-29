@@ -341,5 +341,25 @@ export interface TableHeaderCellProps extends HTMLAttributes<HTMLTableCellElemen
    */
   onSort?: () => void;
 
+  /**
+   * Whether this is a select-all checkbox header
+   */
+  isSelectAll?: boolean;
+
+  /**
+   * Are all rows selected
+   */
+  allSelected?: boolean;
+
+  /**
+   * Are some (but not all) rows selected (for indeterminate state)
+   */
+  someSelected?: boolean;
+
+  /**
+   * Callback when select-all changes
+   */
+  onSelectAllChange?: (selected: boolean) => void;
+
   children?: ReactNode;
 }
