@@ -2,6 +2,36 @@ import { ReactNode, HTMLAttributes } from 'react';
 import { TextAlign } from '@/types';
 
 /**
+ * Sort direction
+ */
+export type SortDirection = 'asc' | 'desc' | false;
+
+/**
+ * Sort state for a column
+ */
+export interface SortState {
+  /**
+   * Column ID being sorted
+   */
+  columnId: string;
+
+  /**
+   * Sort direction
+   */
+  direction: 'asc' | 'desc';
+}
+
+/**
+ * Callback for sort changes
+ */
+export type OnSortChange = (sorting: SortState[]) => void;
+
+/**
+ * Custom sorting function
+ */
+export type SortingFn<T = unknown> = (rowA: T, rowB: T, columnId: string) => number;
+
+/**
  * Column definition for table
  */
 export interface ColumnDef<T = unknown> {
@@ -49,6 +79,17 @@ export interface ColumnDef<T = unknown> {
    * Additional CSS class for header cell
    */
   headerClassName?: string;
+
+  /**
+   * Enable sorting for this column
+   * @default false
+   */
+  enableSorting?: boolean;
+
+  /**
+   * Custom sorting function
+   */
+  sortingFn?: SortingFn<T>;
 }
 
 /**
@@ -136,6 +177,22 @@ export interface TableProps<T = unknown> {
   disableAnimation?: boolean;
 
   /**
+   * Current sort state
+   */
+  sorting?: SortState[];
+
+  /**
+   * Callback when sort changes
+   */
+  onSortChange?: OnSortChange;
+
+  /**
+   * Enable multi-column sorting
+   * @default false
+   */
+  enableMultiSort?: boolean;
+
+  /**
    * Additional CSS class
    */
   className?: string;
@@ -171,6 +228,9 @@ export interface TableContextValue<T = unknown> {
   loading: boolean;
   emptyState?: ReactNode;
   disableAnimation: boolean;
+  sorting: SortState[];
+  onSortChange?: OnSortChange;
+  enableMultiSort: boolean;
 }
 
 /**
@@ -214,6 +274,21 @@ export interface TableHeaderCellProps extends HTMLAttributes<HTMLTableCellElemen
    * Align header content
    */
   align?: TextAlign;
+
+  /**
+   * Is this column sortable
+   */
+  sortable?: boolean;
+
+  /**
+   * Current sort direction for this column
+   */
+  sortDirection?: SortDirection;
+
+  /**
+   * Callback when sort is triggered
+   */
+  onSort?: () => void;
 
   children?: ReactNode;
 }
