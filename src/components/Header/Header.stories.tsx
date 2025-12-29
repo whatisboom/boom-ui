@@ -3,7 +3,7 @@ import { Header } from './Header';
 import { Button } from '../Button';
 
 const meta = {
-  title: 'Components/Navigation/Header',
+  title: 'Navigation & Menus/Header',
   component: Header,
   parameters: {
     layout: 'fullscreen',
