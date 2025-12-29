@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import { Table } from './Table';
 import { TableHead } from './TableHead';
 import { TableBody } from './TableBody';
 import { TableRow } from './TableRow';
 import { TableCell } from './TableCell';
 import { TableHeaderCell } from './TableHeaderCell';
-import { ColumnDef } from './Table.types';
+import { ColumnDef, SortState, SortDirection } from './Table.types';
 
 interface User {
   id: number;
@@ -204,4 +205,205 @@ export const StickyHeader: Story = {
       </Table>
     </div>
   ),
+};
+
+/**
+ * Helper function to sort data based on SortState
+ */
+function sortData<T>(data: T[], sorting: SortState[], columns: ColumnDef<T>[]): T[] {
+  if (!sorting.length) return data;
+
+  return [...data].sort((a, b) => {
+    for (const sort of sorting) {
+      const column = columns.find((col) => col.id === sort.columnId);
+      if (!column) continue;
+
+      let aValue: unknown;
+      let bValue: unknown;
+
+      if (column.accessorFn) {
+        aValue = column.accessorFn(a);
+        bValue = column.accessorFn(b);
+      } else if (column.accessorKey) {
+        aValue = a[column.accessorKey as keyof T];
+        bValue = b[column.accessorKey as keyof T];
+      }
+
+      // Custom sorting function
+      if (column.sortingFn) {
+        const result = column.sortingFn(a, b, column.id);
+        if (result !== 0) {
+          return sort.direction === 'asc' ? result : -result;
+        }
+        continue;
+      }
+
+      // Default sorting
+      const aStr = String(aValue).toLowerCase();
+      const bStr = String(bValue).toLowerCase();
+
+      if (aStr < bStr) {
+        return sort.direction === 'asc' ? -1 : 1;
+      }
+      if (aStr > bStr) {
+        return sort.direction === 'asc' ? 1 : -1;
+      }
+    }
+    return 0;
+  });
+}
+
+export const SingleColumnSort: Story = {
+  render: () => {
+    const [sorting, setSorting] = useState<SortState[]>([]);
+
+    const sortableColumns: ColumnDef<User>[] = columns.map((col) => ({
+      ...col,
+      enableSorting: true,
+    }));
+
+    const sortedData = sortData(data, sorting, sortableColumns);
+
+    const getSortDirection = (columnId: string): SortDirection => {
+      const sortState = sorting.find((s) => s.columnId === columnId);
+      return sortState ? sortState.direction : false;
+    };
+
+    const handleSort = (columnId: string) => {
+      const currentSort = sorting.find((s) => s.columnId === columnId);
+      let newSorting: SortState[];
+
+      if (!currentSort) {
+        // No sort on this column - set to ascending
+        newSorting = [{ columnId, direction: 'asc' }];
+      } else if (currentSort.direction === 'asc') {
+        // Currently ascending - change to descending
+        newSorting = [{ columnId, direction: 'desc' }];
+      } else {
+        // Currently descending - remove sort
+        newSorting = [];
+      }
+
+      setSorting(newSorting);
+    };
+
+    return (
+      <Table
+        columns={sortableColumns}
+        data={sortedData}
+        getRowId={(row) => String(row.id)}
+        sorting={sorting}
+        onSortChange={setSorting}
+        aria-label="Users (sortable)"
+      >
+        <TableHead>
+          <TableRow>
+            {sortableColumns.map((col) => (
+              <TableHeaderCell
+                key={col.id}
+                sortable={col.enableSorting}
+                sortDirection={getSortDirection(col.id)}
+                onSort={() => handleSort(col.id)}
+              >
+                {typeof col.header === 'function' ? col.header(col) : col.header}
+              </TableHeaderCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {sortedData.map((row) => (
+            <TableRow key={row.id}>
+              {sortableColumns.map((col) => (
+                <TableCell key={col.id}>
+                  {String(row[col.accessorKey as keyof User])}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    );
+  },
+};
+
+export const MultiColumnSort: Story = {
+  render: () => {
+    const [sorting, setSorting] = useState<SortState[]>([]);
+
+    const sortableColumns: ColumnDef<User>[] = columns.map((col) => ({
+      ...col,
+      enableSorting: true,
+    }));
+
+    const sortedData = sortData(data, sorting, sortableColumns);
+
+    const getSortDirection = (columnId: string): SortDirection => {
+      const sortState = sorting.find((s) => s.columnId === columnId);
+      return sortState ? sortState.direction : false;
+    };
+
+    const handleSort = (columnId: string) => {
+      const existingIndex = sorting.findIndex((s) => s.columnId === columnId);
+
+      let newSorting: SortState[];
+
+      if (existingIndex === -1) {
+        // Column not currently sorted - add as ascending
+        newSorting = [...sorting, { columnId, direction: 'asc' }];
+      } else {
+        const currentSort = sorting[existingIndex];
+        if (currentSort.direction === 'asc') {
+          // Currently ascending - change to descending
+          newSorting = [
+            ...sorting.slice(0, existingIndex),
+            { columnId, direction: 'desc' },
+            ...sorting.slice(existingIndex + 1),
+          ];
+        } else {
+          // Currently descending - remove this sort
+          newSorting = sorting.filter((s) => s.columnId !== columnId);
+        }
+      }
+
+      setSorting(newSorting);
+    };
+
+    return (
+      <Table
+        columns={sortableColumns}
+        data={sortedData}
+        getRowId={(row) => String(row.id)}
+        sorting={sorting}
+        onSortChange={setSorting}
+        enableMultiSort
+        aria-label="Users (multi-column sortable)"
+      >
+        <TableHead>
+          <TableRow>
+            {sortableColumns.map((col) => (
+              <TableHeaderCell
+                key={col.id}
+                sortable={col.enableSorting}
+                sortDirection={getSortDirection(col.id)}
+                onSort={() => handleSort(col.id)}
+              >
+                {typeof col.header === 'function' ? col.header(col) : col.header}
+              </TableHeaderCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {sortedData.map((row) => (
+            <TableRow key={row.id}>
+              {sortableColumns.map((col) => (
+                <TableCell key={col.id}>
+                  {String(row[col.accessorKey as keyof User])}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    );
+  },
 };

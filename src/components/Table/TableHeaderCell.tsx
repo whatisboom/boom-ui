@@ -44,7 +44,7 @@ export const TableHeaderCell = forwardRef<HTMLTableCellElement, TableHeaderCellP
         {...props}
       >
         {children}
-        {sortable && <SortIndicator direction={sortDirection} />}
+        {sortable && <SortIndicator direction={sortDirection ?? false} />}
       </th>
     );
   }
