@@ -185,4 +185,138 @@ describe('TableRow', () => {
       expect(await axe(container)).toHaveNoViolations();
     });
   });
+
+  describe('keyboard selection', () => {
+    it('should toggle selection when Space key is pressed and onSelectionChange exists', async () => {
+      const user = userEvent.setup();
+      const onSelectionChange = vi.fn();
+
+      render(
+        <table>
+          <tbody>
+            <TableRow selected={false} onSelectionChange={onSelectionChange}>
+              <TableCell>Content</TableCell>
+            </TableRow>
+          </tbody>
+        </table>
+      );
+
+      const row = screen.getByRole('row');
+      row.focus();
+      await user.keyboard(' ');
+
+      expect(onSelectionChange).toHaveBeenCalledWith(true);
+    });
+
+    it('should prevent default behavior when Space key is pressed (no page scroll)', async () => {
+      const user = userEvent.setup();
+      const onSelectionChange = vi.fn();
+
+      render(
+        <table>
+          <tbody>
+            <TableRow selected={false} onSelectionChange={onSelectionChange}>
+              <TableCell>Content</TableCell>
+            </TableRow>
+          </tbody>
+        </table>
+      );
+
+      const row = screen.getByRole('row');
+      row.focus();
+
+      const spaceEvent = new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true });
+      const preventDefaultSpy = vi.spyOn(spaceEvent, 'preventDefault');
+      row.dispatchEvent(spaceEvent);
+
+      expect(preventDefaultSpy).toHaveBeenCalled();
+    });
+
+    it('should not trigger selection when Space key is pressed and row is not selectable', async () => {
+      const user = userEvent.setup();
+      const onSelectionChange = vi.fn();
+
+      render(
+        <table>
+          <tbody>
+            <TableRow selected={false}>
+              <TableCell>Content</TableCell>
+            </TableRow>
+          </tbody>
+        </table>
+      );
+
+      const row = screen.getByRole('row');
+      await user.keyboard(' ');
+
+      expect(onSelectionChange).not.toHaveBeenCalled();
+    });
+
+    it('should be focusable when row is selectable (tabIndex)', () => {
+      render(
+        <table>
+          <tbody>
+            <TableRow selected={false} onSelectionChange={vi.fn()}>
+              <TableCell>Content</TableCell>
+            </TableRow>
+          </tbody>
+        </table>
+      );
+
+      const row = screen.getByRole('row');
+      expect(row).toHaveAttribute('tabIndex', '0');
+    });
+
+    it('should not be focusable when row is not selectable', () => {
+      render(
+        <table>
+          <tbody>
+            <TableRow>
+              <TableCell>Content</TableCell>
+            </TableRow>
+          </tbody>
+        </table>
+      );
+
+      const row = screen.getByRole('row');
+      expect(row).not.toHaveAttribute('tabIndex');
+    });
+
+    it('should preserve existing onKeyDown handler', async () => {
+      const user = userEvent.setup();
+      const onKeyDown = vi.fn();
+      const onSelectionChange = vi.fn();
+
+      render(
+        <table>
+          <tbody>
+            <TableRow selected={false} onSelectionChange={onSelectionChange} onKeyDown={onKeyDown}>
+              <TableCell>Content</TableCell>
+            </TableRow>
+          </tbody>
+        </table>
+      );
+
+      const row = screen.getByRole('row');
+      row.focus();
+      await user.keyboard(' ');
+
+      expect(onKeyDown).toHaveBeenCalled();
+      expect(onSelectionChange).toHaveBeenCalledWith(true);
+    });
+
+    it('should have no accessibility violations with keyboard navigation', async () => {
+      const { container } = render(
+        <table>
+          <tbody>
+            <TableRow selected={false} onSelectionChange={vi.fn()}>
+              <TableCell>Content</TableCell>
+            </TableRow>
+          </tbody>
+        </table>
+      );
+
+      expect(await axe(container)).toHaveNoViolations();
+    });
+  });
 });
