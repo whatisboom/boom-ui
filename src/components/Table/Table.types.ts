@@ -1,4 +1,5 @@
 import { ReactNode, HTMLAttributes } from 'react';
+import { TextAlign } from '@/types';
 
 /**
  * Column definition for table
@@ -37,7 +38,7 @@ export interface ColumnDef<T = unknown> {
   /**
    * Text alignment
    */
-  align?: 'left' | 'center' | 'right';
+  align?: TextAlign;
 
   /**
    * Additional CSS class for cells in this column
@@ -200,7 +201,7 @@ export interface TableCellProps extends HTMLAttributes<HTMLTableCellElement> {
   /**
    * Align cell content
    */
-  align?: 'left' | 'center' | 'right';
+  align?: TextAlign;
 
   children?: ReactNode;
 }
@@ -212,7 +213,7 @@ export interface TableHeaderCellProps extends HTMLAttributes<HTMLTableCellElemen
   /**
    * Align header content
    */
-  align?: 'left' | 'center' | 'right';
+  align?: TextAlign;
 
   children?: ReactNode;
 }
