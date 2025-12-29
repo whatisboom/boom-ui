@@ -1,0 +1,127 @@
+/* Container */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
+}
+
+/* Base table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: var(--boom-theme-text-primary);
+  font-size: var(--boom-font-size-sm);
+  background-color: var(--boom-theme-bg-primary);
+}
+
+/* Layout variants */
+.layoutFixed {
+  table-layout: fixed;
+}
+
+.layoutAuto {
+  table-layout: auto;
+}
+
+/* Density variants */
+.densityCompact .cell,
+.densityCompact .headerCell {
+  padding: var(--boom-spacing-2) var(--boom-spacing-3);
+}
+
+.densityNormal .cell,
+.densityNormal .headerCell {
+  padding: var(--boom-spacing-3) var(--boom-spacing-4);
+}
+
+.densityComfortable .cell,
+.densityComfortable .headerCell {
+  padding: var(--boom-spacing-4) var(--boom-spacing-5);
+}
+
+/* Header */
+.thead {
+  background-color: var(--boom-theme-bg-elevated);
+}
+
+.headerRow {
+  border-bottom: 2px solid var(--boom-theme-border-default);
+}
+
+.headerCell {
+  font-weight: var(--boom-font-weight-semibold);
+  text-align: left;
+  color: var(--boom-theme-text-primary);
+  background-color: var(--boom-theme-bg-elevated);
+  border-bottom: 2px solid var(--boom-theme-border-default);
+}
+
+.stickyHeader .headerCell {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Body */
+.tbody {
+  /* Base styles */
+}
+
+.row {
+  border-bottom: 1px solid var(--boom-theme-border-subtle);
+}
+
+.striped .row:nth-child(even) {
+  background-color: var(--boom-theme-bg-secondary);
+}
+
+.hoverable .row:hover {
+  background-color: var(--boom-theme-bg-tertiary);
+  transition: background-color var(--boom-transition-fast);
+}
+
+/* Cells */
+.cell {
+  border-bottom: 1px solid var(--boom-theme-border-subtle);
+}
+
+/* Alignment */
+.alignLeft {
+  text-align: left;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+/* Focus styles */
+.cell:focus,
+.headerCell:focus {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: -2px;
+}
+
+/* Empty state */
+.emptyState {
+  padding: var(--boom-spacing-8);
+  text-align: center;
+  color: var(--boom-theme-text-secondary);
+}
+
+/* Screen reader only */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
