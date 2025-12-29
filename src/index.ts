@@ -27,6 +27,7 @@ export {
   TableRow,
   TableCell,
   TableHeaderCell,
+  SortIndicator,
 } from './components/Table';
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 export { ErrorBoundary } from './components/ErrorBoundary';
@@ -102,6 +103,7 @@ export type {
   SortState,
   OnSortChange,
   SortingFn,
+  SortIndicatorProps,
 } from './components/Table';
 export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';
 export type {

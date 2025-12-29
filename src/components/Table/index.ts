@@ -4,6 +4,7 @@ export { TableBody } from './TableBody';
 export { TableRow } from './TableRow';
 export { TableCell } from './TableCell';
 export { TableHeaderCell } from './TableHeaderCell';
+export { SortIndicator } from './SortIndicator';
 
 export type {
   TableProps,
@@ -22,3 +23,5 @@ export type {
   OnSortChange,
   SortingFn,
 } from './Table.types';
+
+export type { SortIndicatorProps } from './SortIndicator.types';
