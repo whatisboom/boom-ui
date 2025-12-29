@@ -25,6 +25,8 @@ export type {
   RowSelectionState,
   OnRowSelectionChange,
   SelectionMode,
+  PaginationState,
+  OnPaginationChange,
 } from './Table.types';
 
 export type { SortIndicatorProps } from './SortIndicator.types';

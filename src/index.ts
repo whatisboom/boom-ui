@@ -106,6 +106,8 @@ export type {
   RowSelectionState,
   OnRowSelectionChange,
   SelectionMode,
+  PaginationState,
+  OnPaginationChange,
   SortIndicatorProps,
 } from './components/Table';
 export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';

@@ -47,6 +47,26 @@ export type OnRowSelectionChange = (rowSelection: RowSelectionState) => void;
 export type SelectionMode = 'single' | 'multiple';
 
 /**
+ * Pagination state
+ */
+export interface PaginationState {
+  /**
+   * Current page (0-indexed)
+   */
+  pageIndex: number;
+
+  /**
+   * Number of rows per page
+   */
+  pageSize: number;
+}
+
+/**
+ * Callback for pagination changes
+ */
+export type OnPaginationChange = (pagination: PaginationState) => void;
+
+/**
  * Column definition for table
  */
 export interface ColumnDef<T = unknown> {
@@ -230,6 +250,33 @@ export interface TableProps<T = unknown> {
   selectionMode?: SelectionMode;
 
   /**
+   * Current pagination state
+   */
+  pagination?: PaginationState;
+
+  /**
+   * Callback when pagination changes
+   */
+  onPaginationChange?: OnPaginationChange;
+
+  /**
+   * If true, pagination is handled externally (server-side)
+   * If false, client-side pagination
+   * @default false
+   */
+  manualPagination?: boolean;
+
+  /**
+   * Total row count (for manual pagination with server-side data)
+   */
+  rowCount?: number;
+
+  /**
+   * Total page count (calculated from rowCount and pageSize)
+   */
+  pageCount?: number;
+
+  /**
    * Additional CSS class
    */
   className?: string;
@@ -272,6 +319,11 @@ export interface TableContextValue<T = unknown> {
   onRowSelectionChange?: OnRowSelectionChange;
   enableRowSelection: boolean;
   selectionMode: SelectionMode;
+  pagination: PaginationState;
+  onPaginationChange?: OnPaginationChange;
+  manualPagination: boolean;
+  rowCount: number;
+  pageCount: number;
 }
 
 /**
