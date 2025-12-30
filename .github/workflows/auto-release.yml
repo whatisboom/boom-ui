@@ -25,6 +25,9 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Pin npm version
+        run: npm install -g npm@11.6.0
+
       - name: Check if version changed
         id: version-check
         run: |
