@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/whatisboom/boom-ui/discussions
+    about: For questions, ideas, or general discussions about boom-ui
+  - name: npm Package
+    url: https://www.npmjs.com/package/@whatisboom/boom-ui
+    about: View the published npm package
