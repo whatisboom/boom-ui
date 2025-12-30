@@ -117,9 +117,13 @@ export const Alert = ({
   return (
     <div
       role="alert"
-      className={cn(styles.alert, styles[variant], className)}
+      className={cn(styles.alert, className)}
     >
-      {showIcon && iconElement}
+      {showIcon && (
+        <div className={cn(styles.iconSidebar, styles[`${variant}Sidebar`])}>
+          {iconElement}
+        </div>
+      )}
 
       <div className={styles.content}>
         {title && <div className={styles.title}>{title}</div>}

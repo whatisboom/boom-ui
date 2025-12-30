@@ -182,7 +182,7 @@
   /* Backgrounds */
   --boom-theme-bg-base: var(--boom-palette-base-50);
   --boom-theme-bg-primary: var(--boom-palette-base-50);
-  --boom-theme-bg-elevated: var(--boom-palette-base-100);
+  --boom-theme-bg-elevated: var(--boom-palette-base-75);
   --boom-theme-bg-secondary: var(--boom-palette-base-100);
   --boom-theme-bg-tertiary: var(--boom-palette-base-200);
   --boom-theme-bg-overlay: var(--boom-palette-base-100);

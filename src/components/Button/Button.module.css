@@ -69,7 +69,7 @@
 .outline {
   background-color: transparent;
   color: var(--boom-theme-primary);
-  border-color: var(--boom-theme-border-default);
+  border-color: var(--boom-theme-primary);
 }
 
 .outline:hover:not(:disabled) {
@@ -84,6 +84,7 @@
 
 .ghost:hover:not(:disabled) {
   background-color: var(--boom-theme-bg-elevated);
+  color: var(--boom-theme-primary);
 }
 
 .link {
@@ -95,7 +96,7 @@
 }
 
 .link:hover:not(:disabled) {
-  color: var(--boom-theme-primary-hover);
+  color: var(--boom-theme-primary);
 }
 
 /* Loading state */
@@ -122,7 +123,8 @@
 .outline .spinner,
 .ghost .spinner,
 .link .spinner {
-  border-color: var(--boom-theme-primary);
+  border-color: var(--boom-theme-border-default);
+  border-top-color: transparent;
 }
 
 @keyframes spin {

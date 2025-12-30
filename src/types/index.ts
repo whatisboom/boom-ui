@@ -26,6 +26,11 @@ export type PropsWithChildrenAndClassName = PropsWithChildren<{
 }>;
 
 /**
+ * Text alignment
+ */
+export type TextAlign = 'left' | 'center' | 'right';
+
+/**
  * Animation preferences
  */
 export interface MotionProps {

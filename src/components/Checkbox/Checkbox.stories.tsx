@@ -4,7 +4,7 @@ import { Checkbox } from './Checkbox';
 import { Stack } from '../Stack';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Components/Inputs/Checkbox',
+  title: 'Forms & Validation/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
   argTypes: {

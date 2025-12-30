@@ -1,0 +1,91 @@
+.spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: currentColor;
+  border-right-color: transparent;
+  animation: spin 0.75s linear infinite;
+  color: var(--boom-theme-text-primary);
+}
+
+.sm {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.md {
+  width: 24px;
+  height: 24px;
+  border-width: 3px;
+}
+
+.lg {
+  width: 32px;
+  height: 32px;
+  border-width: 4px;
+}
+
+.noAnimation {
+  animation: none;
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Overlay mode */
+.overlayContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.spinnerWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: spin 1.5s linear infinite;
+  }
+
+  .spinner:not(.noAnimation) {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+}

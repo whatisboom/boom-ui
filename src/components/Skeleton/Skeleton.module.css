@@ -1,0 +1,80 @@
+.skeleton {
+  background-color: var(--skeleton-base-color);
+  border-radius: var(--boom-radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--skeleton-shimmer-color),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.noAnimation::after {
+  animation: none;
+}
+
+/* Variant: text */
+.text {
+  height: 1em;
+  border-radius: var(--boom-radius-xs);
+}
+
+/* Variant: circle */
+.circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+/* Variant: rect */
+.rect {
+  /* Uses base styles */
+}
+
+/* Variant: custom - user controls dimensions */
+.custom {
+  /* Uses base styles + user dimensions */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+}

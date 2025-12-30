@@ -2,8 +2,15 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Box } from './Box';
 
 const meta: Meta<typeof Box> = {
-  title: 'Components/Layout/Box',
+  title: 'Page Layouts/Box',
   component: Box,
+  parameters: {
+    docs: {
+      description: {
+        component: 'Low-level layout primitive. Use for custom layouts and spacing control.',
+      },
+    },
+  },
   tags: ['autodocs'],
   argTypes: {
     display: {

@@ -5,14 +5,13 @@ import { Button } from '../../Button';
 import { Typography } from '../../Typography';
 
 const meta: Meta<typeof Overlay> = {
-  title: 'Primitives/Overlay',
+  title: 'Overlays & Dialogs/Overlay',
   component: Overlay,
   tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
-        component:
-          'Overlay provides a semi-transparent background layer with Portal rendering. Used as a foundation for Modal, Drawer, and other overlay components. Handles backdrop clicks, escape key, and scroll locking.',
+        component: '⚠️ Low-level primitive component. Most developers should use Modal, Drawer, or Popover instead.',
       },
     },
   },

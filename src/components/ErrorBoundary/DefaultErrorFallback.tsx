@@ -1,3 +1,6 @@
+import { Stack } from '../Stack';
+import { Typography } from '../Typography';
+import { Button } from '../Button';
 import { FallbackProps } from './ErrorBoundary.types';
 import styles from './ErrorBoundary.module.css';
 
@@ -7,6 +10,7 @@ const ErrorIcon = () => (
     viewBox="0 0 24 24"
     stroke="currentColor"
     aria-hidden="true"
+    className={styles.icon}
   >
     <path
       strokeLinecap="round"
@@ -21,16 +25,21 @@ export const DefaultErrorFallback = ({ error, errorInfo, resetError }: FallbackP
   const isDevelopment = import.meta.env.DEV;
 
   return (
-    <div className={styles.defaultFallback} role="alert">
-      <div className={styles.icon}>
-        <ErrorIcon />
-      </div>
+    <div className={styles.container} role="alert">
+      <Stack spacing={4} align="center">
+        <div className={styles.illustration} aria-hidden="true">
+          <ErrorIcon />
+        </div>
 
-      <div className={styles.content}>
-        <h2 className={styles.title}>Something went wrong</h2>
-        <p className={styles.message}>
-          An unexpected error occurred. Please try refreshing the page.
-        </p>
+        <Stack spacing={2} align="center">
+          <Typography variant="h2" weight="semibold">
+            Something went wrong
+          </Typography>
+
+          <Typography variant="body" className={styles.description}>
+            An unexpected error occurred. Please try refreshing the page.
+          </Typography>
+        </Stack>
 
         {isDevelopment && (
           <details className={styles.details}>
@@ -47,15 +56,11 @@ export const DefaultErrorFallback = ({ error, errorInfo, resetError }: FallbackP
             </pre>
           </details>
         )}
-      </div>
 
-      <button
-        type="button"
-        onClick={resetError}
-        className={styles.resetButton}
-      >
-        Try again
-      </button>
+        <Button onClick={resetError} variant="primary" size="md">
+          Try again
+        </Button>
+      </Stack>
     </div>
   );
 };
