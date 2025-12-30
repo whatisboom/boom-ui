@@ -199,31 +199,35 @@ jobs:
             const branch = '${{ steps.source-branch.outputs.source_branch }}';
             const version = '${{ steps.version-check.outputs.current_version }}';
 
+            const body = [
+              '## ⚠️ Merge Conflicts Detected',
+              '',
+              `This PR was automatically created because merging \`${branch}\` to \`develop\` resulted in conflicts.`,
+              '',
+              `**Release:** v${version}`,
+              `**Source branch:** \`${branch}\``,
+              '',
+              '### What happened',
+              `1. ✅ Release v${version} was successfully merged to \`main\``,
+              `2. ✅ Tag v${version} was created`,
+              '3. ✅ Published to npm',
+              '4. ❌ Automatic merge to `develop` failed due to conflicts',
+              '',
+              '### Next steps',
+              '1. Resolve the merge conflicts in this PR',
+              '2. Merge this PR to `develop`',
+              `3. The \`${branch}\` branch will be automatically deleted after merge`,
+              '',
+              '**Note:** This is a standard git-flow step to merge the release branch back to develop.'
+            ].join('\n');
+
             await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `Merge ${branch} back to develop (conflicts)`,
               head: branch,
               base: 'develop',
-              body: `## ⚠️ Merge Conflicts Detected
-
-This PR was automatically created because merging \`${branch}\` to \`develop\` resulted in conflicts.
-
-**Release:** v${version}
-**Source branch:** \`${branch}\`
-
-### What happened
-1. ✅ Release v${version} was successfully merged to \`main\`
-2. ✅ Tag v${version} was created
-3. ✅ Published to npm
-4. ❌ Automatic merge to \`develop\` failed due to conflicts
-
-### Next steps
-1. Resolve the merge conflicts in this PR
-2. Merge this PR to \`develop\`
-3. The \`${branch}\` branch will be automatically deleted after merge
-
-**Note:** This is a standard git-flow step to merge the release branch back to develop.`
+              body: body
             });
 
       - name: Comment on original PR
