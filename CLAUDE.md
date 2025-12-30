@@ -251,16 +251,13 @@ git push -u origin release/v0.5.0
 #    - Create tag v0.5.0
 #    - Publish to npm
 #    - Create GitHub release with notes
-
-# 6. Merge release branch back to develop
-git checkout develop
-git pull
-git merge release/v0.5.0
-git push
-
-# 7. Delete release branch
-git branch -d release/v0.5.0
-git push origin --delete release/v0.5.0
+#    - Merge release branch back to develop
+#    - Delete the release branch
+#
+# If merge to develop has conflicts:
+#    - Auto-creates a PR for manual conflict resolution
+#
+# That's it! Fully automated after PR merge.
 ```
 
 ### Hotfix Process (Emergency Fixes)
@@ -278,17 +275,15 @@ git commit -m "Fix critical bug and bump to v0.4.1"
 
 # 3. Create PR: hotfix/v0.4.1 → main
 # Merge after review
-# GitHub Actions will automatically create tag and publish
-
-# 4. Merge hotfix to develop
-git checkout develop
-git pull
-git merge hotfix/v0.4.1
-git push
-
-# 5. Delete hotfix branch
-git branch -d hotfix/v0.4.1
-git push origin --delete hotfix/v0.4.1
+# GitHub Actions will automatically:
+#    - Create tag and publish to npm
+#    - Merge hotfix branch back to develop
+#    - Delete the hotfix branch
+#
+# If merge to develop has conflicts:
+#    - Auto-creates a PR for manual conflict resolution
+#
+# That's it! Fully automated after PR merge.
 ```
 
 ### Publishing Details
@@ -301,6 +296,13 @@ When a release or hotfix branch is merged to `main`, the workflow automatically:
 3. Runs pre-publish checks (via `prepublishOnly` hook)
 4. Publishes to npm with provenance
 5. Creates GitHub release with auto-generated notes
+6. Merges the release/hotfix branch back to `develop`
+7. Deletes the release/hotfix branch
+8. Posts a summary comment on the original PR
+
+**Conflict Handling:**
+- If the merge to `develop` has conflicts, a PR is automatically created for manual resolution
+- The release branch is preserved until conflicts are resolved
 
 **Pre-publish checks** (enforced by `prepublishOnly` hook):
 - Type checking passes (`npm run typecheck`)
