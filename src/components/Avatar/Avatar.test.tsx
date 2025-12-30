@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { axe } from 'vitest-axe';
 import { Avatar } from './Avatar';
 
@@ -22,7 +22,7 @@ describe('Avatar', () => {
     const img = screen.getByRole('img');
 
     // Trigger error
-    img.dispatchEvent(new Event('error'));
+    fireEvent.error(img);
 
     await waitFor(() => {
       expect(screen.getByText('JD')).toBeInTheDocument();
@@ -134,7 +134,7 @@ describe('Avatar', () => {
     const img = screen.getByRole('img');
 
     // Simulate successful load
-    img.dispatchEvent(new Event('load'));
+    fireEvent.load(img);
 
     await waitFor(() => {
       expect(img).toBeVisible();

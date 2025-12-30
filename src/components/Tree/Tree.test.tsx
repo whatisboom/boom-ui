@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { Tree } from './Tree';
@@ -175,9 +175,11 @@ describe('Tree', () => {
     renderTree(mockData, ['item1']);
 
     const item11 = getTreeItemByLabel('Item 1.1');
-    item11.focus();
 
-    await userEvent.keyboard('{ArrowUp}');
+    await act(async () => {
+      item11.focus();
+      await userEvent.keyboard('{ArrowUp}');
+    });
 
     expect(getTreeItemByLabel('Item 1')).toHaveFocus();
   });
@@ -186,9 +188,11 @@ describe('Tree', () => {
     renderTree(mockData, ['item1']);
 
     const item11 = getTreeItemByLabel('Item 1.1');
-    item11.focus();
 
-    await userEvent.keyboard('{ArrowDown}');
+    await act(async () => {
+      item11.focus();
+      await userEvent.keyboard('{ArrowDown}');
+    });
 
     expect(getTreeItemByLabel('Item 2')).toHaveFocus();
   });
@@ -197,9 +201,11 @@ describe('Tree', () => {
     renderTree(mockData, ['item1']);
 
     const item2 = getTreeItemByLabel('Item 2');
-    item2.focus();
 
-    await userEvent.keyboard('{ArrowUp}');
+    await act(async () => {
+      item2.focus();
+      await userEvent.keyboard('{ArrowUp}');
+    });
 
     expect(getTreeItemByLabel('Item 1.1')).toHaveFocus();
   });
@@ -209,9 +215,11 @@ describe('Tree', () => {
     renderTree(mockData, ['item1']);
 
     const item2 = getTreeItemByLabel('Item 2');
-    item2.focus();
 
-    await userEvent.keyboard('{Home}');
+    await act(async () => {
+      item2.focus();
+      await userEvent.keyboard('{Home}');
+    });
 
     expect(getTreeItemByLabel('Item 1')).toHaveFocus();
   });
@@ -245,9 +253,11 @@ describe('Tree', () => {
     renderTree(mockData, [], onExpandedChange);
 
     const item3 = getTreeItemByLabel('Item 3');
-    item3.focus();
 
-    await userEvent.keyboard('{ArrowRight}');
+    await act(async () => {
+      item3.focus();
+      await userEvent.keyboard('{ArrowRight}');
+    });
 
     expect(onExpandedChange).not.toHaveBeenCalled();
   });
