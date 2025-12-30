@@ -3,7 +3,9 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { z } from 'zod';
+import { useRef } from 'react';
 import { Form } from './Form';
+import type { FormHandle } from './Form.types';
 import { Button } from '../Button';
 
 const loginSchema = z.object({
@@ -154,21 +156,26 @@ describe('Form', () => {
   it('should support imperative control via ref', async () => {
     const handleSubmit = vi.fn();
     const user = userEvent.setup();
-    const formRef = { current: null };
 
-    render(
-      <>
-        <Form ref={formRef} schema={loginSchema} onSubmit={handleSubmit}>
-          {(form) => (
-            <>
-              <form.Field name="email" label="Email" component="input" />
-              <form.Field name="password" label="Password" component="input" type="password" />
-            </>
-          )}
-        </Form>
-        <Button onClick={() => formRef.current?.reset()}>External Reset</Button>
-      </>
-    );
+    function TestComponent() {
+      const formRef = useRef<FormHandle<typeof loginSchema>>(null);
+
+      return (
+        <>
+          <Form ref={formRef} schema={loginSchema} onSubmit={handleSubmit}>
+            {(form) => (
+              <>
+                <form.Field name="email" label="Email" component="input" />
+                <form.Field name="password" label="Password" component="input" type="password" />
+              </>
+            )}
+          </Form>
+          <Button onClick={() => formRef.current?.reset()}>External Reset</Button>
+        </>
+      );
+    }
+
+    render(<TestComponent />);
 
     const emailInput = screen.getByLabelText('Email') as HTMLInputElement;
     await user.type(emailInput, 'test@example.com');

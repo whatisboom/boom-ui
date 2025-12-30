@@ -72,7 +72,7 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
 }
 
 // Export with forwardRef while preserving generics
-export const Form = forwardRef(FormComponent) as <
+const FormWithRef = forwardRef(FormComponent) as <
   TSchema extends z.ZodObject<z.ZodRawShape>
 >(
   props: FormProps<TSchema> & {
@@ -80,4 +80,4 @@ export const Form = forwardRef(FormComponent) as <
   }
 ) => React.ReactElement;
 
-Form.displayName = 'Form';
+export const Form = Object.assign(FormWithRef, { displayName: 'Form' });
