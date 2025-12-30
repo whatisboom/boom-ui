@@ -1,0 +1,109 @@
+name: Component Request
+description: Request a new component for boom-ui
+title: "feat: implement [Component Name] component"
+labels: ["enhancement", "component"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for requesting a new component! Please provide as much detail as possible to help us understand what you need.
+
+  - type: input
+    id: component-name
+    attributes:
+      label: Component Name
+      description: What should this component be called?
+      placeholder: e.g., Accordion, Carousel, DatePicker
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Component Description
+      description: What is this component and what does it do?
+      placeholder: A brief description of the component's purpose...
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Use Cases
+      description: When and why would someone use this component?
+      placeholder: |
+        - Use case 1: ...
+        - Use case 2: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-api
+    attributes:
+      label: Proposed API
+      description: What should the component's API look like?
+      placeholder: |
+        ```tsx
+        <ComponentName
+          prop1="value"
+          prop2={true}
+          onEvent={() => {}}
+        >
+          Children
+        </ComponentName>
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility Requirements
+      description: What accessibility features are needed? (WCAG 2.1 AA compliance is required)
+      placeholder: |
+        - Keyboard navigation: ...
+        - Screen reader support: ...
+        - ARIA attributes: ...
+        - Focus management: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: design-considerations
+    attributes:
+      label: Design Considerations
+      description: Any specific design or styling requirements?
+      placeholder: |
+        - Theme support
+        - Variants (primary, secondary, etc.)
+        - Size options
+        - Animation preferences
+    validations:
+      required: false
+
+  - type: textarea
+    id: similar-components
+    attributes:
+      label: Similar Components in Other Libraries
+      description: Link to examples of similar components in other UI libraries for reference.
+      placeholder: |
+        - Material-UI: https://...
+        - Chakra UI: https://...
+        - Radix UI: https://...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: implementation-checklist
+    attributes:
+      label: Implementation Checklist
+      description: These items will be completed during implementation
+      options:
+        - label: Create Component.tsx with forwardRef
+        - label: Create Component.types.ts with TypeScript interfaces
+        - label: Create Component.module.css using design tokens
+        - label: Create Component.test.tsx with 80%+ coverage
+        - label: Add vitest-axe accessibility tests
+        - label: Create Component.stories.tsx for Storybook
+        - label: Export component from src/index.ts
+        - label: Export all types from src/index.ts
