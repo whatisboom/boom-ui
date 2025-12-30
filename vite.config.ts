@@ -13,10 +13,7 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: {
-        index: resolve(__dirname, 'src/index.ts'),
-        form: resolve(__dirname, 'src/form.ts'),
-      },
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'BoomUI',
       formats: ['es'],
     },

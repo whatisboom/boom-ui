@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Skeleton } from './Skeleton';
 import { SkeletonText } from './SkeletonText';
 import { SkeletonAvatar } from './SkeletonAvatar';
@@ -6,7 +6,7 @@ import { SkeletonCard } from './SkeletonCard';
 import { Stack } from '../Stack';
 
 const meta = {
-  title: 'Components/Skeleton',
+  title: 'Data & Content/Skeleton',
   component: Skeleton,
   parameters: {
     layout: 'padded',

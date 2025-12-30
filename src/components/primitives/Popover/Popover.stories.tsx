@@ -5,7 +5,7 @@ import { Button } from '../../Button';
 import { Typography } from '../../Typography';
 
 const meta: Meta<typeof Popover> = {
-  title: 'Primitives/Popover',
+  title: 'Overlays & Dialogs/Popover',
   component: Popover,
   tags: ['autodocs'],
   argTypes: {

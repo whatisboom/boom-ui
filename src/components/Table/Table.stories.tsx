@@ -37,7 +37,7 @@ const data: User[] = [
 ];
 
 const meta: Meta<typeof Table> = {
-  title: 'Components/Table',
+  title: 'Data & Content/Table',
   component: Table,
   parameters: {
     docs: {

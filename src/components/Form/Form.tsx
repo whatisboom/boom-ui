@@ -1,14 +1,13 @@
-import { forwardRef, FormEvent } from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { forwardRef, useImperativeHandle, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { z } from 'zod';
 import { cn } from '@/utils/classnames';
-import { FormContext } from './FormContext';
-import { FormProps } from './Form.types';
+import { FormProps, FormHandle } from './Form.types';
+import { createFieldComponent } from './createFieldComponent';
 import styles from './Form.module.css';
 
-// Generic component type helper - properly typed implementation
-function FormComponent<TSchema extends z.ZodType>(
+function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
   {
     schema,
     onSubmit,
@@ -19,47 +18,66 @@ function FormComponent<TSchema extends z.ZodType>(
     children,
     ...props
   }: FormProps<TSchema>,
-  ref: React.ForwardedRef<HTMLFormElement>
+  ref: React.ForwardedRef<FormHandle<TSchema>>
 ) {
-  type FormValues = z.infer<TSchema> extends FieldValues ? z.infer<TSchema> : never;
+  type FormInput = z.input<TSchema>;
+  type FormOutput = z.output<TSchema>;
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(schema as any) as any,
-    defaultValues: defaultValues as any,
+  // Create react-hook-form instance
+  const form = useForm<FormInput, unknown, FormOutput>({
+    resolver: standardSchemaResolver(schema),
+    defaultValues,
     mode,
   });
 
-  const handleSubmit = async (data: FormValues) => {
+  // Create Field component bound to this form instance
+  // Memoized to maintain referential equality
+  const Field = useMemo(
+    () => createFieldComponent<TSchema>(form),
+    [form]
+  );
+
+  // Expose imperative handle for ref-based control
+  useImperativeHandle(
+    ref,
+    () => ({
+      reset: form.reset,
+      setError: form.setError,
+      clearErrors: form.clearErrors,
+      trigger: form.trigger,
+      getValues: form.getValues,
+      setValue: form.setValue,
+    }),
+    [form]
+  );
+
+  // Handle form submission
+  const handleSubmit = async (data: FormOutput) => {
     await onSubmit(data);
     if (resetOnSubmit) {
       form.reset();
     }
   };
 
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    form.handleSubmit(handleSubmit)(e);
-  };
-
   return (
-    <FormContext.Provider value={{ form: form as any, isSubmitting: form.formState.isSubmitting }}>
-      <form
-        ref={ref}
-        role="form"
-        onSubmit={handleFormSubmit}
-        className={cn(styles.form, className)}
-        noValidate
-        {...props}
-      >
-        {children}
-      </form>
-    </FormContext.Provider>
+    <form
+      onSubmit={form.handleSubmit(handleSubmit)}
+      className={cn(styles.form, className)}
+      noValidate
+      {...props}
+    >
+      {children({ Field, ...form })}
+    </form>
   );
 }
 
-// Cast to support generics with forwardRef
-const FormWithRef = forwardRef(FormComponent) as <TSchema extends z.ZodType>(
-  props: FormProps<TSchema> & { ref?: React.ForwardedRef<HTMLFormElement> }
+// Export with forwardRef while preserving generics
+const FormWithRef = forwardRef(FormComponent) as <
+  TSchema extends z.ZodObject<z.ZodRawShape>
+>(
+  props: FormProps<TSchema> & {
+    ref?: React.ForwardedRef<FormHandle<TSchema>>;
+  }
 ) => React.ReactElement;
 
 export const Form = Object.assign(FormWithRef, { displayName: 'Form' });

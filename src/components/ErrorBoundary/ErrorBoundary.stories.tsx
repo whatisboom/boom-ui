@@ -11,7 +11,7 @@ const BuggyComponent = ({ shouldThrow }: { shouldThrow: boolean }) => {
 };
 
 const meta = {
-  title: 'Components/Utilities/ErrorBoundary',
+  title: 'Page Layouts/Error Boundary',
   component: ErrorBoundary,
   tags: ['autodocs'],
   parameters: {
@@ -98,7 +98,7 @@ export const WithAutoReset: Story = {
   args: {} as never,
   render: () => {
     const [resetKey, setResetKey] = useState(0);
-    const [shouldThrow, setShouldThrow] = useState(true);
+    const [shouldThrow, setShouldThrow] = useState(false);
 
     const handleResetKeyChange = () => {
       setResetKey((k) => k + 1);

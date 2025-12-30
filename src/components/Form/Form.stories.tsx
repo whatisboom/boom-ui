@@ -1,23 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { z } from 'zod';
 import { Form } from './Form';
-import { Field } from './Field';
-import { FieldArray } from './FieldArray';
 import { FormActions } from './FormActions';
 import { FormMessage } from './FormMessage';
-import { FormStepper } from './FormStepper';
-import { FormStep } from './FormStep';
 import { Button } from '../Button';
 
 const meta: Meta<typeof Form> = {
-  title: 'Components/Form',
+  title: 'Forms & Validation/Form',
   component: Form,
   parameters: {
     docs: {
       description: {
         component:
-          'Comprehensive Form component with React Hook Form integration, Zod validation, multi-step support, and field arrays. Perfect for authentication flows and complex forms.',
+          'Comprehensive Form component with React Hook Form integration and Zod validation. Uses render prop pattern for type-safe field access.',
       },
     },
   },
@@ -62,22 +58,28 @@ export const LoginForm: Story = {
 
     return (
       <Form schema={loginSchema} onSubmit={handleSubmit} mode="onBlur">
-        {error && <FormMessage type="error">{error}</FormMessage>}
-        {success && <FormMessage type="success">Login successful!</FormMessage>}
+        {(form) => (
+          <>
+            {error && <FormMessage type="error">{error}</FormMessage>}
+            {success && <FormMessage type="success">Login successful!</FormMessage>}
 
-        <Field name="email" label="Email" type="email" placeholder="you@example.com" />
-        <Field name="password" label="Password" type="password" />
-        <Field name="rememberMe" label="Remember me" component="checkbox" />
+            <form.Field name="email" label="Email" component="input" type="email" placeholder="you@example.com" />
+            <form.Field name="password" label="Password" component="input" type="password" />
+            <form.Field name="rememberMe" label="Remember me" component="checkbox" />
 
-        <FormActions>
-          <Button type="submit">Sign In</Button>
-        </FormActions>
+            <FormActions>
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? 'Signing in...' : 'Sign In'}
+              </Button>
+            </FormActions>
+          </>
+        )}
       </Form>
     );
   },
 };
 
-// Registration Form (Multi-Step)
+// Registration Form
 const registrationSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
@@ -91,17 +93,15 @@ const registrationSchema = z.object({
   path: ['confirmPassword'],
 });
 
-export const MultiStepRegistration: Story = {
+export const RegistrationForm: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Multi-step registration form with progress indicator. Navigate between steps with Back/Next buttons.',
+        story: 'Registration form with multiple fields and cross-field validation (password confirmation).',
       },
     },
   },
   render: () => {
-    const [step, setStep] = useState(0);
-
     const handleSubmit = async (data: z.infer<typeof registrationSchema>) => {
       console.log('Registration data:', data);
       alert('Registration complete!');
@@ -109,104 +109,96 @@ export const MultiStepRegistration: Story = {
 
     return (
       <Form schema={registrationSchema} onSubmit={handleSubmit} mode="onBlur">
-        <FormStepper currentStep={step} onStepChange={setStep} showProgress>
-          <FormStep title="Account">
-            <Field name="email" label="Email" type="email" />
-            <Field name="password" label="Password" type="password" />
-            <Field name="confirmPassword" label="Confirm Password" type="password" />
-          </FormStep>
+        {(form) => (
+          <>
+            <form.Field name="email" label="Email" component="input" type="email" />
+            <form.Field name="password" label="Password" component="input" type="password" />
+            <form.Field name="confirmPassword" label="Confirm Password" component="input" type="password" />
+            <form.Field name="firstName" label="First Name" component="input" />
+            <form.Field name="lastName" label="Last Name" component="input" />
+            <form.Field name="bio" label="Bio" component="textarea" />
+            <form.Field name="newsletter" label="Subscribe to newsletter" component="checkbox" />
 
-          <FormStep title="Profile">
-            <Field name="firstName" label="First Name" />
-            <Field name="lastName" label="Last Name" />
-            <Field name="bio" label="Bio" component="textarea" />
-          </FormStep>
-
-          <FormStep title="Preferences">
-            <Field name="newsletter" label="Subscribe to newsletter" component="checkbox" />
-          </FormStep>
-        </FormStepper>
-
-        <FormActions align="space-between">
-          <Button onClick={() => setStep(s => s - 1)} disabled={step === 0} variant="secondary">
-            Back
-          </Button>
-          <Button type={step === 2 ? 'submit' : 'button'} onClick={() => step < 2 && setStep(s => s + 1)}>
-            {step === 2 ? 'Complete Registration' : 'Next'}
-          </Button>
-        </FormActions>
+            <FormActions>
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? 'Creating Account...' : 'Create Account'}
+              </Button>
+              <Button type="button" variant="secondary" onClick={() => form.reset()}>
+                Reset
+              </Button>
+            </FormActions>
+          </>
+        )}
       </Form>
     );
   },
 };
 
-// Dynamic Fields (Field Array)
+// Contact Form with Custom Render
 const contactSchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  phoneNumbers: z.array(z.object({
-    number: z.string(),
-    type: z.enum(['mobile', 'home', 'work']),
-  })).min(1, 'At least one phone number is required'),
+  email: z.string().email('Invalid email'),
+  message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
-export const DynamicFields: Story = {
+export const CustomFieldRendering: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Form with dynamic field array. Add or remove phone numbers on the fly.',
+        story: 'Demonstrates custom field rendering with the render prop for special cases.',
       },
     },
   },
   render: () => {
     const handleSubmit = (data: z.infer<typeof contactSchema>) => {
       console.log('Contact data:', data);
-      alert('Saved!');
+      alert('Message sent!');
     };
 
     return (
-      <Form
-        schema={contactSchema}
-        onSubmit={handleSubmit}
-        defaultValues={{
-          name: '',
-          phoneNumbers: [{ number: '', type: 'mobile' as const }]
-        }}
-      >
-        <Field name="name" label="Name" />
+      <Form schema={contactSchema} onSubmit={handleSubmit}>
+        {(form) => (
+          <>
+            <form.Field name="name" label="Name" component="input" />
+            <form.Field name="email" label="Email" component="input" type="email" />
 
-        <FieldArray name="phoneNumbers" addButtonText="Add Phone Number">
-          {(_field, index, actions) => (
-            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-              <Field
-                name={`phoneNumbers.${index}.number`}
-                label={`Phone ${index + 1}`}
-                placeholder="555-1234"
-              />
-              <Field
-                name={`phoneNumbers.${index}.type`}
-                label="Type"
-                component="select"
-                options={[
-                  { value: 'mobile', label: 'Mobile' },
-                  { value: 'home', label: 'Home' },
-                  { value: 'work', label: 'Work' },
-                ]}
-              />
-              <Button
-                type="button"
-                onClick={actions.remove}
-                variant="secondary"
-                style={{ marginTop: '1.5rem' }}
-              >
-                Remove
+            {/* Custom render example with character count */}
+            <form.Field
+              name="message"
+              render={({ field, error }) => (
+                <div>
+                  <label htmlFor={field.name} style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>
+                    Message
+                  </label>
+                  <textarea
+                    {...field}
+                    id={field.name}
+                    rows={4}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      borderRadius: '4px',
+                      border: error ? '1px solid var(--boom-palette-error-500)' : '1px solid var(--boom-palette-neutral-300)',
+                      fontSize: '1rem',
+                    }}
+                  />
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.25rem', fontSize: '0.875rem' }}>
+                    {error && <span style={{ color: 'var(--boom-palette-error-500)' }}>{error.message}</span>}
+                    <span style={{ marginLeft: 'auto', color: 'var(--boom-palette-neutral-600)' }}>
+                      {field.value?.length || 0} characters
+                    </span>
+                  </div>
+                </div>
+              )}
+            />
+
+            <FormActions>
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                Send Message
               </Button>
-            </div>
-          )}
-        </FieldArray>
-
-        <FormActions>
-          <Button type="submit">Save Contact</Button>
-        </FormActions>
+            </FormActions>
+          </>
+        )}
       </Form>
     );
   },
@@ -214,11 +206,11 @@ export const DynamicFields: Story = {
 
 // All Field Types
 const allFieldsSchema = z.object({
-  textInput: z.string(),
-  emailInput: z.string().email(),
-  numberInput: z.coerce.number(),
-  textareaInput: z.string(),
-  selectInput: z.string(),
+  textInput: z.string().min(1, 'Required'),
+  emailInput: z.string().email('Invalid email'),
+  numberInput: z.coerce.number().min(0, 'Must be positive'),
+  textareaInput: z.string().min(1, 'Required'),
+  selectInput: z.string().min(1, 'Please select an option'),
   checkboxInput: z.boolean(),
   switchInput: z.boolean(),
 });
@@ -227,33 +219,83 @@ export const AllFieldTypes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Demonstrates all available field component types.',
+        story: 'Showcase of all available field component types.',
       },
     },
   },
   render: () => {
-    return (
-      <Form schema={allFieldsSchema} onSubmit={(data) => console.log(data)}>
-        <Field name="textInput" label="Text Input" type="text" placeholder="Enter text" />
-        <Field name="emailInput" label="Email Input" type="email" placeholder="you@example.com" />
-        <Field name="numberInput" label="Number Input" type="number" placeholder="42" />
-        <Field name="textareaInput" label="Textarea" component="textarea" placeholder="Long text..." />
-        <Field
-          name="selectInput"
-          label="Select"
-          component="select"
-          options={[
-            { value: 'option1', label: 'Option 1' },
-            { value: 'option2', label: 'Option 2' },
-            { value: 'option3', label: 'Option 3' },
-          ]}
-        />
-        <Field name="checkboxInput" label="Checkbox" component="checkbox" />
-        <Field name="switchInput" label="Switch" component="switch" />
+    const handleSubmit = (data: z.infer<typeof allFieldsSchema>) => {
+      console.log('Form data:', data);
+      alert(JSON.stringify(data, null, 2));
+    };
 
-        <FormActions>
-          <Button type="submit">Submit</Button>
-        </FormActions>
+    return (
+      <Form schema={allFieldsSchema} onSubmit={handleSubmit}>
+        {(form) => (
+          <>
+            <form.Field
+              name="textInput"
+              label="Text Input"
+              component="input"
+              type="text"
+              placeholder="Enter text"
+            />
+
+            <form.Field
+              name="emailInput"
+              label="Email Input"
+              component="input"
+              type="email"
+              placeholder="you@example.com"
+            />
+
+            <form.Field
+              name="numberInput"
+              label="Number Input"
+              component="input"
+              type="number"
+              placeholder="0"
+            />
+
+            <form.Field
+              name="textareaInput"
+              label="Textarea"
+              component="textarea"
+              placeholder="Enter multiple lines..."
+            />
+
+            <form.Field
+              name="selectInput"
+              label="Select"
+              component="select"
+              options={[
+                { value: '', label: 'Select an option' },
+                { value: 'option1', label: 'Option 1' },
+                { value: 'option2', label: 'Option 2' },
+                { value: 'option3', label: 'Option 3' },
+              ]}
+            />
+
+            <form.Field
+              name="checkboxInput"
+              label="Checkbox"
+              component="checkbox"
+            />
+
+            <form.Field
+              name="switchInput"
+              label="Switch"
+              component="switch"
+            />
+
+            <FormActions>
+              <Button type="submit">Submit</Button>
+              <Button type="button" variant="secondary" onClick={() => form.reset()}>
+                Reset
+              </Button>
+            </FormActions>
+          </>
+        )}
       </Form>
     );
   },

@@ -2,8 +2,15 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Stack } from './Stack';
 
 const meta: Meta<typeof Stack> = {
-  title: 'Components/Layout/Stack',
+  title: 'Page Layouts/Stack',
   component: Stack,
+  parameters: {
+    docs: {
+      description: {
+        component: 'Low-level layout primitive. Use for custom layouts and spacing control.',
+      },
+    },
+  },
   tags: ['autodocs'],
   argTypes: {
     direction: {

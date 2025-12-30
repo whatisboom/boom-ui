@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { Stack } from '../Stack';
 
 const meta: Meta<typeof ToastProvider> = {
-  title: 'Components/Feedback/Toast',
+  title: 'Feedback & Alerts/Toast',
   component: ToastProvider,
   tags: ['autodocs'],
 };

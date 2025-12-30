@@ -12,6 +12,7 @@ module.exports = {
   },
   rules: {
     'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off', // TypeScript provides type checking
     '@typescript-eslint/no-explicit-any': 'error',
     'react-refresh/only-export-components': [
       'warn',

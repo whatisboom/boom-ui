@@ -1,11 +1,17 @@
 import { ReactNode } from 'react';
 import { z } from 'zod';
-import { UseFormReturn, FieldValues, SubmitHandler } from 'react-hook-form';
+import {
+  UseFormReturn,
+  DefaultValues,
+  Path,
+  ControllerRenderProps,
+  FieldError
+} from 'react-hook-form';
 
 /**
- * Form component props
+ * Form component props with generic schema
  */
-export interface FormProps<TSchema extends z.ZodType> {
+export interface FormProps<TSchema extends z.ZodObject<z.ZodRawShape>> {
   /**
    * Zod validation schema
    */
@@ -14,12 +20,12 @@ export interface FormProps<TSchema extends z.ZodType> {
   /**
    * Submit handler - receives validated data
    */
-  onSubmit: SubmitHandler<z.infer<TSchema>>;
+  onSubmit: (data: z.output<TSchema>) => void | Promise<void>;
 
   /**
    * Default form values
    */
-  defaultValues?: Partial<z.infer<TSchema>>;
+  defaultValues?: DefaultValues<z.input<TSchema>>;
 
   /**
    * Validation mode
@@ -39,22 +45,102 @@ export interface FormProps<TSchema extends z.ZodType> {
   className?: string;
 
   /**
-   * Form children
+   * Render function that receives form instance with Field component
    */
-  children: ReactNode;
+  children: (form: FormRenderProps<TSchema>) => ReactNode;
 }
 
 /**
- * Form context value
+ * Form render props - passed to children function
  */
-export interface FormContextValue<TFieldValues extends FieldValues = FieldValues> {
+export interface FormRenderProps<TSchema extends z.ZodObject<z.ZodRawShape>>
+  extends UseFormReturn<z.input<TSchema>, unknown, z.output<TSchema>> {
   /**
-   * React Hook Form instance
+   * Type-safe Field component bound to this form
    */
-  form: UseFormReturn<TFieldValues>;
+  Field: FieldComponent<TSchema>;
+}
+
+/**
+ * Form handle for imperative control via ref
+ */
+export type FormHandle<TSchema extends z.ZodObject<z.ZodRawShape>> = {
+  reset: UseFormReturn<z.input<TSchema>>['reset'];
+  setError: UseFormReturn<z.input<TSchema>>['setError'];
+  clearErrors: UseFormReturn<z.input<TSchema>>['clearErrors'];
+  trigger: UseFormReturn<z.input<TSchema>>['trigger'];
+  getValues: UseFormReturn<z.input<TSchema>>['getValues'];
+  setValue: UseFormReturn<z.input<TSchema>>['setValue'];
+};
+
+/**
+ * Field component type created by factory
+ */
+export type FieldComponent<TSchema extends z.ZodObject<z.ZodRawShape>> = <
+  TName extends Path<z.input<TSchema>>
+>(
+  props: FieldProps<TSchema, TName>
+) => React.ReactElement;
+
+/**
+ * Field component props
+ */
+export interface FieldProps<
+  TSchema extends z.ZodObject<z.ZodRawShape>,
+  TName extends Path<z.input<TSchema>>
+> {
+  /**
+   * Field name - must match schema key (autocompletes!)
+   */
+  name: TName;
 
   /**
-   * Is form currently submitting
+   * Field label
    */
-  isSubmitting: boolean;
+  label?: string;
+
+  /**
+   * Component type to render
+   * @default 'input'
+   */
+  component?: 'input' | 'textarea' | 'select' | 'checkbox' | 'switch';
+
+  /**
+   * Input type (for component='input')
+   * @default 'text'
+   */
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+
+  /**
+   * Placeholder text
+   */
+  placeholder?: string;
+
+  /**
+   * Helper text below field
+   */
+  helperText?: string;
+
+  /**
+   * Disabled state
+   */
+  disabled?: boolean;
+
+  /**
+   * Select options (for component='select')
+   */
+  options?: Array<{ value: string; label: string }>;
+
+  /**
+   * Custom render function for special cases
+   */
+  render?: (params: {
+    field: ControllerRenderProps<z.input<TSchema>, TName>;
+    error: FieldError | undefined;
+  }) => ReactNode;
+
+  /**
+   * Additional CSS class
+   */
+  className?: string;
 }

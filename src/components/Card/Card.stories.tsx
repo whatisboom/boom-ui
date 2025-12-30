@@ -6,7 +6,7 @@ import { Stack } from '../Stack';
 import { Box } from '../Box';
 
 const meta = {
-  title: 'Components/Data Display/Card',
+  title: 'Data & Content/Card',
   component: Card,
   tags: ['autodocs'],
   argTypes: {

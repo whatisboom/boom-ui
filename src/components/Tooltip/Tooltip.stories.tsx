@@ -5,7 +5,7 @@ import { Stack } from '../Stack';
 import { Badge } from '../Badge';
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'Components/Display/Tooltip',
+  title: 'Overlays & Dialogs/Tooltip',
   component: Tooltip,
   tags: ['autodocs'],
   argTypes: {
