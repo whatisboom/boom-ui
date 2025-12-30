@@ -29,6 +29,7 @@ export function SearchCommand({
     if (debouncedQuery) {
       onSearch(debouncedQuery);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedQuery]);
 
   const displayResults = query ? results : recentSearches;

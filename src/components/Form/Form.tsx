@@ -1,5 +1,5 @@
 import { forwardRef, FormEvent } from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm, FieldValues, UseFormReturn } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { cn } from '@/utils/classnames';
@@ -21,11 +21,11 @@ function FormComponent<TSchema extends z.ZodType>(
   }: FormProps<TSchema>,
   ref: React.ForwardedRef<HTMLFormElement>
 ) {
-  type FormValues = z.infer<TSchema> extends FieldValues ? z.infer<TSchema> : never;
+  type FormValues = z.infer<TSchema>;
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(schema as any) as any,
-    defaultValues: defaultValues as any,
+    resolver: zodResolver(schema),
+    defaultValues,
     mode,
   });
 
@@ -42,10 +42,9 @@ function FormComponent<TSchema extends z.ZodType>(
   };
 
   return (
-    <FormContext.Provider value={{ form: form as any, isSubmitting: form.formState.isSubmitting }}>
+    <FormContext.Provider value={{ form: form as unknown as UseFormReturn<FieldValues>, isSubmitting: form.formState.isSubmitting }}>
       <form
         ref={ref}
-        role="form"
         onSubmit={handleFormSubmit}
         className={cn(styles.form, className)}
         noValidate
