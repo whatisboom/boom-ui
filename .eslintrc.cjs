@@ -14,6 +14,10 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off', // TypeScript provides type checking
     '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-unused-vars': ['error', {
+      argsIgnorePattern: '^_',
+      varsIgnorePattern: '^_',
+    }],
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
