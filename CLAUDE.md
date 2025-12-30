@@ -192,25 +192,124 @@ Use these shared types for consistency. Components can extend or add their own s
 - **URL**: http://localhost:6006
 - Each story should demonstrate component variants and states
 
-## Publishing
+## Git-Flow Workflow
 
-**Automated via GitHub Actions** - Publishing to npm is automated via tag-based releases:
+This project uses **git-flow** for branch management and releases.
 
-1. Bump version in `package.json` (e.g., `0.3.0` → `0.3.1`)
-2. Commit changes
-3. Create and push a git tag: `git tag v0.3.1 && git push origin main && git push origin v0.3.1`
-4. GitHub Actions automatically publishes to npm when a tag starting with `v` is pushed
+### Branch Structure
+
+**Long-lived branches:**
+- `main` - Production-ready code, only updated via release merges
+- `develop` - Default branch for daily development, integration branch
+
+**Short-lived branches:**
+- `feature/*` - Feature development (created from `develop`)
+- `release/v*` - Release preparation (created from `develop`)
+- `hotfix/v*` - Emergency production fixes (created from `main`)
+
+### Daily Development Workflow
+
+```bash
+# Create feature branch
+git checkout develop
+git pull
+git checkout -b feature/my-feature
+
+# Develop and commit changes
+# ...
+
+# Push and create PR targeting develop
+git push -u origin feature/my-feature
+# Create PR: feature/my-feature → develop
+```
+
+### Release Process
+
+```bash
+# 1. Determine version (semver):
+#    - Breaking changes → Major (v1.0.0)
+#    - New features → Minor (v0.5.0)
+#    - Bug fixes only → Patch (v0.4.1)
+
+# 2. Create release branch from develop
+git checkout develop
+git pull
+git checkout -b release/v0.5.0
+
+# 3. Bump version in package.json
+# Edit package.json: "version": "0.5.0"
+
+# 4. Commit and push
+git add package.json
+git commit -m "Bump version to 0.5.0"
+git push -u origin release/v0.5.0
+
+# 5. Create PR: release/v0.5.0 → main
+# Wait for CI checks to pass, then merge
+# GitHub Actions will automatically:
+#    - Detect the version change
+#    - Create tag v0.5.0
+#    - Publish to npm
+#    - Create GitHub release with notes
+
+# 6. Merge release branch back to develop
+git checkout develop
+git pull
+git merge release/v0.5.0
+git push
+
+# 7. Delete release branch
+git branch -d release/v0.5.0
+git push origin --delete release/v0.5.0
+```
+
+### Hotfix Process (Emergency Fixes)
+
+```bash
+# 1. Create hotfix from main
+git checkout main
+git pull
+git checkout -b hotfix/v0.4.1
+
+# 2. Fix bug and bump version
+# Edit package.json: "version": "0.4.1"
+git add .
+git commit -m "Fix critical bug and bump to v0.4.1"
+
+# 3. Create PR: hotfix/v0.4.1 → main
+# Merge after review
+# GitHub Actions will automatically create tag and publish
+
+# 4. Merge hotfix to develop
+git checkout develop
+git pull
+git merge hotfix/v0.4.1
+git push
+
+# 5. Delete hotfix branch
+git branch -d hotfix/v0.4.1
+git push origin --delete hotfix/v0.4.1
+```
+
+### Publishing Details
+
+**Fully Automated via GitHub Actions:**
+
+When a release or hotfix branch is merged to `main`, the workflow automatically:
+1. Detects version change in `package.json`
+2. Creates a git tag (e.g., `v0.5.0`)
+3. Runs pre-publish checks (via `prepublishOnly` hook)
+4. Publishes to npm with provenance
+5. Creates GitHub release with auto-generated notes
 
 **Pre-publish checks** (enforced by `prepublishOnly` hook):
 - Type checking passes (`npm run typecheck`)
 - All tests pass (`npm run test:ci`)
 - Build succeeds (`npm run build`)
 
-**Publishing workflow** (`.github/workflows/publish.yml`):
-- Triggers on tags matching `v*`
-- Uses npm OIDC with provenance (`--provenance` flag)
-- Publishes with public access
-- Runs on Node.js 24
+**Security:**
+- Uses npm OIDC for secure publishing (no long-lived tokens)
+- Publishes with provenance (`--provenance` flag) for supply chain security
 
 ## Important Notes
 
