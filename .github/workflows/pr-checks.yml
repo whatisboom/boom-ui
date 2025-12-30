@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: 24
           cache: 'npm'
+      - name: Upgrade to npm 11
+        run: npm install -g npm@11
       - run: npm ci
       - run: npm run typecheck
 
@@ -30,6 +32,8 @@ jobs:
         with:
           node-version: 24
           cache: 'npm'
+      - name: Upgrade to npm 11
+        run: npm install -g npm@11
       - run: npm ci
       - run: npm run lint
 
@@ -44,6 +48,8 @@ jobs:
         with:
           node-version: 24
           cache: 'npm'
+      - name: Upgrade to npm 11
+        run: npm install -g npm@11
       - run: npm ci
       - run: npm run test:coverage
       - name: Upload coverage reports
@@ -65,6 +71,8 @@ jobs:
         with:
           node-version: 24
           cache: 'npm'
+      - name: Upgrade to npm 11
+        run: npm install -g npm@11
       - run: npm ci
       - run: npm run build
 
@@ -79,5 +87,7 @@ jobs:
         with:
           node-version: 24
           cache: 'npm'
+      - name: Upgrade to npm 11
+        run: npm install -g npm@11
       - run: npm ci
       - run: npm run build-storybook
