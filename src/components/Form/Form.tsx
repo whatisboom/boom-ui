@@ -12,6 +12,7 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
     schema,
     onSubmit,
     defaultValues,
+    mode = 'onSubmit',
     resetOnSubmit = false,
     className,
     children,
@@ -26,6 +27,7 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
   const form = useForm<FormInput, unknown, FormOutput>({
     resolver: standardSchemaResolver(schema),
     defaultValues,
+    mode,
   });
 
   // Create Field component bound to this form instance

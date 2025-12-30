@@ -28,6 +28,12 @@ export interface FormProps<TSchema extends z.ZodObject<z.ZodRawShape>> {
   defaultValues?: DefaultValues<z.input<TSchema>>;
 
   /**
+   * Validation mode
+   * @default 'onSubmit'
+   */
+  mode?: 'onSubmit' | 'onBlur' | 'onChange' | 'onTouched' | 'all';
+
+  /**
    * Reset form after successful submission
    * @default false
    */

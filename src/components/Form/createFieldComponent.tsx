@@ -63,7 +63,7 @@ export function createFieldComponent<TSchema extends z.ZodObject<z.ZodRawShape>>
                 return (
                   <Textarea
                     name={field.name}
-                    value={field.value as string}
+                    value={(field.value as string) || ''}
                     onChange={field.onChange}
                     onBlur={field.onBlur}
                     ref={field.ref}
@@ -100,7 +100,7 @@ export function createFieldComponent<TSchema extends z.ZodObject<z.ZodRawShape>>
                 return (
                   <Select
                     name={field.name}
-                    value={field.value as string}
+                    value={(field.value as string) || ''}
                     onChange={field.onChange}
                     onBlur={field.onBlur}
                     ref={field.ref}
@@ -113,7 +113,7 @@ export function createFieldComponent<TSchema extends z.ZodObject<z.ZodRawShape>>
                 return (
                   <Input
                     name={field.name}
-                    value={field.value as string}
+                    value={(field.value as string) || ''}
                     onChange={field.onChange}
                     onBlur={field.onBlur}
                     ref={field.ref}

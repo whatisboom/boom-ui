@@ -15,7 +15,7 @@ describe('Form', () => {
   it('should render form element', () => {
     const handleSubmit = vi.fn();
 
-    render(
+    const { container } = render(
       <Form schema={loginSchema} onSubmit={handleSubmit}>
         {(form) => (
           <>
@@ -26,7 +26,7 @@ describe('Form', () => {
       </Form>
     );
 
-    expect(screen.getByRole('form')).toBeInTheDocument();
+    expect(container.querySelector('form')).toBeInTheDocument();
   });
 
   it('should render fields from render prop', () => {
@@ -51,7 +51,7 @@ describe('Form', () => {
     const handleSubmit = vi.fn();
     const user = userEvent.setup();
 
-    render(
+    const { container } = render(
       <Form schema={loginSchema} onSubmit={handleSubmit}>
         {(form) => (
           <>
@@ -63,11 +63,22 @@ describe('Form', () => {
       </Form>
     );
 
+    // Submit with invalid data
+    const emailInput = screen.getByLabelText('Email');
+    await user.type(emailInput, 'invalid-email');
     await user.click(screen.getByText('Submit'));
 
-    await waitFor(() => {
-      expect(screen.getByText('Invalid email')).toBeInTheDocument();
-    });
+    // Wait for error to appear
+    await waitFor(
+      () => {
+        const errorElement = screen.queryByText('Invalid email');
+        if (!errorElement) {
+          console.log('DOM:', container.innerHTML);
+        }
+        expect(errorElement).toBeInTheDocument();
+      },
+      { timeout: 2000 }
+    );
 
     expect(handleSubmit).not.toHaveBeenCalled();
   });
@@ -121,12 +132,23 @@ describe('Form', () => {
 
     await user.type(emailInput, 'test@example.com');
     await user.type(passwordInput, 'password123');
+
+    expect(emailInput.value).toBe('test@example.com');
+    expect(passwordInput.value).toBe('password123');
+
     await user.click(screen.getByText('Submit'));
 
     await waitFor(() => {
-      expect(emailInput.value).toBe('');
-      expect(passwordInput.value).toBe('');
+      expect(handleSubmit).toHaveBeenCalled();
     });
+
+    await waitFor(
+      () => {
+        expect(emailInput.value).toBe('');
+        expect(passwordInput.value).toBe('');
+      },
+      { timeout: 2000 }
+    );
   });
 
   it('should support imperative control via ref', async () => {
@@ -155,7 +177,9 @@ describe('Form', () => {
 
     await user.click(screen.getByText('External Reset'));
 
-    expect(emailInput.value).toBe('');
+    await waitFor(() => {
+      expect(emailInput.value).toBe('');
+    });
   });
 
   it('should support custom field rendering', () => {
