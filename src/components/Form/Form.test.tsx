@@ -14,13 +14,13 @@ const testSchema = z.object({
 describe('Form', () => {
   it('should render form element', () => {
     const handleSubmit = vi.fn();
-    render(
+    const { container } = render(
       <Form schema={testSchema} onSubmit={handleSubmit}>
         <div>Form content</div>
       </Form>
     );
 
-    expect(screen.getByRole('form')).toBeInTheDocument();
+    expect(container.querySelector('form')).toBeInTheDocument();
   });
 
   it('should call onSubmit with validated data', async () => {
