@@ -259,17 +259,21 @@ jobs:
                 ? `Successfully merged back to \`develop\` and deleted \`${sourceBranch}\``
                 : `Merge to \`develop\` had conflicts. Created PR for manual resolution.`;
 
+              const commentBody = [
+                '## 🚀 Release Automation Complete',
+                '',
+                `✅ Tag \`${tagName}\` created`,
+                `✅ Published to npm as v${version}`,
+                '✅ GitHub release created',
+                `${statusEmoji} ${mergeMessage}`,
+                '',
+                `[View Release](https://github.com/${context.repo.owner}/${context.repo.repo}/releases/tag/${tagName})`
+              ].join('\n');
+
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: pr.number,
-                body: `## 🚀 Release Automation Complete
-
-✅ Tag \`${tagName}\` created
-✅ Published to npm as v${version}
-✅ GitHub release created
-${statusEmoji} ${mergeMessage}
-
-[View Release](https://github.com/${context.repo.owner}/${context.repo.repo}/releases/tag/${tagName})`
+                body: commentBody
               });
             }
