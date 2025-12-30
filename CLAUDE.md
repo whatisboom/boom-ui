@@ -246,24 +246,19 @@ git push -u origin release/v0.5.0
 
 # 5. Create PR: release/v0.5.0 → main
 # Wait for CI checks to pass, then merge
+# GitHub Actions will automatically:
+#    - Detect the version change
+#    - Create tag v0.5.0
+#    - Publish to npm
+#    - Create GitHub release with notes
 
-# 6. Create tag via GitHub UI (after PR merge):
-#    - Go to https://github.com/whatisboom/boom-ui/releases
-#    - Click "Create a new release"
-#    - Tag: v0.5.0
-#    - Target: main
-#    - Title: "v0.5.0"
-#    - Generate release notes
-#    - Publish release
-#    - GitHub Actions automatically publishes to npm
-
-# 7. Merge release branch back to develop
+# 6. Merge release branch back to develop
 git checkout develop
 git pull
 git merge release/v0.5.0
 git push
 
-# 8. Delete release branch
+# 7. Delete release branch
 git branch -d release/v0.5.0
 git push origin --delete release/v0.5.0
 ```
@@ -283,32 +278,38 @@ git commit -m "Fix critical bug and bump to v0.4.1"
 
 # 3. Create PR: hotfix/v0.4.1 → main
 # Merge after review
+# GitHub Actions will automatically create tag and publish
 
-# 4. Create tag via GitHub UI (v0.4.1)
-
-# 5. Merge hotfix to develop
+# 4. Merge hotfix to develop
 git checkout develop
 git pull
 git merge hotfix/v0.4.1
 git push
 
-# 6. Delete hotfix branch
+# 5. Delete hotfix branch
 git branch -d hotfix/v0.4.1
 git push origin --delete hotfix/v0.4.1
 ```
 
 ### Publishing Details
 
-**Automated via GitHub Actions:**
-- Triggers when tag matching `v*` is created via GitHub UI
-- Runs pre-publish checks (typecheck, tests, build)
-- Publishes to npm with provenance (`--provenance` flag)
-- Uses npm OIDC for secure publishing
+**Fully Automated via GitHub Actions:**
+
+When a release or hotfix branch is merged to `main`, the workflow automatically:
+1. Detects version change in `package.json`
+2. Creates a git tag (e.g., `v0.5.0`)
+3. Runs pre-publish checks (via `prepublishOnly` hook)
+4. Publishes to npm with provenance
+5. Creates GitHub release with auto-generated notes
 
 **Pre-publish checks** (enforced by `prepublishOnly` hook):
 - Type checking passes (`npm run typecheck`)
 - All tests pass (`npm run test:ci`)
 - Build succeeds (`npm run build`)
+
+**Security:**
+- Uses npm OIDC for secure publishing (no long-lived tokens)
+- Publishes with provenance (`--provenance` flag) for supply chain security
 
 ## Important Notes
 
