@@ -5,7 +5,7 @@ import { Checkbox } from '../Checkbox';
 import styles from './Table.module.css';
 
 export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
-  ({ className, children, selected, onSelectionChange, onKeyDown, ...props }, ref) => {
+  ({ className, children, selected, onSelectionChange, rowIndex: _rowIndex, onKeyDown, ...props }, ref) => {
     const showCheckbox = selected !== undefined;
     const isSelectable = onSelectionChange !== undefined;
 
