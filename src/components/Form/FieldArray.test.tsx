@@ -18,11 +18,13 @@ describe('FieldArray', () => {
 
     render(
       <Form schema={arraySchema} onSubmit={handleSubmit} defaultValues={{ items: [] }}>
-        <FieldArray name="items">
-          {(_field, index) => (
-            <Field name={`items.${index}.name`} label="Name" />
-          )}
-        </FieldArray>
+        {() => (
+          <FieldArray name="items">
+            {(_field, index) => (
+              <Field name={`items.${index}.name`} label="Name" />
+            )}
+          </FieldArray>
+        )}
       </Form>
     );
 
@@ -35,11 +37,13 @@ describe('FieldArray', () => {
 
     render(
       <Form schema={arraySchema} onSubmit={handleSubmit} defaultValues={{ items: [] }}>
-        <FieldArray name="items">
-          {(_field, index) => (
-            <Field name={`items.${index}.name`} label={`Name ${index + 1}`} />
-          )}
-        </FieldArray>
+        {() => (
+          <FieldArray name="items">
+            {(_field, index) => (
+              <Field name={`items.${index}.name`} label={`Name ${index + 1}`} />
+            )}
+          </FieldArray>
+        )}
       </Form>
     );
 
@@ -54,14 +58,16 @@ describe('FieldArray', () => {
 
     render(
       <Form schema={arraySchema} onSubmit={handleSubmit} defaultValues={{ items: [{ name: 'Item 1' }] }}>
-        <FieldArray name="items">
-          {(_field, index, actions) => (
-            <div>
-              <Field name={`items.${index}.name`} label="Name" />
-              <button type="button" onClick={actions.remove}>Remove</button>
-            </div>
-          )}
-        </FieldArray>
+        {() => (
+          <FieldArray name="items">
+            {(_field, index, actions) => (
+              <div>
+                <Field name={`items.${index}.name`} label="Name" />
+                <button type="button" onClick={actions.remove}>Remove</button>
+              </div>
+            )}
+          </FieldArray>
+        )}
       </Form>
     );
 

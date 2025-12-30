@@ -5,8 +5,16 @@ import {
   DefaultValues,
   Path,
   ControllerRenderProps,
-  FieldError
+  FieldError,
+  FieldValues
 } from 'react-hook-form';
+
+/**
+ * Form context value - used internally by FormContext
+ */
+export interface FormContextValue<TFieldValues extends FieldValues = FieldValues> {
+  form: UseFormReturn<TFieldValues>;
+}
 
 /**
  * Form component props with generic schema

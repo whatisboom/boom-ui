@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { z } from 'zod';
 import { Form } from './Form';
-import { Field } from './Field';
 
 const testSchema = z.object({
   email: z.string().email('Invalid email'),
@@ -18,7 +17,9 @@ describe('Field', () => {
     const handleSubmit = vi.fn();
     render(
       <Form schema={testSchema} onSubmit={handleSubmit}>
-        <Field name="email" label="Email" />
+        {(form) => (
+          <form.Field name="email" label="Email" component="input" />
+        )}
       </Form>
     );
 
@@ -29,7 +30,9 @@ describe('Field', () => {
     const handleSubmit = vi.fn();
     render(
       <Form schema={testSchema} onSubmit={handleSubmit}>
-        <Field name="bio" label="Bio" component="textarea" />
+        {(form) => (
+          <form.Field name="bio" label="Bio" component="textarea" />
+        )}
       </Form>
     );
 
@@ -40,7 +43,9 @@ describe('Field', () => {
     const handleSubmit = vi.fn();
     render(
       <Form schema={testSchema} onSubmit={handleSubmit}>
-        <Field name="subscribe" label="Subscribe" component="checkbox" />
+        {(form) => (
+          <form.Field name="subscribe" label="Subscribe" component="checkbox" />
+        )}
       </Form>
     );
 
@@ -53,8 +58,12 @@ describe('Field', () => {
 
     render(
       <Form schema={testSchema} onSubmit={handleSubmit} mode="onBlur">
-        <Field name="email" label="Email" type="email" />
-        <button type="submit">Submit</button>
+        {(form) => (
+          <>
+            <form.Field name="email" label="Email" type="email" component="input" />
+            <button type="submit">Submit</button>
+          </>
+        )}
       </Form>
     );
 
@@ -69,7 +78,9 @@ describe('Field', () => {
     const handleSubmit = vi.fn();
     const { container } = render(
       <Form schema={testSchema} onSubmit={handleSubmit}>
-        <Field name="email" label="Email" type="email" />
+        {(form) => (
+          <form.Field name="email" label="Email" type="email" component="input" />
+        )}
       </Form>
     );
 
