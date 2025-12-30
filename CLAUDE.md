@@ -192,25 +192,123 @@ Use these shared types for consistency. Components can extend or add their own s
 - **URL**: http://localhost:6006
 - Each story should demonstrate component variants and states
 
-## Publishing
+## Git-Flow Workflow
 
-**Automated via GitHub Actions** - Publishing to npm is automated via tag-based releases:
+This project uses **git-flow** for branch management and releases.
 
-1. Bump version in `package.json` (e.g., `0.3.0` → `0.3.1`)
-2. Commit changes
-3. Create and push a git tag: `git tag v0.3.1 && git push origin main && git push origin v0.3.1`
-4. GitHub Actions automatically publishes to npm when a tag starting with `v` is pushed
+### Branch Structure
+
+**Long-lived branches:**
+- `main` - Production-ready code, only updated via release merges
+- `develop` - Default branch for daily development, integration branch
+
+**Short-lived branches:**
+- `feature/*` - Feature development (created from `develop`)
+- `release/v*` - Release preparation (created from `develop`)
+- `hotfix/v*` - Emergency production fixes (created from `main`)
+
+### Daily Development Workflow
+
+```bash
+# Create feature branch
+git checkout develop
+git pull
+git checkout -b feature/my-feature
+
+# Develop and commit changes
+# ...
+
+# Push and create PR targeting develop
+git push -u origin feature/my-feature
+# Create PR: feature/my-feature → develop
+```
+
+### Release Process
+
+```bash
+# 1. Determine version (semver):
+#    - Breaking changes → Major (v1.0.0)
+#    - New features → Minor (v0.5.0)
+#    - Bug fixes only → Patch (v0.4.1)
+
+# 2. Create release branch from develop
+git checkout develop
+git pull
+git checkout -b release/v0.5.0
+
+# 3. Bump version in package.json
+# Edit package.json: "version": "0.5.0"
+
+# 4. Commit and push
+git add package.json
+git commit -m "Bump version to 0.5.0"
+git push -u origin release/v0.5.0
+
+# 5. Create PR: release/v0.5.0 → main
+# Wait for CI checks to pass, then merge
+
+# 6. Create tag via GitHub UI (after PR merge):
+#    - Go to https://github.com/whatisboom/boom-ui/releases
+#    - Click "Create a new release"
+#    - Tag: v0.5.0
+#    - Target: main
+#    - Title: "v0.5.0"
+#    - Generate release notes
+#    - Publish release
+#    - GitHub Actions automatically publishes to npm
+
+# 7. Merge release branch back to develop
+git checkout develop
+git pull
+git merge release/v0.5.0
+git push
+
+# 8. Delete release branch
+git branch -d release/v0.5.0
+git push origin --delete release/v0.5.0
+```
+
+### Hotfix Process (Emergency Fixes)
+
+```bash
+# 1. Create hotfix from main
+git checkout main
+git pull
+git checkout -b hotfix/v0.4.1
+
+# 2. Fix bug and bump version
+# Edit package.json: "version": "0.4.1"
+git add .
+git commit -m "Fix critical bug and bump to v0.4.1"
+
+# 3. Create PR: hotfix/v0.4.1 → main
+# Merge after review
+
+# 4. Create tag via GitHub UI (v0.4.1)
+
+# 5. Merge hotfix to develop
+git checkout develop
+git pull
+git merge hotfix/v0.4.1
+git push
+
+# 6. Delete hotfix branch
+git branch -d hotfix/v0.4.1
+git push origin --delete hotfix/v0.4.1
+```
+
+### Publishing Details
+
+**Automated via GitHub Actions:**
+- Triggers when tag matching `v*` is created via GitHub UI
+- Runs pre-publish checks (typecheck, tests, build)
+- Publishes to npm with provenance (`--provenance` flag)
+- Uses npm OIDC for secure publishing
 
 **Pre-publish checks** (enforced by `prepublishOnly` hook):
 - Type checking passes (`npm run typecheck`)
 - All tests pass (`npm run test:ci`)
 - Build succeeds (`npm run build`)
-
-**Publishing workflow** (`.github/workflows/publish.yml`):
-- Triggers on tags matching `v*`
-- Uses npm OIDC with provenance (`--provenance` flag)
-- Publishes with public access
-- Runs on Node.js 24
 
 ## Important Notes
 
