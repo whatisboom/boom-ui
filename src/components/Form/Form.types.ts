@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 import { z } from 'zod';
-import { UseFormReturn, FieldValues, SubmitHandler } from 'react-hook-form';
+import { UseFormReturn, FieldValues, DefaultValues } from 'react-hook-form';
 
 /**
  * Form component props
  */
-export interface FormProps<TSchema extends z.ZodType> {
+export interface FormProps<TSchema extends z.ZodObject<z.ZodRawShape>> {
   /**
    * Zod validation schema
    */
@@ -14,12 +14,12 @@ export interface FormProps<TSchema extends z.ZodType> {
   /**
    * Submit handler - receives validated data
    */
-  onSubmit: SubmitHandler<z.infer<TSchema>>;
+  onSubmit: (data: z.output<TSchema>) => void | Promise<void>;
 
   /**
    * Default form values
    */
-  defaultValues?: Partial<z.infer<TSchema>>;
+  defaultValues?: DefaultValues<z.input<TSchema>>;
 
   /**
    * Validation mode

@@ -1,6 +1,6 @@
 import { forwardRef, FormEvent } from 'react';
 import { useForm, FieldValues, UseFormReturn } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { z } from 'zod';
 import { cn } from '@/utils/classnames';
 import { FormContext } from './FormContext';
@@ -8,7 +8,7 @@ import { FormProps } from './Form.types';
 import styles from './Form.module.css';
 
 // Generic component type helper - properly typed implementation
-function FormComponent<TSchema extends z.ZodType>(
+function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
   {
     schema,
     onSubmit,
@@ -21,10 +21,11 @@ function FormComponent<TSchema extends z.ZodType>(
   }: FormProps<TSchema>,
   ref: React.ForwardedRef<HTMLFormElement>
 ) {
-  type FormValues = z.infer<TSchema>;
+  type FormValues = z.output<TSchema>;
+  type FormInput = z.input<TSchema>;
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
+  const form = useForm<FormInput, unknown, FormValues>({
+    resolver: standardSchemaResolver(schema),
     defaultValues,
     mode,
   });
@@ -57,7 +58,7 @@ function FormComponent<TSchema extends z.ZodType>(
 }
 
 // Cast to support generics with forwardRef
-const FormWithRef = forwardRef(FormComponent) as <TSchema extends z.ZodType>(
+const FormWithRef = forwardRef(FormComponent) as <TSchema extends z.ZodObject<z.ZodRawShape>>(
   props: FormProps<TSchema> & { ref?: React.ForwardedRef<HTMLFormElement> }
 ) => React.ReactElement;
 
