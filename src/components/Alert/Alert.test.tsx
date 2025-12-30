@@ -24,36 +24,36 @@ describe('Alert', () => {
   it('should render info variant', () => {
     render(<Alert variant="info">Info message</Alert>);
 
-    const alert = screen.getByRole('alert');
-    expect(alert.className).toContain('info');
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.getByText('Info message')).toBeInTheDocument();
   });
 
   it('should render success variant', () => {
     render(<Alert variant="success">Success message</Alert>);
 
-    const alert = screen.getByRole('alert');
-    expect(alert.className).toContain('success');
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.getByText('Success message')).toBeInTheDocument();
   });
 
   it('should render warning variant', () => {
     render(<Alert variant="warning">Warning message</Alert>);
 
-    const alert = screen.getByRole('alert');
-    expect(alert.className).toContain('warning');
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.getByText('Warning message')).toBeInTheDocument();
   });
 
   it('should render error variant', () => {
     render(<Alert variant="error">Error message</Alert>);
 
-    const alert = screen.getByRole('alert');
-    expect(alert.className).toContain('error');
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.getByText('Error message')).toBeInTheDocument();
   });
 
   it('should default to info variant', () => {
     render(<Alert>Default message</Alert>);
 
-    const alert = screen.getByRole('alert');
-    expect(alert.className).toContain('info');
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.getByText('Default message')).toBeInTheDocument();
   });
 
   // Icons

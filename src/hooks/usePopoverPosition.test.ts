@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { renderHook } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { usePopoverPosition } from './usePopoverPosition';
 
 describe('usePopoverPosition', () => {
@@ -20,25 +20,29 @@ describe('usePopoverPosition', () => {
     });
   });
 
-  it('should position popover below anchor', () => {
+  it('should position popover below anchor', async () => {
     const { result } = renderHook(() =>
-      usePopoverPosition({ current: popover }, { current: anchor }, 'bottom', 8)
+      usePopoverPosition({ current: popover }, { current: anchor }, 'bottom', 8, true)
     );
 
-    expect(result.current).toEqual({
-      top: 128, // 100 + 20 + 8
-      left: 75, // 100 + 50 - 75 (centered)
+    await waitFor(() => {
+      expect(result.current).toEqual({
+        top: 128, // 100 + 20 + 8
+        left: 75, // 100 + 50 - 75 (centered)
+      });
     });
   });
 
-  it('should position popover above anchor', () => {
+  it('should position popover above anchor', async () => {
     const { result } = renderHook(() =>
-      usePopoverPosition({ current: popover }, { current: anchor }, 'top', 8)
+      usePopoverPosition({ current: popover }, { current: anchor }, 'top', 8, true)
     );
 
-    expect(result.current).toEqual({
-      top: -8, // 100 - 100 - 8
-      left: 75,
+    await waitFor(() => {
+      expect(result.current).toEqual({
+        top: -8, // 100 - 100 - 8
+        left: 75,
+      });
     });
   });
 });

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from './Button';
 
 const meta = {
-  title: 'Components/Inputs/Button',
+  title: 'Forms & Validation/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {

@@ -59,17 +59,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     return (
       <div className={wrapperClassNames}>
         <label className={labelClassNames}>
-          {labelPosition === 'left' && label && (
-            <span className={styles.labelText}>
-              {label}
-              {required && (
-                <span className={styles.required} aria-label="required">
-                  *
-                </span>
-              )}
-            </span>
-          )}
-
           <input
             ref={ref}
             type="checkbox"
@@ -92,7 +81,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             <span className={thumbClassNames} />
           </span>
 
-          {labelPosition === 'right' && label && (
+          {label && (
             <span className={styles.labelText}>
               {label}
               {required && (

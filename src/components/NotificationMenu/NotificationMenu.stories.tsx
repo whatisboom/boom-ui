@@ -7,7 +7,7 @@ import {
 import { Notification } from './NotificationMenu.types';
 
 const meta = {
-  title: 'Components/Navigation/NotificationMenu',
+  title: 'Navigation & Menus/Notification Menu',
   component: NotificationMenu,
   parameters: {
     layout: 'centered',

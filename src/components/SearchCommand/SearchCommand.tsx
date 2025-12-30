@@ -29,7 +29,11 @@ export function SearchCommand({
     if (debouncedQuery) {
       onSearch(debouncedQuery);
     }
-  }, [debouncedQuery, onSearch]);
+    // Note: onSearch is intentionally omitted from deps to prevent infinite loops.
+    // As a library component, we cannot require consumers to wrap onSearch in useCallback.
+    // The stale closure risk is acceptable vs. breaking all consumers with render loops.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedQuery]);
 
   const displayResults = query ? results : recentSearches;
 

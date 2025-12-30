@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SearchCommand } from './SearchCommand';
 import { SearchResult } from './SearchCommand.types';
 import { Button } from '../Button';
 
 const meta: Meta<typeof SearchCommand> = {
-  title: 'Components/Navigation/SearchCommand',
+  title: 'Navigation & Menus/Search Command',
   component: SearchCommand,
   tags: ['autodocs'],
 };
@@ -171,7 +171,7 @@ export const WithLoading: Story = {
     const [results, setResults] = useState<SearchResult[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSearch = (query: string) => {
+    const handleSearch = useCallback((query: string) => {
       setIsLoading(true);
       // Simulate API delay
       setTimeout(() => {
@@ -183,7 +183,7 @@ export const WithLoading: Story = {
         setResults(filtered);
         setIsLoading(false);
       }, 1000);
-    };
+    }, []); // Empty deps - sampleResults is a const, setResults/setIsLoading are stable
 
     return (
       <>

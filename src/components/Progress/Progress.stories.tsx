@@ -4,7 +4,7 @@ import { Progress } from './Progress';
 import { Stack } from '../Stack';
 
 const meta: Meta<typeof Progress> = {
-  title: 'Components/Feedback/Progress',
+  title: 'Feedback & Alerts/Progress',
   component: Progress,
   tags: ['autodocs'],
   argTypes: {

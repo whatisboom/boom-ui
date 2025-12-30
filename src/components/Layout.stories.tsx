@@ -3,7 +3,7 @@ import { Stack } from './Stack';
 import { Box } from './Box';
 
 const meta = {
-  title: 'Components/Layout',
+  title: 'Getting Started/Layout Basics',
   component: Stack,
   tags: ['autodocs'],
 } satisfies Meta<typeof Stack>;

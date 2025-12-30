@@ -5,14 +5,13 @@ import { Button } from '../../Button';
 import { Typography } from '../../Typography';
 
 const meta: Meta<typeof Portal> = {
-  title: 'Primitives/Portal',
+  title: 'Overlays & Dialogs/Portal',
   component: Portal,
   tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
-        component:
-          'Portal renders children into a different part of the DOM tree, outside the parent component hierarchy. Useful for modals, tooltips, and other overlays that need to break out of overflow/z-index constraints.',
+        component: '⚠️ Low-level primitive component. Most developers should use Modal, Drawer, or Popover instead.',
       },
     },
   },

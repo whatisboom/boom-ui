@@ -53,17 +53,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <div className={wrapperClassNames}>
         <label className={labelClassNames}>
-          {labelPosition === 'left' && label && (
-            <span className={styles.labelText}>
-              {label}
-              {required && (
-                <span className={styles.required} aria-label="required">
-                  *
-                </span>
-              )}
-            </span>
-          )}
-
           <input
             ref={ref}
             type="checkbox"
@@ -102,7 +91,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             )}
           </span>
 
-          {labelPosition === 'right' && label && (
+          {label && (
             <span className={styles.labelText}>
               {label}
               {required && (

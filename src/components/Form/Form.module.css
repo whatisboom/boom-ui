@@ -1,0 +1,102 @@
+/* Form container */
+.form {
+  width: 100%;
+}
+
+/* Field spacing */
+.fieldGroup {
+  margin-bottom: var(--boom-spacing-4);
+}
+
+.fieldGroup:last-child {
+  margin-bottom: 0;
+}
+
+/* Form message */
+.formMessage {
+  padding: var(--boom-spacing-3) var(--boom-spacing-4);
+  border-radius: var(--boom-border-radius-md);
+  margin-bottom: var(--boom-spacing-4);
+  font-size: var(--boom-font-size-sm);
+}
+
+.formMessageSuccess {
+  background-color: var(--boom-theme-success-bg);
+  color: var(--boom-theme-success-text);
+  border: 1px solid var(--boom-theme-success-border);
+}
+
+.formMessageError {
+  background-color: var(--boom-theme-error-bg);
+  color: var(--boom-theme-error-text);
+  border: 1px solid var(--boom-theme-error-border);
+}
+
+.formMessageWarning {
+  background-color: var(--boom-theme-warning-bg);
+  color: var(--boom-theme-warning-text);
+  border: 1px solid var(--boom-theme-warning-border);
+}
+
+.formMessageInfo {
+  background-color: var(--boom-theme-info-bg);
+  color: var(--boom-theme-info-text);
+  border: 1px solid var(--boom-theme-info-border);
+}
+
+/* Form actions */
+.formActions {
+  display: flex;
+  gap: var(--boom-spacing-3);
+  margin-top: var(--boom-spacing-6);
+}
+
+.formActionsRight {
+  justify-content: flex-end;
+}
+
+.formActionsLeft {
+  justify-content: flex-start;
+}
+
+.formActionsCenter {
+  justify-content: center;
+}
+
+.formActionsSpaceBetween {
+  justify-content: space-between;
+}
+
+/* Stepper */
+.stepper {
+  margin-bottom: var(--boom-spacing-6);
+}
+
+.stepperProgress {
+  display: flex;
+  gap: var(--boom-spacing-2);
+  margin-bottom: var(--boom-spacing-4);
+}
+
+.step {
+  flex: 1;
+  height: 4px;
+  background-color: var(--boom-theme-bg-tertiary);
+  border-radius: var(--boom-border-radius-sm);
+  transition: background-color var(--boom-transition-fast);
+}
+
+.stepActive {
+  background-color: var(--boom-theme-primary);
+}
+
+.stepCompleted {
+  background-color: var(--boom-theme-success-bg);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .step {
+    transition: none;
+  }
+}

@@ -5,7 +5,7 @@ import { Button } from '../../Button';
 import { Typography } from '../../Typography';
 
 const meta: Meta<typeof Drawer> = {
-  title: 'Primitives/Drawer',
+  title: 'Overlays & Dialogs/Drawer',
   component: Drawer,
   tags: ['autodocs'],
   argTypes: {
