@@ -207,6 +207,107 @@ This project uses **git-flow** for branch management and releases.
 - `release/v*` - Release preparation (created from `develop`)
 - `hotfix/v*` - Emergency production fixes (created from `main`)
 
+### Branch Management Rules
+
+**NEVER reuse git branches.** Once a branch has been merged to `develop` or `main`, create a new branch for any additional work.
+
+**Why:** Each branch should represent a single, focused unit of work with a clear, descriptive name and commit history. Reusing branches:
+- Creates confusing commit history mixing unrelated changes
+- Makes code review difficult (reviewers can't distinguish old vs. new changes)
+- Complicates cherry-picking or reverting specific features
+- Violates the principle that branches are cheap and disposable
+
+**Instead:** Create a new branch with a more accurate description:
+```bash
+# Wrong - reusing old branch
+git checkout old-feature-branch
+# ... add more commits ...
+
+# Correct - create new branch for new work
+git checkout develop
+git pull
+git checkout -b feature/descriptive-name-for-new-work
+# ... implement new changes ...
+```
+
+Git branches are free. Always create a new one for new work.
+
+### Force Push Guidelines
+
+**NEVER use `git push --force` or `git push -f` unless absolutely necessary.** Force pushing is dangerous and should be avoided in nearly all cases.
+
+**Why force push is dangerous:**
+- **Overwrites remote history** - Destroys commits that others may have based work on
+- **Breaks collaborators' branches** - Anyone who pulled the branch will have divergent history
+- **Loses work permanently** - Force-pushed-over commits can be difficult or impossible to recover
+- **Breaks CI/CD pipelines** - Automated systems may reference commit SHAs that no longer exist
+- **Violates git-flow principles** - Proper workflow should never require rewriting shared history
+
+**When force push is NEVER acceptable:**
+- On `main` or `develop` branches (should be protected on GitHub)
+- On any branch that has an open pull request with reviews/comments
+- On any branch where others have based their work
+- To "fix" a merge conflict (use proper merge resolution instead)
+- To remove a commit (use `git revert` instead)
+- To clean up commit messages on a shared branch (messages are permanent)
+
+**The ONLY acceptable use cases for force push:**
+1. **Local history rewrite on unshared feature branch** - You're the only one who has ever pulled this branch, and you need to rebase or squash commits before creating a PR
+   ```bash
+   # Verify nobody else has this branch
+   git checkout feature/my-branch
+   git rebase -i develop
+   # Only force push if this branch has never been shared
+   git push --force-with-lease origin feature/my-branch
+   ```
+
+2. **Recovering from accidental push of sensitive data** - Immediately after accidentally pushing secrets/credentials (but notify all team members)
+   ```bash
+   # Remove sensitive file from history
+   git filter-branch --force --index-filter \
+     'git rm --cached --ignore-unmatch path/to/sensitive/file' HEAD
+   # Force push immediately and notify team
+   git push --force-with-lease
+   # Then rotate the exposed credentials
+   ```
+
+**Always use `--force-with-lease` instead of `--force`:**
+- `git push --force-with-lease` is safer - it fails if someone else pushed to the branch since your last fetch
+- `git push --force` blindly overwrites, even if you're destroying someone else's work
+
+**Safe alternatives to force push:**
+
+- **Instead of rebasing shared branches** - Use merge commits:
+  ```bash
+  # Wrong
+  git rebase develop
+  git push --force
+
+  # Correct
+  git merge develop
+  git push
+  ```
+
+- **Instead of fixing a bad commit** - Use `git revert`:
+  ```bash
+  # Wrong
+  git reset --hard HEAD~1
+  git push --force
+
+  # Correct
+  git revert HEAD
+  git push
+  ```
+
+- **Instead of cleaning up history** - Accept that commits are permanent, or squash during PR merge (GitHub does this automatically if configured)
+
+**If you think you need to force push, STOP and ask yourself:**
+1. Has anyone else ever pulled this branch?
+2. Is there a safer way to achieve the same result?
+3. Am I about to destroy someone's work?
+
+If you answer "yes" to #1 or #3, or "unsure" to #2, **DO NOT force push.**
+
 ### Daily Development Workflow
 
 ```bash
@@ -320,3 +421,9 @@ When a release or hotfix branch is merged to `main`, the workflow automatically:
 - Make frequent small commits between working steps
 - Always test changes before committing
 - Check official documentation before assumptions (CRITICAL per user preferences)
+- **Use standard tools instead of manual file manipulation** - Always prefer using established CLI tools and commands over manually parsing or editing configuration files:
+  - Use `npm version [major|minor|patch]` to bump versions, not manual package.json edits
+  - Use `jq` for JSON manipulation instead of regex/sed on JSON files
+  - Use package manager commands (`npm install`, `npm uninstall`) instead of editing package.json dependencies
+  - Use git commands for repository information instead of parsing `.git/` files
+  - Standard tools handle edge cases, validation, and formatting that manual edits miss
