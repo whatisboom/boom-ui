@@ -308,10 +308,41 @@ Git branches are free. Always create a new one for new work.
 
 If you answer "yes" to #1 or #3, or "unsure" to #2, **DO NOT force push.**
 
+### Working with Git Worktrees
+
+This project uses git worktrees (`.worktrees/` directory) for isolated development environments.
+
+**CRITICAL: Always update branches before creating new worktrees:**
+
+```bash
+# WRONG - creating worktree without updating
+git worktree add .worktrees/my-feature -b feature/my-feature
+
+# CORRECT - update first, then create worktree
+git checkout develop
+git pull origin develop
+git worktree add .worktrees/my-feature -b feature/my-feature
+cd .worktrees/my-feature
+npm install
+```
+
+**Why this matters:**
+- Ensures your new branch starts from the latest code
+- Prevents merge conflicts from working off stale code
+- Avoids duplicating work that's already been merged
+- Ensures all team changes are incorporated from the start
+
+**Worktree best practices:**
+- Always pull latest `develop` before creating feature branch worktrees
+- Always pull latest `main` before creating hotfix branch worktrees
+- Run `npm install` in new worktrees to install dependencies
+- Delete worktrees when done: `git worktree remove .worktrees/my-feature`
+- The `.worktrees/` directory is in `.gitignore` and should never be committed
+
 ### Daily Development Workflow
 
 ```bash
-# Create feature branch
+# Create feature branch (without worktrees)
 git checkout develop
 git pull
 git checkout -b feature/my-feature
