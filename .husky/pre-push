@@ -1,0 +1,24 @@
+#!/bin/sh
+
+echo "🔍 Running pre-push checks..."
+echo ""
+
+# Exit on first failure
+set -e
+
+echo "📝 Type checking..."
+npm run typecheck
+echo "✅ Type check passed"
+echo ""
+
+echo "🎨 Linting (strict mode)..."
+npm run lint
+echo "✅ Lint passed (no warnings)"
+echo ""
+
+echo "🧪 Running tests (strict mode)..."
+npm run test:ci
+echo "✅ Tests passed (no warnings)"
+echo ""
+
+echo "✅ All pre-push checks passed!"
