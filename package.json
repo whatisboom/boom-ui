@@ -29,7 +29,7 @@
     "build": "tsc && vite build",
     "build:mf": "vite build --config vite.mf.config.ts",
     "test": "vitest",
-    "test:ci": "./scripts/run-tests-isolated.sh",
+    "test:ci": "./scripts/test-strict.sh",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "typecheck": "tsc --noEmit",
