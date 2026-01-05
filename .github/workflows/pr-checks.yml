@@ -57,6 +57,8 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
       - run: npm run test:ci
+      - name: Generate coverage report
+        run: npm run test:coverage
       - name: Upload coverage reports
         uses: actions/upload-artifact@v4
         if: always()
