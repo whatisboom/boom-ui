@@ -2,7 +2,7 @@
 set -e
 
 # Create temp file and ensure cleanup on exit
-output_file=$(mktemp /tmp/test-output.XXXXXX)
+output_file=$(mktemp)
 trap 'rm -f "$output_file"' EXIT ERR INT TERM
 
 exit_code=0
