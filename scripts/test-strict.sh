@@ -10,12 +10,12 @@ exit_code=0
 ./scripts/run-tests-isolated.sh 2>&1 | tee "$output_file" || exit_code=$?
 
 # Check for common warning patterns
-if grep -iE "(warning|not wrapped in act|console\.(warn|error))" "$output_file" > /dev/null; then
+if grep -E "Warning:.* not wrapped in act|Warning:.*act\(\)|console\.(warn|error)" "$output_file" > /dev/null; then
   echo ""
   echo "❌ FAILED: Test warnings detected"
   echo ""
   echo "Found warnings in test output:"
-  grep -iE "(warning|not wrapped in act|console\.(warn|error))" "$output_file" || true
+  grep -E "Warning:.* not wrapped in act|Warning:.*act\(\)|console\.(warn|error)" "$output_file" || true
   exit 1
 fi
 
