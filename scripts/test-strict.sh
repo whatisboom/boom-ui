@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 
-# Run tests and capture both stdout and stderr
-output_file=$(mktemp)
+# Create temp file and ensure cleanup on exit
+output_file=$(mktemp /tmp/test-output.XXXXXX)
+trap 'rm -f "$output_file"' EXIT ERR INT TERM
+
 exit_code=0
 
 ./scripts/run-tests-isolated.sh 2>&1 | tee "$output_file" || exit_code=$?
@@ -14,11 +16,8 @@ if grep -iE "(warning|not wrapped in act|console\.(warn|error))" "$output_file" 
   echo ""
   echo "Found warnings in test output:"
   grep -iE "(warning|not wrapped in act|console\.(warn|error))" "$output_file" || true
-  rm "$output_file"
   exit 1
 fi
-
-rm "$output_file"
 
 if [ $exit_code -ne 0 ]; then
   echo "❌ FAILED: Tests failed"

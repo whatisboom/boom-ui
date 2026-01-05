@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 
-# Capture build output
-output_file=$(mktemp)
+# Create temp file and ensure cleanup on exit
+output_file=$(mktemp /tmp/build-output.XXXXXX)
+trap 'rm -f "$output_file"' EXIT ERR INT TERM
+
 exit_code=0
 
 npm run build:base 2>&1 | tee "$output_file" || exit_code=$?
@@ -13,11 +15,8 @@ if grep -iE "(warning TS|⚠)" "$output_file" > /dev/null; then
   echo "❌ FAILED: Build warnings detected"
   echo ""
   grep -iE "(warning TS|⚠)" "$output_file" || true
-  rm "$output_file"
   exit 1
 fi
-
-rm "$output_file"
 
 if [ $exit_code -ne 0 ]; then
   echo "❌ FAILED: Build failed"
