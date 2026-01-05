@@ -27,6 +27,7 @@
     "prepare": "husky",
     "dev": "vite build --watch",
     "dev:mf": "vite --config vite.mf.config.ts",
+    "build:base": "tsc && vite build",
     "build": "./scripts/build-strict.sh",
     "build:mf": "vite build --config vite.mf.config.ts",
     "test": "vitest",

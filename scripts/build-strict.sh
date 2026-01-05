@@ -5,7 +5,7 @@ set -e
 output_file=$(mktemp)
 exit_code=0
 
-npm run typecheck && (tsc && vite build) 2>&1 | tee "$output_file" || exit_code=$?
+npm run build:base 2>&1 | tee "$output_file" || exit_code=$?
 
 # Check for TypeScript warnings
 if grep -iE "(warning TS|⚠)" "$output_file" > /dev/null; then
