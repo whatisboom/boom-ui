@@ -24,7 +24,7 @@
     "*.css"
   ],
   "scripts": {
-    "prepare": "husky",
+    "prepare": "node -e \"if (process.env.CI !== 'true') require('child_process').execSync('husky')\"",
     "dev": "vite build --watch",
     "dev:mf": "vite --config vite.mf.config.ts",
     "build:base": "tsc && vite build",
