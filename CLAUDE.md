@@ -8,6 +8,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
+**Note:** All commands run in strict mode - warnings will cause failures.
+
 ### Essential Commands
 ```bash
 # Development (watch mode - rebuilds on changes)
@@ -118,6 +120,27 @@ ComponentName/
 - **Testing Library**: Use @testing-library/react (not enzyme or others)
 - **User interactions**: Use @testing-library/user-event for simulating events
 - **Setup**: Tests automatically include vitest-axe matchers and jsdom environment
+
+### Warnings Policy
+**Zero tolerance for warnings.** All commands treat warnings as errors:
+
+- **Lint**: `npm run lint` fails on any ESLint warning (`--max-warnings 0`)
+- **Tests**: `npm run test:ci` fails on act() warnings, console.warn, console.error
+- **Build**: `npm run build` fails on TypeScript warnings
+- **Prepush Hook**: Automatically runs all checks before allowing push
+- **CI**: All PR checks enforce strict mode (warnings = failure)
+
+**Emergency escape hatch:** Use `git push --no-verify` ONLY when:
+- You need to push a work-in-progress to collaborate with others
+- CI is down and you need to deploy a hotfix
+- You're pushing to a personal feature branch (not develop/main)
+
+**NEVER use --no-verify when:**
+- Pushing to `develop` or `main` branches
+- Creating a pull request
+- The warnings are "just small issues I'll fix later"
+
+**Why:** Warnings are deferred errors. Allowing them leads to warning fatigue and masks real issues.
 
 ### TypeScript Configuration
 - **Strict mode**: enabled
