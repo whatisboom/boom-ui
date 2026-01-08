@@ -130,6 +130,16 @@ ComponentName/
 - **Prepush Hook**: Automatically runs all checks before allowing push
 - **CI**: All PR checks enforce strict mode (warnings = failure)
 
+**Emergency escape hatch:** Use `git push --no-verify` ONLY when:
+- You need to push a work-in-progress to collaborate with others
+- CI is down and you need to deploy a hotfix
+- You're pushing to a personal feature branch (not develop/main)
+
+**NEVER use --no-verify when:**
+- Pushing to `develop` or `main` branches
+- Creating a pull request
+- The warnings are "just small issues I'll fix later"
+
 **Why:** Warnings are deferred errors. Allowing them leads to warning fatigue and masks real issues.
 
 ### TypeScript Configuration
