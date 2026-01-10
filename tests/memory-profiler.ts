@@ -1,4 +1,7 @@
 // tests/memory-profiler.ts
+import v8 from 'v8';
+import path from 'path';
+import fs from 'fs';
 import type {
   MemorySnapshot,
   MemoryDelta,
@@ -100,6 +103,25 @@ export class MemoryProfiler {
     const mb = (snapshot.heapUsed / 1024 / 1024).toFixed(2);
     console.log(`[MEMORY ${label}] Heap: ${mb}MB`);
   }
+}
+
+export function captureHeapSnapshot(label: string): string | null {
+  if (process.env.HEAP_SNAPSHOT !== 'true') {
+    return null;
+  }
+
+  const snapshotDir = path.join(process.cwd(), '.heap-snapshots');
+  if (!fs.existsSync(snapshotDir)) {
+    fs.mkdirSync(snapshotDir, { recursive: true });
+  }
+
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const filename = path.join(snapshotDir, `${label}-${timestamp}.heapsnapshot`);
+
+  const snapshot = v8.writeHeapSnapshot(filename);
+  console.log(`Heap snapshot written to ${snapshot}`);
+
+  return snapshot;
 }
 
 // Singleton instance
