@@ -207,6 +207,94 @@ Use these shared types for consistency. Components can extend or add their own s
 - ARIA attributes when semantic HTML insufficient
 - Keyboard navigation support required for all interactive components
 
+### Memory Cleanup Patterns
+
+**CRITICAL: All components must properly clean up resources to prevent memory leaks.**
+
+**Event Listeners:**
+```typescript
+useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    // handle event
+  };
+
+  window.addEventListener('keydown', handleKeyDown);
+
+  return () => {
+    window.removeEventListener('keydown', handleKeyDown);
+  };
+}, [dependencies]);
+```
+
+**Timers:**
+```typescript
+useEffect(() => {
+  const timer = setTimeout(() => {
+    // do something
+  }, delay);
+
+  return () => {
+    clearTimeout(timer);
+  };
+}, [dependencies]);
+```
+
+**Intervals:**
+```typescript
+useEffect(() => {
+  const interval = setInterval(() => {
+    // do something
+  }, delay);
+
+  return () => {
+    clearInterval(interval);
+  };
+}, [dependencies]);
+```
+
+**Animation Frames:**
+```typescript
+useEffect(() => {
+  let rafId: number;
+
+  const animate = () => {
+    // animation logic
+    rafId = requestAnimationFrame(animate);
+  };
+
+  rafId = requestAnimationFrame(animate);
+
+  return () => {
+    cancelAnimationFrame(rafId);
+  };
+}, [dependencies]);
+```
+
+**Scroll Lock (use useScrollLock hook):**
+```typescript
+import { useScrollLock } from '@/hooks/useScrollLock';
+
+function MyComponent({ isOpen }: Props) {
+  useScrollLock(isOpen); // Automatically cleans up
+
+  return <div>...</div>;
+}
+```
+
+**Memory Profiling:**
+
+Run tests with memory profiling to detect leaks:
+
+```bash
+# Profile specific test file
+MEMORY_PROFILE=true npm test -- src/components/MyComponent/MyComponent.test.tsx
+
+# Capture heap snapshots for detailed analysis
+MEMORY_PROFILE=true HEAP_SNAPSHOT=true npm test -- src/components/MyComponent/MyComponent.test.tsx
+```
+
+Heap snapshots are saved to `.heap-snapshots/` (gitignored).
+
 ## Storybook Setup
 
 - **Framework**: React + Vite
