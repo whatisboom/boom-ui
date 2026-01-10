@@ -20,6 +20,7 @@ import {
   cleanupFramerMotion
 } from './dom-cleanup';
 import { logMemoryUsage, captureBaseline } from './memory-profiler';
+import { runRegisteredCleanup } from './test-utils';
 
 // Mock HTMLCanvasElement.getContext for axe-core color contrast checks
 HTMLCanvasElement.prototype.getContext = vi.fn(() => ({
@@ -91,6 +92,8 @@ afterEach(() => {
 
   try {
     // Portal/DOM cleanup
+    // Run any registered per-test cleanup
+    runRegisteredCleanup();
     cleanupPortals();
     cleanupFramerMotion();
     resetDocumentBody();
