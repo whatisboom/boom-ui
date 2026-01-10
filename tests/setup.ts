@@ -1,7 +1,25 @@
 import '@testing-library/jest-dom';
-import { expect, afterEach, vi } from 'vitest';
+import { expect, afterEach, beforeEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import * as matchers from 'vitest-axe/matchers';
+import {
+  installTimerTracking,
+  clearAllTrackedTimers,
+  getActiveTimerCount,
+  logLeakedTimers
+} from './timer-tracker';
+import {
+  installListenerTracking,
+  removeAllTrackedListeners,
+  getActiveListenerCount,
+  logLeakedListeners
+} from './listener-tracker';
+import {
+  cleanupPortals,
+  resetDocumentBody,
+  cleanupFramerMotion
+} from './dom-cleanup';
+import { logMemoryUsage, captureBaseline } from './memory-profiler';
 
 // Mock HTMLCanvasElement.getContext for axe-core color contrast checks
 HTMLCanvasElement.prototype.getContext = vi.fn(() => ({
@@ -26,11 +44,77 @@ window.getComputedStyle = vi.fn((element: Element, pseudoElt?: string | null) =>
 
 expect.extend(matchers);
 
-// Cleanup after each test
+// Install tracking
+installTimerTracking();
+installListenerTracking();
+
+// Capture baseline before tests start
+captureBaseline();
+
+// Memory profiling before each test
+beforeEach(() => {
+  logMemoryUsage('BEFORE_TEST');
+});
+
+// Enhanced cleanup after each test
 afterEach(() => {
-  cleanup();
-  // Clear mock call history to prevent memory accumulation
-  vi.clearAllMocks();
+  const errors: Error[] = [];
+
+  try {
+    // Timer cleanup
+    vi.clearAllTimers();
+    clearAllTrackedTimers();
+
+    if (process.env.MEMORY_PROFILE === 'true') {
+      const activeTimers = getActiveTimerCount();
+      if (activeTimers > 0) {
+        logLeakedTimers();
+      }
+    }
+  } catch (e) {
+    errors.push(new Error(`Timer cleanup failed: ${e}`));
+  }
+
+  try {
+    // Event listener cleanup
+    removeAllTrackedListeners();
+
+    if (process.env.MEMORY_PROFILE === 'true') {
+      const activeListeners = getActiveListenerCount();
+      if (activeListeners > 0) {
+        logLeakedListeners();
+      }
+    }
+  } catch (e) {
+    errors.push(new Error(`Event listener cleanup failed: ${e}`));
+  }
+
+  try {
+    // Portal/DOM cleanup
+    cleanupPortals();
+    cleanupFramerMotion();
+    resetDocumentBody();
+  } catch (e) {
+    errors.push(new Error(`DOM cleanup failed: ${e}`));
+  }
+
+  try {
+    // React cleanup
+    cleanup();
+  } catch (e) {
+    errors.push(new Error(`React cleanup failed: ${e}`));
+  } finally {
+    // Always restore mocks, even if cleanup failed
+    vi.clearAllMocks();
+    vi.restoreAllMocks();
+  }
+
+  if (errors.length > 0) {
+    console.warn('Cleanup errors detected:', errors);
+  }
+
+  // Log memory usage after cleanup
+  logMemoryUsage('AFTER_TEST');
 });
 
 // Mock matchMedia for prefers-reduced-motion
