@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '../../../tests/test-utils';
 import { SearchCommand } from './SearchCommand';
 import { SearchResult } from './SearchCommand.types';
 

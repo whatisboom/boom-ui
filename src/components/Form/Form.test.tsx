@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '../../../tests/test-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { z } from 'zod';

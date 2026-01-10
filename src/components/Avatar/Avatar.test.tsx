@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen, waitFor, act } from '@testing-library/react';
+import { render, screen, waitFor, act } from '../../../tests/test-utils';
 import { axe } from 'vitest-axe';
 import { Avatar } from './Avatar';
 
