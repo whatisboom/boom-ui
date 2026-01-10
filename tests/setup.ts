@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { expect, afterEach, beforeEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import * as matchers from 'vitest-axe/matchers';
-import { ReactNode, Fragment, createElement } from 'react';
+import React, { ReactNode, Fragment, createElement } from 'react';
 import {
   installTimerTracking,
   clearAllTrackedTimers,
@@ -29,7 +29,7 @@ vi.mock('framer-motion', async () => {
   const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
   return {
     ...actual,
-    AnimatePresence: ({ children, mode }: { children: ReactNode; mode?: string }) => {
+    AnimatePresence: ({ children }: { children: ReactNode }) => {
       // Render children directly without animation delays
       // This preserves conditional rendering (children present/absent) but skips transitions
       return createElement(Fragment, null, children);
