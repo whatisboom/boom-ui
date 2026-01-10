@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, act } from '../../../tests/test-utils';
+import { render, screen, fireEvent, act } from '../../../../tests/test-utils';
 import { createRef } from 'react';
 import { Popover } from './Popover';
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '../../../tests/test-utils';
+import { render } from '../../../../tests/test-utils';
 import { Portal } from './Portal';
 
 describe('Portal', () => {

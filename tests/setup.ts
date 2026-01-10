@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { expect, afterEach, beforeEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import * as matchers from 'vitest-axe/matchers';
+import { ReactNode, Fragment, createElement } from 'react';
 import {
   installTimerTracking,
   clearAllTrackedTimers,
@@ -21,6 +22,20 @@ import {
 } from './dom-cleanup';
 import { logMemoryUsage, captureBaseline } from './memory-profiler';
 import { runRegisteredCleanup } from './test-utils';
+
+// Mock framer-motion AnimatePresence to skip exit animations in tests
+// Keep the conditional rendering logic but skip animation delays
+vi.mock('framer-motion', async () => {
+  const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
+  return {
+    ...actual,
+    AnimatePresence: ({ children, mode }: { children: ReactNode; mode?: string }) => {
+      // Render children directly without animation delays
+      // This preserves conditional rendering (children present/absent) but skips transitions
+      return createElement(Fragment, null, children);
+    },
+  };
+});
 
 // Mock HTMLCanvasElement.getContext for axe-core color contrast checks
 HTMLCanvasElement.prototype.getContext = vi.fn(() => ({
@@ -120,11 +135,11 @@ afterEach(() => {
   logMemoryUsage('AFTER_TEST');
 });
 
-// Mock matchMedia for prefers-reduced-motion
+// Mock matchMedia - disable animations in tests by returning matches: true for prefers-reduced-motion
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: (query: string) => ({
-    matches: false,
+    matches: query.includes('prefers-reduced-motion'),
     media: query,
     onchange: null,
     addListener: () => {},
