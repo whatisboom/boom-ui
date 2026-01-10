@@ -18,5 +18,12 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'no-restricted-syntax': [
+      'warn',
+      {
+        selector: 'CallExpression[callee.property.name="addEventListener"]',
+        message: 'Ensure addEventListener has corresponding removeEventListener in useEffect cleanup'
+      }
+    ],
   },
 };
