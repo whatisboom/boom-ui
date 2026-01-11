@@ -8,6 +8,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
+**Note:** All commands run in strict mode - warnings will cause failures.
+
 ### Essential Commands
 ```bash
 # Development (watch mode - rebuilds on changes)
@@ -119,6 +121,27 @@ ComponentName/
 - **User interactions**: Use @testing-library/user-event for simulating events
 - **Setup**: Tests automatically include vitest-axe matchers and jsdom environment
 
+### Warnings Policy
+**Zero tolerance for warnings.** All commands treat warnings as errors:
+
+- **Lint**: `npm run lint` fails on any ESLint warning (`--max-warnings 0`)
+- **Tests**: `npm run test:ci` fails on act() warnings, console.warn, console.error
+- **Build**: `npm run build` fails on TypeScript warnings
+- **Prepush Hook**: Automatically runs all checks before allowing push
+- **CI**: All PR checks enforce strict mode (warnings = failure)
+
+**Emergency escape hatch:** Use `git push --no-verify` ONLY when:
+- You need to push a work-in-progress to collaborate with others
+- CI is down and you need to deploy a hotfix
+- You're pushing to a personal feature branch (not develop/main)
+
+**NEVER use --no-verify when:**
+- Pushing to `develop` or `main` branches
+- Creating a pull request
+- The warnings are "just small issues I'll fix later"
+
+**Why:** Warnings are deferred errors. Allowing them leads to warning fatigue and masks real issues.
+
 ### TypeScript Configuration
 - **Strict mode**: enabled
 - **Path alias**: `@/*` maps to `src/*`
@@ -184,6 +207,94 @@ Use these shared types for consistency. Components can extend or add their own s
 - ARIA attributes when semantic HTML insufficient
 - Keyboard navigation support required for all interactive components
 
+### Memory Cleanup Patterns
+
+**CRITICAL: All components must properly clean up resources to prevent memory leaks.**
+
+**Event Listeners:**
+```typescript
+useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    // handle event
+  };
+
+  window.addEventListener('keydown', handleKeyDown);
+
+  return () => {
+    window.removeEventListener('keydown', handleKeyDown);
+  };
+}, [dependencies]);
+```
+
+**Timers:**
+```typescript
+useEffect(() => {
+  const timer = setTimeout(() => {
+    // do something
+  }, delay);
+
+  return () => {
+    clearTimeout(timer);
+  };
+}, [dependencies]);
+```
+
+**Intervals:**
+```typescript
+useEffect(() => {
+  const interval = setInterval(() => {
+    // do something
+  }, delay);
+
+  return () => {
+    clearInterval(interval);
+  };
+}, [dependencies]);
+```
+
+**Animation Frames:**
+```typescript
+useEffect(() => {
+  let rafId: number;
+
+  const animate = () => {
+    // animation logic
+    rafId = requestAnimationFrame(animate);
+  };
+
+  rafId = requestAnimationFrame(animate);
+
+  return () => {
+    cancelAnimationFrame(rafId);
+  };
+}, [dependencies]);
+```
+
+**Scroll Lock (use useScrollLock hook):**
+```typescript
+import { useScrollLock } from '@/hooks/useScrollLock';
+
+function MyComponent({ isOpen }: Props) {
+  useScrollLock(isOpen); // Automatically cleans up
+
+  return <div>...</div>;
+}
+```
+
+**Memory Profiling:**
+
+Run tests with memory profiling to detect leaks:
+
+```bash
+# Profile specific test file
+MEMORY_PROFILE=true npm test -- src/components/MyComponent/MyComponent.test.tsx
+
+# Capture heap snapshots for detailed analysis
+MEMORY_PROFILE=true HEAP_SNAPSHOT=true npm test -- src/components/MyComponent/MyComponent.test.tsx
+```
+
+Heap snapshots are saved to `.heap-snapshots/` (gitignored).
+
 ## Storybook Setup
 
 - **Framework**: React + Vite
@@ -207,10 +318,142 @@ This project uses **git-flow** for branch management and releases.
 - `release/v*` - Release preparation (created from `develop`)
 - `hotfix/v*` - Emergency production fixes (created from `main`)
 
+### Branch Management Rules
+
+**NEVER reuse git branches.** Once a branch has been merged to `develop` or `main`, create a new branch for any additional work.
+
+**Why:** Each branch should represent a single, focused unit of work with a clear, descriptive name and commit history. Reusing branches:
+- Creates confusing commit history mixing unrelated changes
+- Makes code review difficult (reviewers can't distinguish old vs. new changes)
+- Complicates cherry-picking or reverting specific features
+- Violates the principle that branches are cheap and disposable
+
+**Instead:** Create a new branch with a more accurate description:
+```bash
+# Wrong - reusing old branch
+git checkout old-feature-branch
+# ... add more commits ...
+
+# Correct - create new branch for new work
+git checkout develop
+git pull
+git checkout -b feature/descriptive-name-for-new-work
+# ... implement new changes ...
+```
+
+Git branches are free. Always create a new one for new work.
+
+### Force Push Guidelines
+
+**NEVER use `git push --force` or `git push -f` unless absolutely necessary.** Force pushing is dangerous and should be avoided in nearly all cases.
+
+**Why force push is dangerous:**
+- **Overwrites remote history** - Destroys commits that others may have based work on
+- **Breaks collaborators' branches** - Anyone who pulled the branch will have divergent history
+- **Loses work permanently** - Force-pushed-over commits can be difficult or impossible to recover
+- **Breaks CI/CD pipelines** - Automated systems may reference commit SHAs that no longer exist
+- **Violates git-flow principles** - Proper workflow should never require rewriting shared history
+
+**When force push is NEVER acceptable:**
+- On `main` or `develop` branches (should be protected on GitHub)
+- On any branch that has an open pull request with reviews/comments
+- On any branch where others have based their work
+- To "fix" a merge conflict (use proper merge resolution instead)
+- To remove a commit (use `git revert` instead)
+- To clean up commit messages on a shared branch (messages are permanent)
+
+**The ONLY acceptable use cases for force push:**
+1. **Local history rewrite on unshared feature branch** - You're the only one who has ever pulled this branch, and you need to rebase or squash commits before creating a PR
+   ```bash
+   # Verify nobody else has this branch
+   git checkout feature/my-branch
+   git rebase -i develop
+   # Only force push if this branch has never been shared
+   git push --force-with-lease origin feature/my-branch
+   ```
+
+2. **Recovering from accidental push of sensitive data** - Immediately after accidentally pushing secrets/credentials (but notify all team members)
+   ```bash
+   # Remove sensitive file from history
+   git filter-branch --force --index-filter \
+     'git rm --cached --ignore-unmatch path/to/sensitive/file' HEAD
+   # Force push immediately and notify team
+   git push --force-with-lease
+   # Then rotate the exposed credentials
+   ```
+
+**Always use `--force-with-lease` instead of `--force`:**
+- `git push --force-with-lease` is safer - it fails if someone else pushed to the branch since your last fetch
+- `git push --force` blindly overwrites, even if you're destroying someone else's work
+
+**Safe alternatives to force push:**
+
+- **Instead of rebasing shared branches** - Use merge commits:
+  ```bash
+  # Wrong
+  git rebase develop
+  git push --force
+
+  # Correct
+  git merge develop
+  git push
+  ```
+
+- **Instead of fixing a bad commit** - Use `git revert`:
+  ```bash
+  # Wrong
+  git reset --hard HEAD~1
+  git push --force
+
+  # Correct
+  git revert HEAD
+  git push
+  ```
+
+- **Instead of cleaning up history** - Accept that commits are permanent, or squash during PR merge (GitHub does this automatically if configured)
+
+**If you think you need to force push, STOP and ask yourself:**
+1. Has anyone else ever pulled this branch?
+2. Is there a safer way to achieve the same result?
+3. Am I about to destroy someone's work?
+
+If you answer "yes" to #1 or #3, or "unsure" to #2, **DO NOT force push.**
+
+### Working with Git Worktrees
+
+This project uses git worktrees (`.worktrees/` directory) for isolated development environments.
+
+**CRITICAL: Always update branches before creating new worktrees:**
+
+```bash
+# WRONG - creating worktree without updating
+git worktree add .worktrees/my-feature -b feature/my-feature
+
+# CORRECT - update first, then create worktree
+git checkout develop
+git pull origin develop
+git worktree add .worktrees/my-feature -b feature/my-feature
+cd .worktrees/my-feature
+npm install
+```
+
+**Why this matters:**
+- Ensures your new branch starts from the latest code
+- Prevents merge conflicts from working off stale code
+- Avoids duplicating work that's already been merged
+- Ensures all team changes are incorporated from the start
+
+**Worktree best practices:**
+- Always pull latest `develop` before creating feature branch worktrees
+- Always pull latest `main` before creating hotfix branch worktrees
+- Run `npm install` in new worktrees to install dependencies
+- Delete worktrees when done: `git worktree remove .worktrees/my-feature`
+- The `.worktrees/` directory is in `.gitignore` and should never be committed
+
 ### Daily Development Workflow
 
 ```bash
-# Create feature branch
+# Create feature branch (without worktrees)
 git checkout develop
 git pull
 git checkout -b feature/my-feature
@@ -320,3 +563,9 @@ When a release or hotfix branch is merged to `main`, the workflow automatically:
 - Make frequent small commits between working steps
 - Always test changes before committing
 - Check official documentation before assumptions (CRITICAL per user preferences)
+- **Use standard tools instead of manual file manipulation** - Always prefer using established CLI tools and commands over manually parsing or editing configuration files:
+  - Use `npm version [major|minor|patch]` to bump versions, not manual package.json edits
+  - Use `jq` for JSON manipulation instead of regex/sed on JSON files
+  - Use package manager commands (`npm install`, `npm uninstall`) instead of editing package.json dependencies
+  - Use git commands for repository information instead of parsing `.git/` files
+  - Standard tools handle edge cases, validation, and formatting that manual edits miss

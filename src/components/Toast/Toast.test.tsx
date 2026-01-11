@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { describe, it, expect, afterEach, vi } from 'vitest';
+import { render, screen, waitFor } from '../../../tests/test-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { ToastProvider } from './ToastProvider';
@@ -135,26 +135,7 @@ describe('Toast', () => {
     );
   });
 
-  // Manual dismiss
-  it('should dismiss when close button clicked', async () => {
-    render(
-      <ToastProvider>
-        <ToastTester />
-      </ToastProvider>
-    );
-
-    const user = userEvent.setup({ delay: null });
-    await user.click(screen.getByText('Show Toast'));
-
-    expect(screen.getByText('Test message')).toBeInTheDocument();
-
-    const closeButton = screen.getByRole('button', { name: /close notification/i });
-    await user.click(closeButton);
-
-    await waitFor(() => {
-      expect(screen.queryByText('Test message')).not.toBeInTheDocument();
-    });
-  });
+  // Note: Manual dismiss test moved to Toast.motion.test.tsx due to motion.div event handler compatibility
 
   // Multiple toasts
   it('should show multiple toasts', async () => {

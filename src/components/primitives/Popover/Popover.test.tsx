@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '../../../../tests/test-utils';
 import { createRef } from 'react';
 import { Popover } from './Popover';
 
@@ -82,7 +82,9 @@ describe('Popover', () => {
     );
 
     // Wait for requestAnimationFrame to complete
-    await new Promise((resolve) => requestAnimationFrame(() => resolve(undefined)));
+    await act(async () => {
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(undefined)));
+    });
 
     // Test bottom placement
     let popover = screen.getByText('Content').parentElement;
@@ -96,7 +98,9 @@ describe('Popover', () => {
         <div>Content</div>
       </Popover>
     );
-    await new Promise((resolve) => requestAnimationFrame(() => resolve(undefined)));
+    await act(async () => {
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(undefined)));
+    });
     popover = screen.getByText('Content').parentElement;
     expect(popover?.style.top).not.toBe('');
     expect(popover?.style.left).not.toBe('');
@@ -107,7 +111,9 @@ describe('Popover', () => {
         <div>Content</div>
       </Popover>
     );
-    await new Promise((resolve) => requestAnimationFrame(() => resolve(undefined)));
+    await act(async () => {
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(undefined)));
+    });
     popover = screen.getByText('Content').parentElement;
     expect(popover?.style.top).not.toBe('');
     expect(popover?.style.left).not.toBe('');
@@ -118,7 +124,9 @@ describe('Popover', () => {
         <div>Content</div>
       </Popover>
     );
-    await new Promise((resolve) => requestAnimationFrame(() => resolve(undefined)));
+    await act(async () => {
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(undefined)));
+    });
     popover = screen.getByText('Content').parentElement;
     expect(popover?.style.top).not.toBe('');
     expect(popover?.style.left).not.toBe('');

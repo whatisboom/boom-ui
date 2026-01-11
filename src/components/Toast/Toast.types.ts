@@ -18,6 +18,12 @@ export interface Toast {
 }
 
 export interface ToastProps extends Toast {
+  /**
+   * Callback invoked when toast is dismissed (via close button or auto-dismiss).
+   *
+   * Note: This callback is automatically stabilized using useStableCallback,
+   * so you don't need to wrap it in useCallback in the parent component.
+   */
   onClose: () => void;
   position?: ToastPosition;
 }
