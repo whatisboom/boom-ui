@@ -24,8 +24,10 @@ jobs:
         with:
           node-version: '24'
 
+      # Pin npm to >=11.6.0 for OIDC provenance support
+      # See: https://github.blog/changelog/2023-04-19-npm-provenance-public-beta/
       - name: Pin npm version
-        run: npm install -g npm@11.6.0
+        run: npm install -g npm@^11.6.0
 
       - name: Check if version changed
         id: version-check
