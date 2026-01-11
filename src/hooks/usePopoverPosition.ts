@@ -46,7 +46,7 @@ export function usePopoverPosition(
       setPosition({ top, left });
     };
 
-    requestAnimationFrame(() => {
+    const rafId = requestAnimationFrame(() => {
       updatePosition();
     });
 
@@ -54,6 +54,7 @@ export function usePopoverPosition(
     window.addEventListener('resize', updatePosition);
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', updatePosition, true);
       window.removeEventListener('resize', updatePosition);
     };

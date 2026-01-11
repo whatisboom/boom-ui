@@ -121,13 +121,13 @@ export const Toast = ({
   const stableOnClose = useStableCallback(onClose);
 
   useEffect(() => {
-    if (duration) {
-      const timer = setTimeout(() => {
-        stableOnClose();
-      }, duration);
+    if (!duration) return;
 
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => {
+      stableOnClose();
+    }, duration);
+
+    return () => clearTimeout(timer);
   }, [duration, stableOnClose]);
 
   const slideDirection = getSlideDirection(position);
