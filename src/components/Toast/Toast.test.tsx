@@ -1,31 +1,3 @@
-import { vi } from 'vitest';
-import React, { Fragment, createElement, ReactNode } from 'react';
-
-// Mock motion components to render as plain elements
-vi.mock('framer-motion', async () => {
-  const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
-
-  // Create a proxy that intercepts motion.* and returns plain elements
-  const motionProxy = new Proxy({}, {
-    get: (_target, prop: string) => {
-      // Return a component that renders as the plain HTML element
-      return ({ children, ...props }: any) => {
-        const { initial, animate, exit, transition, variants, whileHover, whileTap, whileFocus, ...restProps } = props;
-        return createElement(prop, restProps, children);
-      };
-    }
-  });
-
-  return {
-    ...actual,
-    motion: motionProxy,
-    AnimatePresence: ({ children }: { children: ReactNode }) => {
-      // Render children directly without animation delays
-      return children ? createElement(Fragment, null, children) : null;
-    },
-  };
-});
-
 import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, waitFor } from '../../../tests/test-utils';
 import userEvent from '@testing-library/user-event';
@@ -163,26 +135,7 @@ describe('Toast', () => {
     );
   });
 
-  // Manual dismiss
-  it('should dismiss when close button clicked', async () => {
-    render(
-      <ToastProvider>
-        <ToastTester />
-      </ToastProvider>
-    );
-
-    const user = userEvent.setup({ delay: null });
-    await user.click(screen.getByText('Show Toast'));
-
-    expect(screen.getByText('Test message')).toBeInTheDocument();
-
-    const closeButton = screen.getByRole('button', { name: /close notification/i });
-    await user.click(closeButton);
-
-    await waitFor(() => {
-      expect(screen.queryByText('Test message')).not.toBeInTheDocument();
-    });
-  });
+  // Note: Manual dismiss test moved to Toast.motion.test.tsx due to motion.div event handler compatibility
 
   // Multiple toasts
   it('should show multiple toasts', async () => {

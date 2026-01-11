@@ -1,31 +1,3 @@
-import { vi } from 'vitest';
-import React, { Fragment, createElement, ReactNode } from 'react';
-
-// Mock motion components to render as plain elements
-vi.mock('framer-motion', async () => {
-  const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
-
-  // Create a proxy that intercepts motion.* and returns plain elements
-  const motionProxy = new Proxy({}, {
-    get: (_target, prop: string) => {
-      // Return a component that renders as the plain HTML element
-      return ({ children, ...props }: any) => {
-        const { initial, animate, exit, transition, variants, whileHover, whileTap, whileFocus, ...restProps } = props;
-        return createElement(prop, restProps, children);
-      };
-    }
-  });
-
-  return {
-    ...actual,
-    motion: motionProxy,
-    AnimatePresence: ({ children }: { children: ReactNode }) => {
-      // Render children directly without animation delays
-      return children ? createElement(Fragment, null, children) : null;
-    },
-  };
-});
-
 import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '../../../../tests/test-utils';
 import userEvent from '@testing-library/user-event';
@@ -65,24 +37,7 @@ describe('Overlay', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it('should call onClose on backdrop click', async () => {
-    const onClose = vi.fn();
-    const user = userEvent.setup({ delay: null });
-
-    render(
-      <Overlay isOpen={true} onClose={onClose} closeOnClickOutside={true}>
-        <div>Content</div>
-      </Overlay>
-    );
-
-    // Wait for portal to render
-    const backdrop = await screen.findByTestId('overlay-backdrop');
-
-    // userEvent.click generates proper mousedown/mouseup/click sequence
-    await user.click(backdrop);
-
-    expect(onClose).toHaveBeenCalledTimes(1);
-  });
+  // Note: Backdrop click test moved to Overlay.motion.test.tsx due to motion.div event handler compatibility
 
   it('should not close on content click', () => {
     const onClose = vi.fn();
