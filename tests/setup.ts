@@ -130,11 +130,12 @@ afterEach(async () => {
   try {
     // Reset motion component cache to prevent test isolation issues
     const framerMotion = await import('framer-motion');
-    if (typeof (framerMotion as any).__resetMotionCache__ === 'function') {
+    // Defensive checks: ensure module loaded and cache reset function exists
+    if (framerMotion && typeof (framerMotion as any).__resetMotionCache__ === 'function') {
       (framerMotion as any).__resetMotionCache__();
     }
   } catch (e) {
-    // Silently ignore - not all mocks expose this function
+    // Silently ignore - mock might not be available in all test contexts
   }
 
   try {
