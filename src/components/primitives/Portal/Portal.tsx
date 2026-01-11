@@ -1,4 +1,4 @@
-import { useEffect, useState, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 export interface PortalProps {
@@ -7,11 +7,8 @@ export interface PortalProps {
 }
 
 export function Portal({ children, container }: PortalProps) {
-  const [mountNode, setMountNode] = useState<Element | null>(null);
-
-  useEffect(() => {
-    setMountNode(container || document.body);
-  }, [container]);
+  // Compute mount node directly without state - React can handle this efficiently
+  const mountNode = container || (typeof document !== 'undefined' ? document.body : null);
 
   if (!mountNode) return null;
 

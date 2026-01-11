@@ -13,10 +13,6 @@ function getSystemTheme(): ResolvedTheme {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-function resolveTheme(theme: Theme): ResolvedTheme {
-  return theme === 'system' ? getSystemTheme() : theme;
-}
-
 export function ThemeProvider({
   children,
   defaultTheme = 'system',
@@ -32,16 +28,17 @@ export function ThemeProvider({
     return defaultTheme;
   });
 
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() => resolveTheme(theme));
+  // Track system theme changes when in system mode
+  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() => getSystemTheme());
+
+  // Derive resolved theme from current theme and system theme
+  const resolvedTheme = theme === 'system' ? systemTheme : theme;
 
   useEffect(() => {
-    const newResolvedTheme = resolveTheme(theme);
-    setResolvedTheme(newResolvedTheme);
-
-    document.documentElement.setAttribute('data-theme', newResolvedTheme);
-
+    // Update DOM and localStorage
+    document.documentElement.setAttribute('data-theme', resolvedTheme);
     localStorage.setItem(storageKey, theme);
-  }, [theme, storageKey]);
+  }, [resolvedTheme, theme, storageKey]);
 
   useEffect(() => {
     if (theme !== 'system') return;
@@ -49,9 +46,7 @@ export function ThemeProvider({
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     const handleChange = () => {
-      const newResolvedTheme = getSystemTheme();
-      setResolvedTheme(newResolvedTheme);
-      document.documentElement.setAttribute('data-theme', newResolvedTheme);
+      setSystemTheme(getSystemTheme());
     };
 
     mediaQuery.addEventListener('change', handleChange);
