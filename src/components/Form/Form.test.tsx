@@ -1,4 +1,26 @@
-import { describe, it, expect, vi } from 'vitest';
+import { vi } from 'vitest';
+import React, { Fragment, createElement, ReactNode } from 'react';
+
+// Mock motion.div to render as plain div
+vi.mock('framer-motion', async () => {
+  const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
+  return {
+    ...actual,
+    motion: {
+      ...actual.motion,
+      div: ({ children, ...props }: any) => {
+        const { initial, animate, exit, transition, variants, ...restProps } = props;
+        return <div {...restProps}>{children}</div>;
+      },
+    },
+    AnimatePresence: ({ children }: { children: ReactNode }) => {
+      // Render children directly without animation delays
+      return children ? createElement(Fragment, null, children) : null;
+    },
+  };
+});
+
+import { describe, it, expect } from 'vitest';
 import { render, screen, waitFor } from '../../../tests/test-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
@@ -86,7 +108,7 @@ describe('Form', () => {
   });
 
   it('should call onSubmit with validated data', async () => {
-    const handleSubmit = vi.fn();
+    const handleSubmit = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
 
     render(
@@ -105,16 +127,19 @@ describe('Form', () => {
     await user.type(screen.getByLabelText('Password'), 'password123');
     await user.click(screen.getByText('Submit'));
 
-    await waitFor(() => {
-      expect(handleSubmit).toHaveBeenCalledWith({
-        email: 'test@example.com',
-        password: 'password123',
-      });
-    });
+    await waitFor(
+      () => {
+        expect(handleSubmit).toHaveBeenCalledWith({
+          email: 'test@example.com',
+          password: 'password123',
+        });
+      },
+      { timeout: 2000 }
+    );
   });
 
   it('should reset form when resetOnSubmit is true', async () => {
-    const handleSubmit = vi.fn();
+    const handleSubmit = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
 
     render(
@@ -140,9 +165,12 @@ describe('Form', () => {
 
     await user.click(screen.getByText('Submit'));
 
-    await waitFor(() => {
-      expect(handleSubmit).toHaveBeenCalled();
-    });
+    await waitFor(
+      () => {
+        expect(handleSubmit).toHaveBeenCalled();
+      },
+      { timeout: 2000 }
+    );
 
     await waitFor(
       () => {

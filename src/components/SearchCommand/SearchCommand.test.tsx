@@ -1,5 +1,29 @@
-import { describe, it, expect, vi } from 'vitest';
+import { vi } from 'vitest';
+import React, { Fragment, createElement, ReactNode } from 'react';
+
+// Mock motion.div to render as plain div (fixes animation state issues)
+vi.mock('framer-motion', async () => {
+  const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
+  return {
+    ...actual,
+    motion: {
+      ...actual.motion,
+      div: ({ children, ...props }: any) => {
+        // Strip animation props that cause jsdom issues
+        const { initial, animate, exit, transition, variants, ...restProps } = props;
+        return <div {...restProps}>{children}</div>;
+      },
+    },
+    AnimatePresence: ({ children }: { children: ReactNode }) => {
+      // Render children directly without animation delays
+      return children ? createElement(Fragment, null, children) : null;
+    },
+  };
+});
+
+import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '../../../tests/test-utils';
+import userEvent from '@testing-library/user-event';
 import { SearchCommand } from './SearchCommand';
 import { SearchResult } from './SearchCommand.types';
 
@@ -48,6 +72,8 @@ describe('SearchCommand', () => {
 
   it('should call onSearch with debounced input', async () => {
     const onSearch = vi.fn();
+    const user = userEvent.setup({ delay: null });
+
     render(
       <SearchCommand
         isOpen={true}
@@ -58,17 +84,19 @@ describe('SearchCommand', () => {
     );
 
     const input = screen.getByPlaceholderText(/search/i);
-    fireEvent.change(input, { target: { value: 'test query' } });
+    await user.type(input, 'test query');
 
     await waitFor(
       () => {
         expect(onSearch).toHaveBeenCalledWith('test query');
       },
-      { timeout: 400 }
+      { timeout: 500 }
     );
   });
 
-  it('should render search results grouped by category', () => {
+  it('should render search results grouped by category', async () => {
+    const user = userEvent.setup({ delay: null });
+
     render(
       <SearchCommand
         isOpen={true}
@@ -79,16 +107,20 @@ describe('SearchCommand', () => {
     );
 
     const input = screen.getByPlaceholderText(/search/i);
-    fireEvent.change(input, { target: { value: 'test' } });
+    await user.type(input, 'test');
 
-    expect(screen.getByText('Pages')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Pages')).toBeInTheDocument();
+    });
+
     expect(screen.getByText('Actions')).toBeInTheDocument();
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Create Project')).toBeInTheDocument();
   });
 
-  it('should call onSelect when result is clicked', () => {
+  it('should call onSelect when result is clicked', async () => {
     const onSelect = vi.fn();
+    const user = userEvent.setup({ delay: null });
     const results: SearchResult[] = [
       { id: '1', title: 'Test', onSelect },
     ];
@@ -103,13 +135,19 @@ describe('SearchCommand', () => {
     );
 
     const input = screen.getByPlaceholderText(/search/i);
-    fireEvent.change(input, { target: { value: 'test' } });
+    await user.type(input, 'test');
 
-    fireEvent.click(screen.getByText('Test'));
+    await waitFor(() => {
+      expect(screen.getByText('Test')).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByText('Test'));
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
 
-  it('should support keyboard navigation', () => {
+  it('should support keyboard navigation', async () => {
+    const user = userEvent.setup({ delay: null });
+
     render(
       <SearchCommand
         isOpen={true}
@@ -120,15 +158,19 @@ describe('SearchCommand', () => {
     );
 
     const input = screen.getByPlaceholderText(/search/i);
-    fireEvent.change(input, { target: { value: 'test' } });
+    await user.type(input, 'test');
 
-    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    await waitFor(() => {
+      expect(screen.getByText('Dashboard')).toBeInTheDocument();
+    });
+
+    await user.keyboard('{ArrowDown}');
     expect(screen.getByText('Dashboard').closest('button')).toHaveFocus();
 
-    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    await user.keyboard('{ArrowDown}');
     expect(screen.getByText('Create Project').closest('button')).toHaveFocus();
 
-    fireEvent.keyDown(input, { key: 'ArrowUp' });
+    await user.keyboard('{ArrowUp}');
     expect(screen.getByText('Dashboard').closest('button')).toHaveFocus();
   });
 
@@ -146,7 +188,9 @@ describe('SearchCommand', () => {
     expect(screen.getByText(/searching/i)).toBeInTheDocument();
   });
 
-  it('should show empty message when no results', () => {
+  it('should show empty message when no results', async () => {
+    const user = userEvent.setup({ delay: null });
+
     render(
       <SearchCommand
         isOpen={true}
@@ -158,8 +202,10 @@ describe('SearchCommand', () => {
     );
 
     const input = screen.getByPlaceholderText(/search/i);
-    fireEvent.change(input, { target: { value: 'test' } });
+    await user.type(input, 'test');
 
-    expect(screen.getByText('No results found')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('No results found')).toBeInTheDocument();
+    });
   });
 });

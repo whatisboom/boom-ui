@@ -23,10 +23,25 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
   type FormInput = z.input<TSchema>;
   type FormOutput = z.output<TSchema>;
 
+  // Extract field names from schema and create default empty strings
+  const getDefaultValues = () => {
+    if (defaultValues) return defaultValues;
+
+    // Generate default empty strings for all schema fields
+    const defaults: Record<string, string> = {};
+    const shape = schema.shape as z.ZodRawShape;
+
+    Object.keys(shape).forEach(key => {
+      defaults[key] = '';
+    });
+
+    return defaults as FormInput;
+  };
+
   // Create react-hook-form instance
   const form = useForm<FormInput, unknown, FormOutput>({
     resolver: standardSchemaResolver(schema),
-    defaultValues,
+    defaultValues: getDefaultValues(),
     mode,
   });
 

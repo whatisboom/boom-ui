@@ -31,8 +31,8 @@ vi.mock('framer-motion', async () => {
     ...actual,
     AnimatePresence: ({ children }: { children: ReactNode }) => {
       // Render children directly without animation delays
-      // This preserves conditional rendering (children present/absent) but skips transitions
-      return createElement(Fragment, null, children);
+      // Return null when children is falsy to preserve conditional rendering
+      return children ? createElement(Fragment, null, children) : null;
     },
   };
 });
@@ -106,7 +106,15 @@ afterEach(() => {
   }
 
   try {
-    // Portal/DOM cleanup
+    // React cleanup - must happen BEFORE DOM cleanup
+    // This allows React to properly unmount components before we remove their DOM nodes
+    cleanup();
+  } catch (e) {
+    errors.push(new Error(`React cleanup failed: ${e}`));
+  }
+
+  try {
+    // Portal/DOM cleanup - happens AFTER React cleanup
     // Run any registered per-test cleanup
     runRegisteredCleanup();
     cleanupPortals();
@@ -114,13 +122,6 @@ afterEach(() => {
     resetDocumentBody();
   } catch (e) {
     errors.push(new Error(`DOM cleanup failed: ${e}`));
-  }
-
-  try {
-    // React cleanup
-    cleanup();
-  } catch (e) {
-    errors.push(new Error(`React cleanup failed: ${e}`));
   } finally {
     // Always restore mocks, even if cleanup failed
     vi.clearAllMocks();

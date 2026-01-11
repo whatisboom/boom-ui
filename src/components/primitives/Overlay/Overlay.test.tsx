@@ -1,5 +1,28 @@
-import { describe, it, expect, vi } from 'vitest';
+import { vi } from 'vitest';
+import React, { Fragment, createElement, ReactNode } from 'react';
+
+// Mock motion.div to render as plain div (fixes event propagation)
+vi.mock('framer-motion', async () => {
+  const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
+  return {
+    ...actual,
+    motion: {
+      ...actual.motion,
+      div: ({ children, ...props }: any) => {
+        const { initial, animate, exit, transition, variants, ...restProps } = props;
+        return <div {...restProps}>{children}</div>;
+      },
+    },
+    AnimatePresence: ({ children }: { children: ReactNode }) => {
+      // Render children directly without animation delays
+      return children ? createElement(Fragment, null, children) : null;
+    },
+  };
+});
+
+import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '../../../../tests/test-utils';
+import userEvent from '@testing-library/user-event';
 import { Overlay } from './Overlay';
 
 describe('Overlay', () => {
@@ -36,16 +59,21 @@ describe('Overlay', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it('should call onClose on backdrop click', () => {
+  it('should call onClose on backdrop click', async () => {
     const onClose = vi.fn();
+    const user = userEvent.setup({ delay: null });
+
     render(
       <Overlay isOpen={true} onClose={onClose} closeOnClickOutside={true}>
         <div>Content</div>
       </Overlay>
     );
 
-    const backdrop = screen.getByTestId('overlay-backdrop');
-    fireEvent.mouseDown(backdrop);
+    // Wait for portal to render
+    const backdrop = await screen.findByTestId('overlay-backdrop');
+
+    // userEvent.click generates proper mousedown/mouseup/click sequence
+    await user.click(backdrop);
 
     expect(onClose).toHaveBeenCalledTimes(1);
   });
