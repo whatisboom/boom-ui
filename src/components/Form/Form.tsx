@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle, useMemo } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, DefaultValues } from 'react-hook-form';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { z } from 'zod';
 import { cn } from '@/utils/classnames';
@@ -24,8 +24,8 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
   type FormOutput = z.output<TSchema>;
 
   // Extract field names from schema and create default empty strings
-  const getDefaultValues = () => {
-    if (defaultValues) return defaultValues;
+  const getDefaultValues = (): DefaultValues<FormInput> => {
+    if (defaultValues) return defaultValues as DefaultValues<FormInput>;
 
     // Generate default empty strings for all schema fields
     const defaults: Record<string, string> = {};
@@ -35,7 +35,7 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
       defaults[key] = '';
     });
 
-    return defaults as FormInput;
+    return defaults as DefaultValues<FormInput>;
   };
 
   // Create react-hook-form instance

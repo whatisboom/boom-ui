@@ -1,25 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '../../../tests/test-utils';
-import userEvent from '@testing-library/user-event';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '../../../tests/test-utils';
 import { SearchCommand } from './SearchCommand';
-import { SearchResult } from './SearchCommand.types';
 
 describe('SearchCommand', () => {
-  const mockResults: SearchResult[] = [
-    {
-      id: '1',
-      category: 'Pages',
-      title: 'Dashboard',
-      subtitle: '/dashboard',
-      onSelect: vi.fn(),
-    },
-    {
-      id: '2',
-      category: 'Actions',
-      title: 'Create Project',
-      onSelect: vi.fn(),
-    },
-  ];
 
   it('should render search input when open', () => {
     render(
