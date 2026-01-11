@@ -1,4 +1,4 @@
-import { ElementType } from 'react';
+import { ElementType, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/classnames';
 import { CardProps } from './Card.types';
@@ -36,11 +36,13 @@ export function Card<E extends ElementType = 'div'>({
   // Use Framer Motion for hover animations when enabled
   const shouldAnimate = hoverable && !disableAnimation;
 
-  if (shouldAnimate) {
-    // Use motion.create for dynamic components in v12+
-    const MotionComponent = motion.create(Component);
+  // Memoize motion component creation to prevent recreating on every render
+  // eslint-disable-next-line react-hooks/static-components -- Dynamic polymorphic components require runtime creation with motion.create()
+  const MotionComponent = useMemo(() => motion.create(Component), [Component]);
 
+  if (shouldAnimate) {
     return (
+      /* eslint-disable-next-line react-hooks/static-components -- Dynamic polymorphic components require runtime creation with motion.create() */
       <MotionComponent
         className={cardClassName}
         style={cardStyle}

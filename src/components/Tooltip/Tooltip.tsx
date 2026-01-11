@@ -42,6 +42,7 @@ export const Tooltip = ({
   }, []);
 
   // Clone the child element and add event handlers
+  // eslint-disable-next-line react-hooks/refs -- Passing refs to cloneElement is the correct React pattern for forwarding refs to dynamic children
   const trigger = cloneElement(children, {
     ref: triggerRef,
     onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
