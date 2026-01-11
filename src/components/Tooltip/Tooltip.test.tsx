@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '../../../tests/test-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { Tooltip } from './Tooltip';
@@ -37,7 +37,8 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    await user.hover(screen.getByText('Hover me'));
+    const trigger = screen.getByText('Hover me');
+    await user.hover(trigger);
 
     await waitFor(() => {
       expect(screen.getByText('Tooltip text')).toBeInTheDocument();
@@ -53,12 +54,13 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    await user.hover(screen.getByText('Hover me'));
+    const trigger = screen.getByText('Hover me');
+    await user.hover(trigger);
     await waitFor(() => {
       expect(screen.getByText('Tooltip text')).toBeInTheDocument();
     });
 
-    await user.unhover(screen.getByText('Hover me'));
+    await user.unhover(trigger);
     await waitFor(() => {
       expect(screen.queryByText('Tooltip text')).not.toBeInTheDocument();
     });
@@ -111,7 +113,8 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    await user.hover(screen.getByText('Hover me'));
+    const trigger = screen.getByText('Hover me');
+    await user.hover(trigger);
 
     // Should not appear immediately
     expect(screen.queryByText('Delayed tooltip')).not.toBeInTheDocument();
@@ -134,10 +137,11 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    await user.hover(screen.getByText('Hover me'));
+    const trigger = screen.getByText('Hover me');
+    await user.hover(trigger);
 
     // Immediately unhover before delay completes
-    await user.unhover(screen.getByText('Hover me'));
+    await user.unhover(trigger);
 
     // Wait to ensure tooltip doesn't appear
     await new Promise((resolve) => setTimeout(resolve, 300));
@@ -156,7 +160,8 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    await user.hover(screen.getByText('Hover me'));
+    const trigger = screen.getByText('Hover me');
+    await user.hover(trigger);
 
     await waitFor(() => {
       expect(screen.getByText('Top tooltip')).toBeInTheDocument();
@@ -172,7 +177,8 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    await user.hover(screen.getByText('Hover me'));
+    const trigger = screen.getByText('Hover me');
+    await user.hover(trigger);
 
     await waitFor(() => {
       expect(screen.getByText('Bottom tooltip')).toBeInTheDocument();
@@ -199,7 +205,8 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    await user.hover(screen.getByText('Hover me'));
+    const trigger = screen.getByText('Hover me');
+    await user.hover(trigger);
 
     await waitFor(() => {
       expect(screen.getByText('Accessible tooltip')).toBeInTheDocument();

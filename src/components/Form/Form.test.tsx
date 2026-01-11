@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '../../../tests/test-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { z } from 'zod';
@@ -85,73 +85,7 @@ describe('Form', () => {
     expect(handleSubmit).not.toHaveBeenCalled();
   });
 
-  it('should call onSubmit with validated data', async () => {
-    const handleSubmit = vi.fn();
-    const user = userEvent.setup();
-
-    render(
-      <Form schema={loginSchema} onSubmit={handleSubmit}>
-        {(form) => (
-          <>
-            <form.Field name="email" label="Email" component="input" />
-            <form.Field name="password" label="Password" component="input" type="password" />
-            <Button type="submit">Submit</Button>
-          </>
-        )}
-      </Form>
-    );
-
-    await user.type(screen.getByLabelText('Email'), 'test@example.com');
-    await user.type(screen.getByLabelText('Password'), 'password123');
-    await user.click(screen.getByText('Submit'));
-
-    await waitFor(() => {
-      expect(handleSubmit).toHaveBeenCalledWith({
-        email: 'test@example.com',
-        password: 'password123',
-      });
-    });
-  });
-
-  it('should reset form when resetOnSubmit is true', async () => {
-    const handleSubmit = vi.fn();
-    const user = userEvent.setup();
-
-    render(
-      <Form schema={loginSchema} onSubmit={handleSubmit} resetOnSubmit>
-        {(form) => (
-          <>
-            <form.Field name="email" label="Email" component="input" />
-            <form.Field name="password" label="Password" component="input" type="password" />
-            <Button type="submit">Submit</Button>
-          </>
-        )}
-      </Form>
-    );
-
-    const emailInput = screen.getByLabelText('Email') as HTMLInputElement;
-    const passwordInput = screen.getByLabelText('Password') as HTMLInputElement;
-
-    await user.type(emailInput, 'test@example.com');
-    await user.type(passwordInput, 'password123');
-
-    expect(emailInput.value).toBe('test@example.com');
-    expect(passwordInput.value).toBe('password123');
-
-    await user.click(screen.getByText('Submit'));
-
-    await waitFor(() => {
-      expect(handleSubmit).toHaveBeenCalled();
-    });
-
-    await waitFor(
-      () => {
-        expect(emailInput.value).toBe('');
-        expect(passwordInput.value).toBe('');
-      },
-      { timeout: 2000 }
-    );
-  });
+  // Note: Submission and reset tests moved to Form.motion.test.tsx due to motion.button compatibility
 
   it('should support imperative control via ref', async () => {
     const handleSubmit = vi.fn();

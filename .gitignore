@@ -8,3 +8,4 @@ storybook-static
 .vite
 .claude
 .worktrees/
+.heap-snapshots/

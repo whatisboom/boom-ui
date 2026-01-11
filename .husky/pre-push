@@ -1,0 +1,53 @@
+#!/bin/sh
+
+echo "🔍 Running pre-push checks..."
+echo ""
+
+# Track failed checks
+failed_checks=""
+
+echo "📝 Type checking..."
+if npm run typecheck > /dev/null 2>&1; then
+  echo "✅ Type check passed"
+else
+  echo "❌ Type check failed"
+  failed_checks="$failed_checks typecheck"
+fi
+echo ""
+
+echo "🎨 Linting (strict mode)..."
+if npm run lint > /dev/null 2>&1; then
+  echo "✅ Lint passed (no warnings)"
+else
+  echo "❌ Lint failed"
+  failed_checks="$failed_checks lint"
+fi
+echo ""
+
+echo "🧪 Running tests (strict mode)..."
+if npm run test:ci > /dev/null 2>&1; then
+  echo "✅ Tests passed (no warnings)"
+else
+  echo "❌ Tests failed"
+  failed_checks="$failed_checks tests"
+fi
+echo ""
+
+# Check if any checks failed
+if [ -n "$failed_checks" ]; then
+  echo "❌ Pre-push checks failed:$failed_checks"
+  echo ""
+  echo "Run the failed commands to see details:"
+  for check in $failed_checks; do
+    case $check in
+      typecheck) echo "  npm run typecheck" ;;
+      lint) echo "  npm run lint" ;;
+      tests) echo "  npm run test:ci" ;;
+    esac
+  done
+  echo ""
+  echo "Use 'git push --no-verify' to skip checks (not recommended)"
+  exit 1
+fi
+
+echo "✅ All pre-push checks passed!"
