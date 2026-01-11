@@ -42,7 +42,6 @@ export function Card<E extends ElementType = 'div'>({
 
   if (shouldAnimate) {
     return (
-      /* eslint-disable-next-line react-hooks/static-components -- Dynamic polymorphic components require runtime creation with motion.create() */
       <MotionComponent
         className={cardClassName}
         style={cardStyle}

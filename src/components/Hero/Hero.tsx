@@ -154,7 +154,6 @@ export function Hero<E extends ElementType = 'section'>({
   }
 
   return (
-    /* eslint-disable-next-line react-hooks/static-components -- Dynamic polymorphic components require runtime creation with motion.create() */
     <MotionComponent
       className={heroClassName}
       style={heroStyle}
