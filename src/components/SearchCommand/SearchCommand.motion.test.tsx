@@ -94,9 +94,13 @@ describe('SearchCommand - Motion Tests', () => {
     const input = screen.getByPlaceholderText(/search/i);
     await user.type(input, 'test');
 
-    await waitFor(() => {
-      expect(screen.getByText('Pages')).toBeInTheDocument();
-    });
+    // Wait for results to render after query state updates
+    await waitFor(
+      () => {
+        expect(screen.getByText('Pages')).toBeInTheDocument();
+      },
+      { timeout: 2000 }
+    );
 
     expect(screen.getByText('Actions')).toBeInTheDocument();
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
