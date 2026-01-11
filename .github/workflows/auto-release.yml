@@ -23,7 +23,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+          # Required for npm OIDC trusted publishing
+          # Configures .npmrc to enable automatic OIDC authentication
           registry-url: 'https://registry.npmjs.org'
+
+      # Pin npm to >=11.6.0 for OIDC provenance support
+      # See: https://github.blog/changelog/2023-04-19-npm-provenance-public-beta/
+      - name: Pin npm version
+        run: npm install -g npm@^11.6.0
 
       - name: Check if version changed
         id: version-check
@@ -77,11 +84,17 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=4096
 
+      # Publish using npm OIDC trusted publishing (no NODE_AUTH_TOKEN needed)
+      # Requirements:
+      #   1. Trusted publisher configured on npmjs.com for this repo/workflow
+      #   2. npm CLI 11.5.1+ (pinned to ^11.6.0 above)
+      #   3. id-token: write permission (set in workflow permissions)
+      #   4. registry-url in setup-node (configured above)
+      # The npm CLI automatically detects OIDC and authenticates without secrets
       - name: Publish to npm
         if: steps.version-check.outputs.version_changed == 'true' && steps.tag-check.outputs.tag_exists == 'false'
         run: npm publish --provenance --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_OPTIONS: --max-old-space-size=4096
 
       - name: Create GitHub Release

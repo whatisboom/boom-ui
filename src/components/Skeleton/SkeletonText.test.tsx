@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/react';
+import { render } from '../../../tests/test-utils';
 import { axe } from 'vitest-axe';
 import { SkeletonText } from './SkeletonText';
 

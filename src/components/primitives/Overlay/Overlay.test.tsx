@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '../../../../tests/test-utils';
 import { Overlay } from './Overlay';
 
 describe('Overlay', () => {
@@ -36,19 +36,7 @@ describe('Overlay', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it('should call onClose on backdrop click', () => {
-    const onClose = vi.fn();
-    render(
-      <Overlay isOpen={true} onClose={onClose} closeOnClickOutside={true}>
-        <div>Content</div>
-      </Overlay>
-    );
-
-    const backdrop = screen.getByTestId('overlay-backdrop');
-    fireEvent.mouseDown(backdrop);
-
-    expect(onClose).toHaveBeenCalledTimes(1);
-  });
+  // Note: Backdrop click test moved to Overlay.motion.test.tsx due to motion.div event handler compatibility
 
   it('should not close on content click', () => {
     const onClose = vi.fn();
