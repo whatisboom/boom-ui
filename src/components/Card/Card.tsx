@@ -37,12 +37,11 @@ export function Card<E extends ElementType = 'div'>({
   const shouldAnimate = hoverable && !disableAnimation;
 
   // Memoize motion component creation to prevent recreating on every render
-  // eslint-disable-next-line react-hooks/static-components -- Dynamic polymorphic components require runtime creation with motion.create()
+  /* eslint-disable react-hooks/static-components -- Dynamic polymorphic components require runtime creation with motion.create() */
   const MotionComponent = useMemo(() => motion.create(Component), [Component]);
 
   if (shouldAnimate) {
     return (
-      /* eslint-disable-next-line react-hooks/static-components -- Dynamic polymorphic components require runtime creation with motion.create() */
       <MotionComponent
         className={cardClassName}
         style={cardStyle}
@@ -59,6 +58,7 @@ export function Card<E extends ElementType = 'div'>({
       </MotionComponent>
     );
   }
+  /* eslint-enable react-hooks/static-components */
 
   // Static component without animations
   return (
