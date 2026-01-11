@@ -1,4 +1,4 @@
-import { ElementType, CSSProperties } from 'react';
+import { ElementType, CSSProperties, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/classnames';
 import { Button } from '@/components/Button';
@@ -141,6 +141,10 @@ export function Hero<E extends ElementType = 'section'>({
     </>
   );
 
+  // Memoize motion component creation to prevent recreating on every render
+  // eslint-disable-next-line react-hooks/static-components -- Dynamic polymorphic components require runtime creation with motion.create()
+  const MotionComponent = useMemo(() => motion.create(Component), [Component]);
+
   if (disableAnimation) {
     return (
       <Component className={heroClassName} style={heroStyle} {...props}>
@@ -149,9 +153,8 @@ export function Hero<E extends ElementType = 'section'>({
     );
   }
 
-  const MotionComponent = motion.create(Component);
-
   return (
+    /* eslint-disable-next-line react-hooks/static-components -- Dynamic polymorphic components require runtime creation with motion.create() */
     <MotionComponent
       className={heroClassName}
       style={heroStyle}
