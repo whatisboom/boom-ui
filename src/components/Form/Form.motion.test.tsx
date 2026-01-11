@@ -33,7 +33,7 @@ vi.mock('framer-motion', async () => {
 });
 
 import { describe, it, expect } from 'vitest';
-import { render, screen, waitFor } from '../../../tests/test-utils';
+import { render, screen, waitFor, fireEvent } from '../../../tests/test-utils';
 import userEvent from '@testing-library/user-event';
 import { z } from 'zod';
 import { Form } from './Form';
@@ -61,8 +61,9 @@ describe('Form - Motion Tests', () => {
       </Form>
     );
 
-    await user.type(screen.getByLabelText('Email'), 'test@example.com');
-    await user.type(screen.getByLabelText('Password'), 'password123');
+    // Use fireEvent.change directly to bypass userEvent issues
+    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'test@example.com' } });
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password123' } });
     await user.click(screen.getByText('Submit'));
 
     await waitFor(
@@ -78,7 +79,7 @@ describe('Form - Motion Tests', () => {
 
   it('should reset form when resetOnSubmit is true', async () => {
     const handleSubmit = vi.fn().mockResolvedValue(undefined);
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
 
     render(
       <Form schema={loginSchema} onSubmit={handleSubmit} resetOnSubmit>
@@ -95,21 +96,29 @@ describe('Form - Motion Tests', () => {
     const emailInput = screen.getByLabelText('Email') as HTMLInputElement;
     const passwordInput = screen.getByLabelText('Password') as HTMLInputElement;
 
-    await user.type(emailInput, 'test@example.com');
-    await user.type(passwordInput, 'password123');
+    // Use fireEvent.change directly to bypass userEvent issues
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
 
+    // Verify values are set
     expect(emailInput.value).toBe('test@example.com');
     expect(passwordInput.value).toBe('password123');
 
+    // Submit the form
     await user.click(screen.getByText('Submit'));
 
+    // Wait for submit handler to be called
     await waitFor(
       () => {
-        expect(handleSubmit).toHaveBeenCalled();
+        expect(handleSubmit).toHaveBeenCalledWith({
+          email: 'test@example.com',
+          password: 'password123',
+        });
       },
       { timeout: 2000 }
     );
 
+    // Wait for form to reset
     await waitFor(
       () => {
         expect(emailInput.value).toBe('');

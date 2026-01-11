@@ -23,16 +23,67 @@ import {
 import { logMemoryUsage, captureBaseline } from './memory-profiler';
 import { runRegisteredCleanup } from './test-utils';
 
-// Mock framer-motion AnimatePresence to skip exit animations in tests
+// Mock framer-motion to skip animations in tests
 // Keep the conditional rendering logic but skip animation delays
 vi.mock('framer-motion', async () => {
   const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
+
+  // Component cache needs to be reset between tests to prevent stale references
+  let componentCache: Map<string, React.ForwardRefExoticComponent<any>> | null = null;
+
+  const getComponentCache = () => {
+    if (!componentCache) {
+      componentCache = new Map<string, React.ForwardRefExoticComponent<any>>();
+    }
+    return componentCache;
+  };
+
+  const motionProxy = new Proxy({}, {
+    get: (_target, prop: string) => {
+      const cache = getComponentCache();
+
+      // Handle motion.create() for custom components
+      if (prop === 'create') {
+        return (Component: React.ComponentType<any>) => {
+          const key = `create_${Component.displayName || Component.name || 'Component'}`;
+          if (!cache.has(key)) {
+            const MotionComponent = React.forwardRef((props: any, ref) => {
+              // Filter out Framer Motion props before passing to component
+              const { initial, animate, exit, transition, variants, whileHover, whileTap, whileFocus, whileInView, ...domProps } = props;
+              return createElement(Component, { ...domProps, ref });
+            });
+            MotionComponent.displayName = `motion(${Component.displayName || Component.name})`;
+            cache.set(key, MotionComponent);
+          }
+          return cache.get(key);
+        };
+      }
+
+      // Handle motion.div, motion.button, etc.
+      if (!cache.has(prop)) {
+        const Component = React.forwardRef((props: any, ref) => {
+          // Filter out Framer Motion props before passing to DOM element
+          const { initial, animate, exit, transition, variants, whileHover, whileTap, whileFocus, whileInView, ...domProps } = props;
+          return createElement(prop, { ...domProps, ref });
+        });
+        Component.displayName = `motion.${prop}`;
+        cache.set(prop, Component);
+      }
+      return cache.get(prop);
+    }
+  });
+
   return {
     ...actual,
+    motion: motionProxy,
     AnimatePresence: ({ children }: { children: ReactNode }) => {
       // Render children directly without animation delays
       // Return null when children is falsy to preserve conditional rendering
       return children ? createElement(Fragment, null, children) : null;
+    },
+    // Expose function to clear cache between tests
+    __resetMotionCache__: () => {
+      componentCache = null;
     },
   };
 });
@@ -73,8 +124,18 @@ beforeEach(() => {
 });
 
 // Enhanced cleanup after each test
-afterEach(() => {
+afterEach(async () => {
   const errors: Error[] = [];
+
+  try {
+    // Reset motion component cache to prevent test isolation issues
+    const framerMotion = await import('framer-motion');
+    if (typeof (framerMotion as any).__resetMotionCache__ === 'function') {
+      (framerMotion as any).__resetMotionCache__();
+    }
+  } catch (e) {
+    // Silently ignore - not all mocks expose this function
+  }
 
   try {
     // Timer cleanup
