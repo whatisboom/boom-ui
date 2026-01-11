@@ -6,14 +6,17 @@ vi.mock('framer-motion', async () => {
   const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
 
   // Cache components to maintain referential equality across re-renders
-  const componentCache = new Map<string, React.ForwardRefExoticComponent<any>>();
+  const componentCache = new Map<string, React.ForwardRefExoticComponent<Record<string, unknown>>>();
 
   const motionProxy = new Proxy({}, {
     get: (_target, prop: string) => {
       if (!componentCache.has(prop)) {
-        const Component = React.forwardRef((props: any, ref) => {
+        const Component = React.forwardRef((props: Record<string, unknown>, ref) => {
           // Filter out Framer Motion props before passing to DOM element
-          const { initial, animate, exit, transition, variants, whileHover, whileTap, whileFocus, whileInView, ...domProps } = props;
+          const motionProps = ['initial', 'animate', 'exit', 'transition', 'variants', 'whileHover', 'whileTap', 'whileFocus', 'whileInView'];
+          const domProps = Object.fromEntries(
+            Object.entries(props).filter(([key]) => !motionProps.includes(key))
+          );
           return createElement(prop, { ...domProps, ref });
         });
         Component.displayName = `motion.${prop}`;
