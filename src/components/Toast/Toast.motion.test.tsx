@@ -5,13 +5,21 @@ import React, { Fragment, createElement, ReactNode } from 'react';
 vi.mock('framer-motion', async () => {
   const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
 
+  // Cache components to maintain referential equality across re-renders
+  const componentCache = new Map<string, React.ForwardRefExoticComponent<any>>();
+
   const motionProxy = new Proxy({}, {
     get: (_target, prop: string) => {
-      const Component = React.forwardRef((props: any, ref) => {
-        return createElement(prop, { ...props, ref });
-      });
-      Component.displayName = `motion.${prop}`;
-      return Component;
+      if (!componentCache.has(prop)) {
+        const Component = React.forwardRef((props: any, ref) => {
+          // Filter out Framer Motion props before passing to DOM element
+          const { initial, animate, exit, transition, variants, whileHover, whileTap, whileFocus, whileInView, ...domProps } = props;
+          return createElement(prop, { ...domProps, ref });
+        });
+        Component.displayName = `motion.${prop}`;
+        componentCache.set(prop, Component);
+      }
+      return componentCache.get(prop);
     }
   });
 
