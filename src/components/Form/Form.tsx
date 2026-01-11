@@ -23,19 +23,71 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
   type FormInput = z.input<TSchema>;
   type FormOutput = z.output<TSchema>;
 
-  // Extract field names from schema and create default empty strings
+  // Extract field names from schema and create type-appropriate defaults
   const getDefaultValues = (): DefaultValues<FormInput> => {
     if (defaultValues) return defaultValues as DefaultValues<FormInput>;
 
-    // Generate default empty strings for all schema fields
-    const defaults: Record<string, string> = {};
+    // Generate type-appropriate default values for schema fields
+    const defaults: Record<string, unknown> = {};
     const shape = schema.shape as z.ZodRawShape;
 
     Object.keys(shape).forEach(key => {
-      defaults[key] = '';
+      const field = shape[key] as z.ZodTypeAny;
+      defaults[key] = getDefaultValueForField(field);
     });
 
     return defaults as DefaultValues<FormInput>;
+  };
+
+  // Helper to determine appropriate default value based on Zod field type
+  const getDefaultValueForField = (field: z.ZodTypeAny): unknown => {
+    // Type guard for accessing Zod internals
+    type ZodInternalDef = {
+      typeName?: string;
+      innerType?: z.ZodTypeAny;
+      schema?: z.ZodTypeAny;
+    };
+
+    // Access internal type definition (Zod internals are not part of public API)
+    const def = (field as unknown as { _def: ZodInternalDef })._def;
+
+    // Unwrap optional/nullable/default schemas to get the inner type
+    let innerType: { _def: ZodInternalDef } | null = field as unknown as { _def: ZodInternalDef };
+    let typeName = def?.typeName;
+
+    while (typeName === 'ZodOptional' ||
+           typeName === 'ZodNullable' ||
+           typeName === 'ZodDefault') {
+      const nextType = innerType?._def?.innerType || innerType?._def?.schema;
+      if (!nextType) break;
+      innerType = nextType as unknown as { _def: ZodInternalDef };
+      typeName = innerType?._def?.typeName;
+    }
+
+    // Return undefined for optional/nullable fields
+    if (def?.typeName === 'ZodOptional' || def?.typeName === 'ZodNullable') {
+      return undefined;
+    }
+
+    // Return type-specific defaults based on the inner type
+    const innerTypeName = innerType?._def?.typeName || typeName;
+    switch (innerTypeName) {
+      case 'ZodString':
+        return '';
+      case 'ZodNumber':
+        return 0;
+      case 'ZodBoolean':
+        return false;
+      case 'ZodArray':
+        return [];
+      case 'ZodObject':
+        return {};
+      case 'ZodDate':
+        return new Date();
+      default:
+        // For unknown types, default to undefined
+        return undefined;
+    }
   };
 
   // Create react-hook-form instance
