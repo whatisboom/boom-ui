@@ -1,18 +1,24 @@
 import { vi } from 'vitest';
 import React, { Fragment, createElement, ReactNode } from 'react';
 
-// Mock motion.div to render as plain div
+// Mock motion components to render as plain elements
 vi.mock('framer-motion', async () => {
   const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
+
+  // Create a proxy that intercepts motion.* and returns plain elements
+  const motionProxy = new Proxy({}, {
+    get: (_target, prop: string) => {
+      // Return a component that renders as the plain HTML element
+      return ({ children, ...props }: any) => {
+        const { initial, animate, exit, transition, variants, whileHover, whileTap, whileFocus, ...restProps } = props;
+        return createElement(prop, restProps, children);
+      };
+    }
+  });
+
   return {
     ...actual,
-    motion: {
-      ...actual.motion,
-      div: ({ children, ...props }: any) => {
-        const { initial, animate, exit, transition, variants, ...restProps } = props;
-        return <div {...restProps}>{children}</div>;
-      },
-    },
+    motion: motionProxy,
     AnimatePresence: ({ children }: { children: ReactNode }) => {
       // Render children directly without animation delays
       return children ? createElement(Fragment, null, children) : null;
