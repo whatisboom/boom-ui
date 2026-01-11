@@ -23,6 +23,18 @@ module.exports = {
       {
         selector: 'CallExpression[callee.property.name="addEventListener"]',
         message: 'Ensure addEventListener has corresponding removeEventListener in useEffect cleanup'
+      },
+      {
+        selector: 'CallExpression[callee.name="setTimeout"]',
+        message: 'setTimeout must be cleaned up in useEffect - store the timer ID and call clearTimeout in cleanup function'
+      },
+      {
+        selector: 'CallExpression[callee.name="setInterval"]',
+        message: 'setInterval must be cleaned up in useEffect - store the timer ID and call clearInterval in cleanup function'
+      },
+      {
+        selector: 'CallExpression[callee.name="requestAnimationFrame"]',
+        message: 'requestAnimationFrame must be cancelled in useEffect - store the frame ID and call cancelAnimationFrame in cleanup function'
       }
     ],
   },
