@@ -33,9 +33,6 @@ export function useStableCallback<T extends (...args: unknown[]) => unknown>(
   });
 
   // Return stable callback that invokes latest ref
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useCallback(
-    ((...args) => callbackRef.current(...args)) as T,
-    []
-  );
+  // eslint-disable-next-line react-hooks/use-memo -- Type assertion needed for generic callback
+  return useCallback(((...args) => callbackRef.current(...args)) as T, []);
 }
