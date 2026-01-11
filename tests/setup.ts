@@ -47,3 +47,12 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: () => true,
   }),
 });
+
+// Mock requestAnimationFrame for Popover positioning
+global.requestAnimationFrame = (callback: FrameRequestCallback): number => {
+  return setTimeout(() => callback(Date.now()), 0) as unknown as number;
+};
+
+global.cancelAnimationFrame = (id: number): void => {
+  clearTimeout(id);
+};
