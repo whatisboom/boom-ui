@@ -6,7 +6,6 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
-import { fixupPluginRules } from '@eslint/compat';
 import storybookPlugin from 'eslint-plugin-storybook';
 
 export default [
