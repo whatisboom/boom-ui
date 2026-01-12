@@ -1,0 +1,115 @@
+name: Bug Report
+description: Report a bug or unexpected behavior in boom-ui
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the information below to help us investigate and fix the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the bug.
+      placeholder: When I try to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the behavior.
+      placeholder: |
+        1. Import component '...'
+        2. Set prop '...'
+        3. Click on '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: I expected...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Instead, I saw...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component Affected
+      description: Which component is experiencing the issue?
+      options:
+        - Button
+        - Input
+        - Form
+        - Select
+        - Checkbox
+        - Switch
+        - RadioGroup
+        - Textarea
+        - Card
+        - Modal
+        - Drawer
+        - Popover
+        - Toast
+        - Alert
+        - Table
+        - Tree
+        - Tabs
+        - Typography
+        - Box
+        - Stack
+        - Progress
+        - Slider
+        - Badge
+        - Tooltip
+        - Avatar
+        - Skeleton
+        - Spinner
+        - EmptyState
+        - Hero
+        - ThemeProvider
+        - ErrorBoundary
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please provide details about your environment.
+      placeholder: |
+        - boom-ui version:
+        - React version:
+        - Browser:
+        - OS:
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Screenshots / Code Examples
+      description: Add screenshots, error messages, or code examples to help explain the problem.
+      placeholder: |
+        ```tsx
+        // Your code here
+        ```
+    validations:
+      required: false

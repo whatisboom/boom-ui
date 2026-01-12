@@ -1,0 +1,59 @@
+name: Documentation
+description: Improve or clarify documentation
+title: "docs: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our documentation! Please provide details about what needs to be updated.
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: Documentation Type
+      description: What type of documentation needs improvement?
+      options:
+        - README
+        - Component Documentation
+        - API Documentation
+        - Examples / Guides
+        - Storybook Stories
+        - Contributing Guidelines
+        - Code Comments
+        - TypeScript Types
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: missing-unclear
+    attributes:
+      label: What's Missing or Unclear?
+      description: Describe what documentation is missing, incorrect, or confusing.
+      placeholder: The documentation for X doesn't explain...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-changes
+    attributes:
+      label: Proposed Changes
+      description: What should be added or changed to improve the documentation?
+      placeholder: |
+        We should add:
+        - ...
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected-sections
+    attributes:
+      label: Affected Components / Sections
+      description: Which components, files, or sections need updates?
+      placeholder: |
+        - README.md - Installation section
+        - src/components/Button - Props documentation
+    validations:
+      required: false

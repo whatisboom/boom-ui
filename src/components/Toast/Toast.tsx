@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/classnames';
+import { useStableCallback } from '@/hooks/useStableCallback';
 import { ToastProps } from './Toast.types';
 import styles from './Toast.module.css';
 
@@ -117,15 +118,17 @@ export const Toast = ({
   onClose,
   position,
 }: ToastProps) => {
-  useEffect(() => {
-    if (duration) {
-      const timer = setTimeout(() => {
-        onClose();
-      }, duration);
+  const stableOnClose = useStableCallback(onClose);
 
-      return () => clearTimeout(timer);
-    }
-  }, [duration, onClose]);
+  useEffect(() => {
+    if (!duration) return;
+
+    const timer = setTimeout(() => {
+      stableOnClose();
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [duration, stableOnClose]);
 
   const slideDirection = getSlideDirection(position);
 
