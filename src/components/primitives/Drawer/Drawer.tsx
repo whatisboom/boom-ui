@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Overlay } from '../Overlay';
-import { DrawerProps } from '../types';
+import type { DrawerProps } from '../types';
 import { cn } from '@/utils/classnames';
 import styles from './Drawer.module.css';
 

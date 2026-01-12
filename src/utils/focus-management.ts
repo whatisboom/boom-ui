@@ -13,10 +13,10 @@ export function getFocusableElements(container: HTMLElement): HTMLElement[] {
 
 export function createFocusTrap(container: HTMLElement): () => void {
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key !== 'Tab') return;
+    if (event.key !== 'Tab') {return;}
 
     const focusableElements = getFocusableElements(container);
-    if (focusableElements.length === 0) return;
+    if (focusableElements.length === 0) {return;}
 
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Portal } from '../primitives/Portal';
 import { useScrollLock } from '@/hooks/useScrollLock';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
-import { SpinnerProps } from './Spinner.types';
+import type { SpinnerProps } from './Spinner.types';
 import styles from './Spinner.module.css';
 
 export function Spinner({

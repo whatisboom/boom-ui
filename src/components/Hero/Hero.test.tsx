@@ -177,7 +177,7 @@ describe('Hero', () => {
 
     const videos = document.querySelectorAll('video');
     expect(videos.length).toBeGreaterThan(0);
-    const video = videos[0] as HTMLVideoElement;
+    const video = videos[0];
     expect(video).toHaveAttribute('poster', '/poster.jpg');
     expect(video.autoplay).toBe(true);
     expect(video.loop).toBe(true);

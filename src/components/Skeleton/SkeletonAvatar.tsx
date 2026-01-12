@@ -1,5 +1,5 @@
 import { Skeleton } from './Skeleton';
-import { SkeletonAvatarProps } from './Skeleton.types';
+import type { SkeletonAvatarProps } from './Skeleton.types';
 import styles from './SkeletonAvatar.module.css';
 
 export function SkeletonAvatar({

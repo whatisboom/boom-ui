@@ -1,6 +1,6 @@
 import { forwardRef, useId } from 'react';
 import { cn } from '@/utils/classnames';
-import { RadioGroupProps } from './RadioGroup.types';
+import type { RadioGroupProps } from './RadioGroup.types';
 import styles from './RadioGroup.module.css';
 
 export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(

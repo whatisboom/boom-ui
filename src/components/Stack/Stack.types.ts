@@ -1,4 +1,4 @@
-import { ElementType, HTMLAttributes, ReactNode } from 'react';
+import type { ElementType, HTMLAttributes, ReactNode } from 'react';
 
 export interface StackProps<E extends ElementType = 'div'> extends HTMLAttributes<HTMLElement> {
   /**

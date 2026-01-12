@@ -1,5 +1,5 @@
 import { cn } from '@/utils/classnames';
-import { AlertProps } from './Alert.types';
+import type { AlertProps } from './Alert.types';
 import styles from './Alert.module.css';
 
 // Default icons for each variant

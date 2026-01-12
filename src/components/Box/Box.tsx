@@ -1,6 +1,6 @@
-import { ElementType, CSSProperties } from 'react';
+import type { ElementType, CSSProperties } from 'react';
 import { cn } from '@/utils/classnames';
-import { BoxProps } from './Box.types';
+import type { BoxProps } from './Box.types';
 import styles from './Box.module.css';
 
 export function Box<E extends ElementType = 'div'>({

@@ -1,4 +1,5 @@
-import { useEffect, RefObject } from 'react';
+import type { RefObject } from 'react';
+import { useEffect } from 'react';
 import { createFocusTrap } from '@/utils/focus-management';
 
 export function useFocusTrap<T extends HTMLElement = HTMLElement>(
@@ -6,7 +7,7 @@ export function useFocusTrap<T extends HTMLElement = HTMLElement>(
   enabled: boolean = true
 ): void {
   useEffect(() => {
-    if (!enabled || !ref.current) return;
+    if (!enabled || !ref.current) {return;}
 
     const cleanup = createFocusTrap(ref.current);
     return cleanup;

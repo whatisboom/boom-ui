@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor, fireEvent, act } from '../../../tests/test-utils';
 import { SearchCommand } from './SearchCommand';
-import { SearchResult } from './SearchCommand.types';
+import type { SearchResult } from './SearchCommand.types';
 
 describe('SearchCommand - Motion Tests - Results Rendering', () => {
   const mockResults: SearchResult[] = [

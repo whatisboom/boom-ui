@@ -111,6 +111,7 @@ describe('Form', () => {
 
     render(<TestComponent />);
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const emailInput = screen.getByLabelText('Email') as HTMLInputElement;
     await user.type(emailInput, 'test@example.com');
 

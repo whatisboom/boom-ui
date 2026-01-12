@@ -4,7 +4,7 @@ import { Portal } from '../Portal';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useKeyboardShortcut } from '@/hooks/useKeyboardShortcut';
 import { usePopoverPosition } from '@/hooks/usePopoverPosition';
-import { PopoverProps } from '../types';
+import type { PopoverProps } from '../types';
 import styles from './Popover.module.css';
 
 export function Popover({

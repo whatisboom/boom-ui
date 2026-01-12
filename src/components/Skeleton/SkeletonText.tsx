@@ -1,6 +1,6 @@
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 import { Skeleton } from './Skeleton';
-import { SkeletonTextProps } from './Skeleton.types';
+import type { SkeletonTextProps } from './Skeleton.types';
 
 export function SkeletonText({
   lines = 3,

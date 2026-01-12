@@ -1,6 +1,7 @@
-import { Component, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { Component } from 'react';
 import { cn } from '@/utils/classnames';
-import { ErrorBoundaryProps, ErrorBoundaryState, FallbackProps } from './ErrorBoundary.types';
+import type { ErrorBoundaryProps, ErrorBoundaryState, FallbackProps } from './ErrorBoundary.types';
 import { DefaultErrorFallback } from './DefaultErrorFallback';
 import styles from './ErrorBoundary.module.css';
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useTabsContext } from './TabsContext';
-import { TabProps } from './Tabs.types';
+import type { TabProps } from './Tabs.types';
 import { cn } from '@/utils/classnames';
 import styles from './Tabs.module.css';
 

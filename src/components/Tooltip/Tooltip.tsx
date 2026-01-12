@@ -1,6 +1,6 @@
 import { useState, useRef, cloneElement, useEffect } from 'react';
 import { Popover } from '../primitives/Popover';
-import { TooltipProps } from './Tooltip.types';
+import type { TooltipProps } from './Tooltip.types';
 import styles from './Tooltip.module.css';
 import { cn } from '@/utils/classnames';
 

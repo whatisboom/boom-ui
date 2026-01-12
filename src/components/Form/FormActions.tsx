@@ -1,5 +1,5 @@
 import { cn } from '@/utils/classnames';
-import { FormActionsProps } from './FormActions.types';
+import type { FormActionsProps } from './FormActions.types';
 import styles from './Form.module.css';
 
 export const FormActions: React.FC<FormActionsProps> = ({

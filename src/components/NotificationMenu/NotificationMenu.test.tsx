@@ -6,7 +6,7 @@ import {
   NotificationMenuPanel,
   NotificationMenuItem,
 } from './NotificationMenu';
-import { Notification } from './NotificationMenu.types';
+import type { Notification } from './NotificationMenu.types';
 import styles from './NotificationMenu.module.css';
 
 describe('NotificationMenu', () => {

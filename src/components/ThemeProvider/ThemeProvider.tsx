@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, useMemo, useCallback } from 'react';
 import type {
   Theme,
   ResolvedTheme,
@@ -9,7 +9,7 @@ import type {
 const ThemeProviderContext = createContext<ThemeProviderContextValue | undefined>(undefined);
 
 function getSystemTheme(): ResolvedTheme {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') {return 'dark';}
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
@@ -19,7 +19,7 @@ export function ThemeProvider({
   storageKey = 'boom-ui-theme',
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return defaultTheme;
+    if (typeof window === 'undefined') {return defaultTheme;}
 
     const stored = localStorage.getItem(storageKey);
     if (stored === 'light' || stored === 'dark' || stored === 'system') {
@@ -41,7 +41,7 @@ export function ThemeProvider({
   }, [resolvedTheme, theme, storageKey]);
 
   useEffect(() => {
-    if (theme !== 'system') return;
+    if (theme !== 'system') {return;}
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -53,15 +53,18 @@ export function ThemeProvider({
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, [theme]);
 
-  const setTheme = (newTheme: Theme) => {
+  const setTheme = useCallback((newTheme: Theme) => {
     setThemeState(newTheme);
-  };
+  }, []);
 
-  const value: ThemeProviderContextValue = {
-    theme,
-    resolvedTheme,
-    setTheme,
-  };
+  const value: ThemeProviderContextValue = useMemo(
+    () => ({
+      theme,
+      resolvedTheme,
+      setTheme,
+    }),
+    [theme, resolvedTheme, setTheme]
+  );
 
   return (
     <ThemeProviderContext.Provider value={value}>

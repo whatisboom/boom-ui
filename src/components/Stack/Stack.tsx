@@ -1,6 +1,6 @@
-import { ElementType } from 'react';
+import type { ElementType } from 'react';
 import { Box } from '@/components/Box';
-import { StackProps } from './Stack.types';
+import type { StackProps } from './Stack.types';
 
 export function Stack<E extends ElementType = 'div'>({
   direction = 'column',

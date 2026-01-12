@@ -7,7 +7,7 @@ import { TableBody } from './TableBody';
 import { TableRow } from './TableRow';
 import { TableCell } from './TableCell';
 import { TableHeaderCell } from './TableHeaderCell';
-import { ColumnDef } from './Table.types';
+import type { ColumnDef } from './Table.types';
 import styles from './Table.module.css';
 
 interface User {

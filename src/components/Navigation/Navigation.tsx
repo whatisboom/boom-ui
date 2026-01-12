@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NavigationProps, NavItem } from './Navigation.types';
+import type { NavigationProps, NavItem } from './Navigation.types';
 import { cn } from '@/utils/classnames';
 import styles from './Navigation.module.css';
 

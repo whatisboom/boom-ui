@@ -185,7 +185,7 @@ export const CustomFieldRendering: Story = {
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.25rem', fontSize: '0.875rem' }}>
                     {error && <span style={{ color: 'var(--boom-palette-error-500)' }}>{error.message}</span>}
                     <span style={{ marginLeft: 'auto', color: 'var(--boom-palette-neutral-600)' }}>
-                      {field.value?.length || 0} characters
+                      {field.value.length || 0} characters
                     </span>
                   </div>
                 </div>

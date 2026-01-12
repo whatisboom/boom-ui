@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { TabsContext } from './TabsContext';
-import { TabsProps } from './Tabs.types';
+import type { TabsProps } from './Tabs.types';
 import { cn } from '@/utils/classnames';
 import styles from './Tabs.module.css';
 
@@ -16,7 +16,7 @@ export const Tabs = ({
 
   const registerTab = useCallback((tabValue: string, disabled: boolean) => {
     setTabValues((prev) => {
-      if (prev.includes(tabValue)) return prev;
+      if (prev.includes(tabValue)) {return prev;}
       return [...prev, tabValue];
     });
 
@@ -40,18 +40,21 @@ export const Tabs = ({
     });
   }, []);
 
+  const contextValue = useMemo(
+    () => ({
+      activeTab: value,
+      setActiveTab: onChange,
+      orientation,
+      registerTab,
+      unregisterTab,
+      tabValues,
+      disabledTabs,
+    }),
+    [value, onChange, orientation, registerTab, unregisterTab, tabValues, disabledTabs]
+  );
+
   return (
-    <TabsContext.Provider
-      value={{
-        activeTab: value,
-        setActiveTab: onChange,
-        orientation,
-        registerTab,
-        unregisterTab,
-        tabValues,
-        disabledTabs,
-      }}
-    >
+    <TabsContext.Provider value={contextValue}>
       <div className={cn(styles.tabs, styles[orientation], className)}>
         {children}
       </div>

@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import styles from './Table.module.css';
-import { SortIndicatorProps } from './SortIndicator.types';
+import type { SortIndicatorProps } from './SortIndicator.types';
 
 /**
  * SortIndicator displays sort direction icons for table columns

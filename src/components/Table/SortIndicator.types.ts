@@ -1,4 +1,4 @@
-import { SortDirection } from './Table.types';
+import type { SortDirection } from './Table.types';
 
 /**
  * SortIndicator component props

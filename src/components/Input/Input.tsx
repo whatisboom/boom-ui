@@ -1,6 +1,6 @@
 import { forwardRef, useId } from 'react';
 import { cn } from '@/utils/classnames';
-import { InputProps } from './Input.types';
+import type { InputProps } from './Input.types';
 import styles from './Input.module.css';
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(

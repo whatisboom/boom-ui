@@ -1,5 +1,5 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { Size, Variant, MotionProps } from '@/types';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { Size, Variant, MotionProps } from '@/types';
 
 // Omit conflicting event handlers that Framer Motion overrides
 type ButtonHTMLProps = Omit<

@@ -1,5 +1,5 @@
-import { ReactNode, HTMLAttributes } from 'react';
-import { TextAlign } from '@/types';
+import type { ReactNode, HTMLAttributes } from 'react';
+import type { TextAlign } from '@/types';
 
 /**
  * Sort direction

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SearchCommand } from './SearchCommand';
-import { SearchResult } from './SearchCommand.types';
+import type { SearchResult } from './SearchCommand.types';
 import { Button } from '../Button';
 
 const meta: Meta<typeof SearchCommand> = {

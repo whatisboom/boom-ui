@@ -1,5 +1,5 @@
-import { ElementType } from 'react';
-import { PolymorphicProps } from '@/types';
+import type { ElementType } from 'react';
+import type { PolymorphicProps } from '@/types';
 
 export type TypographyVariant =
   | 'h1'

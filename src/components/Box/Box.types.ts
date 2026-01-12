@@ -1,5 +1,5 @@
-import { ElementType, CSSProperties } from 'react';
-import { PolymorphicProps } from '@/types';
+import type { ElementType, CSSProperties } from 'react';
+import type { PolymorphicProps } from '@/types';
 
 export interface BoxBaseProps {
   /**

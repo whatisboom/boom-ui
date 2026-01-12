@@ -1,5 +1,5 @@
-import { InputHTMLAttributes } from 'react';
-import { Size } from '@/types';
+import type { InputHTMLAttributes } from 'react';
+import type { Size } from '@/types';
 
 type CheckboxHTMLProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,

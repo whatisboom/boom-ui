@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { Modal } from '../primitives/Modal';
 import { useDebounce } from '@/hooks/useDebounce';
-import { SearchCommandProps, SearchResult } from './SearchCommand.types';
+import type { SearchCommandProps, SearchResult } from './SearchCommand.types';
 import styles from './SearchCommand.module.css';
 
 export function SearchCommand({
@@ -38,7 +38,7 @@ export function SearchCommand({
   const displayResults = query ? results : recentSearches;
 
   const groupedResults = useMemo(() => {
-    const groups: Record<string, SearchResult[]> = {};
+    const groups: Partial<Record<string, SearchResult[]>> = {};
 
     displayResults.forEach((result) => {
       const category = result.category || 'Results';
@@ -115,11 +115,15 @@ export function SearchCommand({
           ) : displayResults.length === 0 && query ? (
             <div className={styles.emptyState}>{emptyMessage}</div>
           ) : (
-            Object.entries(groupedResults).map(([category, categoryResults]) => (
-              <div key={category}>
-                <div className={styles.category}>{category}</div>
-                <ul className={styles.resultsList}>
-                  {categoryResults.map((result) => {
+            Object.entries(groupedResults).map(([category, categoryResults]) => {
+              if (!categoryResults) {
+                return null;
+              }
+              return (
+                <div key={category}>
+                  <div className={styles.category}>{category}</div>
+                  <ul className={styles.resultsList}>
+                    {categoryResults.map((result) => {
                     const currentIndex = resultIndex++;
                     return (
                       <li key={result.id}>
@@ -150,9 +154,10 @@ export function SearchCommand({
                       </li>
                     );
                   })}
-                </ul>
-              </div>
-            ))
+                  </ul>
+                </div>
+              );
+            })
           )}
         </div>
 

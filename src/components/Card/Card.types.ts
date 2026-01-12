@@ -1,5 +1,5 @@
-import { ElementType, CSSProperties, ReactNode } from 'react';
-import { PolymorphicProps } from '@/types';
+import type { ElementType, CSSProperties, ReactNode } from 'react';
+import type { PolymorphicProps } from '@/types';
 
 export type CardVariant = 'flat' | 'raised' | 'elevated';
 

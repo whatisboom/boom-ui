@@ -310,6 +310,7 @@ describe('TableHeaderCell', () => {
         </table>
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
       expect(checkbox.checked).toBe(true);
     });
@@ -325,6 +326,7 @@ describe('TableHeaderCell', () => {
         </table>
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
       expect(checkbox.indeterminate).toBe(true);
     });

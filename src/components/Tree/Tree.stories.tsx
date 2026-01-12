@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Tree } from './Tree';
-import { TreeNode } from './Tree.types';
+import type { TreeNode } from './Tree.types';
 
 const meta: Meta<typeof Tree> = {
   title: 'Data & Content/Tree',

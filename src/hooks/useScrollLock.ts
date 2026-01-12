@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 export function useScrollLock(enabled: boolean = true): void {
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled) {return;}
 
     const originalOverflow = document.body.style.overflow;
     const originalPaddingRight = document.body.style.paddingRight;

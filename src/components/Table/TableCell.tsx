@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { cn } from '@/utils/classnames';
-import { TableCellProps } from './Table.types';
+import type { TableCellProps } from './Table.types';
 import styles from './Table.module.css';
 
 export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(

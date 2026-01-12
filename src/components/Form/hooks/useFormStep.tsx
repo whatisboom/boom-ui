@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { FormStepperContextValue } from '../FormStepper.types';
+import type { FormStepperContextValue } from '../FormStepper.types';
 
 export const FormStepperContext = createContext<FormStepperContextValue | undefined>(undefined);
 

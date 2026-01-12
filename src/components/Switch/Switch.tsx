@@ -1,6 +1,6 @@
 import { forwardRef, useId } from 'react';
 import { cn } from '@/utils/classnames';
-import { SwitchProps } from './Switch.types';
+import type { SwitchProps } from './Switch.types';
 import styles from './Switch.module.css';
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(

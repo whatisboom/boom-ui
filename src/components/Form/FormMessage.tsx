@@ -1,5 +1,5 @@
 import { cn } from '@/utils/classnames';
-import { FormMessageProps } from './FormMessage.types';
+import type { FormMessageProps } from './FormMessage.types';
 import styles from './Form.module.css';
 
 export const FormMessage: React.FC<FormMessageProps> = ({

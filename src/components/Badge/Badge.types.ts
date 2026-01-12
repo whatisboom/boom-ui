@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { Size } from '@/types';
+import type { ReactNode } from 'react';
+import type { Size } from '@/types';
 
 export type BadgeVariant = 'primary' | 'success' | 'warning' | 'error' | 'info' | 'neutral';
 

@@ -101,7 +101,7 @@ describe('ErrorBoundary', () => {
       const user = userEvent.setup();
       let shouldThrow = true;
       const { rerender } = render(
-        <ErrorBoundary key={shouldThrow ? 'error' : 'no-error'}>
+        <ErrorBoundary key="error">
           <ThrowError shouldThrow={shouldThrow} />
         </ErrorBoundary>
       );
@@ -115,7 +115,7 @@ describe('ErrorBoundary', () => {
 
       // Re-render with no error and new key to force remount
       rerender(
-        <ErrorBoundary key={shouldThrow ? 'error' : 'no-error'}>
+        <ErrorBoundary key="no-error">
           <ThrowError shouldThrow={shouldThrow} />
         </ErrorBoundary>
       );

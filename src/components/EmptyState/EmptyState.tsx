@@ -1,6 +1,6 @@
 import { Stack } from '../Stack';
 import { Typography } from '../Typography';
-import { EmptyStateProps } from './EmptyState.types';
+import type { EmptyStateProps } from './EmptyState.types';
 import styles from './EmptyState.module.css';
 
 export function EmptyState({
