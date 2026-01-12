@@ -3,9 +3,11 @@ dist
 coverage
 .DS_Store
 *.log
+*.txt
 .storybook-out
 storybook-static
 .vite
 .claude
 .worktrees/
 .heap-snapshots/
+docs/plans/

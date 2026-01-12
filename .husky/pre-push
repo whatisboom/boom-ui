@@ -33,6 +33,15 @@ else
 fi
 echo ""
 
+echo "🔒 Security audit (high/critical vulnerabilities)..."
+if npm audit --audit-level=high > /dev/null 2>&1; then
+  echo "✅ Security audit passed"
+else
+  echo "❌ Security audit failed (high or critical vulnerabilities detected)"
+  failed_checks="$failed_checks audit"
+fi
+echo ""
+
 # Check if any checks failed
 if [ -n "$failed_checks" ]; then
   echo "❌ Pre-push checks failed:$failed_checks"
@@ -43,6 +52,7 @@ if [ -n "$failed_checks" ]; then
       typecheck) echo "  npm run typecheck" ;;
       lint) echo "  npm run lint" ;;
       tests) echo "  npm run test:ci" ;;
+      audit) echo "  npm audit" ;;
     esac
   done
   echo ""
