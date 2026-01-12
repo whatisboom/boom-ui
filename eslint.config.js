@@ -33,6 +33,13 @@ export default [
     },
     rules: {
       ...tsPlugin.configs.recommended.rules,
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/no-misused-promises': 'error',
+      '@typescript-eslint/await-thenable': 'error',
+      '@typescript-eslint/no-unnecessary-condition': 'error',
+      '@typescript-eslint/prefer-optional-chain': 'error',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
     },
   },
 
@@ -44,6 +51,11 @@ export default [
     },
     rules: {
       ...reactPlugin.configs.recommended.rules,
+      'react/no-unstable-nested-components': 'error',
+      'react/jsx-no-constructed-context-values': 'warn',
+      'react/jsx-no-useless-fragment': 'error',
+      'react/self-closing-comp': 'error',
+      'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
     },
     settings: {
       react: {
@@ -121,6 +133,11 @@ export default [
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off', // TypeScript provides type checking
       '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-unused-vars': 'error',
+      'prefer-const': 'error',
+      'no-var': 'error',
+      'eqeqeq': ['error', 'smart'],
+      'curly': ['error', 'all'],
     },
   },
 ];
