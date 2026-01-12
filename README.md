@@ -286,6 +286,19 @@ const buttonProps: ButtonProps = {
 - Safari (latest)
 - Edge (latest)
 
+## Security
+
+Security is a top priority for @whatisboom/boom-ui. We follow industry best practices for:
+
+- **XSS Prevention**: All components use React's built-in escaping, no `dangerouslySetInnerHTML`
+- **Dependency Security**: Automated Dependabot scans, pre-push vulnerability checks
+- **Supply Chain**: npm provenance attestations, OIDC authentication
+- **Type Safety**: Strict TypeScript mode with no `any` types
+
+For security vulnerabilities, please use [GitHub Security Advisories](https://github.com/whatisboom/boom-ui/security/advisories/new).
+
+See [SECURITY.md](./SECURITY.md) for our complete security policy.
+
 ## License
 
 MIT

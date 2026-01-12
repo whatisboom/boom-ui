@@ -176,6 +176,36 @@ ComponentName/
 6. Use shared types from `src/types/index.ts` where appropriate (Size, Variant, PolymorphicProps)
 7. Write comprehensive tests including `axe()` accessibility check
 8. Create Storybook stories showing all variants
+9. **Review [SECURITY_CHECKLIST.md](./SECURITY_CHECKLIST.md) before submitting PR**
+
+### Security Guidelines
+
+**CRITICAL: All code must follow security best practices documented in [SECURITY.md](./SECURITY.md).**
+
+**Never use these patterns:**
+- ❌ `dangerouslySetInnerHTML` (unless explicitly justified with DOMPurify sanitization)
+- ❌ `innerHTML` or `outerHTML` manipulation
+- ❌ `eval()` or `Function()` constructor
+- ❌ `javascript:` protocol in URLs
+- ❌ Arbitrary style objects from untrusted sources
+
+**Always use these patterns:**
+- ✅ React's built-in prop escaping for user content
+- ✅ Type-safe props (no `any` types)
+- ✅ Validated URLs (check protocol)
+- ✅ Controlled enums for variants/types
+
+**Before submitting PRs:**
+- Run `npm audit` (pre-push hook enforces this)
+- Review [SECURITY_CHECKLIST.md](./SECURITY_CHECKLIST.md) for XSS, injection, and memory leak patterns
+- Justify any new dependencies with security rationale
+- Never commit secrets, API keys, or credentials
+
+**For vulnerability reports:**
+- Use [GitHub Security Advisories](https://github.com/whatisboom/boom-ui/security/advisories/new)
+- Never report security issues via public GitHub issues
+
+See [SECURITY.md](./SECURITY.md) for complete policy.
 
 ### Style Implementation
 - Use CSS variables from tokens, never hardcode colors/spacing
