@@ -1,5 +1,5 @@
-import { ReactNode, CSSProperties, VideoHTMLAttributes, ElementType } from 'react';
-import { MotionProps, PolymorphicProps } from '@/types';
+import type { ReactNode, CSSProperties, VideoHTMLAttributes, ElementType } from 'react';
+import type { MotionProps, PolymorphicProps } from '@/types';
 
 /**
  * Layout variants for Hero component

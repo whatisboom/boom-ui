@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '../../../tests/test-utils';
 import { Navigation } from './Navigation';
-import { NavItem } from './Navigation.types';
+import type { NavItem } from './Navigation.types';
 import styles from './Navigation.module.css';
 
 describe('Navigation', () => {

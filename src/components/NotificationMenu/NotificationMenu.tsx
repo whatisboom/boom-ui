@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useRef, useEffect } from 'react';
-import {
+import { createContext, useContext, useState, useRef, useEffect, useMemo } from 'react';
+import type {
   NotificationMenuProps,
   NotificationMenuTriggerProps,
   NotificationMenuPanelProps,
@@ -32,8 +32,13 @@ export function NotificationMenu({ children }: NotificationMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
+  const value = useMemo(
+    () => ({ isOpen, setIsOpen, triggerRef }),
+    [isOpen]
+  );
+
   return (
-    <NotificationMenuContext.Provider value={{ isOpen, setIsOpen, triggerRef }}>
+    <NotificationMenuContext.Provider value={value}>
       {children}
     </NotificationMenuContext.Provider>
   );
@@ -85,9 +90,9 @@ export function NotificationMenuItem({
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
 
-    if (minutes < 1) return 'Just now';
-    if (minutes < 60) return `${minutes}m ago`;
-    if (hours < 24) return `${hours}h ago`;
+    if (minutes < 1) {return 'Just now';}
+    if (minutes < 60) {return `${minutes}m ago`;}
+    if (hours < 24) {return `${hours}h ago`;}
     return `${days}d ago`;
   };
 
@@ -147,7 +152,7 @@ export function NotificationMenuPanel({
 
   // Handle click outside - exclude both panel and trigger from detection
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {return;}
 
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Node;

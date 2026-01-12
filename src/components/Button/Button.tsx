@@ -1,7 +1,8 @@
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
+import { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/classnames';
-import { ButtonProps } from './Button.types';
+import type { ButtonProps } from './Button.types';
 import styles from './Button.module.css';
 
 type MotionButtonProps = ComponentPropsWithoutRef<typeof motion.button>;

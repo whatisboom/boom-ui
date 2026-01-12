@@ -1,9 +1,11 @@
 import { vi } from 'vitest';
-import React, { Fragment, createElement, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { Fragment, createElement } from 'react';
+import type * as FramerMotion from 'framer-motion';
 
 // Mock motion components to render as plain elements
 vi.mock('framer-motion', async () => {
-  const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
+  const actual = await vi.importActual<typeof FramerMotion>('framer-motion');
 
   // Cache components to maintain referential equality across re-renders
   const componentCache = new Map<string, React.ForwardRefExoticComponent<Record<string, unknown>>>();
@@ -96,7 +98,9 @@ describe('Form - Motion Tests', () => {
       </Form>
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const emailInput = screen.getByLabelText('Email') as HTMLInputElement;
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const passwordInput = screen.getByLabelText('Password') as HTMLInputElement;
 
     // Use fireEvent.change directly to bypass userEvent issues

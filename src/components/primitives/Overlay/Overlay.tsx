@@ -4,7 +4,7 @@ import { Portal } from '../Portal';
 import { useScrollLock } from '@/hooks/useScrollLock';
 import { useKeyboardShortcut } from '@/hooks/useKeyboardShortcut';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
-import { OverlayProps } from '../types';
+import type { OverlayProps } from '../types';
 import styles from './Overlay.module.css';
 
 export function Overlay({

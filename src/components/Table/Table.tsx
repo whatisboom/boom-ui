@@ -1,7 +1,8 @@
-import { forwardRef, useMemo, ReactElement } from 'react';
+import type { ReactElement } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { cn } from '@/utils/classnames';
 import { TableContext } from './TableContext';
-import { TableProps, TableContextValue } from './Table.types';
+import type { TableProps, TableContextValue } from './Table.types';
 import { Pagination } from './Pagination';
 import styles from './Table.module.css';
 

@@ -1,6 +1,6 @@
 import { forwardRef, useId, useEffect, useRef } from 'react';
 import { cn } from '@/utils/classnames';
-import { TextareaProps } from './Textarea.types';
+import type { TextareaProps } from './Textarea.types';
 import styles from './Textarea.module.css';
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -32,11 +32,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const helperTextId = `${id}-helper`;
 
     const internalRef = useRef<HTMLTextAreaElement>(null);
-    const textareaRef = (ref as React.RefObject<HTMLTextAreaElement>) || internalRef;
+    const textareaRef = ref ? (ref as React.RefObject<HTMLTextAreaElement>) : internalRef;
 
     // Auto-resize functionality
     useEffect(() => {
-      if (resize !== 'auto' || !textareaRef.current) return;
+      if (resize !== 'auto' || !textareaRef.current) {return;}
 
       const textarea = textareaRef.current;
       const updateHeight = () => {

@@ -1,5 +1,5 @@
-import { CSSProperties } from 'react';
-import { SkeletonProps } from './Skeleton.types';
+import type { CSSProperties } from 'react';
+import type { SkeletonProps } from './Skeleton.types';
 import styles from './Skeleton.module.css';
 
 export function Skeleton({
@@ -13,7 +13,7 @@ export function Skeleton({
   ...restProps
 }: SkeletonProps) {
   const formatDimension = (value: string | number | undefined): string | undefined => {
-    if (value === undefined) return undefined;
+    if (value === undefined) {return undefined;}
     return typeof value === 'number' ? `${value}px` : value;
   };
 
@@ -25,7 +25,7 @@ export function Skeleton({
 
   // Add random width variation for text variant
   const getTextWidth = (index: number): string | undefined => {
-    if (variant !== 'text' || width !== undefined) return undefined;
+    if (variant !== 'text' || width !== undefined) {return undefined;}
     const widths = ['100%', '95%', '98%', '92%', '97%'];
     return widths[index % widths.length];
   };

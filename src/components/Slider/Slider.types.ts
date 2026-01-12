@@ -1,4 +1,4 @@
-import { Size } from '@/types';
+import type { Size } from '@/types';
 
 export interface BaseSliderProps {
   /** Label text */

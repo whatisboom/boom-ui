@@ -1,6 +1,7 @@
-import { Controller, UseFormReturn, Path } from 'react-hook-form';
-import { z } from 'zod';
-import { FieldProps, FieldComponent } from './Form.types';
+import type { UseFormReturn, Path } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
+import type { z } from 'zod';
+import type { FieldProps, FieldComponent } from './Form.types';
 import { Input } from '../Input';
 import { Textarea } from '../Textarea';
 import { Checkbox } from '../Checkbox';
@@ -42,8 +43,8 @@ export function createFieldComponent<TSchema extends z.ZodObject<z.ZodRawShape>>
           render={({ field, fieldState }) => {
             // Custom render prop takes precedence
             if (render) {
-              const customResult = render({ field, error: fieldState.error });
-              return <>{customResult}</>;
+              // Fragment ensures ReactElement type (Controller requires ReactElement, not ReactNode)
+              return <>{render({ field, error: fieldState.error })}</>;
             }
 
             // Common props for all field types

@@ -1,5 +1,5 @@
 import { useTabsContext } from './TabsContext';
-import { TabPanelProps } from './Tabs.types';
+import type { TabPanelProps } from './Tabs.types';
 import { cn } from '@/utils/classnames';
 import styles from './Tabs.module.css';
 

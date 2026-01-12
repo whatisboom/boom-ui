@@ -1,6 +1,6 @@
 import { forwardRef, useId, useRef } from 'react';
 import { cn } from '@/utils/classnames';
-import { SliderProps } from './Slider.types';
+import type { SliderProps } from './Slider.types';
 import styles from './Slider.module.css';
 
 // Helper utilities
@@ -68,7 +68,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
 
     // Calculate value from position
     const getValueFromPosition = (clientX: number): number => {
-      if (!trackRef.current) return min;
+      if (!trackRef.current) {return min;}
 
       const rect = trackRef.current.getBoundingClientRect();
       const percentage = (clientX - rect.left) / rect.width;
@@ -95,7 +95,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
 
     // Handle track click
     const handleTrackClick = (e: React.MouseEvent) => {
-      if (disabled || readOnly) return;
+      if (disabled || readOnly) {return;}
 
       const newValue = getValueFromPosition(e.clientX);
 
@@ -113,7 +113,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
 
     // Handle mouse drag
     const handleMouseDown = (handle: 'start' | 'end') => (e: React.MouseEvent) => {
-      if (disabled || readOnly) return;
+      if (disabled || readOnly) {return;}
 
       e.preventDefault();
       isDraggingRef.current = true;
@@ -137,7 +137,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
 
     // Handle touch drag
     const handleTouchStart = (handle: 'start' | 'end') => (e: React.TouchEvent) => {
-      if (disabled || readOnly) return;
+      if (disabled || readOnly) {return;}
 
       e.preventDefault();
       isDraggingRef.current = true;
@@ -163,7 +163,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
 
     // Handle keyboard navigation
     const handleKeyDown = (handle: 'start' | 'end') => (e: React.KeyboardEvent) => {
-      if (disabled || readOnly) return;
+      if (disabled || readOnly) {return;}
 
       const currentVal = mode === 'single'
         ? value as number

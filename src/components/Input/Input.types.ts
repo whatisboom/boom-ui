@@ -1,5 +1,5 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
-import { Size } from '@/types';
+import type { InputHTMLAttributes, ReactNode } from 'react';
+import type { Size } from '@/types';
 
 type InputHTMLProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
 

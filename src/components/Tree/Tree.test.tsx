@@ -3,7 +3,7 @@ import { render, screen, act } from '../../../tests/test-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { Tree } from './Tree';
-import { TreeNode } from './Tree.types';
+import type { TreeNode } from './Tree.types';
 
 describe('Tree', () => {
   const mockData: TreeNode[] = [

@@ -1,6 +1,6 @@
-import { ElementType } from 'react';
+import type { ElementType } from 'react';
 import { cn } from '@/utils/classnames';
-import { TypographyProps } from './Typography.types';
+import type { TypographyProps } from './Typography.types';
 import styles from './Typography.module.css';
 
 const variantToElement = {

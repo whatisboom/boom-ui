@@ -1,6 +1,6 @@
 import { Card } from '../Card';
 import { Skeleton } from './Skeleton';
-import { SkeletonCardProps } from './Skeleton.types';
+import type { SkeletonCardProps } from './Skeleton.types';
 import { Stack } from '../Stack';
 
 export function SkeletonCard({

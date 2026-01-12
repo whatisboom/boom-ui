@@ -1,6 +1,7 @@
-import { forwardRef, KeyboardEvent, MouseEvent, useEffect, useRef } from 'react';
+import type { KeyboardEvent, MouseEvent} from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 import { cn } from '@/utils/classnames';
-import { TableHeaderCellProps } from './Table.types';
+import type { TableHeaderCellProps } from './Table.types';
 import { SortIndicator } from './SortIndicator';
 import { Checkbox } from '../Checkbox';
 import styles from './Table.module.css';
@@ -44,9 +45,9 @@ export const TableHeaderCell = forwardRef<HTMLTableCellElement, TableHeaderCellP
     };
 
     const getAriaSort = (): 'ascending' | 'descending' | 'none' | undefined => {
-      if (!sortable) return undefined;
-      if (sortDirection === 'asc') return 'ascending';
-      if (sortDirection === 'desc') return 'descending';
+      if (!sortable) {return undefined;}
+      if (sortDirection === 'asc') {return 'ascending';}
+      if (sortDirection === 'desc') {return 'descending';}
       return 'none';
     };
 

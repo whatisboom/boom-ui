@@ -1,8 +1,8 @@
-import { createContext, useState, useCallback } from 'react';
+import { createContext, useState, useCallback, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Portal } from '../primitives/Portal';
 import { Toast as ToastComponent } from './Toast';
-import {
+import type {
   Toast,
   ToastOptions,
   ToastContextValue,
@@ -72,8 +72,13 @@ export const ToastProvider = ({
     }
   };
 
+  const contextValue = useMemo(
+    () => ({ toasts, toast, dismiss, dismissAll }),
+    [toasts, toast, dismiss, dismissAll]
+  );
+
   return (
-    <ToastContext.Provider value={{ toasts, toast, dismiss, dismissAll }}>
+    <ToastContext.Provider value={contextValue}>
       {children}
       <Portal>
         <div className={`${styles.container} ${getPositionClass(position)}`}>

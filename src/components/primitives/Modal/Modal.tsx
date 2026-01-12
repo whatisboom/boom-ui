@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { motion } from 'framer-motion';
 import { Overlay } from '../Overlay';
-import { ModalProps } from '../types';
+import type { ModalProps } from '../types';
 import { cn } from '@/utils/classnames';
 import styles from './Modal.module.css';
 

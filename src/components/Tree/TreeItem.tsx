@@ -1,8 +1,9 @@
-import { useRef, useEffect, KeyboardEvent } from 'react';
+import type { KeyboardEvent } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils/classnames';
 import { useTreeContext } from './TreeContext';
-import { TreeItemProps } from './Tree.types';
+import type { TreeItemProps } from './Tree.types';
 import styles from './Tree.module.css';
 
 export const TreeItem = ({ node, depth, index, siblingCount }: TreeItemProps) => {
@@ -57,7 +58,7 @@ export const TreeItem = ({ node, depth, index, siblingCount }: TreeItemProps) =>
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (node.disabled) return;
+    if (node.disabled) {return;}
 
     switch (e.key) {
       case 'Enter':

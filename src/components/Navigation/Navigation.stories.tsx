@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Navigation } from './Navigation';
-import { NavItem } from './Navigation.types';
+import type { NavItem } from './Navigation.types';
 
 const meta = {
   title: 'Navigation & Menus/Navigation',

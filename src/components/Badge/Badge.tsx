@@ -1,5 +1,5 @@
 import { cn } from '@/utils/classnames';
-import { BadgeProps } from './Badge.types';
+import type { BadgeProps } from './Badge.types';
 import styles from './Badge.module.css';
 
 export const Badge = ({

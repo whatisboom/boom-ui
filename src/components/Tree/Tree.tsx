@@ -1,8 +1,9 @@
-import { useState, useCallback, useMemo, useRef, RefObject, KeyboardEvent } from 'react';
+import type { RefObject, KeyboardEvent } from 'react';
+import { useState, useCallback, useMemo, useRef } from 'react';
 import { cn } from '@/utils/classnames';
 import { TreeContext } from './TreeContext';
 import { TreeItem } from './TreeItem';
-import { TreeProps, TreeNode } from './Tree.types';
+import type { TreeProps, TreeNode } from './Tree.types';
 import styles from './Tree.module.css';
 
 export const Tree = ({
@@ -76,10 +77,10 @@ export const Tree = ({
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
-      if (!focusedId) return;
+      if (!focusedId) {return;}
 
       const currentIndex = visibleItems.findIndex((item) => item.id === focusedId);
-      if (currentIndex === -1) return;
+      if (currentIndex === -1) {return;}
 
       let nextIndex = currentIndex;
 

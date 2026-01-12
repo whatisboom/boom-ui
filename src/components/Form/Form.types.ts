@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { z } from 'zod';
-import {
+import type { ReactNode } from 'react';
+import type { z } from 'zod';
+import type {
   UseFormReturn,
   DefaultValues,
   Path,

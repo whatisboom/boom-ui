@@ -1,6 +1,6 @@
-import { KeyboardEvent } from 'react';
+import type { KeyboardEvent } from 'react';
 import { useTabsContext } from './TabsContext';
-import { TabListProps } from './Tabs.types';
+import type { TabListProps } from './Tabs.types';
 import { cn } from '@/utils/classnames';
 import styles from './Tabs.module.css';
 
@@ -12,7 +12,7 @@ export const TabList = ({ children, className }: TabListProps) => {
       (value) => document.activeElement?.getAttribute('data-value') === value
     );
 
-    if (currentIndex === -1) return;
+    if (currentIndex === -1) {return;}
 
     let nextIndex = currentIndex;
     const enabledTabs = tabValues.filter((v) => !disabledTabs.has(v));

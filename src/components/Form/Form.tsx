@@ -1,9 +1,10 @@
 import { forwardRef, useImperativeHandle, useMemo } from 'react';
-import { useForm, DefaultValues } from 'react-hook-form';
+import type { DefaultValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
-import { z } from 'zod';
+import type { z } from 'zod';
 import { cn } from '@/utils/classnames';
-import { FormProps, FormHandle } from './Form.types';
+import type { FormProps, FormHandle } from './Form.types';
 import { createFieldComponent } from './createFieldComponent';
 import styles from './Form.module.css';
 
@@ -25,11 +26,11 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
 
   // Extract field names from schema and create type-appropriate defaults
   const getDefaultValues = (): DefaultValues<FormInput> => {
-    if (defaultValues) return defaultValues as DefaultValues<FormInput>;
+    if (defaultValues) {return defaultValues as DefaultValues<FormInput>;}
 
     // Generate type-appropriate default values for schema fields
     const defaults: Record<string, unknown> = {};
-    const shape = schema.shape as z.ZodRawShape;
+    const shape = schema.shape;
 
     Object.keys(shape).forEach(key => {
       const field = shape[key] as z.ZodTypeAny;
@@ -52,25 +53,27 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
     const def = (field as unknown as { _def: ZodInternalDef })._def;
 
     // Unwrap optional/nullable/default schemas to get the inner type
-    let innerType: { _def: ZodInternalDef } | null = field as unknown as { _def: ZodInternalDef };
-    let typeName = def?.typeName;
+    let innerType = field as unknown as { _def: ZodInternalDef };
+    let typeName = def.typeName;
 
     while (typeName === 'ZodOptional' ||
            typeName === 'ZodNullable' ||
            typeName === 'ZodDefault') {
-      const nextType = innerType?._def?.innerType || innerType?._def?.schema;
-      if (!nextType) break;
+      const nextType = innerType._def.innerType || innerType._def.schema;
+      if (!nextType) {
+        break;
+      }
       innerType = nextType as unknown as { _def: ZodInternalDef };
-      typeName = innerType?._def?.typeName;
+      typeName = innerType._def.typeName;
     }
 
     // Return undefined for optional/nullable fields
-    if (def?.typeName === 'ZodOptional' || def?.typeName === 'ZodNullable') {
+    if (def.typeName === 'ZodOptional' || def.typeName === 'ZodNullable') {
       return undefined;
     }
 
     // Return type-specific defaults based on the inner type
-    const innerTypeName = innerType?._def?.typeName || typeName;
+    const innerTypeName = innerType._def.typeName;
     switch (innerTypeName) {
       case 'ZodString':
         return '';
@@ -128,7 +131,9 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
 
   return (
     <form
-      onSubmit={form.handleSubmit(handleSubmit)}
+      onSubmit={(e) => {
+        void form.handleSubmit(handleSubmit)(e);
+      }}
       className={cn(styles.form, className)}
       noValidate
       {...props}

@@ -1,7 +1,8 @@
-import { ElementType, useMemo } from 'react';
+import type { ElementType} from 'react';
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/classnames';
-import { CardProps } from './Card.types';
+import type { CardProps } from './Card.types';
 import styles from './Card.module.css';
 
 export function Card<E extends ElementType = 'div'>({
@@ -19,9 +20,7 @@ export function Card<E extends ElementType = 'div'>({
 
   // Build inline styles with padding
   const cardStyle = {
-    ...(padding !== undefined && {
-      padding: `var(--boom-spacing-${padding})`,
-    }),
+    padding: `var(--boom-spacing-${padding})`,
     ...style,
   };
 

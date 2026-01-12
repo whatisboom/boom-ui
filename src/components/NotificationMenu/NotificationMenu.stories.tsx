@@ -4,7 +4,7 @@ import {
   NotificationMenuTrigger,
   NotificationMenuPanel,
 } from './NotificationMenu';
-import { Notification } from './NotificationMenu.types';
+import type { Notification } from './NotificationMenu.types';
 
 const meta = {
   title: 'Navigation & Menus/Notification Menu',

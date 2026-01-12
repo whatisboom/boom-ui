@@ -1,7 +1,7 @@
 import { Stack } from '../Stack';
 import { Typography } from '../Typography';
 import { Button } from '../Button';
-import { FallbackProps } from './ErrorBoundary.types';
+import type { FallbackProps } from './ErrorBoundary.types';
 import styles from './ErrorBoundary.module.css';
 
 const ErrorIcon = () => (

@@ -1,5 +1,5 @@
-import { SelectHTMLAttributes } from 'react';
-import { Size } from '@/types';
+import type { SelectHTMLAttributes } from 'react';
+import type { Size } from '@/types';
 
 export interface SelectOption {
   value: string;

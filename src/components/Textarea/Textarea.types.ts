@@ -1,5 +1,5 @@
-import { TextareaHTMLAttributes } from 'react';
-import { Size } from '@/types';
+import type { TextareaHTMLAttributes } from 'react';
+import type { Size } from '@/types';
 
 type TextareaHTMLProps = Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,

@@ -19,8 +19,8 @@ describe('cn (classnames utility)', () => {
   });
 
   it('should handle conditional classes', () => {
-    const isActive = true;
-    const isDisabled = false;
+    const isActive = Math.random() > -1; // Always true, but TypeScript doesn't know
+    const isDisabled = Math.random() < -1; // Always false, but TypeScript doesn't know
     expect(cn('base', isActive && 'active', isDisabled && 'disabled')).toBe('base active');
   });
 });

@@ -1,5 +1,5 @@
 import { cn } from '@/utils/classnames';
-import { ProgressProps } from './Progress.types';
+import type { ProgressProps } from './Progress.types';
 import styles from './Progress.module.css';
 
 export const Progress = ({

@@ -6,7 +6,7 @@ import { TableBody } from './TableBody';
 import { TableRow } from './TableRow';
 import { TableCell } from './TableCell';
 import { TableHeaderCell } from './TableHeaderCell';
-import { ColumnDef, SortState, SortDirection, RowSelectionState, PaginationState } from './Table.types';
+import type { ColumnDef, SortState, SortDirection, RowSelectionState, PaginationState } from './Table.types';
 
 interface User {
   id: number;
@@ -218,12 +218,12 @@ export const StickyHeader: Story = {
  * Helper function to sort data based on SortState
  */
 function sortData<T>(data: T[], sorting: SortState[], columns: ColumnDef<T>[]): T[] {
-  if (!sorting.length) return data;
+  if (!sorting.length) {return data;}
 
   return [...data].sort((a, b) => {
     for (const sort of sorting) {
       const column = columns.find((col) => col.id === sort.columnId);
-      if (!column) continue;
+      if (!column) {continue;}
 
       let aValue: unknown;
       let bValue: unknown;

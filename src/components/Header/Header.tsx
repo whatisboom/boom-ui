@@ -1,4 +1,4 @@
-import { HeaderProps } from './Header.types';
+import type { HeaderProps } from './Header.types';
 import { cn } from '@/utils/classnames';
 import styles from './Header.module.css';
 

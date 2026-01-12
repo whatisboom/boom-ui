@@ -1,8 +1,9 @@
-import { ElementType, CSSProperties, useMemo } from 'react';
+import type { ElementType, CSSProperties} from 'react';
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/classnames';
 import { Button } from '@/components/Button';
-import { HeroProps } from './Hero.types';
+import type { HeroProps } from './Hero.types';
 import styles from './Hero.module.css';
 
 export function Hero<E extends ElementType = 'section'>({
@@ -48,7 +49,9 @@ export function Hero<E extends ElementType = 'section'>({
 
   // Render background media
   const renderBackgroundMedia = () => {
-    if (!backgroundMedia) return null;
+    if (!backgroundMedia) {
+      return null;
+    }
 
     if (backgroundMedia.type === 'video') {
       return (
@@ -75,29 +78,26 @@ export function Hero<E extends ElementType = 'section'>({
       );
     }
 
-    if (backgroundMedia.type === 'image') {
-      return (
-        <>
-          <img
-            src={backgroundMedia.src}
-            alt={backgroundMedia.alt || ''}
-            className={styles.backgroundImage}
-            aria-hidden={!backgroundMedia.alt}
-          />
-          <div
-            className={styles.overlay}
-            style={{ opacity: backgroundMedia.overlayOpacity ?? 0.3 }}
-          />
-        </>
-      );
-    }
-
-    return null;
+    // At this point, type must be 'image'
+    return (
+      <>
+        <img
+          src={backgroundMedia.src}
+          alt={backgroundMedia.alt || ''}
+          className={styles.backgroundImage}
+          aria-hidden={!backgroundMedia.alt}
+        />
+        <div
+          className={styles.overlay}
+          style={{ opacity: backgroundMedia.overlayOpacity ?? 0.3 }}
+        />
+      </>
+    );
   };
 
   // Render CTAs
   const renderCTAs = () => {
-    if (!primaryCTA && !secondaryCTA) return null;
+    if (!primaryCTA && !secondaryCTA) {return null;}
 
     return (
       <div className={styles.ctaContainer}>

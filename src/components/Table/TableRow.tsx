@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { cn } from '@/utils/classnames';
-import { TableRowProps } from './Table.types';
+import type { TableRowProps } from './Table.types';
 import { Checkbox } from '../Checkbox';
 import styles from './Table.module.css';
 
@@ -45,7 +45,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
         {showCheckbox && (
           <td className={styles.selectionCheckbox} onClick={handleCheckboxClick}>
             <Checkbox
-              checked={selected ?? false}
+              checked={selected}
               onChange={handleCheckboxChange}
               aria-label="Select row"
             />

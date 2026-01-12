@@ -1,4 +1,5 @@
-import { useState, useEffect, RefObject } from 'react';
+import type { RefObject } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Position {
   top: number;
@@ -16,7 +17,7 @@ export function usePopoverPosition(
 
   useEffect(() => {
     const updatePosition = () => {
-      if (!popoverRef.current || !anchorRef.current) return;
+      if (!popoverRef.current || !anchorRef.current) {return;}
 
       const anchorRect = anchorRef.current.getBoundingClientRect();
       const popoverRect = popoverRef.current.getBoundingClientRect();

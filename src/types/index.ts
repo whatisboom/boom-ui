@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType, PropsWithChildren } from 'react';
+import type { ComponentPropsWithoutRef, ElementType, PropsWithChildren } from 'react';
 
 /**
  * Common size variants

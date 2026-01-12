@@ -1,9 +1,11 @@
 import { vi } from 'vitest';
-import React, { Fragment, createElement, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { Fragment, createElement } from 'react';
+import type * as FramerMotion from 'framer-motion';
 
 // Mock motion components to render as plain elements
 vi.mock('framer-motion', async () => {
-  const actual = await vi.importActual<typeof import('framer-motion')>('framer-motion');
+  const actual = await vi.importActual<typeof FramerMotion>('framer-motion');
 
   // Cache components to maintain referential equality across re-renders
   const componentCache = new Map<string, React.ForwardRefExoticComponent<Record<string, unknown>>>();
