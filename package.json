@@ -15,7 +15,7 @@
       "import": "./dist/form.js",
       "types": "./dist/form.d.ts"
     },
-    "./styles": "./dist/styles/index.css"
+    "./styles": "./dist/boom-ui.css"
   },
   "files": [
     "dist"
