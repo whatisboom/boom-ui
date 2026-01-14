@@ -214,6 +214,144 @@ See [SECURITY.md](./SECURITY.md) for complete policy.
 - Prefer CSS Grid/Flexbox with token-based spacing
 - Animation: Use Framer Motion `motion` components
 
+### Layout and Spacing (CRITICAL)
+
+**NEVER use inline styles for layout and spacing.** Use layout components with spacing tokens instead.
+
+#### Spacing Token System
+
+All layout components accept spacing as **numbers** that map to design tokens:
+
+| Token | CSS Variable | Value | Use Case |
+|-------|--------------|-------|----------|
+| 4 | --boom-spacing-4 | 16px / 1rem | Default spacing |
+| 6 | --boom-spacing-6 | 24px / 1.5rem | Medium spacing |
+| 8 | --boom-spacing-8 | 32px / 2rem | Large spacing |
+| 12 | --boom-spacing-12 | 48px / 3rem | Section spacing |
+
+See `src/styles/tokens/spacing.css` for all available tokens.
+
+#### Use Box for Custom Layouts
+
+Box component provides layout props that use spacing tokens:
+
+```tsx
+// ❌ WRONG: Inline styles
+<div style={{
+  display: 'flex',
+  padding: '1.5rem',
+  gap: '1rem'
+}}>
+
+// ✅ CORRECT: Box with spacing tokens
+<Box display="flex" padding={6} gap={4}>
+```
+
+**Box props:**
+- `padding`, `margin`, `gap` - Spacing tokens (numbers)
+- `display`, `flexDirection`, `alignItems`, `justifyContent` - Layout
+- `width`, `height` - Dimensions
+- `as` - Render as different HTML element
+
+**When to use Box:**
+- Custom flex or grid layouts
+- Adding padding/margin to elements
+- Polymorphic components (different HTML elements)
+
+#### Use Stack for Stacked Layouts
+
+Stack component for vertical/horizontal stacks with equal spacing:
+
+```tsx
+// ❌ WRONG: Inline flex column
+<div style={{
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem'
+}}>
+
+// ✅ CORRECT: Stack with spacing token
+<Stack spacing={4}>
+  <Item1 />
+  <Item2 />
+  <Item3 />
+</Stack>
+```
+
+**Stack props:**
+- `direction` - 'column' (default) or 'row'
+- `spacing` - Gap between items (spacing token)
+- `align`, `justify` - Alignment
+
+#### Use Grid for Grid Layouts
+
+Grid component for multi-column layouts:
+
+```tsx
+// ❌ WRONG: Inline grid styles
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(4, 1fr)',
+  gap: '1rem'
+}}>
+
+// ✅ CORRECT: Grid with spacing token
+<Grid columns={4} gap={4}>
+  <Card />
+  <Card />
+  <Card />
+  <Card />
+</Grid>
+```
+
+**Grid props:**
+- `columns` - Number of columns (fixed)
+- `gap` - Space between items (spacing token)
+- `minColumnWidth` - Minimum column width (responsive)
+- `autoFit` - Use CSS Grid auto-fit
+
+#### Accessing Theme Colors in TypeScript
+
+Use `useTheme()` hook to access theme colors instead of hardcoding hex values:
+
+```tsx
+import { useTheme } from '@whatisboom/boom-ui';
+
+function MyComponent() {
+  const { colors } = useTheme();
+
+  // ❌ WRONG: Hardcoded colors
+  <div style={{ borderColor: '#e0e0e0', color: '#1976d2' }}>
+
+  // ✅ CORRECT: Theme colors
+  <Box style={{
+    borderColor: colors.border.default,
+    color: colors.primary
+  }}>
+}
+```
+
+**Available color groups:**
+- `colors.bg.*` - Background colors
+- `colors.text.*` - Text colors
+- `colors.border.*` - Border colors
+- `colors.primary`, `colors.secondary` - Interactive colors
+- `colors.success.*`, `colors.error.*`, `colors.warning.*` - Semantic colors
+
+#### Decision Tree
+
+```
+Do you need colors from the theme?
+├─ YES → Use useTheme().colors
+└─ NO  → Do you need a grid layout?
+          ├─ YES → Use Grid
+          └─ NO  → Do you need stacked items with equal spacing?
+                    ├─ YES → Use Stack
+                    └─ NO  → Use Box
+```
+
+**See [docs/layout-guide.md](./docs/layout-guide.md) for comprehensive examples and patterns.**
+
 ### Hooks Location
 Custom hooks live in `src/hooks/`:
 - `useClickOutside` - Detect outside clicks
