@@ -35,6 +35,7 @@ export {
 export { ThemeProvider, useTheme } from './components/ThemeProvider';
 export { ErrorBoundary } from './components/ErrorBoundary';
 export { Hero } from './components/Hero';
+export { Nav, NavItem } from './components/Nav';
 
 // Skeleton components
 export { Skeleton, SkeletonText, SkeletonAvatar, SkeletonCard } from './components/Skeleton';
@@ -134,6 +135,7 @@ export type {
   ThemeColors,
 } from './components/ThemeProvider';
 export type { ErrorBoundaryProps, FallbackProps } from './components/ErrorBoundary';
+export type { NavProps, NavBaseProps, NavItemProps, NavItemBaseProps } from './components/Nav';
 export type {
   HeroProps,
   HeroBaseProps,
