@@ -24,9 +24,9 @@ export function NavItem<E extends ElementType = 'a'>({
       aria-current={isActive ? 'page' : undefined}
       {...(rest as Record<string, unknown>)}
     >
-      {icon || children ? (
+      {icon ? (
         <Stack direction="row" spacing={2} align="center">
-          {icon && <span className={styles.navItemIcon}>{icon}</span>}
+          <span className={styles.navItemIcon}>{icon}</span>
           <span className={styles.navItemLabel}>{children}</span>
         </Stack>
       ) : (
