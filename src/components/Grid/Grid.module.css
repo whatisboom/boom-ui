@@ -1,0 +1,4 @@
+.grid {
+  /* Base grid class - most styling comes from inline styles and Box */
+  box-sizing: border-box;
+}
