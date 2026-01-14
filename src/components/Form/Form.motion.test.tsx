@@ -98,10 +98,8 @@ describe('Form - Motion Tests', () => {
       </Form>
     );
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    const emailInput = screen.getByLabelText('Email') as HTMLInputElement;
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    const passwordInput = screen.getByLabelText('Password') as HTMLInputElement;
+    const emailInput = screen.getByLabelText<HTMLInputElement>('Email');
+    const passwordInput = screen.getByLabelText<HTMLInputElement>('Password');
 
     // Use fireEvent.change directly to bypass userEvent issues
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });

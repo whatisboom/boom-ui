@@ -1,5 +1,5 @@
-import type { ElementType, CSSProperties} from 'react';
 import { useMemo } from 'react';
+import type { ElementType, CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/classnames';
 import { Button } from '@/components/Button';
@@ -97,7 +97,9 @@ export function Hero<E extends ElementType = 'section'>({
 
   // Render CTAs
   const renderCTAs = () => {
-    if (!primaryCTA && !secondaryCTA) {return null;}
+    if (!primaryCTA && !secondaryCTA) {
+      return null;
+    }
 
     return (
       <div className={styles.ctaContainer}>

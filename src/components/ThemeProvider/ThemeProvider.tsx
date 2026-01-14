@@ -10,7 +10,9 @@ import type {
 const ThemeProviderContext = createContext<ThemeProviderContextValue | undefined>(undefined);
 
 function getSystemTheme(): ResolvedTheme {
-  if (typeof window === 'undefined') {return 'dark';}
+  if (typeof window === 'undefined') {
+    return 'dark';
+  }
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
@@ -130,7 +132,9 @@ export function ThemeProvider({
   storageKey = 'boom-ui-theme',
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window === 'undefined') {return defaultTheme;}
+    if (typeof window === 'undefined') {
+      return defaultTheme;
+    }
 
     const stored = localStorage.getItem(storageKey);
     if (stored === 'light' || stored === 'dark' || stored === 'system') {
@@ -160,7 +164,9 @@ export function ThemeProvider({
   }, [resolvedTheme, theme, storageKey]);
 
   useEffect(() => {
-    if (theme !== 'system') {return;}
+    if (theme !== 'system') {
+      return;
+    }
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
