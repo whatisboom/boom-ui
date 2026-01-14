@@ -129,6 +129,7 @@ export type {
   ResolvedTheme,
   ThemeProviderProps,
   ThemeProviderContextValue,
+  ThemeColors,
 } from './components/ThemeProvider';
 export type { ErrorBoundaryProps, FallbackProps } from './components/ErrorBoundary';
 export type {

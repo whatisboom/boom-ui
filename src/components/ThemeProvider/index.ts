@@ -4,4 +4,5 @@ export type {
   ResolvedTheme,
   ThemeProviderProps,
   ThemeProviderContextValue,
+  ThemeColors,
 } from './ThemeProvider.types';
