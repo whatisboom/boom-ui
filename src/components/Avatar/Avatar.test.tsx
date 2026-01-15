@@ -129,6 +129,26 @@ describe('Avatar', () => {
     expect(statusIndicator?.className).toContain('busy');
   });
 
+  it('should render wrapper structure with status indicator outside avatar container', () => {
+    const { container } = render(
+      <Avatar alt="User" name="User" status="online" showStatus />
+    );
+
+    const wrapper = container.querySelector('[class*="avatarWrapper"]') as HTMLElement;
+    const avatar = container.querySelector('[class*="avatar"]:not([class*="avatarWrapper"])') as HTMLElement;
+    const statusIndicator = container.querySelector('[class*="status"]') as HTMLElement;
+
+    // Verify wrapper exists
+    expect(wrapper).toBeInTheDocument();
+
+    // Verify avatar is inside wrapper
+    expect(wrapper).toContainElement(avatar);
+
+    // Verify status indicator is sibling of avatar (both children of wrapper)
+    expect(wrapper).toContainElement(statusIndicator);
+    expect(avatar).not.toContainElement(statusIndicator);
+  });
+
   // Image Loading States
   it('should show image when loaded successfully', async () => {
     render(<Avatar src="https://example.com/avatar.jpg" alt="User" name="User" />);
