@@ -1,40 +1,60 @@
-/* Avatar container */
-.avatar {
+/* Avatar wrapper - allows status indicator to overflow */
+.avatarWrapper {
   position: relative;
   display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* Wrapper sizes */
+.avatarWrapper.sm {
+  width: 32px;
+  height: 32px;
+}
+
+.avatarWrapper.md {
+  width: 40px;
+  height: 40px;
+}
+
+.avatarWrapper.lg {
+  width: 56px;
+  height: 56px;
+}
+
+.avatarWrapper.xl {
+  width: 80px;
+  height: 80px;
+}
+
+/* Avatar container */
+.avatar {
+  width: 100%;
+  height: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   overflow: hidden;
-  flex-shrink: 0;
   background-color: var(--boom-theme-border-default);
   color: var(--boom-theme-text-primary);
   font-weight: var(--boom-font-weight-semibold);
   user-select: none;
 }
 
-/* Sizes */
-.sm {
-  width: 32px;
-  height: 32px;
+/* Font sizes for initials */
+.avatarWrapper.sm .initials {
   font-size: var(--boom-font-size-xs);
 }
 
-.md {
-  width: 40px;
-  height: 40px;
+.avatarWrapper.md .initials {
   font-size: var(--boom-font-size-sm);
 }
 
-.lg {
-  width: 56px;
-  height: 56px;
+.avatarWrapper.lg .initials {
   font-size: var(--boom-font-size-base);
 }
 
-.xl {
-  width: 80px;
-  height: 80px;
+.avatarWrapper.xl .initials {
   font-size: var(--boom-font-size-lg);
 }
 

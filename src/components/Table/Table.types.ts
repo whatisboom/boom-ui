@@ -180,7 +180,16 @@ export interface TableProps<T = unknown> {
 
   /**
    * Enable sticky header
+   *
+   * When enabled, the table header will stick to the top of the scrolling container.
+   * You must wrap the Table in a scrolling container (e.g., a div with overflow: auto)
+   * for the sticky header to work properly.
+   *
    * @default false
+   * @example
+   * <div style={{ height: '300px', overflow: 'auto' }}>
+   *   <Table stickyHeader={true} ... />
+   * </div>
    */
   stickyHeader?: boolean;
 
