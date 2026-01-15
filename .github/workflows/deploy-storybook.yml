@@ -24,14 +24,21 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 24
           cache: 'npm'
+
+      - name: Upgrade to npm 11
+        run: npm install -g npm@11
 
       - name: Install dependencies
         run: npm ci
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
 
       - name: Build Storybook
         run: npm run build-storybook
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
