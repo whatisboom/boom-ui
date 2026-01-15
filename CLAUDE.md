@@ -634,6 +634,11 @@ git push -u origin feature/my-feature
 # Create PR: feature/my-feature → develop
 ```
 
+**CI/CD Build Times:**
+- After pushing changes, expect CI checks to take approximately **5 minutes** to complete
+- This includes: typecheck, lint, test, build, and build-storybook jobs
+- PRs with auto-merge enabled will merge automatically once all checks pass
+
 ### Release Process
 
 ```bash
