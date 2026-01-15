@@ -751,14 +751,22 @@ export const ClientSidePagination: Story = {
       pageSize: 10,
     });
 
+    // Generate 100 users for demonstrating pagination
+    const largeDataset: User[] = Array.from({ length: 100 }, (_, i) => ({
+      id: i + 1,
+      name: `User ${i + 1}`,
+      email: `user${i + 1}@example.com`,
+      role: ['Admin', 'User', 'Manager'][i % 3],
+    }));
+
     // Client-side pagination: slice the data based on current page
-    const paginatedData = getPaginatedData(data, pagination);
+    const paginatedData = getPaginatedData(largeDataset, pagination);
 
     return (
       <div>
         <div style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#666' }}>
-          Showing page {pagination.pageIndex + 1} of {Math.ceil(data.length / pagination.pageSize)} (
-          {data.length} total rows, {pagination.pageSize} per page)
+          Showing page {pagination.pageIndex + 1} of {Math.ceil(largeDataset.length / pagination.pageSize)} (
+          {largeDataset.length} total rows, {pagination.pageSize} per page)
         </div>
         <Table
           columns={columns}
@@ -767,7 +775,7 @@ export const ClientSidePagination: Story = {
           pagination={pagination}
           onPaginationChange={setPagination}
           manualPagination={false}
-          rowCount={data.length}
+          rowCount={largeDataset.length}
           aria-label="Users (client-side pagination)"
         >
           <TableHead>
