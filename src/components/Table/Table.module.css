@@ -5,6 +5,12 @@
   position: relative;
 }
 
+/* Remove overflow when using sticky header - user must provide scrolling container */
+.tableContainer.stickyHeader {
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
 /* Base table */
 .table {
   width: 100%;
@@ -187,8 +193,10 @@
 /* Pagination */
 .pagination {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: var(--boom-spacing-4);
   padding: var(--boom-spacing-4);
   border-top: 1px solid var(--boom-theme-border-default);
 }
@@ -196,6 +204,37 @@
 .paginationInfo {
   font-size: var(--boom-font-size-sm);
   color: var(--boom-theme-text-secondary);
+}
+
+.paginationPageSize {
+  display: flex;
+  align-items: center;
+  gap: var(--boom-spacing-2);
+}
+
+.paginationLabel {
+  font-size: var(--boom-font-size-sm);
+  color: var(--boom-theme-text-primary);
+  white-space: nowrap;
+}
+
+.paginationNav {
+  display: flex;
+  align-items: center;
+  gap: var(--boom-spacing-2);
+  flex-wrap: nowrap;
+}
+
+.paginationPages {
+  display: flex;
+  align-items: center;
+  gap: var(--boom-spacing-1);
+}
+
+.paginationEllipsis {
+  padding: var(--boom-spacing-2);
+  color: var(--boom-theme-text-secondary);
+  user-select: none;
 }
 
 .paginationControls {
@@ -240,6 +279,27 @@
   cursor: pointer;
   border-radius: var(--boom-border-radius-md);
   font-size: var(--boom-font-size-sm);
+}
+
+/* Responsive pagination layout */
+@media (max-width: 768px) {
+  .pagination {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .paginationInfo {
+    text-align: center;
+  }
+
+  .paginationPageSize {
+    justify-content: center;
+  }
+
+  .paginationNav {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
 /* Respect reduced motion preference */

@@ -44,23 +44,25 @@ export const Avatar = ({
   const initials = name ? generateInitials(name) : '';
 
   return (
-    <div className={cn(styles.avatar, styles[size], className)}>
-      {showImage && (
-        <img
-          src={src}
-          alt={alt}
-          className={cn(styles.image, !imageLoaded && styles.hidden)}
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-          {...imgProps}
-        />
-      )}
+    <div className={cn(styles.avatarWrapper, styles[size], className)}>
+      <div className={styles.avatar}>
+        {showImage && (
+          <img
+            src={src}
+            alt={alt}
+            className={cn(styles.image, !imageLoaded && styles.hidden)}
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+            {...imgProps}
+          />
+        )}
 
-      {!showImage && initials && (
-        <span className={styles.initials} aria-label={alt}>
-          {initials}
-        </span>
-      )}
+        {!showImage && initials && (
+          <span className={styles.initials} aria-label={alt}>
+            {initials}
+          </span>
+        )}
+      </div>
 
       {showStatus && status && (
         <span className={cn(styles.status, styles[size], styles[status])} />

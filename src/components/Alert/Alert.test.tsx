@@ -81,6 +81,18 @@ describe('Alert', () => {
     expect(svg).not.toBeInTheDocument();
   });
 
+  it('should apply correct CSS classes for colored border when icon is null', () => {
+    const { container } = render(
+      <Alert variant="success" icon={null}>
+        Message
+      </Alert>
+    );
+
+    const alert = container.querySelector('[role="alert"]');
+    expect(alert?.className).toContain('noIcon');
+    expect(alert?.className).toContain('success');
+  });
+
   // Dismissible
   it('should render close button when onClose provided', () => {
     const handleClose = vi.fn();

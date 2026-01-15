@@ -101,7 +101,7 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
               id="page-size-select"
               value={pageSize}
               onChange={handlePageSizeChange}
-              className={styles.paginationSelect}
+              className={styles.pageSizeSelect}
             >
               {pageSizeOptions.map((size) => (
                 <option key={size} value={size}>
