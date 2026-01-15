@@ -8,6 +8,23 @@
   overflow: hidden; /* Ensures border-radius clips sidebar */
 }
 
+/* Colored left border when no icon is shown */
+.alert.noIcon.info {
+  border-left: 4px solid var(--boom-theme-info-border);
+}
+
+.alert.noIcon.success {
+  border-left: 4px solid var(--boom-theme-success-border);
+}
+
+.alert.noIcon.warning {
+  border-left: 4px solid var(--boom-theme-warning-border);
+}
+
+.alert.noIcon.error {
+  border-left: 4px solid var(--boom-theme-error-border);
+}
+
 /* Icon sidebar - contains icon with variant color */
 .iconSidebar {
   display: flex;
