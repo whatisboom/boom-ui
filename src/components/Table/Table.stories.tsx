@@ -748,7 +748,7 @@ export const ClientSidePagination: Story = {
   render: () => {
     const [pagination, setPagination] = useState<PaginationState>({
       pageIndex: 0,
-      pageSize: 5,
+      pageSize: 10,
     });
 
     // Client-side pagination: slice the data based on current page
@@ -812,7 +812,7 @@ export const ManualPagination: Story = {
   render: () => {
     const [pagination, setPagination] = useState<PaginationState>({
       pageIndex: 0,
-      pageSize: 5,
+      pageSize: 10,
     });
     const [loading, setLoading] = useState(false);
 
@@ -984,7 +984,7 @@ export const PaginationWithSortingAndSelection: Story = {
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
     const [pagination, setPagination] = useState<PaginationState>({
       pageIndex: 0,
-      pageSize: 5,
+      pageSize: 10,
     });
 
     const sortableColumns: ColumnDef<User>[] = columns.map((col) => ({
