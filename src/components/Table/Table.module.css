@@ -5,6 +5,12 @@
   position: relative;
 }
 
+/* Remove overflow when using sticky header - user must provide scrolling container */
+.tableContainer.stickyHeader {
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
 /* Base table */
 .table {
   width: 100%;
