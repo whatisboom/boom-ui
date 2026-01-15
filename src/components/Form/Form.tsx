@@ -26,7 +26,9 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
 
   // Extract field names from schema and create type-appropriate defaults
   const getDefaultValues = (): DefaultValues<FormInput> => {
-    if (defaultValues) {return defaultValues as DefaultValues<FormInput>;}
+    if (defaultValues) {
+      return defaultValues as DefaultValues<FormInput>;
+    }
 
     // Generate type-appropriate default values for schema fields
     const defaults: Record<string, unknown> = {};

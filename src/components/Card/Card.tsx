@@ -1,5 +1,5 @@
-import type { ElementType} from 'react';
 import { useMemo } from 'react';
+import type { ElementType } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/classnames';
 import type { CardProps } from './Card.types';

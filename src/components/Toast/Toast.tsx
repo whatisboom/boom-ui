@@ -106,8 +106,12 @@ const getIcon = (variant: ToastProps['variant']) => {
 };
 
 const getSlideDirection = (position: ToastProps['position']) => {
-  if (position?.includes('right')) {return { x: 400 };}
-  if (position?.includes('left')) {return { x: -400 };}
+  if (position?.includes('right')) {
+    return { x: 400 };
+  }
+  if (position?.includes('left')) {
+    return { x: -400 };
+  }
   return { y: -100 }; // top-center, bottom-center
 };
 
@@ -121,7 +125,9 @@ export const Toast = ({
   const stableOnClose = useStableCallback(onClose);
 
   useEffect(() => {
-    if (!duration) {return;}
+    if (!duration) {
+      return;
+    }
 
     const timer = setTimeout(() => {
       stableOnClose();
