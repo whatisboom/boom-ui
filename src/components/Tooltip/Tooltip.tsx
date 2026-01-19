@@ -14,7 +14,7 @@ export const Tooltip = ({
 }: TooltipProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLElement>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const showTooltip = () => {
     if (delay > 0) {
@@ -42,36 +42,40 @@ export const Tooltip = ({
   }, []);
 
   // Clone the child element and add event handlers
-  // eslint-disable-next-line react-hooks/refs -- Passing refs to cloneElement is the correct React pattern for forwarding refs to dynamic children
-  const trigger = cloneElement(children, {
+  // Type the original props to safely access event handlers
+  type ChildProps = {
+    onMouseEnter?: (e: React.MouseEvent<HTMLElement>) => void;
+    onMouseLeave?: (e: React.MouseEvent<HTMLElement>) => void;
+    onFocus?: (e: React.FocusEvent<HTMLElement>) => void;
+    onBlur?: (e: React.FocusEvent<HTMLElement>) => void;
+  };
+  const originalProps = children.props as ChildProps;
+
+  // In React 19, we need to use a type assertion for the entire cloneElement call
+  // to work around stricter ref typing in cloneElement.
+  // Passing refs to cloneElement is the correct React pattern for forwarding refs to dynamic children.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, react-hooks/refs
+  const trigger = cloneElement(children as any, {
     ref: triggerRef,
     onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
       showTooltip();
       // Call original onMouseEnter if it exists
-      if (children.props.onMouseEnter) {
-        children.props.onMouseEnter(e);
-      }
+      originalProps.onMouseEnter?.(e);
     },
     onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
       hideTooltip();
       // Call original onMouseLeave if it exists
-      if (children.props.onMouseLeave) {
-        children.props.onMouseLeave(e);
-      }
+      originalProps.onMouseLeave?.(e);
     },
     onFocus: (e: React.FocusEvent<HTMLElement>) => {
       showTooltip();
       // Call original onFocus if it exists
-      if (children.props.onFocus) {
-        children.props.onFocus(e);
-      }
+      originalProps.onFocus?.(e);
     },
     onBlur: (e: React.FocusEvent<HTMLElement>) => {
       hideTooltip();
       // Call original onBlur if it exists
-      if (children.props.onBlur) {
-        children.props.onBlur(e);
-      }
+      originalProps.onBlur?.(e);
     },
   });
 

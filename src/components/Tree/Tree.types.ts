@@ -128,7 +128,7 @@ export interface TreeContextValue {
   /**
    * Register a tree item with its ref
    */
-  registerItem: (id: string, ref: RefObject<HTMLDivElement>) => void;
+  registerItem: (id: string, ref: RefObject<HTMLDivElement | null>) => void;
 
   /**
    * Unregister a tree item

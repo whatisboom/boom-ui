@@ -17,7 +17,7 @@ export const Tree = ({
   const [focusedId, setFocusedId] = useState<string | undefined>(
     data.length > 0 ? data[0].id : undefined
   );
-  const itemRefs = useRef<Map<string, RefObject<HTMLDivElement>>>(new Map());
+  const itemRefs = useRef<Map<string, RefObject<HTMLDivElement | null>>>(new Map());
 
   // Build a flat list of visible items for keyboard navigation
   const visibleItems = useMemo(() => {
@@ -37,7 +37,7 @@ export const Tree = ({
   }, [data, expanded]);
 
   const registerItem = useCallback(
-    (id: string, ref: RefObject<HTMLDivElement>) => {
+    (id: string, ref: RefObject<HTMLDivElement | null>) => {
       itemRefs.current.set(id, ref);
     },
     []
