@@ -1,0 +1,148 @@
+/* FormStepper styles using design tokens */
+
+.stepper {
+  width: 100%;
+}
+
+/* Screen reader only live region */
+.liveRegion {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Progress indicator container */
+.progressContainer {
+  display: flex;
+  gap: var(--boom-spacing-2);
+  margin-bottom: var(--boom-spacing-6);
+  padding: var(--boom-spacing-4);
+  background: var(--boom-theme-bg-secondary);
+  border-radius: var(--boom-border-radius-lg);
+}
+
+/* Individual progress step */
+.progressStep {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--boom-spacing-3);
+  padding: var(--boom-spacing-3);
+  background: transparent;
+  border: 2px solid var(--boom-theme-border-default);
+  border-radius: var(--boom-border-radius-md);
+  cursor: pointer;
+  transition: all var(--boom-transition-base);
+  font: inherit;
+  text-align: left;
+}
+
+.progressStep:hover {
+  background: var(--boom-theme-bg-primary);
+  border-color: var(--boom-theme-border-hover);
+}
+
+.progressStep:focus-visible {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Progress step number indicator */
+.progressStepNumber {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--boom-border-radius-full);
+  background: var(--boom-theme-bg-tertiary);
+  color: var(--boom-theme-text-secondary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all var(--boom-transition-base);
+}
+
+/* Progress step content */
+.progressStepContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--boom-spacing-1);
+  min-width: 0; /* Allow text truncation */
+}
+
+.progressStepTitle {
+  font-weight: 500;
+  color: var(--boom-theme-text-primary);
+  font-size: 0.875rem;
+}
+
+.progressStepDescription {
+  font-size: 0.75rem;
+  color: var(--boom-theme-text-secondary);
+}
+
+/* Completed step state */
+.progressStep--completed {
+  border-color: var(--boom-theme-success);
+}
+
+.progressStep--completed .progressStepNumber {
+  background: var(--boom-theme-success);
+  color: var(--boom-theme-success-contrast);
+}
+
+.progressStep--completed .progressStepTitle {
+  color: var(--boom-theme-text-primary);
+}
+
+/* Current step state */
+.progressStep--current {
+  border-color: var(--boom-theme-primary);
+  background: var(--boom-theme-bg-primary);
+}
+
+.progressStep--current .progressStepNumber {
+  background: var(--boom-theme-primary);
+  color: var(--boom-theme-primary-contrast);
+}
+
+.progressStep--current .progressStepTitle {
+  color: var(--boom-theme-primary);
+  font-weight: 600;
+}
+
+/* Pending step state */
+.progressStep--pending {
+  opacity: 0.7;
+}
+
+.progressStep--pending .progressStepTitle {
+  color: var(--boom-theme-text-secondary);
+}
+
+/* Step content container */
+.stepContent {
+  padding: var(--boom-spacing-4) 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .progressContainer {
+    flex-direction: column;
+  }
+
+  .progressStep {
+    width: 100%;
+  }
+
+  .progressStepDescription {
+    display: none; /* Hide descriptions on mobile for space */
+  }
+}
