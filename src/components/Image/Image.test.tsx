@@ -384,7 +384,9 @@ describe('Image', () => {
       );
 
       // Should show loading state again
-      expect(document.querySelector('[role="status"]')).toBeInTheDocument();
+      await waitFor(() => {
+        expect(document.querySelector('[role="status"]')).toBeInTheDocument();
+      });
     });
   });
 

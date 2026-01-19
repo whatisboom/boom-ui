@@ -273,7 +273,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
         video.removeEventListener('waiting', handleWaiting);
         video.removeEventListener('canplay', handleCanPlay);
       };
-    }, [onEnded, onPlay, onPause, onTimeUpdate, onVolumeChange, videoRef]);
+    }, [onEnded, onPlay, onPause, onVideoTimeUpdate, onVolumeChange, videoRef]);
 
     // Fullscreen change listener
     useEffect(() => {

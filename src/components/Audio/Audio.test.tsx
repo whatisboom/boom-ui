@@ -29,7 +29,7 @@ beforeEach(() => {
   );
 
   // Mock ResizeObserver
-  (global as typeof globalThis & { ResizeObserver: typeof ResizeObserver }).ResizeObserver = class ResizeObserver {
+  (window as Window & typeof globalThis & { ResizeObserver: typeof ResizeObserver }).ResizeObserver = class ResizeObserver {
     observe = vi.fn();
     unobserve = vi.fn();
     disconnect = vi.fn();

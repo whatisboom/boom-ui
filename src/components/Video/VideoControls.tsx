@@ -81,7 +81,6 @@ const formatTime = (seconds: number): string => {
 };
 
 export const VideoControls = ({
-  videoRef,
   isPlaying,
   currentTime,
   duration,
