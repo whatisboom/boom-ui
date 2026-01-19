@@ -2,10 +2,9 @@ import type { ElementType } from 'react';
 import { Children, Fragment } from 'react';
 import { cn } from '@/utils/classnames';
 import type { BreadcrumbsProps } from './Breadcrumbs.types';
-import { BreadcrumbItem } from './BreadcrumbItem';
 import styles from './Breadcrumbs.module.css';
 
-function BreadcrumbsComponent<E extends ElementType = 'nav'>({
+export function Breadcrumbs<E extends ElementType = 'nav'>({
   children,
   separator = '/',
   maxItems,
@@ -60,9 +59,4 @@ function BreadcrumbsComponent<E extends ElementType = 'nav'>({
   );
 }
 
-BreadcrumbsComponent.displayName = 'Breadcrumbs';
-
-// Compound component pattern
-export const Breadcrumbs = Object.assign(BreadcrumbsComponent, {
-  Item: BreadcrumbItem,
-});
+Breadcrumbs.displayName = 'Breadcrumbs';

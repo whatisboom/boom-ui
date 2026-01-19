@@ -3,15 +3,16 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { Breadcrumbs } from './Breadcrumbs';
+import { BreadcrumbItem } from './BreadcrumbItem';
 
 describe('Breadcrumbs', () => {
   describe('Rendering', () => {
     it('renders breadcrumb items', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Product Name</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -23,7 +24,7 @@ describe('Breadcrumbs', () => {
     it('renders as nav by default', () => {
       const { container } = render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -34,7 +35,7 @@ describe('Breadcrumbs', () => {
     it('renders as specified element with "as" prop', () => {
       const { container } = render(
         <Breadcrumbs as="div">
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -45,7 +46,7 @@ describe('Breadcrumbs', () => {
     it('applies custom className', () => {
       const { container } = render(
         <Breadcrumbs className="custom-breadcrumbs">
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -58,8 +59,8 @@ describe('Breadcrumbs', () => {
     it('renders default separator', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -70,8 +71,8 @@ describe('Breadcrumbs', () => {
     it('renders custom text separator', () => {
       render(
         <Breadcrumbs separator=">">
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -82,8 +83,8 @@ describe('Breadcrumbs', () => {
       const ChevronIcon = () => <span data-testid="chevron">›</span>;
       render(
         <Breadcrumbs separator={<ChevronIcon />}>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -93,8 +94,8 @@ describe('Breadcrumbs', () => {
     it('does not render separator after last item', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Products</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem current>Products</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -107,7 +108,7 @@ describe('Breadcrumbs', () => {
     it('renders as link when href provided', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/home">Home</Breadcrumbs.Item>
+          <BreadcrumbItem href="/home">Home</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -119,7 +120,7 @@ describe('Breadcrumbs', () => {
     it('renders as span when no href', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item>Current</Breadcrumbs.Item>
+          <BreadcrumbItem>Current</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -130,7 +131,7 @@ describe('Breadcrumbs', () => {
     it('renders as custom element with "as" prop', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item as="button">Home</Breadcrumbs.Item>
+          <BreadcrumbItem as="button">Home</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -141,9 +142,9 @@ describe('Breadcrumbs', () => {
     it('applies custom className to item', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/" className="custom-item">
+          <BreadcrumbItem href="/" className="custom-item">
             Home
-          </Breadcrumbs.Item>
+          </BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -157,9 +158,9 @@ describe('Breadcrumbs', () => {
 
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/home" onClick={handleClick}>
+          <BreadcrumbItem href="/home" onClick={handleClick}>
             Home
-          </Breadcrumbs.Item>
+          </BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -174,8 +175,8 @@ describe('Breadcrumbs', () => {
     it('applies aria-current="page" to current item', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Products</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem current>Products</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -186,8 +187,8 @@ describe('Breadcrumbs', () => {
     it('does not apply aria-current to non-current items', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Products</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem current>Products</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -200,9 +201,9 @@ describe('Breadcrumbs', () => {
     it('shows all items when count is less than maxItems', () => {
       render(
         <Breadcrumbs maxItems={5}>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Product Name</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -215,11 +216,11 @@ describe('Breadcrumbs', () => {
     it('collapses items when count exceeds maxItems', () => {
       render(
         <Breadcrumbs maxItems={3}>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/category">Category</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/subcategory">Subcategory</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/category">Category</BreadcrumbItem>
+          <BreadcrumbItem href="/subcategory">Subcategory</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Product Name</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -236,11 +237,11 @@ describe('Breadcrumbs', () => {
     it('shows first and last items with ellipsis when maxItems=3', () => {
       render(
         <Breadcrumbs maxItems={3}>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/a">A</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/b">B</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/c">C</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Current</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/a">A</BreadcrumbItem>
+          <BreadcrumbItem href="/b">B</BreadcrumbItem>
+          <BreadcrumbItem href="/c">C</BreadcrumbItem>
+          <BreadcrumbItem current>Current</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -252,11 +253,11 @@ describe('Breadcrumbs', () => {
     it('ellipsis has aria-hidden', () => {
       render(
         <Breadcrumbs maxItems={3}>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/a">A</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/b">B</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/c">C</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Current</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/a">A</BreadcrumbItem>
+          <BreadcrumbItem href="/b">B</BreadcrumbItem>
+          <BreadcrumbItem href="/c">C</BreadcrumbItem>
+          <BreadcrumbItem current>Current</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -269,7 +270,7 @@ describe('Breadcrumbs', () => {
     it('has aria-label="breadcrumb" by default', () => {
       const { container } = render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -280,7 +281,7 @@ describe('Breadcrumbs', () => {
     it('accepts custom aria-label', () => {
       const { container } = render(
         <Breadcrumbs aria-label="Custom navigation">
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -291,8 +292,8 @@ describe('Breadcrumbs', () => {
     it('separators have aria-hidden', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -303,9 +304,9 @@ describe('Breadcrumbs', () => {
     it('passes axe accessibility tests', async () => {
       const { container } = render(
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Product Name</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -316,9 +317,9 @@ describe('Breadcrumbs', () => {
     it('passes axe with custom separator', async () => {
       const { container } = render(
         <Breadcrumbs separator=">">
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Product Name</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -329,11 +330,11 @@ describe('Breadcrumbs', () => {
     it('passes axe with maxItems', async () => {
       const { container } = render(
         <Breadcrumbs maxItems={3}>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/a">A</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/b">B</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/c">C</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Current</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/a">A</BreadcrumbItem>
+          <BreadcrumbItem href="/b">B</BreadcrumbItem>
+          <BreadcrumbItem href="/c">C</BreadcrumbItem>
+          <BreadcrumbItem current>Current</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -346,7 +347,7 @@ describe('Breadcrumbs', () => {
     it('handles single item', () => {
       render(
         <Breadcrumbs>
-          <Breadcrumbs.Item current>Home</Breadcrumbs.Item>
+          <BreadcrumbItem current>Home</BreadcrumbItem>
         </Breadcrumbs>
       );
 
@@ -357,9 +358,9 @@ describe('Breadcrumbs', () => {
     it('handles maxItems=1', () => {
       render(
         <Breadcrumbs maxItems={1}>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Product Name</BreadcrumbItem>
         </Breadcrumbs>
       );
 

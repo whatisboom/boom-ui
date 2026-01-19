@@ -19,7 +19,7 @@ export { Alert } from './components/Alert';
 export { Progress } from './components/Progress';
 export { Toast, ToastProvider, useToast } from './components/Toast';
 export { Badge } from './components/Badge';
-export { Breadcrumbs } from './components/Breadcrumbs';
+export { Breadcrumbs, BreadcrumbItem } from './components/Breadcrumbs';
 export { Tooltip } from './components/Tooltip';
 export { Tree } from './components/Tree';
 export {

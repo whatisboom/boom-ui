@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Breadcrumbs } from './Breadcrumbs';
+import { BreadcrumbItem } from './BreadcrumbItem';
 import { Box } from '@/components/Box';
 
 const meta = {
@@ -24,9 +25,9 @@ export const Default: Story = {
   args: { children: [] },
   render: () => (
     <Breadcrumbs>
-      <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-      <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+      <BreadcrumbItem href="/">Home</BreadcrumbItem>
+      <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+      <BreadcrumbItem current>Product Name</BreadcrumbItem>
     </Breadcrumbs>
   ),
 };
@@ -35,10 +36,10 @@ export const WithCustomSeparator: Story = {
   args: { children: [] },
   render: () => (
     <Breadcrumbs separator=">">
-      <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/category">Category</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/subcategory">Subcategory</Breadcrumbs.Item>
-      <Breadcrumbs.Item current>Product</Breadcrumbs.Item>
+      <BreadcrumbItem href="/">Home</BreadcrumbItem>
+      <BreadcrumbItem href="/category">Category</BreadcrumbItem>
+      <BreadcrumbItem href="/subcategory">Subcategory</BreadcrumbItem>
+      <BreadcrumbItem current>Product</BreadcrumbItem>
     </Breadcrumbs>
   ),
 };
@@ -60,10 +61,10 @@ export const WithIconSeparator: Story = {
 
     return (
       <Breadcrumbs separator={<ChevronIcon />}>
-        <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-        <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-        <Breadcrumbs.Item href="/category">Category</Breadcrumbs.Item>
-        <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+        <BreadcrumbItem href="/category">Category</BreadcrumbItem>
+        <BreadcrumbItem current>Product Name</BreadcrumbItem>
       </Breadcrumbs>
     );
   },
@@ -78,11 +79,11 @@ export const MaxItems: Story = {
           maxItems=3 (5 total items)
         </p>
         <Breadcrumbs maxItems={3}>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/category">Category</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/subcategory">Subcategory</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/category">Category</BreadcrumbItem>
+          <BreadcrumbItem href="/subcategory">Subcategory</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Product Name</BreadcrumbItem>
         </Breadcrumbs>
       </div>
 
@@ -91,13 +92,13 @@ export const MaxItems: Story = {
           maxItems=4 (7 total items)
         </p>
         <Breadcrumbs maxItems={4}>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/category">Category</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/subcategory">Subcategory</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/type">Type</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/subtype">Subtype</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/category">Category</BreadcrumbItem>
+          <BreadcrumbItem href="/subcategory">Subcategory</BreadcrumbItem>
+          <BreadcrumbItem href="/type">Type</BreadcrumbItem>
+          <BreadcrumbItem href="/subtype">Subtype</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Product Name</BreadcrumbItem>
         </Breadcrumbs>
       </div>
     </Box>
@@ -108,7 +109,7 @@ export const SingleItem: Story = {
   args: { children: [] },
   render: () => (
     <Breadcrumbs>
-      <Breadcrumbs.Item current>Home</Breadcrumbs.Item>
+      <BreadcrumbItem current>Home</BreadcrumbItem>
     </Breadcrumbs>
   ),
 };
@@ -117,8 +118,8 @@ export const TwoLevels: Story = {
   args: { children: [] },
   render: () => (
     <Breadcrumbs>
-      <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-      <Breadcrumbs.Item current>About</Breadcrumbs.Item>
+      <BreadcrumbItem href="/">Home</BreadcrumbItem>
+      <BreadcrumbItem current>About</BreadcrumbItem>
     </Breadcrumbs>
   ),
 };
@@ -127,11 +128,11 @@ export const DeepNavigation: Story = {
   args: { children: [] },
   render: () => (
     <Breadcrumbs>
-      <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/blog">Blog</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/blog/2024">2024</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/blog/2024/01">January</Breadcrumbs.Item>
-      <Breadcrumbs.Item current>How to Build a Design System</Breadcrumbs.Item>
+      <BreadcrumbItem href="/">Home</BreadcrumbItem>
+      <BreadcrumbItem href="/blog">Blog</BreadcrumbItem>
+      <BreadcrumbItem href="/blog/2024">2024</BreadcrumbItem>
+      <BreadcrumbItem href="/blog/2024/01">January</BreadcrumbItem>
+      <BreadcrumbItem current>How to Build a Design System</BreadcrumbItem>
     </Breadcrumbs>
   ),
 };
@@ -140,11 +141,11 @@ export const EcommercePath: Story = {
   args: { children: [] },
   render: () => (
     <Breadcrumbs separator=">">
-      <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/electronics">Electronics</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/electronics/computers">Computers</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/electronics/computers/laptops">Laptops</Breadcrumbs.Item>
-      <Breadcrumbs.Item current>MacBook Pro 16&quot;</Breadcrumbs.Item>
+      <BreadcrumbItem href="/">Home</BreadcrumbItem>
+      <BreadcrumbItem href="/electronics">Electronics</BreadcrumbItem>
+      <BreadcrumbItem href="/electronics/computers">Computers</BreadcrumbItem>
+      <BreadcrumbItem href="/electronics/computers/laptops">Laptops</BreadcrumbItem>
+      <BreadcrumbItem current>MacBook Pro 16&quot;</BreadcrumbItem>
     </Breadcrumbs>
   ),
 };
@@ -153,13 +154,13 @@ export const WithCustomElement: Story = {
   args: { children: [] },
   render: () => (
     <Breadcrumbs>
-      <Breadcrumbs.Item as="button" onClick={() => alert('Go to Home')}>
+      <BreadcrumbItem as="button" onClick={() => alert('Go to Home')}>
         Home
-      </Breadcrumbs.Item>
-      <Breadcrumbs.Item as="button" onClick={() => alert('Go to Products')}>
+      </BreadcrumbItem>
+      <BreadcrumbItem as="button" onClick={() => alert('Go to Products')}>
         Products
-      </Breadcrumbs.Item>
-      <Breadcrumbs.Item current>Product Name</Breadcrumbs.Item>
+      </BreadcrumbItem>
+      <BreadcrumbItem current>Product Name</BreadcrumbItem>
     </Breadcrumbs>
   ),
 };
@@ -168,16 +169,16 @@ export const LongItemNames: Story = {
   args: { children: [] },
   render: () => (
     <Breadcrumbs>
-      <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/category">
+      <BreadcrumbItem href="/">Home</BreadcrumbItem>
+      <BreadcrumbItem href="/category">
         A Very Long Category Name That Might Wrap
-      </Breadcrumbs.Item>
-      <Breadcrumbs.Item href="/subcategory">
+      </BreadcrumbItem>
+      <BreadcrumbItem href="/subcategory">
         Another Long Subcategory Name
-      </Breadcrumbs.Item>
-      <Breadcrumbs.Item current>
+      </BreadcrumbItem>
+      <BreadcrumbItem current>
         An Extremely Long Product Name That Demonstrates Text Handling
-      </Breadcrumbs.Item>
+      </BreadcrumbItem>
     </Breadcrumbs>
   ),
 };
@@ -191,9 +192,9 @@ export const DifferentSeparators: Story = {
           Default (/)
         </p>
         <Breadcrumbs>
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Item</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Item</BreadcrumbItem>
         </Breadcrumbs>
       </div>
 
@@ -202,9 +203,9 @@ export const DifferentSeparators: Story = {
           Greater than (&gt;)
         </p>
         <Breadcrumbs separator=">">
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Item</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Item</BreadcrumbItem>
         </Breadcrumbs>
       </div>
 
@@ -213,9 +214,9 @@ export const DifferentSeparators: Story = {
           Dash (-)
         </p>
         <Breadcrumbs separator="-">
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Item</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Item</BreadcrumbItem>
         </Breadcrumbs>
       </div>
 
@@ -224,9 +225,9 @@ export const DifferentSeparators: Story = {
           Bullet (•)
         </p>
         <Breadcrumbs separator="•">
-          <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/products">Products</Breadcrumbs.Item>
-          <Breadcrumbs.Item current>Item</Breadcrumbs.Item>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem current>Item</BreadcrumbItem>
         </Breadcrumbs>
       </div>
     </Box>
