@@ -66,7 +66,7 @@ export type {
 } from './components/Typography';
 export type { BoxProps, BoxBaseProps } from './components/Box';
 export type { StackProps } from './components/Stack';
-export type { GridProps, GridBaseProps } from './components/Grid';
+export type { GridProps, GridBaseProps, ResponsiveValue } from './components/Grid';
 export type { ContainerProps, ContainerBaseProps, ContainerSize } from './components/Container';
 export type {
   DividerProps,
