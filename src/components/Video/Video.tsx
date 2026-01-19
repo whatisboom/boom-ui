@@ -35,7 +35,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
 
     // Internal video ref
     const internalRef = useRef<HTMLVideoElement>(null);
-    const videoRef = (ref as React.RefObject<HTMLVideoElement>) || internalRef;
+    const videoRef = ref || internalRef;
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     // Video state
@@ -123,19 +123,23 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
     }, []);
 
     // Picture-in-Picture toggle handler
-    const handlePictureInPictureToggle = useCallback(async () => {
+    const handlePictureInPictureToggle = useCallback(() => {
       if (!videoRef.current) {return;}
 
-      try {
-        if (!document.pictureInPictureElement) {
-          await videoRef.current.requestPictureInPicture();
-        } else {
-          await document.exitPictureInPicture();
+      const togglePiP = async () => {
+        try {
+          if (!document.pictureInPictureElement) {
+            await videoRef.current.requestPictureInPicture();
+          } else {
+            await document.exitPictureInPicture();
+          }
+        } catch (error) {
+          // PiP request failed - silently ignore
+          console.warn('Picture-in-Picture request failed:', error);
         }
-      } catch (error) {
-        // PiP request failed - silently ignore
-        console.warn('Picture-in-Picture request failed:', error);
-      }
+      };
+
+      void togglePiP();
     }, [videoRef]);
 
     // Keyboard shortcuts
@@ -318,6 +322,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
           className
         )}
       >
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
           ref={videoRef}
           className={styles.video}
@@ -330,16 +335,20 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
           playsInline
           {...videoProps}
         >
-          {captions.map((caption, index) => (
-            <track
-              key={index}
-              kind="subtitles"
-              src={caption.src}
-              srcLang={caption.language}
-              label={caption.label}
-              default={caption.default}
-            />
-          ))}
+          {captions.length > 0 ? (
+            captions.map((caption, index) => (
+              <track
+                key={index}
+                kind="subtitles"
+                src={caption.src}
+                srcLang={caption.language}
+                label={caption.label}
+                default={caption.default}
+              />
+            ))
+          ) : (
+            <track kind="captions" />
+          )}
         </video>
 
         {/* Loading indicator */}
@@ -353,6 +362,12 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
         <div
           className={cn(styles.playOverlay, !isPlaying && styles.paused)}
           onClick={handlePlayPause}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handlePlayPause();
+            }
+          }}
           role="button"
           tabIndex={-1}
           aria-label="Play video"

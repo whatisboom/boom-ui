@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { Popover } from '../primitives/Popover';
 import { useMenuContext } from './MenuContext';
 import type { MenuContentProps } from './Menu.types';
@@ -35,61 +35,59 @@ export const MenuContent = ({
   }, [focusedIndex, isOpen, itemRefs]);
 
   // Handle keyboard navigation
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      const enabledItems = Array.from(itemRefs.current.entries())
-        .filter(([, ref]) => !ref.disabled)
-        .map(([index]) => index)
-        .sort((a, b) => a - b);
+  // Remove useCallback - React Compiler will optimize this
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const enabledItems = Array.from(itemRefs.current.entries())
+      .filter(([, ref]) => !ref.disabled)
+      .map(([index]) => index)
+      .sort((a, b) => a - b);
 
-      if (enabledItems.length === 0) {return;}
+    if (enabledItems.length === 0) {return;}
 
-      switch (e.key) {
-        case 'ArrowDown': {
-          e.preventDefault();
-          const currentPos = enabledItems.indexOf(focusedIndex);
-          const nextIndex =
-            currentPos === -1
-              ? enabledItems[0]
-              : enabledItems[(currentPos + 1) % enabledItems.length];
-          setFocusedIndex(nextIndex);
-          break;
-        }
-        case 'ArrowUp': {
-          e.preventDefault();
-          const currentPos = enabledItems.indexOf(focusedIndex);
-          const prevIndex =
-            currentPos === -1
-              ? enabledItems[enabledItems.length - 1]
-              : enabledItems[
-                  (currentPos - 1 + enabledItems.length) % enabledItems.length
-                ];
-          setFocusedIndex(prevIndex);
-          break;
-        }
-        case 'Home': {
-          e.preventDefault();
-          setFocusedIndex(enabledItems[0]);
-          break;
-        }
-        case 'End': {
-          e.preventDefault();
-          setFocusedIndex(enabledItems[enabledItems.length - 1]);
-          break;
-        }
-        case 'Escape': {
-          e.preventDefault();
-          closeMenu();
-          // Return focus to trigger
-          if (triggerRef.current) {
-            triggerRef.current.focus();
-          }
-          break;
-        }
+    switch (e.key) {
+      case 'ArrowDown': {
+        e.preventDefault();
+        const currentPos = enabledItems.indexOf(focusedIndex);
+        const nextIndex =
+          currentPos === -1
+            ? enabledItems[0]
+            : enabledItems[(currentPos + 1) % enabledItems.length];
+        setFocusedIndex(nextIndex);
+        break;
       }
-    },
-    [focusedIndex, setFocusedIndex, closeMenu, itemRefs, triggerRef]
-  );
+      case 'ArrowUp': {
+        e.preventDefault();
+        const currentPos = enabledItems.indexOf(focusedIndex);
+        const prevIndex =
+          currentPos === -1
+            ? enabledItems[enabledItems.length - 1]
+            : enabledItems[
+                (currentPos - 1 + enabledItems.length) % enabledItems.length
+              ];
+        setFocusedIndex(prevIndex);
+        break;
+      }
+      case 'Home': {
+        e.preventDefault();
+        setFocusedIndex(enabledItems[0]);
+        break;
+      }
+      case 'End': {
+        e.preventDefault();
+        setFocusedIndex(enabledItems[enabledItems.length - 1]);
+        break;
+      }
+      case 'Escape': {
+        e.preventDefault();
+        closeMenu();
+        // Return focus to trigger
+        if (triggerRef.current) {
+          triggerRef.current.focus();
+        }
+        break;
+      }
+    }
+  };
 
   // Focus first item when menu opens
   useEffect(() => {
@@ -122,6 +120,7 @@ export const MenuContent = ({
         ref={contentRef as React.RefObject<HTMLDivElement>}
         className={cn(styles.menuContent, className)}
         role="menu"
+        tabIndex={-1}
         onKeyDown={handleKeyDown}
       >
         {children}

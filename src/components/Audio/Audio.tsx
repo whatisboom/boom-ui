@@ -142,7 +142,6 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
       }
     }, [isMuted, onVolumeChange]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleSeek = useCallback((time: number) => {
       const audio = typeof internalRef === 'function' ? null : internalRef.current;
       if (!audio) {return;}
@@ -150,7 +149,7 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
       // eslint-disable-next-line react-hooks/immutability
       audio.currentTime = time;
       setCurrentTime(time);
-    }, []); // Refs don't need to be dependencies
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handlePlaybackRateChange = useCallback((rate: number) => {
       setPlaybackRate(rate);
@@ -210,8 +209,7 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [handlePlayPause, handleSeek, handleMuteToggle, currentTime, duration]); // Refs don't need to be dependencies
+    }, [handlePlayPause, handleSeek, handleMuteToggle, currentTime, duration]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // Determine ARIA label
     const label = ariaLabel ||

@@ -38,7 +38,7 @@ export const MenuTrigger = ({ children, className }: MenuTriggerProps) => {
     });
   }
 
-  return <>{children}</>;
+  return children;
 };
 
 MenuTrigger.displayName = 'Menu.Trigger';

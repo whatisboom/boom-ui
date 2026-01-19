@@ -8,7 +8,7 @@ import { Video } from './Video';
 const getVideo = (container: HTMLElement): HTMLVideoElement => {
   const video = container.querySelector('video');
   if (!video) {throw new Error('Video element not found');}
-  return video as HTMLVideoElement;
+  return video;
 };
 
 // Mock HTMLMediaElement methods
