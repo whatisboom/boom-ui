@@ -25,7 +25,7 @@ export type PlaybackRate = 0.25 | 0.5 | 0.75 | 1 | 1.25 | 1.5 | 1.75 | 2;
 /**
  * Video player props
  */
-export interface VideoProps extends Omit<VideoHTMLAttributes<HTMLVideoElement>, 'controls'> {
+export interface VideoProps extends Omit<VideoHTMLAttributes<HTMLVideoElement>, 'controls' | 'onVolumeChange'> {
   /** Video source URL */
   src: string;
 

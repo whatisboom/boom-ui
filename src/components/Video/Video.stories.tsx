@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Video } from './Video';
 import { Stack } from '../Stack';
 
@@ -287,7 +287,7 @@ export const EventHandlers: Story = {
     onPlay: () => console.log('Video started playing'),
     onPause: () => console.log('Video paused'),
     onEnded: () => console.log('Video ended'),
-    onTimeUpdate: (time: number) => console.log(`Current time: ${time.toFixed(2)}s`),
+    onVideoTimeUpdate: (time: number) => console.log(`Current time: ${time.toFixed(2)}s`),
     onVolumeChange: (volume: number, muted: boolean) =>
       console.log(`Volume: ${(volume * 100).toFixed(0)}%, Muted: ${muted}`),
     onPlaybackRateChange: (rate) => console.log(`Playback rate: ${rate}x`),

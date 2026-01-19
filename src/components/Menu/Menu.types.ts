@@ -106,5 +106,5 @@ export interface MenuContextValue {
   unregisterItem: (index: number) => void;
   closeMenu: () => void;
   itemCount: number;
-  setItemCount: (count: number) => void;
+  setItemCount: React.Dispatch<React.SetStateAction<number>>;
 }

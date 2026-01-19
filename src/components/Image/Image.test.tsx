@@ -101,7 +101,7 @@ describe('Image', () => {
       fireEvent.error(img);
 
       await waitFor(() => {
-        expect(img.src).toContain('via.placeholder.com');
+        expect((img as HTMLImageElement).src).toContain('via.placeholder.com');
       });
     });
 
@@ -121,7 +121,7 @@ describe('Image', () => {
       fireEvent.error(img);
 
       await waitFor(() => {
-        expect(img.src).toContain('also-invalid.com');
+        expect((img as HTMLImageElement).src).toContain('also-invalid.com');
       });
 
       // Trigger second error

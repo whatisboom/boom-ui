@@ -3,16 +3,8 @@ import { cn } from '@/utils/classnames';
 import type { AudioProps, AudioTrack } from './Audio.types';
 import { AudioControls } from './AudioControls';
 import { AudioWaveform } from './AudioWaveform';
+import { formatTime } from './Audio.utils';
 import styles from './Audio.module.css';
-
-// Utility to format time in mm:ss
-const formatTime = (seconds: number): string => {
-  if (!isFinite(seconds)) {return '00:00';}
-
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-};
 
 export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
   (props, ref) => {
@@ -150,13 +142,15 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
       }
     }, [isMuted, onVolumeChange]);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleSeek = useCallback((time: number) => {
       const audio = typeof internalRef === 'function' ? null : internalRef.current;
       if (!audio) {return;}
 
+      // eslint-disable-next-line react-hooks/immutability
       audio.currentTime = time;
       setCurrentTime(time);
-    }, [internalRef]);
+    }, []); // Refs don't need to be dependencies
 
     const handlePlaybackRateChange = useCallback((rate: number) => {
       setPlaybackRate(rate);
@@ -216,7 +210,8 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
-    }, [handlePlayPause, handleSeek, handleMuteToggle, currentTime, duration, internalRef]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [handlePlayPause, handleSeek, handleMuteToggle, currentTime, duration]); // Refs don't need to be dependencies
 
     // Determine ARIA label
     const label = ariaLabel ||
@@ -235,7 +230,9 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onEnded={handleEnded}
-        />
+        >
+          <track kind="captions" />
+        </audio>
 
         {/* Track info */}
         {currentTrack && (currentTrack.title || currentTrack.artist) && (
@@ -331,5 +328,3 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
 );
 
 Audio.displayName = 'Audio';
-
-export { formatTime };

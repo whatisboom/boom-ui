@@ -46,15 +46,15 @@ export const AudioWaveform = ({
         const normalized = filteredData.map(n => n / max);
 
         setWaveformData(normalized);
-        audioContext.close();
-      } catch (error) {
+        void audioContext.close();
+      } catch {
         // Fallback to simple bars if waveform generation fails
         const fallback = Array(100).fill(0).map(() => Math.random() * 0.5 + 0.3);
         setWaveformData(fallback);
       }
     };
 
-    generateWaveform();
+    void generateWaveform();
   }, [audioRef]);
 
   // Update canvas size on resize

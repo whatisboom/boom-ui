@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/utils/classnames';
 import { Slider } from '@/components/Slider';
 import type { AudioControlsProps } from './Audio.types';
-import { formatTime } from './Audio';
+import { formatTime } from './Audio.utils';
 import styles from './Audio.module.css';
 
 // Icon components (simple SVG icons)

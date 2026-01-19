@@ -350,7 +350,7 @@ describe('Audio', () => {
       };
 
       const originalGetContext = HTMLCanvasElement.prototype.getContext;
-      HTMLCanvasElement.prototype.getContext = vi.fn(() => mockContext as unknown as CanvasRenderingContext2D);
+      HTMLCanvasElement.prototype.getContext = vi.fn(() => mockContext) as unknown as typeof HTMLCanvasElement.prototype.getContext;
 
       const { container } = render(
         <Audio src={mockAudioSrc} showWaveform />
@@ -434,13 +434,12 @@ describe('Audio', () => {
       const onTimeUpdate = vi.fn();
       render(<Audio src={mockAudioSrc} onTimeUpdate={onTimeUpdate} />);
 
-      const audio = document.querySelector('audio') as HTMLAudioElement;
+      const audio = document.querySelector('audio');
       if (audio) {
         Object.defineProperty(audio, 'currentTime', { value: 10, writable: true });
         audio.dispatchEvent(new Event('timeupdate'));
+        expect(onTimeUpdate).toHaveBeenCalledWith(10);
       }
-
-      expect(onTimeUpdate).toHaveBeenCalledWith(10);
     });
   });
 
@@ -464,7 +463,7 @@ describe('Audio', () => {
     it('should format time correctly', async () => {
       render(<Audio src={mockAudioSrc} />);
 
-      const audio = document.querySelector('audio') as HTMLAudioElement;
+      const audio = document.querySelector('audio');
       if (audio) {
         Object.defineProperty(audio, 'currentTime', { value: 125, writable: true, configurable: true });
         Object.defineProperty(audio, 'duration', { value: 185, writable: true, configurable: true });
@@ -473,14 +472,14 @@ describe('Audio', () => {
         audio.dispatchEvent(new Event('loadedmetadata'));
         // Then trigger timeupdate to update current time
         audio.dispatchEvent(new Event('timeupdate'));
+
+        // Wait for state updates
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        // Should show 02:05 for 125 seconds and 03:05 for 185 seconds
+        expect(screen.getByText('02:05')).toBeInTheDocument();
+        expect(screen.getByText('03:05')).toBeInTheDocument();
       }
-
-      // Wait for state updates
-      await new Promise(resolve => setTimeout(resolve, 0));
-
-      // Should show 02:05 for 125 seconds and 03:05 for 185 seconds
-      expect(screen.getByText('02:05')).toBeInTheDocument();
-      expect(screen.getByText('03:05')).toBeInTheDocument();
     });
   });
 });
