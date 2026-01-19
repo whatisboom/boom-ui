@@ -42,8 +42,8 @@
   --boom-light-success: 41;
 
   /* Warning - Amber saturation/lightness (reference: warning-500) */
-  --boom-sat-warning: 63;
-  --boom-light-warning: 32;
+  --boom-sat-warning: 75;
+  --boom-light-warning: 50;
 
   /* Error - Red saturation/lightness (reference: error-500) */
   --boom-sat-error: 84;
@@ -150,7 +150,7 @@
   --boom-light-success: 51;
   --boom-hue-warning: 38;
   --boom-sat-warning: 75;
-  --boom-light-warning: 75;
+  --boom-light-warning: 50;
   --boom-hue-error: 0;
   --boom-sat-error: 84;
   --boom-light-error: 60;
