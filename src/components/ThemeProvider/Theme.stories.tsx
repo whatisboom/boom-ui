@@ -392,8 +392,8 @@ export const ThemeCustomizer: Story = {
     const [successLight, setSuccessLight] = useState(41);
 
     const [warningHue, setWarningHue] = useState(38);
-    const [warningSat, setWarningSat] = useState(63);
-    const [warningLight, setWarningLight] = useState(32);
+    const [warningSat, setWarningSat] = useState(75);
+    const [warningLight, setWarningLight] = useState(50);
 
     const [errorHue, setErrorHue] = useState(0);
     const [errorSat, setErrorSat] = useState(84);
