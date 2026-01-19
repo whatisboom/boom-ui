@@ -7,8 +7,8 @@ interface Position {
 }
 
 export function usePopoverPosition(
-  popoverRef: RefObject<HTMLElement>,
-  anchorRef: RefObject<HTMLElement>,
+  popoverRef: RefObject<HTMLElement | null>,
+  anchorRef: RefObject<HTMLElement | null>,
   placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom',
   offset: number = 8,
   isOpen: boolean = false

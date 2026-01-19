@@ -22,7 +22,7 @@ export interface PopoverProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  anchorEl: React.RefObject<HTMLElement>;
+  anchorEl: React.RefObject<HTMLElement | null>;
   placement?: 'top' | 'bottom' | 'left' | 'right';
   offset?: number;
 }

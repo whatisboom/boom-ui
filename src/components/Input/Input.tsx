@@ -35,16 +35,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputClassNames = cn(
       styles.input,
       styles[size],
-      leftIcon && styles.hasLeftIcon,
-      rightIcon && styles.hasRightIcon,
-      error && styles.error,
+      leftIcon ? styles.hasLeftIcon : false,
+      rightIcon ? styles.hasRightIcon : false,
+      error ? styles.error : false,
       inputClassName
     );
 
     const wrapperClassNames = cn(
       styles.wrapper,
-      fullWidth && styles.fullWidth,
-      disabled && styles.disabled,
+      fullWidth ? styles.fullWidth : false,
+      disabled ? styles.disabled : false,
       className
     );
 
@@ -53,7 +53,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={id}
-            className={cn(styles.label, disabled && styles.disabled)}
+            className={cn(styles.label, disabled ? styles.disabled : false)}
           >
             {label}
             {required && (
