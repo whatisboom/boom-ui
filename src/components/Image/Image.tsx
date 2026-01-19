@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, forwardRef, useMemo } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import { cn } from '@/utils/classnames';
 import { Skeleton } from '@/components/Skeleton';
 import type { ImageProps } from './Image.types';
@@ -21,21 +21,11 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
     },
     ref
   ) => {
-    // Use key to reset state when src changes
-    const imageKey = useMemo(() => src, [src]);
-
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
     const [isInView, setIsInView] = useState(loading === 'eager');
     const [currentSrc, setCurrentSrc] = useState<string>(src);
     const containerRef = useRef<HTMLDivElement>(null);
-
-    // Reset state when src changes
-    useEffect(() => {
-      setCurrentSrc(src);
-      setIsLoading(true);
-      setHasError(false);
-    }, [imageKey]);
 
     // IntersectionObserver for lazy loading
     useEffect(() => {
@@ -119,9 +109,10 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
           </div>
         )}
 
-        {/* Image */}
+        {/* Image - use key to remount when src changes */}
         {isInView && !hasError && (
           <img
+            key={src}
             ref={ref}
             src={currentSrc}
             alt={alt}

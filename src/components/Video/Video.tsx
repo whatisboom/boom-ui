@@ -27,7 +27,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
       onEnded,
       onPlay,
       onPause,
-      onTimeUpdate,
+      onVideoTimeUpdate,
       onVolumeChange,
       onPlaybackRateChange,
       ...videoProps
@@ -227,7 +227,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
 
       const handleTimeUpdateEvent = () => {
         setCurrentTime(video.currentTime);
-        onTimeUpdate?.(video.currentTime);
+        onVideoTimeUpdate?.(video.currentTime);
       };
 
       const handleLoadedMetadata = () => {

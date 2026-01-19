@@ -27,6 +27,13 @@ beforeEach(() => {
       arrayBuffer: () => Promise.resolve(new ArrayBuffer(8)),
     } as Response)
   );
+
+  // Mock ResizeObserver
+  (global as typeof globalThis & { ResizeObserver: typeof ResizeObserver }).ResizeObserver = class ResizeObserver {
+    observe = vi.fn();
+    unobserve = vi.fn();
+    disconnect = vi.fn();
+  };
 });
 
 afterEach(() => {
@@ -335,13 +342,26 @@ describe('Audio', () => {
 
   describe('Waveform', () => {
     it('should render waveform container when showWaveform is true', () => {
+      // Mock HTMLCanvasElement.prototype.getContext for this test
+      const mockContext = {
+        clearRect: vi.fn(),
+        fillRect: vi.fn(),
+        scale: vi.fn(),
+      };
+
+      const originalGetContext = HTMLCanvasElement.prototype.getContext;
+      HTMLCanvasElement.prototype.getContext = vi.fn(() => mockContext as unknown as CanvasRenderingContext2D);
+
       const { container } = render(
         <Audio src={mockAudioSrc} showWaveform />
       );
 
-      // Check that waveform container exists (canvas may fail without proper mocking)
+      // Check that waveform container exists
       const canvas = container.querySelector('canvas');
       expect(canvas).toBeInTheDocument();
+
+      // Restore original method
+      HTMLCanvasElement.prototype.getContext = originalGetContext;
     });
 
     it('should not render waveform by default', () => {

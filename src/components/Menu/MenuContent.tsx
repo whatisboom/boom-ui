@@ -19,18 +19,20 @@ export const MenuContent = ({
     focusedIndex,
     setFocusedIndex,
     itemRefs,
-    itemCount,
   } = useMenuContext();
 
   // Focus the appropriate item when focusedIndex changes
   useEffect(() => {
-    if (isOpen && focusedIndex >= 0 && focusedIndex < itemCount) {
+    if (isOpen && focusedIndex >= 0) {
       const item = itemRefs.current.get(focusedIndex);
-      if (item) {
-        item.focus();
+      if (item && !item.disabled) {
+        // Use requestAnimationFrame to ensure DOM is ready
+        requestAnimationFrame(() => {
+          item.focus();
+        });
       }
     }
-  }, [focusedIndex, isOpen, itemCount, itemRefs]);
+  }, [focusedIndex, isOpen, itemRefs]);
 
   // Handle keyboard navigation
   const handleKeyDown = useCallback(
@@ -117,7 +119,7 @@ export const MenuContent = ({
       offset={offset}
     >
       <div
-        ref={contentRef}
+        ref={contentRef as React.RefObject<HTMLDivElement>}
         className={cn(styles.menuContent, className)}
         role="menu"
         onKeyDown={handleKeyDown}

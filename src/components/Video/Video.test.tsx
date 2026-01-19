@@ -341,7 +341,7 @@ describe('Video', () => {
     const { container } = render(<Video src="/test-video.mp4" muted />);
 
     const video = getVideo(container);
-    expect(video).toHaveAttribute('muted');
+    expect(video.muted).toBe(true);
   });
 
   it('should support preload prop', () => {

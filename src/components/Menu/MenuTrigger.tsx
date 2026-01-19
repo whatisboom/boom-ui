@@ -33,7 +33,7 @@ export const MenuTrigger = ({ children, className }: MenuTriggerProps) => {
       onKeyDown: handleKeyDown,
       'aria-haspopup': true,
       'aria-expanded': isOpen,
-      ref: triggerRef,
+      ref: triggerRef as React.Ref<HTMLElement>,
       className: className || (children as React.ReactElement<{ className?: string }>).props.className,
     });
   }

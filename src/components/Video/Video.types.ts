@@ -68,8 +68,8 @@ export interface VideoProps extends Omit<VideoHTMLAttributes<HTMLVideoElement>, 
   /** Callback when video pauses */
   onPause?: () => void;
 
-  /** Callback when time updates */
-  onTimeUpdate?: (currentTime: number) => void;
+  /** Callback when time updates (custom handler, use onTimeUpdateCapture for native event) */
+  onVideoTimeUpdate?: (currentTime: number) => void;
 
   /** Callback when volume changes */
   onVolumeChange?: (volume: number, muted: boolean) => void;

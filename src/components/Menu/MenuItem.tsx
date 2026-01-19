@@ -22,12 +22,12 @@ export const MenuItem = ({
   useEffect(() => {
     if (itemRef.current) {
       registerItem(itemIndex, itemRef.current);
-      setItemCount((prev) => prev + 1);
+      setItemCount((prev: number) => prev + 1);
     }
 
     return () => {
       unregisterItem(itemIndex);
-      setItemCount((prev) => prev - 1);
+      setItemCount((prev: number) => prev - 1);
     };
   }, [itemIndex, registerItem, unregisterItem, setItemCount]);
 
