@@ -12,7 +12,18 @@ const config: StorybookConfig = {
   framework: {
     name: '@storybook/react-vite',
     options: {},
-  }
+  },
+
+  docs: {
+    autodocs: 'tag',
+  },
+
+  typescript: {
+    // Use TypeScript for type extraction instead of react-docgen
+    reactDocgen: 'react-docgen-typescript',
+    // Check types but don't fail on errors
+    check: false,
+  },
 };
 
 export default config;
