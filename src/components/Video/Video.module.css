@@ -128,7 +128,7 @@
 .volumeSliderWrapper {
   width: 0;
   opacity: 0;
-  overflow: hidden;
+  overflow: visible;
   transition: width var(--boom-transition-base), opacity var(--boom-transition-base);
 }
 
