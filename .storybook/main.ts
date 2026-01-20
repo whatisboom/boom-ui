@@ -18,10 +18,8 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
     source: {
-      // Show original source code instead of compiled output
-      type: 'code',
-      // Don't show decorators in code snippets
-      excludeDecorators: true,
+      // Show rendered JSX instead of story args object
+      type: 'dynamic',
     },
   },
 

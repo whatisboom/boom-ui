@@ -46,8 +46,8 @@ const preview: Preview = {
     docs: {
       container: DocsContainer,
       source: {
-        // Always show story source code, not compiled output
-        type: 'code',
+        // Show rendered JSX instead of story args object
+        type: 'dynamic',
         // Use TSX language for syntax highlighting
         language: 'tsx',
       },
