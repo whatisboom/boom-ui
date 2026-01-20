@@ -234,6 +234,58 @@ describe('AppShell', () => {
     });
   });
 
+  describe('Sidebar Position', () => {
+    it('positions sidebar on left by default', () => {
+      const { container } = render(
+        <AppShell sidebar={<Sidebar>Sidebar</Sidebar>}>
+          <div>Content</div>
+        </AppShell>
+      );
+
+      const appShell = container.firstChild as HTMLElement;
+      expect(appShell.style.gridTemplateAreas).toBe('"sidebar main"');
+      expect(appShell.style.gridTemplateColumns).toBe('280px 1fr');
+    });
+
+    it('positions sidebar on right when position="right"', () => {
+      const { container } = render(
+        <AppShell sidebar={<Sidebar position="right">Sidebar</Sidebar>}>
+          <div>Content</div>
+        </AppShell>
+      );
+
+      const appShell = container.firstChild as HTMLElement;
+      expect(appShell.style.gridTemplateAreas).toBe('"main sidebar"');
+      expect(appShell.style.gridTemplateColumns).toBe('1fr 280px');
+    });
+
+    it('positions sidebar on right with header when position="right"', () => {
+      const { container } = render(
+        <AppShell
+          header={<Header>Header</Header>}
+          sidebar={<Sidebar position="right">Sidebar</Sidebar>}
+        >
+          <div>Content</div>
+        </AppShell>
+      );
+
+      const appShell = container.firstChild as HTMLElement;
+      expect(appShell.style.gridTemplateAreas).toBe('"header header" "main sidebar"');
+      expect(appShell.style.gridTemplateColumns).toBe('1fr 280px');
+    });
+
+    it('respects custom width with right-positioned sidebar', () => {
+      const { container } = render(
+        <AppShell sidebar={<Sidebar position="right" width="350px">Sidebar</Sidebar>}>
+          <div>Content</div>
+        </AppShell>
+      );
+
+      const appShell = container.firstChild as HTMLElement;
+      expect(appShell.style.gridTemplateColumns).toBe('1fr 350px');
+    });
+  });
+
   describe('Main Content Area', () => {
     it('wraps children in main element', () => {
       render(

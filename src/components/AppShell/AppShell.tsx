@@ -7,21 +7,25 @@ const DEFAULT_SIDEBAR_WIDTH = '280px';
 const HEADER_HEIGHT = 'var(--boom-header-height, 64px)';
 
 export function AppShell({ header, sidebar, children, className, style }: AppShellProps) {
-  // Extract sidebar width from sidebar props
+  // Extract sidebar props
   const sidebarWidth = sidebar?.props.width || DEFAULT_SIDEBAR_WIDTH;
+  const sidebarPosition = sidebar?.props.position || 'left';
 
   // Build grid template properties based on what's present
   const hasHeader = !!header;
   const hasSidebar = !!sidebar;
+  const isSidebarRight = sidebarPosition === 'right';
 
   // Grid template areas
   let gridTemplateAreas: string;
   if (hasHeader && hasSidebar) {
-    gridTemplateAreas = '"header header" "sidebar main"';
+    gridTemplateAreas = isSidebarRight
+      ? '"header header" "main sidebar"'
+      : '"header header" "sidebar main"';
   } else if (hasHeader) {
     gridTemplateAreas = '"header" "main"';
   } else if (hasSidebar) {
-    gridTemplateAreas = '"sidebar main"';
+    gridTemplateAreas = isSidebarRight ? '"main sidebar"' : '"sidebar main"';
   } else {
     gridTemplateAreas = '"main"';
   }
@@ -37,7 +41,7 @@ export function AppShell({ header, sidebar, children, className, style }: AppShe
   // Grid template columns
   let gridTemplateColumns: string;
   if (hasSidebar) {
-    gridTemplateColumns = `${sidebarWidth} 1fr`;
+    gridTemplateColumns = isSidebarRight ? `1fr ${sidebarWidth}` : `${sidebarWidth} 1fr`;
   } else {
     gridTemplateColumns = '1fr';
   }

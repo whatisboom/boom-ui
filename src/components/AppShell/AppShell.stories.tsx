@@ -310,6 +310,47 @@ export const CustomSidebarWidth: Story = {
   },
 };
 
+export const RightSidebar: Story = {
+  args: {
+    header: (
+      <Header logo={<div style={{ fontWeight: 'bold', fontSize: '20px' }}>Right Sidebar</div>}>
+        <Button variant="ghost">Home</Button>
+        <Button variant="ghost">About</Button>
+        <Button variant="primary">Contact</Button>
+      </Header>
+    ),
+    sidebar: (
+      <Sidebar position="right">
+        <Sidebar.Header>Quick Actions</Sidebar.Header>
+        <Sidebar.Nav>
+          <Sidebar.Item label="Notifications" badge={5} isActive />
+          <Sidebar.Item label="Messages" badge={2} />
+          <Sidebar.Item label="Settings" />
+          <Sidebar.Item label="Help" />
+        </Sidebar.Nav>
+      </Sidebar>
+    ),
+    children: (
+      <Box padding={8}>
+        <h1>Right-Positioned Sidebar</h1>
+        <p>
+          The sidebar appears on the right side of the layout instead of the default left position.
+          This is useful for secondary navigation or contextual actions.
+        </p>
+        <Box>
+          <h2>Use Cases</h2>
+          <ul>
+            <li>Notifications panel</li>
+            <li>Chat or messaging sidebar</li>
+            <li>Context-sensitive tools</li>
+            <li>Secondary navigation</li>
+          </ul>
+        </Box>
+      </Box>
+    ),
+  },
+};
+
 export const WithStyledContent: Story = {
   args: {
     header: (
