@@ -162,13 +162,18 @@
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: var(--boom-spacing-1);
-  padding: var(--boom-spacing-2);
+  padding: 0 var(--boom-spacing-2);
   background: var(--boom-theme-bg-elevated);
   border: 1px solid var(--boom-theme-border-default);
   border-radius: var(--boom-border-radius-md);
   box-shadow: var(--boom-shadow-lg);
   width: 100px;
   z-index: 10;
+}
+
+:root[data-theme='dark'] .volumeSlider {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Playback Rate Control */
