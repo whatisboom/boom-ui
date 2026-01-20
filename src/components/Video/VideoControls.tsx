@@ -92,6 +92,7 @@ export const VideoControls = ({
   activeCaptionIndex,
   isFullscreen,
   isPictureInPicture,
+  volumeSliderDelay,
   onPlayPause,
   onSeek,
   onVolumeChange,
@@ -103,8 +104,11 @@ export const VideoControls = ({
 }: VideoControlsProps) => {
   const [showPlaybackRateMenu, setShowPlaybackRateMenu] = useState(false);
   const [showCaptionMenu, setShowCaptionMenu] = useState(false);
+  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const [isSliderActive, setIsSliderActive] = useState(false);
   const playbackRateRef = useRef<HTMLDivElement>(null);
   const captionRef = useRef<HTMLDivElement>(null);
+  const volumeHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Close menus when clicking outside
   useEffect(() => {
@@ -126,6 +130,52 @@ export const VideoControls = ({
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Volume slider visibility management
+  const clearVolumeTimer = () => {
+    if (volumeHideTimerRef.current) {
+      clearTimeout(volumeHideTimerRef.current);
+      volumeHideTimerRef.current = null;
+    }
+  };
+
+  const handleVolumeControlEnter = () => {
+    clearVolumeTimer();
+    setShowVolumeSlider(true);
+  };
+
+  const handleVolumeControlLeave = () => {
+    // Don't hide if slider is being actively dragged
+    if (isSliderActive) {
+      return;
+    }
+
+    clearVolumeTimer();
+    volumeHideTimerRef.current = setTimeout(() => {
+      setShowVolumeSlider(false);
+    }, volumeSliderDelay);
+  };
+
+  const handleSliderInteractionStart = () => {
+    clearVolumeTimer();
+    setIsSliderActive(true);
+    setShowVolumeSlider(true);
+  };
+
+  const handleSliderInteractionEnd = () => {
+    setIsSliderActive(false);
+    // Start hide timer when interaction ends
+    volumeHideTimerRef.current = setTimeout(() => {
+      setShowVolumeSlider(false);
+    }, volumeSliderDelay);
+  };
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      clearVolumeTimer();
     };
   }, []);
 
@@ -178,7 +228,11 @@ export const VideoControls = ({
           </button>
 
           {/* Volume */}
-          <div className={styles.volumeControl}>
+          <div
+            className={styles.volumeControl}
+            onMouseEnter={handleVolumeControlEnter}
+            onMouseLeave={handleVolumeControlLeave}
+          >
             <button
               type="button"
               className={styles.controlButton}
@@ -188,7 +242,13 @@ export const VideoControls = ({
               {isMuted || volume === 0 ? <VolumeOffIcon /> : <VolumeUpIcon />}
             </button>
 
-            <div className={styles.volumeSliderWrapper}>
+            <div
+              className={cn(styles.volumeSliderWrapper, showVolumeSlider && styles.volumeSliderVisible)}
+              onMouseDown={handleSliderInteractionStart}
+              onMouseUp={handleSliderInteractionEnd}
+              onTouchStart={handleSliderInteractionStart}
+              onTouchEnd={handleSliderInteractionEnd}
+            >
               <Slider
                 value={isMuted ? 0 : volume * 100}
                 onChange={handleVolumeChange}

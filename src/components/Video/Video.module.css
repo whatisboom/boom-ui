@@ -132,8 +132,7 @@
   transition: width var(--boom-transition-base), opacity var(--boom-transition-base);
 }
 
-.volumeControl:hover .volumeSliderWrapper,
-.volumeControl:focus-within .volumeSliderWrapper {
+.volumeSliderWrapper.volumeSliderVisible {
   width: 80px;
   opacity: 1;
 }

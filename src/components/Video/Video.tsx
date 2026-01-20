@@ -23,6 +23,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
       loop = false,
       muted = false,
       preload = 'metadata',
+      volumeSliderDelay = 500,
       className,
       onEnded,
       onPlay,
@@ -394,6 +395,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
             activeCaptionIndex={activeCaptionIndex}
             isFullscreen={isFullscreen}
             isPictureInPicture={isPictureInPicture}
+            volumeSliderDelay={volumeSliderDelay}
             onPlayPause={handlePlayPause}
             onSeek={handleSeek}
             onVolumeChange={handleVolumeChange}

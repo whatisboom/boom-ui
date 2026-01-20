@@ -76,6 +76,9 @@ export interface VideoProps extends Omit<VideoHTMLAttributes<HTMLVideoElement>, 
 
   /** Callback when playback rate changes */
   onPlaybackRateChange?: (rate: PlaybackRate) => void;
+
+  /** Delay in milliseconds before hiding volume slider after mouse leaves (default: 500) */
+  volumeSliderDelay?: number;
 }
 
 /**
@@ -141,4 +144,7 @@ export interface VideoControlsProps {
 
   /** Picture-in-picture toggle handler */
   onPictureInPictureToggle: () => void;
+
+  /** Delay in milliseconds before hiding volume slider after mouse leaves */
+  volumeSliderDelay: number;
 }
