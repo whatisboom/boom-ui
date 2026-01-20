@@ -10,7 +10,7 @@ import { Stack } from '../Stack';
 import { useFormStep } from './hooks/useFormStep';
 
 const meta: Meta<typeof FormStepper> = {
-  title: 'Forms & Validation/FormStepper',
+  title: 'Forms/FormStepper',
   component: FormStepper,
   parameters: {
     docs: {

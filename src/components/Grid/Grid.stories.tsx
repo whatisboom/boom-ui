@@ -5,7 +5,7 @@ import { Typography } from '@/components/Typography';
 import { Box } from '@/components/Box';
 
 const meta: Meta<typeof Grid> = {
-  title: 'Page Layouts/Grid',
+  title: 'Layout/Grid',
   component: Grid,
   parameters: {
     docs: {

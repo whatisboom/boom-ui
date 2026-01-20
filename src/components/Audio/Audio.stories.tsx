@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Audio } from './Audio';
 
 const meta = {
-  title: 'Components/Media/Audio',
+  title: 'Media/Audio',
   component: Audio,
   parameters: {
     layout: 'centered',

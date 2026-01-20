@@ -3,7 +3,7 @@ import { Image } from './Image';
 import { Stack } from '../Stack';
 
 const meta = {
-  title: 'Components/Media/Image',
+  title: 'Media/Image',
   component: Image,
   parameters: {
     layout: 'centered',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Hero } from './Hero';
 
 const meta = {
-  title: 'Page Layouts/Hero',
+  title: 'Layout/Hero',
   component: Hero,
   tags: ['autodocs'],
   argTypes: {

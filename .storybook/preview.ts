@@ -8,6 +8,21 @@ const preview: Preview = {
   decorators: [ThemeDecorator],
 
   parameters: {
+    options: {
+      storySort: {
+        order: [
+          'Getting Started',
+          'Layout',
+          'Core',
+          'Navigation',
+          'Forms',
+          'Overlays & Dialogs',
+          'Feedback & Status',
+          'Media',
+          'Data Display',
+        ],
+      },
+    },
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {

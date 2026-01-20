@@ -3,7 +3,7 @@ import { Video } from './Video';
 import { Stack } from '../Stack';
 
 const meta = {
-  title: 'Components/Media/Video',
+  title: 'Media/Video',
   component: Video,
   parameters: {
     layout: 'centered',
