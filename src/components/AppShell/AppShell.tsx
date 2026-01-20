@@ -43,17 +43,15 @@ export function AppShell({ header, sidebar, children, className, style }: AppShe
   }
 
   // Merge inline styles with grid properties and layout styles
-  // Note: Grid template properties are intentionally placed AFTER user's style prop
-  // to ensure the component's layout structure is preserved. The grid layout is
-  // calculated based on header/sidebar presence and must not be overridden.
+  // Grid template properties provide defaults but can be overridden by user's style prop
   const containerStyle: CSSProperties = {
     display: 'grid',
     height: '100vh',
     overflow: 'hidden',
-    ...style,
     gridTemplateAreas,
     gridTemplateRows,
     gridTemplateColumns,
+    ...style,
   };
 
   // Style for main element

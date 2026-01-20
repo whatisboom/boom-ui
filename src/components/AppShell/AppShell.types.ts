@@ -26,9 +26,9 @@ export interface AppShellProps {
   /**
    * Additional inline styles
    *
-   * Note: Grid layout properties (gridTemplateAreas, gridTemplateRows, gridTemplateColumns)
-   * are managed by the component based on header/sidebar presence and will override any
-   * user-provided values.
+   * Note: Can be used to override the default grid layout if advanced customization is needed.
+   * The component provides default grid template properties based on header/sidebar presence,
+   * but these can be overridden via this prop.
    */
   style?: CSSProperties;
 }
