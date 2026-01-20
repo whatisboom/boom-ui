@@ -68,6 +68,30 @@ export function Grid<E extends ElementType = 'div'>({
   const responsiveColumns = hasResponsiveColumns && typeof columns === 'object' ? columns : null;
   const responsiveGap = hasResponsiveGap && typeof gap === 'object' ? gap : null;
 
+  // Fallback: if responsive columns object is empty, set a default
+  if (
+    responsiveColumns &&
+    responsiveColumns.base === undefined &&
+    responsiveColumns.sm === undefined &&
+    responsiveColumns.md === undefined &&
+    responsiveColumns.lg === undefined &&
+    responsiveColumns.xl === undefined
+  ) {
+    gridStyle.gridTemplateColumns = '1fr';
+  }
+
+  // Fallback: if responsive gap object is empty, use default gap
+  if (
+    responsiveGap &&
+    responsiveGap.base === undefined &&
+    responsiveGap.sm === undefined &&
+    responsiveGap.md === undefined &&
+    responsiveGap.lg === undefined &&
+    responsiveGap.xl === undefined
+  ) {
+    gridStyle.gap = 'var(--boom-spacing-4)';
+  }
+
   const gridClassName = cn(
     styles.grid,
     // Add responsive column classes

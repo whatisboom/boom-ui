@@ -354,6 +354,18 @@ describe('Grid', () => {
       const grid = container.firstChild as HTMLElement;
       expect(grid.style.gridTemplateColumns).toBe('');
     });
+
+    it('applies fallback when empty responsive columns object is provided', () => {
+      const { container } = render(
+        <Grid columns={{}}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      // Should have default gridTemplateColumns when all breakpoints are undefined
+      expect(grid.style.gridTemplateColumns).toBe('1fr');
+    });
   });
 
   describe('Responsive Gap', () => {
@@ -406,6 +418,18 @@ describe('Grid', () => {
 
       const grid = container.firstChild as HTMLElement;
       expect(grid.style.gap).toBe('');
+    });
+
+    it('applies fallback when empty responsive gap object is provided', () => {
+      const { container } = render(
+        <Grid columns={2} gap={{}}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      // Should have default gap when all breakpoints are undefined
+      expect(grid.style.gap).toBe('var(--boom-spacing-4)');
     });
   });
 
