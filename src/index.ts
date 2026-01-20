@@ -138,15 +138,6 @@ export type {
 export { Avatar } from './components/Avatar';
 export type { AvatarProps, AvatarSize, AvatarStatus } from './components/Avatar';
 
-export { Menu, MenuTrigger, MenuContent, MenuItem, MenuSeparator } from './components/Menu';
-export type {
-  MenuProps,
-  MenuTriggerProps,
-  MenuContentProps,
-  MenuItemProps,
-  MenuSeparatorProps,
-  MenuContextValue,
-} from './components/Menu';
 export type {
   Theme,
   ResolvedTheme,
