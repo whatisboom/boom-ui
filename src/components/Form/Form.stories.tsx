@@ -7,7 +7,7 @@ import { FormMessage } from './FormMessage';
 import { Button } from '../Button';
 
 const meta: Meta<typeof Form> = {
-  title: 'Forms & Validation/Form',
+  title: 'Forms/Form',
   component: Form,
   parameters: {
     docs: {

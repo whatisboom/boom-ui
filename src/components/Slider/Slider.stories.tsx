@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Slider } from './Slider';
 
 const meta: Meta<typeof Slider> = {
-  title: 'Forms & Validation/Slider',
+  title: 'Forms/Slider',
   component: Slider,
   tags: ['autodocs'],
   argTypes: {

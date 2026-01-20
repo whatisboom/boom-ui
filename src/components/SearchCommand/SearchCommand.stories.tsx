@@ -5,7 +5,7 @@ import type { SearchResult } from './SearchCommand.types';
 import { Button } from '../Button';
 
 const meta: Meta<typeof SearchCommand> = {
-  title: 'Navigation & Menus/Search Command',
+  title: 'Navigation/Search Command',
   component: SearchCommand,
   tags: ['autodocs'],
 };

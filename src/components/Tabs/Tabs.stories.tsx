@@ -6,7 +6,7 @@ import { Tab } from './Tab';
 import { TabPanel } from './TabPanel';
 
 const meta: Meta<typeof Tabs> = {
-  title: 'Navigation & Menus/Tabs',
+  title: 'Navigation/Tabs',
   component: Tabs,
   tags: ['autodocs'],
   argTypes: {

@@ -39,6 +39,7 @@ export { ThemeProvider, useTheme } from './components/ThemeProvider';
 export { ErrorBoundary } from './components/ErrorBoundary';
 export { Hero } from './components/Hero';
 export { Nav, NavItem } from './components/Nav';
+export { Sidebar } from './components/Sidebar';
 
 // Skeleton components
 export { Skeleton, SkeletonText, SkeletonAvatar, SkeletonCard } from './components/Skeleton';
@@ -48,6 +49,15 @@ export { Spinner } from './components/Spinner';
 
 // EmptyState
 export { EmptyState } from './components/EmptyState';
+
+// Image
+export { Image } from './components/Image';
+
+// Video
+export { Video } from './components/Video';
+
+// Audio
+export { Audio } from './components/Audio';
 
 // Primitives
 export { Popover } from './components/primitives/Popover';
@@ -144,6 +154,7 @@ export type {
 } from './components/Tabs';
 export { Avatar } from './components/Avatar';
 export type { AvatarProps, AvatarSize, AvatarStatus } from './components/Avatar';
+
 export type {
   Theme,
   ResolvedTheme,
@@ -153,6 +164,13 @@ export type {
 } from './components/ThemeProvider';
 export type { ErrorBoundaryProps, FallbackProps } from './components/ErrorBoundary';
 export type { NavProps, NavBaseProps, NavItemProps, NavItemBaseProps } from './components/Nav';
+export type {
+  SidebarProps,
+  SidebarHeaderProps,
+  SidebarNavProps,
+  SidebarItemProps,
+  SidebarContextValue,
+} from './components/Sidebar';
 export type {
   HeroProps,
   HeroBaseProps,
@@ -175,6 +193,28 @@ export type { SpinnerProps } from './components/Spinner';
 
 // EmptyState types
 export type { EmptyStateProps } from './components/EmptyState';
+
+// Image types
+export type { ImageProps, ImageObjectFit } from './components/Image';
+
+// Video types
+export type {
+  VideoProps,
+  VideoCaption,
+  PlaybackRate,
+  VideoControlsProps,
+} from './components/Video';
+
+// Audio types
+export type {
+  AudioProps,
+  AudioBaseProps,
+  SingleAudioProps,
+  PlaylistAudioProps,
+  AudioTrack,
+  AudioControlsProps,
+  AudioWaveformProps,
+} from './components/Audio';
 
 // Primitive types
 export type { PopoverProps, ModalProps, DrawerProps, OverlayProps } from './components/primitives/types';

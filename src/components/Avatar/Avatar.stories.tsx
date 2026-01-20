@@ -3,7 +3,7 @@ import { Avatar } from './Avatar';
 import { Stack } from '../Stack';
 
 const meta: Meta<typeof Avatar> = {
-  title: 'Data & Content/Avatar',
+  title: 'Core/Avatar',
   component: Avatar,
   tags: ['autodocs'],
   argTypes: {

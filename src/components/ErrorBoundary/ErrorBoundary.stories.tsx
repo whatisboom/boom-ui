@@ -11,7 +11,7 @@ const BuggyComponent = ({ shouldThrow }: { shouldThrow: boolean }) => {
 };
 
 const meta = {
-  title: 'Page Layouts/Error Boundary',
+  title: 'Layout/Error Boundary',
   component: ErrorBoundary,
   tags: ['autodocs'],
   parameters: {

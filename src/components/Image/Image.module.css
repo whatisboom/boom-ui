@@ -1,0 +1,79 @@
+.container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  background-color: var(--boom-bg-elevated);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover .image {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+}
+
+.image.hidden {
+  opacity: 0;
+}
+
+.image.placeholder {
+  filter: blur(20px);
+  transform: scale(1.1);
+}
+
+/* Object-fit variants */
+.cover {
+  object-fit: cover;
+}
+
+.contain {
+  object-fit: contain;
+}
+
+.fill {
+  object-fit: fill;
+}
+
+.scale-down {
+  object-fit: scale-down;
+}
+
+.none {
+  object-fit: none;
+}
+
+.skeletonWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--boom-bg-elevated);
+  color: var(--boom-text-muted);
+  min-height: 100px;
+}
+
+.errorIcon {
+  font-size: 2rem;
+  opacity: 0.5;
+}

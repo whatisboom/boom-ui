@@ -3,7 +3,7 @@ import { Badge } from './Badge';
 import { Stack } from '../Stack';
 
 const meta: Meta<typeof Badge> = {
-  title: 'Data & Content/Badge',
+  title: 'Core/Badge',
   component: Badge,
   tags: ['autodocs'],
   argTypes: {

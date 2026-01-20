@@ -5,3 +5,4 @@ export { useKeyboardShortcut } from './useKeyboardShortcut';
 export { usePopoverPosition } from './usePopoverPosition';
 export { useScrollLock } from './useScrollLock';
 export { useStableCallback } from './useStableCallback';
+export { useMediaQuery } from './useMediaQuery';

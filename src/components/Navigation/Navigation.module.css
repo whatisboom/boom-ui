@@ -50,8 +50,13 @@
 }
 
 .navLink.active {
-  color: var(--boom-theme-text-primary);
+  color: var(--boom-palette-base-50);
   background-color: var(--boom-theme-bg-secondary);
+  font-weight: var(--boom-font-weight-semibold);
+}
+
+:root[data-theme='light'] .navLink.active {
+  color: var(--boom-theme-primary);
 }
 
 .navLink:focus-visible,

@@ -4,7 +4,7 @@ import { Tree } from './Tree';
 import type { TreeNode } from './Tree.types';
 
 const meta: Meta<typeof Tree> = {
-  title: 'Data & Content/Tree',
+  title: 'Data Display/Tree',
   component: Tree,
   tags: ['autodocs'],
 };

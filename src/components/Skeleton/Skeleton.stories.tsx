@@ -6,7 +6,7 @@ import { SkeletonCard } from './SkeletonCard';
 import { Stack } from '../Stack';
 
 const meta = {
-  title: 'Data & Content/Skeleton',
+  title: 'Core/Skeleton',
   component: Skeleton,
   parameters: {
     layout: 'padded',
