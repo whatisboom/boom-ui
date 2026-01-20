@@ -13,6 +13,30 @@ const meta = {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
+  argTypes: {
+    // Hide React element props from controls - they're not editable in Storybook
+    header: {
+      control: false,
+      description: 'Optional header component (typically Header component)',
+      table: {
+        type: { summary: 'ReactElement<HeaderProps>' },
+      },
+    },
+    sidebar: {
+      control: false,
+      description: 'Optional sidebar component (typically Sidebar component)',
+      table: {
+        type: { summary: 'ReactElement<SidebarProps>' },
+      },
+    },
+    children: {
+      control: false,
+      description: 'Main content area',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
+    },
+  },
 } satisfies Meta<typeof AppShell>;
 
 export default meta;
