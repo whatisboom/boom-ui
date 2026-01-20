@@ -22,7 +22,7 @@ export function BreadcrumbItem<E extends ElementType = 'a'>({
 
   return (
     <Component
-      href={href}
+      {...(href && (!as || as === 'a') ? { href } : {})}
       className={itemClassName}
       aria-current={current ? 'page' : undefined}
       {...(rest as Record<string, unknown>)}

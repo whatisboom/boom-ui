@@ -11,7 +11,7 @@ import styles from './NotificationMenu.module.css';
 interface NotificationMenuContextValue {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  triggerRef: React.RefObject<HTMLButtonElement>;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
 }
 
 const NotificationMenuContext = createContext<NotificationMenuContextValue | undefined>(

@@ -21,7 +21,9 @@ export function Breadcrumbs<E extends ElementType = 'nav'>({
   let displayItems = childrenArray;
 
   if (maxItems && totalItems > maxItems) {
-    const itemsToShow = maxItems - 1; // Reserve one spot for ellipsis
+    // Ensure at least first and last items are shown (minimum effective maxItems = 3)
+    const effectiveMaxItems = Math.max(maxItems, 3);
+    const itemsToShow = effectiveMaxItems - 1; // Reserve one spot for ellipsis
     const firstItems = childrenArray.slice(0, Math.ceil(itemsToShow / 2));
     const lastItems = childrenArray.slice(
       totalItems - Math.floor(itemsToShow / 2),
