@@ -21,6 +21,7 @@ export { Alert } from './components/Alert';
 export { Progress } from './components/Progress';
 export { Toast, ToastProvider, useToast } from './components/Toast';
 export { Badge } from './components/Badge';
+export { Breadcrumbs, BreadcrumbItem } from './components/Breadcrumbs';
 export { Tooltip } from './components/Tooltip';
 export { Tree } from './components/Tree';
 export {
@@ -100,6 +101,12 @@ export type {
   ToastContextValue,
 } from './components/Toast';
 export type { BadgeProps, BadgeVariant } from './components/Badge';
+export type {
+  BreadcrumbsProps,
+  BreadcrumbsBaseProps,
+  BreadcrumbItemProps,
+  BreadcrumbItemBaseProps,
+} from './components/Breadcrumbs';
 export type { TooltipProps, TooltipPlacement } from './components/Tooltip';
 export type { TreeProps, TreeNode, TreeItemProps, TreeContextValue } from './components/Tree';
 export type {
