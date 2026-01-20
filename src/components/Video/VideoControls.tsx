@@ -242,6 +242,7 @@ export const VideoControls = ({
               {isMuted || volume === 0 ? <VolumeOffIcon /> : <VolumeUpIcon />}
             </button>
 
+            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
             <div
               className={cn(styles.volumeSliderWrapper, showVolumeSlider && styles.volumeSliderVisible)}
               onMouseDown={handleSliderInteractionStart}

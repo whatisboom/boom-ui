@@ -54,11 +54,15 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
       };
     }, [loading]);
 
-    // Reset loading state when src changes
+    // Sync internal state when src prop changes
+    // This is a legitimate use of setState in useEffect - we're syncing internal state with external props
+    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
+      setCurrentSrc(src);
       setIsLoading(true);
       setHasError(false);
     }, [src]);
+    /* eslint-enable react-hooks/set-state-in-effect */
 
     // Handle image loading
     const handleLoad = () => {

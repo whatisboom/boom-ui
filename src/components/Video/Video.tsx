@@ -36,8 +36,18 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
 
     // Internal video ref
     const internalRef = useRef<HTMLVideoElement>(null);
-    const videoRef = ref || internalRef;
     const wrapperRef = useRef<HTMLDivElement>(null);
+
+    // Merge forwarded ref with internal ref
+    useEffect(() => {
+      if (!ref) {return;}
+
+      if (typeof ref === 'function') {
+        ref(internalRef.current);
+      } else {
+        ref.current = internalRef.current;
+      }
+    }, [ref]);
 
     // Video state
     const [isPlaying, setIsPlaying] = useState(autoPlay);
@@ -56,61 +66,61 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
 
     // Play/Pause handler
     const handlePlayPause = useCallback(() => {
-      if (!videoRef.current) {return;}
+      if (!internalRef.current) {return;}
 
       if (isPlaying) {
-        videoRef.current.pause();
+        internalRef.current.pause();
       } else {
-        void videoRef.current.play();
+        void internalRef.current.play();
       }
-    }, [isPlaying, videoRef]);
+    }, [isPlaying, internalRef]);
 
     // Seek handler
     const handleSeek = useCallback((time: number) => {
-      if (!videoRef.current) {return;}
-      videoRef.current.currentTime = time;
+      if (!internalRef.current) {return;}
+      internalRef.current.currentTime = time;
       setCurrentTime(time);
-    }, [videoRef]);
+    }, [internalRef]);
 
     // Volume change handler
     const handleVolumeChange = useCallback((newVolume: number) => {
-      if (!videoRef.current) {return;}
-      videoRef.current.volume = newVolume;
+      if (!internalRef.current) {return;}
+      internalRef.current.volume = newVolume;
       setVolume(newVolume);
 
       if (newVolume > 0 && isMuted) {
-        videoRef.current.muted = false;
+        internalRef.current.muted = false;
         setIsMuted(false);
       }
-    }, [isMuted, videoRef]);
+    }, [isMuted, internalRef]);
 
     // Mute toggle handler
     const handleMuteToggle = useCallback(() => {
-      if (!videoRef.current) {return;}
+      if (!internalRef.current) {return;}
       const newMuted = !isMuted;
-      videoRef.current.muted = newMuted;
+      internalRef.current.muted = newMuted;
       setIsMuted(newMuted);
-    }, [isMuted, videoRef]);
+    }, [isMuted, internalRef]);
 
     // Playback rate change handler
     const handlePlaybackRateChange = useCallback((rate: PlaybackRate) => {
-      if (!videoRef.current) {return;}
-      videoRef.current.playbackRate = rate;
+      if (!internalRef.current) {return;}
+      internalRef.current.playbackRate = rate;
       setPlaybackRate(rate);
       onPlaybackRateChange?.(rate);
-    }, [onPlaybackRateChange, videoRef]);
+    }, [onPlaybackRateChange, internalRef]);
 
     // Caption change handler
     const handleCaptionChange = useCallback((index: number) => {
-      if (!videoRef.current) {return;}
+      if (!internalRef.current) {return;}
 
-      const tracks = videoRef.current.textTracks;
+      const tracks = internalRef.current.textTracks;
       for (let i = 0; i < tracks.length; i++) {
         tracks[i].mode = i === index ? 'showing' : 'hidden';
       }
 
       setActiveCaptionIndex(index);
-    }, [videoRef]);
+    }, [internalRef]);
 
     // Fullscreen toggle handler
     const handleFullscreenToggle = useCallback(() => {
@@ -125,12 +135,14 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
 
     // Picture-in-Picture toggle handler
     const handlePictureInPictureToggle = useCallback(() => {
-      if (!videoRef.current) {return;}
+      if (!internalRef.current) {return;}
+
+      const video = internalRef.current;
 
       const togglePiP = async () => {
         try {
           if (!document.pictureInPictureElement) {
-            await videoRef.current.requestPictureInPicture();
+            await video.requestPictureInPicture();
           } else {
             await document.exitPictureInPicture();
           }
@@ -141,12 +153,12 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
       };
 
       void togglePiP();
-    }, [videoRef]);
+    }, []);
 
     // Keyboard shortcuts
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
-        if (!videoRef.current) {return;}
+        if (!internalRef.current) {return;}
 
         // Don't handle if user is typing in an input
         if (
@@ -211,12 +223,12 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
       handleVolumeChange,
       handleMuteToggle,
       handleFullscreenToggle,
-      videoRef,
+      internalRef,
     ]);
 
     // Video event listeners
     useEffect(() => {
-      const video = videoRef.current;
+      const video = internalRef.current;
       if (!video) {return;}
 
       const handlePlay = () => {
@@ -278,7 +290,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
         video.removeEventListener('waiting', handleWaiting);
         video.removeEventListener('canplay', handleCanPlay);
       };
-    }, [onEnded, onPlay, onPause, onVideoTimeUpdate, onVolumeChange, videoRef]);
+    }, [onEnded, onPlay, onPause, onVideoTimeUpdate, onVolumeChange, internalRef]);
 
     // Fullscreen change listener
     useEffect(() => {
@@ -294,7 +306,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
 
     // Picture-in-Picture change listener
     useEffect(() => {
-      const video = videoRef.current;
+      const video = internalRef.current;
       if (!video) {return;}
 
       const handleEnterPiP = () => {
@@ -312,7 +324,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
         video.removeEventListener('enterpictureinpicture', handleEnterPiP);
         video.removeEventListener('leavepictureinpicture', handleLeavePiP);
       };
-    }, [videoRef]);
+    }, [internalRef]);
 
     return (
       <div
@@ -325,7 +337,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
       >
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
-          ref={videoRef}
+          ref={internalRef}
           className={styles.video}
           src={src}
           poster={poster}
@@ -383,7 +395,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
         {/* Custom controls */}
         {controls && (
           <VideoControls
-            videoRef={videoRef}
+            videoRef={internalRef}
             isPlaying={isPlaying}
             currentTime={currentTime}
             duration={duration}
