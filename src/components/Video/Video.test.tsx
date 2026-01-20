@@ -311,7 +311,7 @@ describe('Video', () => {
 
   it('should call onTimeUpdate when time updates', async () => {
     const handleTimeUpdate = vi.fn();
-    const { container } = render(<Video src="/test-video.mp4" onTimeUpdate={handleTimeUpdate} />);
+    const { container } = render(<Video src="/test-video.mp4" onVideoTimeUpdate={handleTimeUpdate} />);
 
     const video = getVideo(container);
     Object.defineProperty(video, 'currentTime', { value: 5, writable: true });
