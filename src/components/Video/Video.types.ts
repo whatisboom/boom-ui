@@ -86,7 +86,7 @@ export interface VideoProps extends Omit<VideoHTMLAttributes<HTMLVideoElement>, 
  */
 export interface VideoControlsProps {
   /** Video element ref */
-  videoRef: React.RefObject<HTMLVideoElement>;
+  videoRef: React.RefObject<HTMLVideoElement | null>;
 
   /** Whether video is playing */
   isPlaying: boolean;

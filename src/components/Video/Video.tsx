@@ -35,7 +35,7 @@ export const Video = forwardRef<HTMLVideoElement, VideoProps>(
     } = props;
 
     // Internal video ref
-    const internalRef = useRef<HTMLVideoElement>(null);
+    const internalRef = useRef<HTMLVideoElement | null>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     // Merge forwarded ref with internal ref

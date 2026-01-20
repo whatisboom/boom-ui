@@ -1,8 +1,33 @@
 import { Children, useMemo, useCallback, useRef, useEffect } from 'react';
 import { cn } from '@/utils/classnames';
 import type { FormStepperProps } from './FormStepper.types';
+import type { FormStepProps } from './FormStep.types';
 import { FormStepperContext } from './hooks/useFormStep';
 import styles from './FormStepper.module.css';
+
+/**
+ * Type guard to check if a React child is a FormStep element with typed props
+ */
+function isFormStepElement(
+  value: unknown
+): value is React.ReactElement<FormStepProps> {
+  if (
+    typeof value !== 'object' ||
+    value === null ||
+    !('type' in value) ||
+    !('props' in value)
+  ) {
+    return false;
+  }
+
+  const element = value as React.ReactElement;
+  return (
+    typeof element.type === 'function' &&
+    'name' in element.type &&
+    element.type.name === 'FormStep' &&
+    typeof (element as React.ReactElement<FormStepProps>).props.title === 'string'
+  );
+}
 
 /**
  * FormStepper - Multi-step form container with progress tracking.
@@ -22,14 +47,7 @@ export const FormStepper: React.FC<FormStepperProps> = ({
 
   // Extract step information from children
   const steps = useMemo(() => {
-    return Children.toArray(children).filter((child) => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      if (typeof child === 'object' && child !== null && 'type' in child) {
-        const element = child as React.ReactElement;
-        return typeof element.type === 'function' && element.type.name === 'FormStep';
-      }
-      return false;
-    });
+    return Children.toArray(children).filter(isFormStepElement);
   }, [children]);
 
   const totalSteps = steps.length;
@@ -66,17 +84,10 @@ export const FormStepper: React.FC<FormStepperProps> = ({
 
   // Get step information from children props
   const stepInfo = useMemo(() => {
-    return steps.map((step) => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      if (typeof step === 'object' && step !== null && 'props' in step) {
-        const element = step as React.ReactElement;
-        return {
-          title: (element.props.title as string) || '',
-          description: (element.props.description as string) || '',
-        };
-      }
-      return { title: '', description: '' };
-    });
+    return steps.map((step) => ({
+      title: step.props.title,
+      description: step.props.description || '',
+    }));
   }, [steps]);
 
   // Announce step change to screen readers
