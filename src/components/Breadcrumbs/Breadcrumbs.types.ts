@@ -13,7 +13,7 @@ export interface BreadcrumbsOwnProps {
   separator?: ReactNode;
 
   /**
-   * Maximum number of items to display (rest collapsed into ellipsis)
+   * Maximum number of items to display (rest collapsed into ellipsis). Minimum effective value is 3.
    */
   maxItems?: number;
 
@@ -40,7 +40,7 @@ export interface BreadcrumbItemOwnProps {
   children: ReactNode;
 
   /**
-   * Link href (if not provided, renders as current page)
+   * Link href. If not provided, renders as a non-interactive span element.
    */
   href?: string;
 

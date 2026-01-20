@@ -343,6 +343,115 @@ describe('Breadcrumbs', () => {
     });
   });
 
+  describe('Key Generation', () => {
+    it('generates stable keys for items with href', () => {
+      const { rerender } = render(
+        <Breadcrumbs>
+          <BreadcrumbItem href="/home">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+        </Breadcrumbs>
+      );
+
+      const firstRenderHome = screen.getByText('Home');
+      const firstRenderProducts = screen.getByText('Products');
+
+      // Re-render with same items
+      rerender(
+        <Breadcrumbs>
+          <BreadcrumbItem href="/home">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+        </Breadcrumbs>
+      );
+
+      // Elements should be the same instances (keys are stable)
+      expect(screen.getByText('Home')).toBe(firstRenderHome);
+      expect(screen.getByText('Products')).toBe(firstRenderProducts);
+    });
+
+    it('respects explicit keys when provided', () => {
+      render(
+        <Breadcrumbs>
+          <BreadcrumbItem key="custom-home" href="/home">
+            Home
+          </BreadcrumbItem>
+          <BreadcrumbItem key="custom-products" href="/products">
+            Products
+          </BreadcrumbItem>
+        </Breadcrumbs>
+      );
+
+      // Should render without console warnings about duplicate keys
+      expect(screen.getByText('Home')).toBeInTheDocument();
+      expect(screen.getByText('Products')).toBeInTheDocument();
+    });
+
+    it('generates keys for ellipsis when using maxItems', () => {
+      render(
+        <Breadcrumbs maxItems={3}>
+          <BreadcrumbItem href="/home">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/a">A</BreadcrumbItem>
+          <BreadcrumbItem href="/b">B</BreadcrumbItem>
+          <BreadcrumbItem href="/c">C</BreadcrumbItem>
+          <BreadcrumbItem current>Current</BreadcrumbItem>
+        </Breadcrumbs>
+      );
+
+      // Ellipsis should render without key warnings
+      expect(screen.getByText('…')).toBeInTheDocument();
+      expect(screen.getByText('Home')).toBeInTheDocument();
+      expect(screen.getByText('Current')).toBeInTheDocument();
+    });
+
+    it('handles dynamic maxItems changes without key conflicts', () => {
+      const { rerender } = render(
+        <Breadcrumbs maxItems={5}>
+          <BreadcrumbItem href="/home">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/a">A</BreadcrumbItem>
+          <BreadcrumbItem href="/b">B</BreadcrumbItem>
+          <BreadcrumbItem href="/c">C</BreadcrumbItem>
+          <BreadcrumbItem current>Current</BreadcrumbItem>
+        </Breadcrumbs>
+      );
+
+      // All items visible
+      expect(screen.getByText('A')).toBeInTheDocument();
+      expect(screen.getByText('B')).toBeInTheDocument();
+
+      // Change maxItems to collapse some items
+      rerender(
+        <Breadcrumbs maxItems={3}>
+          <BreadcrumbItem href="/home">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/a">A</BreadcrumbItem>
+          <BreadcrumbItem href="/b">B</BreadcrumbItem>
+          <BreadcrumbItem href="/c">C</BreadcrumbItem>
+          <BreadcrumbItem current>Current</BreadcrumbItem>
+        </Breadcrumbs>
+      );
+
+      // Ellipsis now visible, middle items hidden
+      expect(screen.getByText('…')).toBeInTheDocument();
+      expect(screen.queryByText('A')).not.toBeInTheDocument();
+      expect(screen.queryByText('B')).not.toBeInTheDocument();
+    });
+
+    it('generates unique keys for items without href', () => {
+      render(
+        <Breadcrumbs>
+          <BreadcrumbItem href="/home">Home</BreadcrumbItem>
+          <BreadcrumbItem>No Link 1</BreadcrumbItem>
+          <BreadcrumbItem>No Link 2</BreadcrumbItem>
+          <BreadcrumbItem current>Current</BreadcrumbItem>
+        </Breadcrumbs>
+      );
+
+      // All items should render without duplicate key warnings
+      expect(screen.getByText('Home')).toBeInTheDocument();
+      expect(screen.getByText('No Link 1')).toBeInTheDocument();
+      expect(screen.getByText('No Link 2')).toBeInTheDocument();
+      expect(screen.getByText('Current')).toBeInTheDocument();
+    });
+  });
+
   describe('Edge Cases', () => {
     it('handles single item', () => {
       render(
