@@ -27,12 +27,20 @@
 
 .navItemActive {
   background-color: var(--boom-theme-accent-subtle);
-  color: var(--boom-theme-primary);
+  color: var(--boom-palette-base-50);
   font-weight: 600;
+}
+
+:root[data-theme='light'] .navItemActive {
+  color: var(--boom-theme-primary);
 }
 
 .navItemActive:hover {
   background-color: var(--boom-theme-accent-subtle);
+  color: var(--boom-palette-base-50);
+}
+
+:root[data-theme='light'] .navItemActive:hover {
   color: var(--boom-theme-primary);
 }
 
