@@ -23,9 +23,13 @@
 .gap-base-2 { gap: var(--boom-spacing-2); }
 .gap-base-3 { gap: var(--boom-spacing-3); }
 .gap-base-4 { gap: var(--boom-spacing-4); }
+.gap-base-5 { gap: var(--boom-spacing-5); }
 .gap-base-6 { gap: var(--boom-spacing-6); }
 .gap-base-8 { gap: var(--boom-spacing-8); }
+.gap-base-10 { gap: var(--boom-spacing-10); }
 .gap-base-12 { gap: var(--boom-spacing-12); }
+.gap-base-16 { gap: var(--boom-spacing-16); }
+.gap-base-20 { gap: var(--boom-spacing-20); }
 
 /* Small screens (640px and up) */
 @media (min-width: 640px) {
@@ -47,9 +51,13 @@
   .gap-sm-2 { gap: var(--boom-spacing-2); }
   .gap-sm-3 { gap: var(--boom-spacing-3); }
   .gap-sm-4 { gap: var(--boom-spacing-4); }
+  .gap-sm-5 { gap: var(--boom-spacing-5); }
   .gap-sm-6 { gap: var(--boom-spacing-6); }
   .gap-sm-8 { gap: var(--boom-spacing-8); }
+  .gap-sm-10 { gap: var(--boom-spacing-10); }
   .gap-sm-12 { gap: var(--boom-spacing-12); }
+  .gap-sm-16 { gap: var(--boom-spacing-16); }
+  .gap-sm-20 { gap: var(--boom-spacing-20); }
 }
 
 /* Medium screens (768px and up) */
@@ -72,9 +80,13 @@
   .gap-md-2 { gap: var(--boom-spacing-2); }
   .gap-md-3 { gap: var(--boom-spacing-3); }
   .gap-md-4 { gap: var(--boom-spacing-4); }
+  .gap-md-5 { gap: var(--boom-spacing-5); }
   .gap-md-6 { gap: var(--boom-spacing-6); }
   .gap-md-8 { gap: var(--boom-spacing-8); }
+  .gap-md-10 { gap: var(--boom-spacing-10); }
   .gap-md-12 { gap: var(--boom-spacing-12); }
+  .gap-md-16 { gap: var(--boom-spacing-16); }
+  .gap-md-20 { gap: var(--boom-spacing-20); }
 }
 
 /* Large screens (1024px and up) */
@@ -97,9 +109,13 @@
   .gap-lg-2 { gap: var(--boom-spacing-2); }
   .gap-lg-3 { gap: var(--boom-spacing-3); }
   .gap-lg-4 { gap: var(--boom-spacing-4); }
+  .gap-lg-5 { gap: var(--boom-spacing-5); }
   .gap-lg-6 { gap: var(--boom-spacing-6); }
   .gap-lg-8 { gap: var(--boom-spacing-8); }
+  .gap-lg-10 { gap: var(--boom-spacing-10); }
   .gap-lg-12 { gap: var(--boom-spacing-12); }
+  .gap-lg-16 { gap: var(--boom-spacing-16); }
+  .gap-lg-20 { gap: var(--boom-spacing-20); }
 }
 
 /* Extra large screens (1280px and up) */
@@ -122,7 +138,11 @@
   .gap-xl-2 { gap: var(--boom-spacing-2); }
   .gap-xl-3 { gap: var(--boom-spacing-3); }
   .gap-xl-4 { gap: var(--boom-spacing-4); }
+  .gap-xl-5 { gap: var(--boom-spacing-5); }
   .gap-xl-6 { gap: var(--boom-spacing-6); }
   .gap-xl-8 { gap: var(--boom-spacing-8); }
+  .gap-xl-10 { gap: var(--boom-spacing-10); }
   .gap-xl-12 { gap: var(--boom-spacing-12); }
+  .gap-xl-16 { gap: var(--boom-spacing-16); }
+  .gap-xl-20 { gap: var(--boom-spacing-20); }
 }
