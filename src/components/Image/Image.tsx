@@ -54,6 +54,12 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
       };
     }, [loading]);
 
+    // Reset loading state when src changes
+    useEffect(() => {
+      setIsLoading(true);
+      setHasError(false);
+    }, [src]);
+
     // Handle image loading
     const handleLoad = () => {
       setIsLoading(false);
