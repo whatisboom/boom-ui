@@ -324,10 +324,67 @@ export const CustomStyled: Story = {
     title: 'Custom Style',
     className: 'custom-audio-player',
   },
+  decorators: [
+    (Story) => (
+      <>
+        <style>
+          {`
+            .custom-audio-player {
+              background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+              border: 2px solid #d946ef;
+              border-radius: 16px;
+            }
+
+            .custom-audio-player button {
+              color: #f0abfc;
+            }
+
+            .custom-audio-player button:hover,
+            .custom-audio-player button.active {
+              color: #fdf4ff;
+            }
+
+            .custom-audio-player .playPauseButton {
+              background: #d946ef;
+              color: white;
+            }
+
+            .custom-audio-player .playPauseButton:hover {
+              background: #c026d3;
+            }
+
+            /* Progress bar / Slider styling - scope to progressBar to avoid matching trackTitle */
+            .custom-audio-player [class*="progressBar"] [class*="track"] {
+              background-color: rgba(255, 255, 255, 0.3) !important;
+            }
+
+            .custom-audio-player [class*="progressBar"] [class*="filledTrack"] {
+              background-color: #fdf4ff !important;
+            }
+
+            .custom-audio-player [class*="progressBar"] [class*="handle"] {
+              background-color: #fdf4ff !important;
+              border-color: #d946ef !important;
+            }
+
+            .custom-audio-player [class*="progressBar"] [class*="handle"]:active {
+              transform: translate(-50%, -50%) scale(1.1);
+            }
+
+            /* Time display */
+            .custom-audio-player [class*="timeDisplay"] {
+              color: rgba(255, 255, 255, 0.9);
+            }
+          `}
+        </style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
     docs: {
       description: {
-        story: 'Apply custom CSS classes to style the audio player.',
+        story: 'Apply custom CSS classes to style the audio player with custom colors.',
       },
     },
   },
