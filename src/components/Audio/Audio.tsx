@@ -46,6 +46,7 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(initialVolume);
     const [playbackRate, setPlaybackRate] = useState(1);
+    const [isLoop, setIsLoop] = useState(loop);
 
     // Refs
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -93,25 +94,43 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
     const handleEnded = useCallback(() => {
       setIsPlaying(false);
 
-      // If in playlist mode and there's a next track, play it
-      if (isPlaylistMode && currentTrackIndex < playlist.length - 1) {
-        const nextIndex = currentTrackIndex + 1;
-        setCurrentTrackIndex(nextIndex);
-        onTrackChange?.(nextIndex);
+      // Handle playlist mode
+      if (isPlaylistMode) {
+        // If there's a next track, play it
+        if (currentTrackIndex < playlist.length - 1) {
+          const nextIndex = currentTrackIndex + 1;
+          setCurrentTrackIndex(nextIndex);
+          onTrackChange?.(nextIndex);
 
-        // Auto-play next track
-        setTimeout(() => {
-          const audio = typeof internalRef === 'function' ? null : internalRef.current;
-          if (audio) {
-            audio.play().catch(() => {
-              // Playback failed, user interaction may be required
-            });
-          }
-        }, 0);
+          // Auto-play next track
+          setTimeout(() => {
+            const audio = typeof internalRef === 'function' ? null : internalRef.current;
+            if (audio) {
+              audio.play().catch(() => {
+                // Playback failed, user interaction may be required
+              });
+            }
+          }, 0);
+        }
+        // If at last track and loop is enabled, restart from first track
+        else if (isLoop) {
+          setCurrentTrackIndex(0);
+          onTrackChange?.(0);
+
+          // Auto-play first track
+          setTimeout(() => {
+            const audio = typeof internalRef === 'function' ? null : internalRef.current;
+            if (audio) {
+              audio.play().catch(() => {
+                // Playback failed, user interaction may be required
+              });
+            }
+          }, 0);
+        }
       }
 
       onEnded?.();
-    }, [isPlaylistMode, currentTrackIndex, playlist.length, onTrackChange, onEnded, internalRef]);
+    }, [isPlaylistMode, currentTrackIndex, playlist.length, isLoop, onTrackChange, onEnded, internalRef]);
 
     // Control handlers
     const handlePlayPause = useCallback(() => {
@@ -153,6 +172,10 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
 
     const handlePlaybackRateChange = useCallback((rate: number) => {
       setPlaybackRate(rate);
+    }, []);
+
+    const handleLoopToggle = useCallback(() => {
+      setIsLoop(prev => !prev);
     }, []);
 
     const handlePrevious = useCallback(() => {
@@ -222,7 +245,7 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
           ref={internalRef as React.RefObject<HTMLAudioElement>}
           src={currentTrack?.src}
           autoPlay={autoPlay}
-          loop={loop && !isPlaylistMode} // Disable loop in playlist mode
+          loop={isLoop && !isPlaylistMode} // Disable native loop in playlist mode
           onPlay={handlePlay}
           onPause={handlePause}
           onTimeUpdate={handleTimeUpdate}
@@ -264,12 +287,14 @@ export const Audio = forwardRef<HTMLAudioElement, AudioProps>(
           volume={volume}
           playbackRate={playbackRate}
           playbackRates={playbackRates}
+          isLoop={isLoop}
           size={size}
           onPlayPause={handlePlayPause}
           onMuteToggle={handleMuteToggle}
           onVolumeChange={handleVolumeChange}
           onSeek={handleSeek}
           onPlaybackRateChange={handlePlaybackRateChange}
+          onLoopToggle={handleLoopToggle}
           onPrevious={isPlaylistMode ? handlePrevious : undefined}
           onNext={isPlaylistMode ? handleNext : undefined}
           hasPrevious={isPlaylistMode && currentTrackIndex > 0}

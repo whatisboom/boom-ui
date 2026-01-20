@@ -46,6 +46,12 @@ const NextIcon = () => (
   </svg>
 );
 
+const LoopIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z" />
+  </svg>
+);
+
 export const AudioControls = ({
   isPlaying,
   isMuted,
@@ -54,12 +60,14 @@ export const AudioControls = ({
   volume,
   playbackRate,
   playbackRates,
+  isLoop,
   size,
   onPlayPause,
   onMuteToggle,
   onVolumeChange,
   onSeek,
   onPlaybackRateChange,
+  onLoopToggle,
   onPrevious,
   onNext,
   hasPrevious,
@@ -175,6 +183,17 @@ export const AudioControls = ({
             </div>
           )}
         </div>
+
+        {/* Loop control */}
+        <button
+          type="button"
+          className={cn(styles.controlButton, isLoop && styles.active)}
+          onClick={onLoopToggle}
+          aria-label={isLoop ? 'Disable loop' : 'Enable loop'}
+          aria-pressed={isLoop}
+        >
+          <LoopIcon />
+        </button>
 
         {/* Playback rate */}
         <div className={styles.playbackRateControl} ref={playbackRateRef}>

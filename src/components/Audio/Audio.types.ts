@@ -119,6 +119,9 @@ export interface AudioControlsProps {
   /** Available playback rates */
   playbackRates: number[];
 
+  /** Is loop enabled */
+  isLoop: boolean;
+
   /** Size variant */
   size: Size;
 
@@ -136,6 +139,9 @@ export interface AudioControlsProps {
 
   /** Playback rate change handler */
   onPlaybackRateChange: (rate: number) => void;
+
+  /** Loop toggle handler */
+  onLoopToggle: () => void;
 
   /** Skip to previous track (for playlists) */
   onPrevious?: () => void;
