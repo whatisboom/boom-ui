@@ -6,7 +6,7 @@ export { Button } from './components/Button';
 export { Typography } from './components/Typography';
 export { Box } from './components/Box';
 export { Stack } from './components/Stack';
-export { Grid } from './components/Grid';
+export { Grid, GRID_BREAKPOINTS } from './components/Grid';
 export { Container } from './components/Container';
 export { Divider } from './components/Divider';
 export { Input } from './components/Input';
