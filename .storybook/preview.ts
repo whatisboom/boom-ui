@@ -45,6 +45,12 @@ const preview: Preview = {
     },
     docs: {
       container: DocsContainer,
+      source: {
+        // Always show story source code, not compiled output
+        type: 'code',
+        // Use TSX language for syntax highlighting
+        language: 'tsx',
+      },
     },
     darkMode: {
       dark: { ...themes.dark, appBg: '#1e293b', appContentBg: '#1e293b' },
