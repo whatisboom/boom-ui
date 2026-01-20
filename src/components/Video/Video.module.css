@@ -122,19 +122,27 @@
 .volumeControl {
   display: flex;
   align-items: center;
-  gap: var(--boom-spacing-2);
+  gap: var(--boom-spacing-1);
 }
 
 .volumeSliderWrapper {
   width: 0;
   opacity: 0;
   overflow: visible;
-  transition: width var(--boom-transition-base), opacity var(--boom-transition-base);
+  padding: 0;
+  background-color: transparent;
+  border-radius: var(--boom-border-radius-sm);
+  transition: width var(--boom-transition-base),
+              opacity var(--boom-transition-base),
+              padding var(--boom-transition-base),
+              background-color var(--boom-transition-base);
 }
 
 .volumeSliderWrapper.volumeSliderVisible {
   width: 80px;
   opacity: 1;
+  padding: var(--boom-spacing-2);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* Time display */
