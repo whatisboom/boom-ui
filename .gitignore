@@ -11,3 +11,4 @@ storybook-static
 .worktrees/
 .heap-snapshots/
 docs/plans/
+.planning/

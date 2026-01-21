@@ -39,7 +39,9 @@ export { ThemeProvider, useTheme } from './components/ThemeProvider';
 export { ErrorBoundary } from './components/ErrorBoundary';
 export { Hero } from './components/Hero';
 export { Nav, NavItem } from './components/Nav';
+export { Header } from './components/Header';
 export { Sidebar } from './components/Sidebar';
+export { AppShell } from './components/AppShell';
 
 // Skeleton components
 export { Skeleton, SkeletonText, SkeletonAvatar, SkeletonCard } from './components/Skeleton';
@@ -164,6 +166,7 @@ export type {
 } from './components/ThemeProvider';
 export type { ErrorBoundaryProps, FallbackProps } from './components/ErrorBoundary';
 export type { NavProps, NavBaseProps, NavItemProps, NavItemBaseProps } from './components/Nav';
+export type { HeaderProps } from './components/Header';
 export type {
   SidebarProps,
   SidebarHeaderProps,
@@ -171,6 +174,7 @@ export type {
   SidebarItemProps,
   SidebarContextValue,
 } from './components/Sidebar';
+export type { AppShellProps } from './components/AppShell';
 export type {
   HeroProps,
   HeroBaseProps,
