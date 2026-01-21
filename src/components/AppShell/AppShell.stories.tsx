@@ -5,6 +5,10 @@ import { Sidebar } from '../Sidebar';
 import { Button } from '../Button';
 import { Box } from '../Box';
 import { Stack } from '../Stack';
+import { Input } from '../Input';
+import { Card } from '../Card';
+import { Grid } from '../Grid';
+import { Typography } from '../Typography';
 
 const meta = {
   title: 'Layout/AppShell',
@@ -188,24 +192,35 @@ export const WithCollapsedSidebar: Story = {
   },
 };
 
+// Mock data for FullApplication story
+const stats = [
+  { id: '1', label: 'Total Users', value: '1,234', change: 12 },
+  { id: '2', label: 'Revenue', value: '$45.2K', change: 8 },
+  { id: '3', label: 'Active Projects', value: '67', change: 15 },
+  { id: '4', label: 'Tasks Completed', value: '234', change: 23 },
+];
+
+const activities = [
+  { id: '1', text: 'Activity item 1' },
+  { id: '2', text: 'Activity item 2' },
+  { id: '3', text: 'Activity item 3' },
+  { id: '4', text: 'Activity item 4' },
+  { id: '5', text: 'Activity item 5' },
+];
+
 export const FullApplication: Story = {
   args: {
     header: (
       <Header logo={<div style={{ fontWeight: 'bold', fontSize: '20px' }}>Dashboard</div>}>
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <input
+        <Box display="flex" gap={4} alignItems="center">
+          <Input
             type="search"
             placeholder="Search..."
-            style={{
-              padding: '0.5rem 1rem',
-              borderRadius: '0.5rem',
-              border: '1px solid #e0e0e0',
-              minWidth: '300px',
-            }}
+            style={{ minWidth: '300px' }}
           />
           <Button variant="ghost">Notifications</Button>
           <Button variant="ghost">Profile</Button>
-        </div>
+        </Box>
       </Header>
     ),
     sidebar: (
@@ -224,59 +239,54 @@ export const FullApplication: Story = {
     children: (
       <Box padding={8}>
         <Stack spacing={6}>
-          <div>
-            <h1>Welcome to Your Dashboard</h1>
-            <p style={{ color: '#666' }}>Here is an overview of your activity</p>
-          </div>
+          <Stack spacing={2}>
+            <Typography variant="h1" as="h1">
+              Welcome to Your Dashboard
+            </Typography>
+            <Typography variant="body" as="p">
+              Here is an overview of your activity
+            </Typography>
+          </Stack>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
-            {['Total Users', 'Revenue', 'Active Projects', 'Tasks Completed'].map((title) => (
-              <div
-                key={title}
-                style={{
-                  padding: '1.5rem',
-                  borderRadius: '0.5rem',
-                  border: '1px solid #e0e0e0',
-                  backgroundColor: 'white',
-                }}
-              >
-                <h3 style={{ marginTop: 0 }}>{title}</h3>
-                <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: '0.5rem 0' }}>
-                  {Math.floor(Math.random() * 1000)}
-                </p>
-                <p style={{ color: 'green', margin: 0 }}>↑ 12% from last month</p>
-              </div>
+          <Grid columns={{ base: 1, sm: 2, lg: 4 }} gap={6}>
+            {stats.map((stat) => (
+              <Card key={stat.id} padding={6} hoverable>
+                <Stack spacing={3}>
+                  <Typography variant="label" as="div">
+                    {stat.label}
+                  </Typography>
+                  <Typography variant="h2" as="div" weight="bold">
+                    {stat.value}
+                  </Typography>
+                  <Typography variant="caption" as="div">
+                    ↑ {stat.change}% from last month
+                  </Typography>
+                </Stack>
+              </Card>
             ))}
-          </div>
+          </Grid>
 
-          <div>
-            <h2>Recent Activity</h2>
-            <div
-              style={{
-                border: '1px solid #e0e0e0',
-                borderRadius: '0.5rem',
-                backgroundColor: 'white',
-              }}
-            >
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div
-                  key={i}
+          <Stack spacing={4}>
+            <Typography variant="h3" as="h2">
+              Recent Activity
+            </Typography>
+            <Card padding={0}>
+              {activities.map((activity, index) => (
+                <Box
+                  key={activity.id}
+                  padding={4}
                   style={{
-                    padding: '1rem',
-                    borderBottom: i < 5 ? '1px solid #e0e0e0' : 'none',
+                    borderBottom:
+                      index < activities.length - 1
+                        ? '1px solid var(--boom-color-border-default)'
+                        : 'none',
                   }}
                 >
-                  Activity item {i}
-                </div>
+                  {activity.text}
+                </Box>
               ))}
-            </div>
-          </div>
+            </Card>
+          </Stack>
         </Stack>
       </Box>
     ),

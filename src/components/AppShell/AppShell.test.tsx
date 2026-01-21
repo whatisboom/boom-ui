@@ -197,7 +197,7 @@ describe('AppShell', () => {
       );
 
       const appShell = container.firstChild as HTMLElement;
-      expect(appShell.style.gridTemplateColumns).toBe('280px 1fr');
+      expect(appShell.style.gridTemplateColumns).toBe('auto 1fr');
     });
 
     it('uses correct grid-template-columns with sidebar (custom width)', () => {
@@ -208,7 +208,7 @@ describe('AppShell', () => {
       );
 
       const appShell = container.firstChild as HTMLElement;
-      expect(appShell.style.gridTemplateColumns).toBe('350px 1fr');
+      expect(appShell.style.gridTemplateColumns).toBe('auto 1fr');
     });
 
     it('uses correct grid-template-columns with header only', () => {
@@ -244,7 +244,7 @@ describe('AppShell', () => {
 
       const appShell = container.firstChild as HTMLElement;
       expect(appShell.style.gridTemplateAreas).toBe('"sidebar main"');
-      expect(appShell.style.gridTemplateColumns).toBe('280px 1fr');
+      expect(appShell.style.gridTemplateColumns).toBe('auto 1fr');
     });
 
     it('positions sidebar on right when position="right"', () => {
@@ -256,7 +256,7 @@ describe('AppShell', () => {
 
       const appShell = container.firstChild as HTMLElement;
       expect(appShell.style.gridTemplateAreas).toBe('"main sidebar"');
-      expect(appShell.style.gridTemplateColumns).toBe('1fr 280px');
+      expect(appShell.style.gridTemplateColumns).toBe('1fr auto');
     });
 
     it('positions sidebar on right with header when position="right"', () => {
@@ -271,7 +271,7 @@ describe('AppShell', () => {
 
       const appShell = container.firstChild as HTMLElement;
       expect(appShell.style.gridTemplateAreas).toBe('"header header" "main sidebar"');
-      expect(appShell.style.gridTemplateColumns).toBe('1fr 280px');
+      expect(appShell.style.gridTemplateColumns).toBe('1fr auto');
     });
 
     it('respects custom width with right-positioned sidebar', () => {
@@ -282,7 +282,7 @@ describe('AppShell', () => {
       );
 
       const appShell = container.firstChild as HTMLElement;
-      expect(appShell.style.gridTemplateColumns).toBe('1fr 350px');
+      expect(appShell.style.gridTemplateColumns).toBe('1fr auto');
     });
   });
 

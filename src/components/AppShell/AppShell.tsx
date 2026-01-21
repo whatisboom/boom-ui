@@ -3,12 +3,10 @@ import type { AppShellProps } from './AppShell.types';
 import { cn } from '@/utils/classnames';
 import styles from './AppShell.module.css';
 
-const DEFAULT_SIDEBAR_WIDTH = '280px';
 const HEADER_HEIGHT = 'var(--boom-header-height, 64px)';
 
 export function AppShell({ header, sidebar, children, className, style }: AppShellProps) {
   // Extract sidebar props
-  const sidebarWidth = sidebar?.props.width || DEFAULT_SIDEBAR_WIDTH;
   const sidebarPosition = sidebar?.props.position || 'left';
 
   // Build grid template properties based on what's present
@@ -41,7 +39,9 @@ export function AppShell({ header, sidebar, children, className, style }: AppShe
   // Grid template columns
   let gridTemplateColumns: string;
   if (hasSidebar) {
-    gridTemplateColumns = isSidebarRight ? `1fr ${sidebarWidth}` : `${sidebarWidth} 1fr`;
+    // Use 'auto' to let grid size to sidebar's actual rendered width
+    // This allows the grid to adapt when sidebar collapses/expands
+    gridTemplateColumns = isSidebarRight ? '1fr auto' : 'auto 1fr';
   } else {
     gridTemplateColumns = '1fr';
   }

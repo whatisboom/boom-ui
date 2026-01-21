@@ -25,7 +25,7 @@ const config: StorybookConfig = {
   typescript: {
     // Use TypeScript for type extraction instead of react-docgen
     reactDocgen: 'react-docgen-typescript',
-    // Check types but don't fail on errors
+    // Disable type checking in Storybook builds
     check: false,
   },
 };
