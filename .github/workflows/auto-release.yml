@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2  # Need to fetch previous commit to compare
+          fetch-depth: 0  # Fetch full history for merging branches
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -170,27 +170,23 @@ jobs:
             echo "No release/hotfix branch found in commit message"
           fi
 
-      - name: Merge release branch back to develop
+      - name: Merge main to develop
         if: steps.version-check.outputs.version_changed == 'true' && steps.tag-check.outputs.tag_exists == 'false' && steps.source-branch.outputs.source_branch != ''
         id: merge-to-develop
         run: |
-          BRANCH="${{ steps.source-branch.outputs.source_branch }}"
-
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Fetch the release branch
-          git fetch origin "$BRANCH"
-
-          # Fetch develop
+          # Fetch main and develop
+          git fetch origin main
           git fetch origin develop
           git checkout develop
 
-          # Try to merge
-          if git merge "origin/$BRANCH" --no-ff -m "Merge $BRANCH back to develop"; then
+          # Try to merge main to develop
+          if git merge origin/main --no-ff -m "Merge main to develop after release ${{ steps.version-check.outputs.tag_name }}"; then
             git push origin develop
             echo "merge_status=success" >> $GITHUB_OUTPUT
-            echo "Successfully merged $BRANCH to develop"
+            echo "Successfully merged main to develop"
           else
             echo "merge_status=conflict" >> $GITHUB_OUTPUT
             echo "Merge conflict detected"
@@ -201,8 +197,12 @@ jobs:
         if: steps.version-check.outputs.version_changed == 'true' && steps.merge-to-develop.outputs.merge_status == 'success'
         run: |
           BRANCH="${{ steps.source-branch.outputs.source_branch }}"
-          git push origin --delete "$BRANCH"
-          echo "Deleted branch $BRANCH"
+          if git ls-remote --heads origin "$BRANCH" | grep -q "$BRANCH"; then
+            git push origin --delete "$BRANCH"
+            echo "Deleted branch $BRANCH"
+          else
+            echo "Branch $BRANCH already deleted, skipping"
+          fi
 
       - name: Create PR for conflicted merge
         if: steps.version-check.outputs.version_changed == 'true' && steps.merge-to-develop.outputs.merge_status == 'conflict'
@@ -215,29 +215,32 @@ jobs:
             const body = [
               '## ⚠️ Merge Conflicts Detected',
               '',
-              `This PR was automatically created because merging \`${branch}\` to \`develop\` resulted in conflicts.`,
+              `This PR was automatically created because merging \`main\` to \`develop\` after release resulted in conflicts.`,
               '',
               `**Release:** v${version}`,
-              `**Source branch:** \`${branch}\``,
+              `**Source branch:** \`${branch}\` (already merged to \`main\`)`,
+              `**Merging:** \`main\` → \`develop\``,
               '',
               '### What happened',
               `1. ✅ Release v${version} was successfully merged to \`main\``,
               `2. ✅ Tag v${version} was created`,
               '3. ✅ Published to npm',
-              '4. ❌ Automatic merge to `develop` failed due to conflicts',
+              '4. ❌ Automatic merge of `main` to `develop` failed due to conflicts',
               '',
               '### Next steps',
               '1. Resolve the merge conflicts in this PR',
               '2. Merge this PR to `develop`',
               `3. The \`${branch}\` branch will be automatically deleted after merge`,
               '',
-              '**Note:** This is a standard git-flow step to merge the release branch back to develop.'
+              '**Note:** This PR uses the release branch as a proxy to merge changes from \`main\` back to \`develop\`.'
             ].join('\n');
+
+            const tagName = '${{ steps.version-check.outputs.tag_name }}';
 
             await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: `Merge ${branch} back to develop (conflicts)`,
+              title: `Merge main to develop after ${tagName} (conflicts)`,
               head: branch,
               base: 'develop',
               body: body
@@ -269,8 +272,8 @@ jobs:
             if (pr) {
               let statusEmoji = mergeStatus === 'success' ? '✅' : '⚠️';
               let mergeMessage = mergeStatus === 'success'
-                ? `Successfully merged back to \`develop\` and deleted \`${sourceBranch}\``
-                : `Merge to \`develop\` had conflicts. Created PR for manual resolution.`;
+                ? `Successfully merged \`main\` to \`develop\` and deleted \`${sourceBranch}\``
+                : `Merge of \`main\` to \`develop\` had conflicts. Created PR for manual resolution.`;
 
               const commentBody = [
                 '## 🚀 Release Automation Complete',

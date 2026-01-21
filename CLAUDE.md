@@ -634,6 +634,11 @@ git push -u origin feature/my-feature
 # Create PR: feature/my-feature → develop
 ```
 
+**CI/CD Build Times:**
+- After pushing changes, expect CI checks to take approximately **5 minutes** to complete
+- This includes: typecheck, lint, test, build, and build-storybook jobs
+- PRs with auto-merge enabled will merge automatically once all checks pass
+
 ### Release Process
 
 ```bash
@@ -662,7 +667,7 @@ git push -u origin release/v0.5.0
 #    - Create tag v0.5.0
 #    - Publish to npm
 #    - Create GitHub release with notes
-#    - Merge release branch back to develop
+#    - Merge main to develop (bringing release changes back)
 #    - Delete the release branch
 #
 # If merge to develop has conflicts:
@@ -688,7 +693,7 @@ git commit -m "Fix critical bug and bump to v0.4.1"
 # Merge after review
 # GitHub Actions will automatically:
 #    - Create tag and publish to npm
-#    - Merge hotfix branch back to develop
+#    - Merge main to develop (bringing hotfix changes back)
 #    - Delete the hotfix branch
 #
 # If merge to develop has conflicts:
