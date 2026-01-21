@@ -3,6 +3,9 @@ export {
   Form,
   FormActions,
   FormMessage,
+  FormStepper,
+  FormStep,
+  useFormStep,
 } from './components/Form';
 
 export type {
@@ -13,4 +16,7 @@ export type {
   FieldProps,
   FormActionsProps,
   FormMessageProps,
+  FormStepperProps,
+  FormStepperContextValue,
+  FormStepProps,
 } from './components/Form';

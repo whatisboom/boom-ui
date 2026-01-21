@@ -4,7 +4,7 @@ import { Textarea } from './Textarea';
 import { Stack } from '../Stack';
 
 const meta: Meta<typeof Textarea> = {
-  title: 'Forms & Validation/Textarea',
+  title: 'Forms/Textarea',
   component: Textarea,
   tags: ['autodocs'],
   argTypes: {

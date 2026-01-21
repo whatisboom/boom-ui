@@ -302,4 +302,256 @@ describe('Grid', () => {
       expect(grid.style.gridTemplateColumns).toContain('minmax(15rem, 1fr)');
     });
   });
+
+  describe('Responsive Columns', () => {
+    it('applies responsive columns with base value', () => {
+      const { container } = render(
+        <Grid columns={{ base: 1, md: 2, lg: 3 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).toContain('cols-base-1');
+      expect(grid.className).toContain('cols-md-2');
+      expect(grid.className).toContain('cols-lg-3');
+    });
+
+    it('applies responsive columns without base value', () => {
+      const { container } = render(
+        <Grid columns={{ md: 2, lg: 4 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).toContain('cols-md-2');
+      expect(grid.className).toContain('cols-lg-4');
+    });
+
+    it('applies all breakpoints for responsive columns', () => {
+      const { container } = render(
+        <Grid columns={{ base: 1, sm: 2, md: 3, lg: 4, xl: 6 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).toContain('cols-base-1');
+      expect(grid.className).toContain('cols-sm-2');
+      expect(grid.className).toContain('cols-md-3');
+      expect(grid.className).toContain('cols-lg-4');
+      expect(grid.className).toContain('cols-xl-6');
+    });
+
+    it('does not apply inline gridTemplateColumns when using responsive columns', () => {
+      const { container } = render(
+        <Grid columns={{ base: 1, md: 2 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.style.gridTemplateColumns).toBe('');
+    });
+
+    it('applies fallback when empty responsive columns object is provided', () => {
+      const { container } = render(
+        <Grid columns={{}}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      // Should have default gridTemplateColumns when all breakpoints are undefined
+      expect(grid.style.gridTemplateColumns).toBe('1fr');
+    });
+  });
+
+  describe('Responsive Gap', () => {
+    it('applies responsive gap with base value', () => {
+      const { container } = render(
+        <Grid columns={2} gap={{ base: 2, md: 4, lg: 6 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).toContain('gap-base-2');
+      expect(grid.className).toContain('gap-md-4');
+      expect(grid.className).toContain('gap-lg-6');
+    });
+
+    it('applies responsive gap without base value', () => {
+      const { container } = render(
+        <Grid columns={2} gap={{ md: 4, lg: 8 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).toContain('gap-md-4');
+      expect(grid.className).toContain('gap-lg-8');
+    });
+
+    it('applies all breakpoints for responsive gap', () => {
+      const { container } = render(
+        <Grid columns={2} gap={{ base: 2, sm: 3, md: 4, lg: 6, xl: 8 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).toContain('gap-base-2');
+      expect(grid.className).toContain('gap-sm-3');
+      expect(grid.className).toContain('gap-md-4');
+      expect(grid.className).toContain('gap-lg-6');
+      expect(grid.className).toContain('gap-xl-8');
+    });
+
+    it('does not apply inline gap when using responsive gap', () => {
+      const { container } = render(
+        <Grid columns={2} gap={{ base: 2, md: 4 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.style.gap).toBe('');
+    });
+
+    it('applies fallback when empty responsive gap object is provided', () => {
+      const { container } = render(
+        <Grid columns={2} gap={{}}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      // Should have default gap when all breakpoints are undefined
+      expect(grid.style.gap).toBe('var(--boom-spacing-4)');
+    });
+  });
+
+  describe('Combined Responsive Props', () => {
+    it('applies both responsive columns and gap', () => {
+      const { container } = render(
+        <Grid columns={{ base: 1, md: 2, lg: 3 }} gap={{ base: 2, md: 4 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).toContain('cols-base-1');
+      expect(grid.className).toContain('cols-md-2');
+      expect(grid.className).toContain('cols-lg-3');
+      expect(grid.className).toContain('gap-base-2');
+      expect(grid.className).toContain('gap-md-4');
+    });
+
+    it('mixes responsive and non-responsive props', () => {
+      const { container } = render(
+        <Grid columns={{ base: 1, md: 2 }} gap={4}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).toContain('cols-base-1');
+      expect(grid.className).toContain('cols-md-2');
+      expect(grid.style.gap).toBeTruthy();
+    });
+
+    it('mixes non-responsive columns with responsive gap', () => {
+      const { container } = render(
+        <Grid columns={3} gap={{ base: 2, lg: 6 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.style.gridTemplateColumns).toBe('repeat(3, 1fr)');
+      expect(grid.className).toContain('gap-base-2');
+      expect(grid.className).toContain('gap-lg-6');
+    });
+  });
+
+  describe('Backward Compatibility', () => {
+    it('still supports number columns prop', () => {
+      const { container } = render(
+        <Grid columns={4}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.style.gridTemplateColumns).toBe('repeat(4, 1fr)');
+    });
+
+    it('still supports number gap prop', () => {
+      const { container } = render(
+        <Grid columns={2} gap={6}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.style.gap).toBeTruthy();
+    });
+
+    it('still supports minColumnWidth', () => {
+      const { container } = render(
+        <Grid minColumnWidth="200px">
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.style.gridTemplateColumns).toContain('minmax(200px, 1fr)');
+    });
+  });
+
+  describe('Edge Cases', () => {
+    it('handles responsive columns with only some breakpoints defined', () => {
+      const { container } = render(
+        <Grid columns={{ md: 2, xl: 4 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).not.toContain('cols-base-');
+      expect(grid.className).not.toContain('cols-sm-');
+      expect(grid.className).toContain('cols-md-2');
+      expect(grid.className).not.toContain('cols-lg-');
+      expect(grid.className).toContain('cols-xl-4');
+    });
+
+    it('handles responsive gap with only some breakpoints defined', () => {
+      const { container } = render(
+        <Grid columns={2} gap={{ sm: 3, lg: 6 }}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).not.toContain('gap-base-');
+      expect(grid.className).toContain('gap-sm-3');
+      expect(grid.className).not.toContain('gap-md-');
+      expect(grid.className).toContain('gap-lg-6');
+      expect(grid.className).not.toContain('gap-xl-');
+    });
+
+    it('handles empty responsive object gracefully', () => {
+      const { container } = render(
+        <Grid columns={{} as Record<string, number>}>
+          <div>Item</div>
+        </Grid>
+      );
+
+      const grid = container.firstChild as HTMLElement;
+      // Should not crash and should render with default
+      expect(grid).toBeInTheDocument();
+    });
+  });
 });

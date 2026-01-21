@@ -1,8 +1,12 @@
-import type { ElementType } from 'react';
-import { Box } from '@/components/Box';
-import type { GridProps } from './Grid.types';
-import styles from './Grid.module.css';
+import type { ElementType, CSSProperties } from 'react';
 import { cn } from '@/utils/classnames';
+import type { GridProps, ResponsiveValue } from './Grid.types';
+import styles from './Grid.module.css';
+
+// Helper function to check if a value is a responsive object
+function isResponsiveValue<T>(value: T | ResponsiveValue<T>): value is ResponsiveValue<T> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
 
 export function Grid<E extends ElementType = 'div'>({
   columns,
@@ -16,6 +20,8 @@ export function Grid<E extends ElementType = 'div'>({
   children,
   ...rest
 }: GridProps<E>) {
+  const Component = as || 'div';
+
   // Validate props
   if (columns && minColumnWidth) {
     console.warn('Grid: Cannot use both "columns" and "minColumnWidth" props. Using "columns".');
@@ -25,35 +31,92 @@ export function Grid<E extends ElementType = 'div'>({
     console.warn('Grid: "autoFit" and "autoFill" only work with "minColumnWidth". Ignoring.');
   }
 
-  // Build grid-template-columns value
-  let gridTemplateColumns: string;
+  // Determine if we're using responsive values
+  const hasResponsiveColumns = isResponsiveValue(columns);
+  const hasResponsiveGap = isResponsiveValue(gap);
 
-  if (columns) {
-    // Fixed columns
-    gridTemplateColumns = `repeat(${columns}, 1fr)`;
-  } else if (minColumnWidth) {
-    // Responsive grid with minimum column width
-    const repeatMode = autoFit ? 'auto-fit' : autoFill ? 'auto-fill' : 'auto-fit';
-    gridTemplateColumns = `repeat(${repeatMode}, minmax(${minColumnWidth}, 1fr))`;
-  } else {
-    // Default: single column
-    gridTemplateColumns = '1fr';
+  // Build inline styles
+  const gridStyle: CSSProperties = {
+    display: 'grid',
+    ...style,
+  };
+
+  // Handle non-responsive columns
+  if (!hasResponsiveColumns) {
+    const columnValue = columns;
+    let gridTemplateColumns: string;
+
+    if (typeof columnValue === 'number') {
+      gridTemplateColumns = `repeat(${columnValue}, 1fr)`;
+    } else if (minColumnWidth) {
+      const repeatMode = autoFit ? 'auto-fit' : autoFill ? 'auto-fill' : 'auto-fit';
+      gridTemplateColumns = `repeat(${repeatMode}, minmax(${minColumnWidth}, 1fr))`;
+    } else {
+      gridTemplateColumns = '1fr';
+    }
+
+    gridStyle.gridTemplateColumns = gridTemplateColumns;
   }
 
+  // Handle non-responsive gap
+  if (!hasResponsiveGap) {
+    const gapValue = gap;
+    gridStyle.gap = `var(--boom-spacing-${gapValue})`;
+  }
+
+  // Build className with responsive classes
+  const responsiveColumns = hasResponsiveColumns && typeof columns === 'object' ? columns : null;
+  const responsiveGap = hasResponsiveGap && typeof gap === 'object' ? gap : null;
+
+  // Fallback: if responsive columns object is empty, set a default
+  if (
+    responsiveColumns &&
+    responsiveColumns.base === undefined &&
+    responsiveColumns.sm === undefined &&
+    responsiveColumns.md === undefined &&
+    responsiveColumns.lg === undefined &&
+    responsiveColumns.xl === undefined
+  ) {
+    gridStyle.gridTemplateColumns = '1fr';
+  }
+
+  // Fallback: if responsive gap object is empty, use default gap
+  if (
+    responsiveGap &&
+    responsiveGap.base === undefined &&
+    responsiveGap.sm === undefined &&
+    responsiveGap.md === undefined &&
+    responsiveGap.lg === undefined &&
+    responsiveGap.xl === undefined
+  ) {
+    gridStyle.gap = 'var(--boom-spacing-4)';
+  }
+
+  const gridClassName = cn(
+    styles.grid,
+    // Add responsive column classes
+    responsiveColumns?.base !== undefined && styles[`cols-base-${responsiveColumns.base}`],
+    responsiveColumns?.sm !== undefined && styles[`cols-sm-${responsiveColumns.sm}`],
+    responsiveColumns?.md !== undefined && styles[`cols-md-${responsiveColumns.md}`],
+    responsiveColumns?.lg !== undefined && styles[`cols-lg-${responsiveColumns.lg}`],
+    responsiveColumns?.xl !== undefined && styles[`cols-xl-${responsiveColumns.xl}`],
+    // Add responsive gap classes
+    responsiveGap?.base !== undefined && styles[`gap-base-${responsiveGap.base}`],
+    responsiveGap?.sm !== undefined && styles[`gap-sm-${responsiveGap.sm}`],
+    responsiveGap?.md !== undefined && styles[`gap-md-${responsiveGap.md}`],
+    responsiveGap?.lg !== undefined && styles[`gap-lg-${responsiveGap.lg}`],
+    responsiveGap?.xl !== undefined && styles[`gap-xl-${responsiveGap.xl}`],
+    className
+  );
+
   return (
-    <Box
-      as={as as ElementType}
-      display="grid"
-      gap={gap}
-      className={cn(styles.grid, className)}
-      style={{
-        gridTemplateColumns,
-        ...style,
-      }}
+    <Component
+      className={gridClassName}
+      style={gridStyle}
       {...(rest as Record<string, unknown>)}
     >
       {children}
-    </Box>
+    </Component>
   );
 }
 

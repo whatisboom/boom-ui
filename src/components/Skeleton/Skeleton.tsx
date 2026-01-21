@@ -20,7 +20,8 @@ export function Skeleton({
   const style: CSSProperties = {
     width: formatDimension(width),
     height: formatDimension(height),
-    borderRadius: formatDimension(borderRadius),
+    // Don't apply borderRadius for circle variant - let CSS class handle it
+    borderRadius: variant === 'circle' ? undefined : formatDimension(borderRadius),
   };
 
   // Add random width variation for text variant

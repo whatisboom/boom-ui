@@ -46,4 +46,17 @@ describe('Skeleton', () => {
     expect(skeleton).toHaveAttribute('aria-busy', 'true');
     expect(skeleton).toHaveAttribute('role', 'status');
   });
+
+  it('should render circle variant without inline border-radius override', () => {
+    render(<Skeleton variant="circle" width={48} height={48} data-testid="skeleton" />);
+    const skeleton = screen.getByTestId('skeleton');
+
+    // Circle variant should have the circle class (which applies border-radius: 50%)
+    expect(skeleton).toHaveClass(styles.circle);
+
+    // Verify inline style doesn't contain border-radius
+    // This ensures CSS class's border-radius: 50% won't be overridden
+    const inlineStyle = skeleton.getAttribute('style') || '';
+    expect(inlineStyle).not.toContain('border-radius');
+  });
 });

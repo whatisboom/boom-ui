@@ -4,7 +4,7 @@ import { RadioGroup } from './RadioGroup';
 import { Stack } from '../Stack';
 
 const meta: Meta<typeof RadioGroup> = {
-  title: 'Forms & Validation/Radio Group',
+  title: 'Forms/Radio Group',
   component: RadioGroup,
   tags: ['autodocs'],
   argTypes: {

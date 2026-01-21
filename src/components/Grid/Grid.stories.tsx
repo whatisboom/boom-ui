@@ -5,7 +5,7 @@ import { Typography } from '@/components/Typography';
 import { Box } from '@/components/Box';
 
 const meta: Meta<typeof Grid> = {
-  title: 'Page Layouts/Grid',
+  title: 'Layout/Grid',
   component: Grid,
   parameters: {
     docs: {
@@ -441,6 +441,197 @@ export const WithCustomStyles: Story = {
         <DemoCard>Item 1</DemoCard>
         <DemoCard>Item 2</DemoCard>
         <DemoCard>Item 3</DemoCard>
+      </>
+    ),
+  },
+};
+
+/**
+ * Responsive columns that adjust at different breakpoints.
+ * Resize your browser to see the grid adapt from 1 column on mobile
+ * to 2 columns on tablets to 4 columns on desktop.
+ */
+export const ResponsiveBreakpoints: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Grid automatically adjusts column count at different screen sizes using responsive values. Try resizing the window to see the grid adapt.',
+      },
+    },
+  },
+  args: {
+    columns: { base: 1, md: 2, lg: 4 },
+    gap: 4,
+    children: (
+      <>
+        <DemoCard>Item 1</DemoCard>
+        <DemoCard>Item 2</DemoCard>
+        <DemoCard>Item 3</DemoCard>
+        <DemoCard>Item 4</DemoCard>
+        <DemoCard>Item 5</DemoCard>
+        <DemoCard>Item 6</DemoCard>
+        <DemoCard>Item 7</DemoCard>
+        <DemoCard>Item 8</DemoCard>
+      </>
+    ),
+  },
+};
+
+/**
+ * Responsive gap that increases on larger screens for better spacing.
+ */
+export const ResponsiveGap: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Gap size increases on larger screens to maintain visual balance with more columns.',
+      },
+    },
+  },
+  args: {
+    columns: 3,
+    gap: { base: 2, md: 4, lg: 6 },
+    children: (
+      <>
+        <DemoCard>Item 1</DemoCard>
+        <DemoCard>Item 2</DemoCard>
+        <DemoCard>Item 3</DemoCard>
+        <DemoCard>Item 4</DemoCard>
+        <DemoCard>Item 5</DemoCard>
+        <DemoCard>Item 6</DemoCard>
+      </>
+    ),
+  },
+};
+
+/**
+ * Product grid that adapts from single column on mobile to multi-column on larger screens.
+ */
+export const ResponsiveProductGrid: Story = {
+  args: {
+    columns: { base: 1, sm: 2, md: 3, lg: 4 },
+    gap: { base: 3, md: 4 },
+    children: (
+      <>
+        <DemoCard>
+          <Box>
+            <Typography variant="h4" weight="bold">Product 1</Typography>
+            <Typography variant="caption">$29.99</Typography>
+          </Box>
+        </DemoCard>
+        <DemoCard>
+          <Box>
+            <Typography variant="h4" weight="bold">Product 2</Typography>
+            <Typography variant="caption">$39.99</Typography>
+          </Box>
+        </DemoCard>
+        <DemoCard>
+          <Box>
+            <Typography variant="h4" weight="bold">Product 3</Typography>
+            <Typography variant="caption">$49.99</Typography>
+          </Box>
+        </DemoCard>
+        <DemoCard>
+          <Box>
+            <Typography variant="h4" weight="bold">Product 4</Typography>
+            <Typography variant="caption">$59.99</Typography>
+          </Box>
+        </DemoCard>
+        <DemoCard>
+          <Box>
+            <Typography variant="h4" weight="bold">Product 5</Typography>
+            <Typography variant="caption">$69.99</Typography>
+          </Box>
+        </DemoCard>
+        <DemoCard>
+          <Box>
+            <Typography variant="h4" weight="bold">Product 6</Typography>
+            <Typography variant="caption">$79.99</Typography>
+          </Box>
+        </DemoCard>
+        <DemoCard>
+          <Box>
+            <Typography variant="h4" weight="bold">Product 7</Typography>
+            <Typography variant="caption">$89.99</Typography>
+          </Box>
+        </DemoCard>
+        <DemoCard>
+          <Box>
+            <Typography variant="h4" weight="bold">Product 8</Typography>
+            <Typography variant="caption">$99.99</Typography>
+          </Box>
+        </DemoCard>
+      </>
+    ),
+  },
+};
+
+/**
+ * Dashboard that stacks vertically on mobile and spreads horizontally on desktop.
+ */
+export const ResponsiveDashboard: Story = {
+  args: {
+    columns: { base: 1, sm: 2, lg: 4 },
+    gap: { base: 3, lg: 4 },
+    children: (
+      <>
+        <DemoCard>
+          <Box>
+            <Typography variant="h2" weight="bold">2,543</Typography>
+            <Typography variant="caption">Total Sales</Typography>
+          </Box>
+        </DemoCard>
+        <DemoCard>
+          <Box>
+            <Typography variant="h2" weight="bold">$12.5k</Typography>
+            <Typography variant="caption">Revenue</Typography>
+          </Box>
+        </DemoCard>
+        <DemoCard>
+          <Box>
+            <Typography variant="h2" weight="bold">342</Typography>
+            <Typography variant="caption">New Customers</Typography>
+          </Box>
+        </DemoCard>
+        <DemoCard>
+          <Box>
+            <Typography variant="h2" weight="bold">94%</Typography>
+            <Typography variant="caption">Satisfaction</Typography>
+          </Box>
+        </DemoCard>
+      </>
+    ),
+  },
+};
+
+/**
+ * All breakpoints demonstration showing how the grid responds at each screen size.
+ */
+export const AllBreakpoints: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates all available breakpoints: base (mobile), sm (640px+), md (768px+), lg (1024px+), xl (1280px+).',
+      },
+    },
+  },
+  args: {
+    columns: { base: 1, sm: 2, md: 3, lg: 4, xl: 6 },
+    gap: { base: 2, sm: 3, md: 4, lg: 4, xl: 6 },
+    children: (
+      <>
+        <DemoCard>1 col mobile</DemoCard>
+        <DemoCard>2 col sm</DemoCard>
+        <DemoCard>3 col md</DemoCard>
+        <DemoCard>4 col lg</DemoCard>
+        <DemoCard>6 col xl</DemoCard>
+        <DemoCard>Item 6</DemoCard>
+        <DemoCard>Item 7</DemoCard>
+        <DemoCard>Item 8</DemoCard>
+        <DemoCard>Item 9</DemoCard>
+        <DemoCard>Item 10</DemoCard>
+        <DemoCard>Item 11</DemoCard>
+        <DemoCard>Item 12</DemoCard>
       </>
     ),
   },

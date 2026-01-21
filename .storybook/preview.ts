@@ -8,6 +8,21 @@ const preview: Preview = {
   decorators: [ThemeDecorator],
 
   parameters: {
+    options: {
+      storySort: {
+        order: [
+          'Getting Started',
+          'Layout',
+          'Core',
+          'Navigation',
+          'Forms',
+          'Overlays & Dialogs',
+          'Feedback & Status',
+          'Media',
+          'Data Display',
+        ],
+      },
+    },
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
@@ -30,6 +45,12 @@ const preview: Preview = {
     },
     docs: {
       container: DocsContainer,
+      source: {
+        // Show rendered JSX instead of story args object
+        type: 'dynamic',
+        // Use TSX language for syntax highlighting
+        language: 'tsx',
+      },
     },
     darkMode: {
       dark: { ...themes.dark, appBg: '#1e293b', appContentBg: '#1e293b' },

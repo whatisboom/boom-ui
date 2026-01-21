@@ -3,7 +3,7 @@ import { Navigation } from './Navigation';
 import type { NavItem } from './Navigation.types';
 
 const meta = {
-  title: 'Navigation & Menus/Navigation',
+  title: 'Navigation/Navigation',
   component: Navigation,
   parameters: {
     layout: 'padded',

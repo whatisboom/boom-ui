@@ -6,7 +6,9 @@ export { Button } from './components/Button';
 export { Typography } from './components/Typography';
 export { Box } from './components/Box';
 export { Stack } from './components/Stack';
-export { Grid } from './components/Grid';
+export { Grid, GRID_BREAKPOINTS } from './components/Grid';
+export { Container } from './components/Container';
+export { Divider } from './components/Divider';
 export { Input } from './components/Input';
 export { Card } from './components/Card';
 export { Slider } from './components/Slider';
@@ -19,6 +21,7 @@ export { Alert } from './components/Alert';
 export { Progress } from './components/Progress';
 export { Toast, ToastProvider, useToast } from './components/Toast';
 export { Badge } from './components/Badge';
+export { Breadcrumbs, BreadcrumbItem } from './components/Breadcrumbs';
 export { Tooltip } from './components/Tooltip';
 export { Tree } from './components/Tree';
 export {
@@ -36,6 +39,9 @@ export { ThemeProvider, useTheme } from './components/ThemeProvider';
 export { ErrorBoundary } from './components/ErrorBoundary';
 export { Hero } from './components/Hero';
 export { Nav, NavItem } from './components/Nav';
+export { Header } from './components/Header';
+export { Sidebar } from './components/Sidebar';
+export { AppShell } from './components/AppShell';
 
 // Skeleton components
 export { Skeleton, SkeletonText, SkeletonAvatar, SkeletonCard } from './components/Skeleton';
@@ -45,6 +51,15 @@ export { Spinner } from './components/Spinner';
 
 // EmptyState
 export { EmptyState } from './components/EmptyState';
+
+// Image
+export { Image } from './components/Image';
+
+// Video
+export { Video } from './components/Video';
+
+// Audio
+export { Audio } from './components/Audio';
 
 // Primitives
 export { Popover } from './components/primitives/Popover';
@@ -64,7 +79,15 @@ export type {
 } from './components/Typography';
 export type { BoxProps, BoxBaseProps } from './components/Box';
 export type { StackProps } from './components/Stack';
-export type { GridProps, GridBaseProps } from './components/Grid';
+export type { GridProps, GridBaseProps, ResponsiveValue } from './components/Grid';
+export type { ContainerProps, ContainerBaseProps, ContainerSize } from './components/Container';
+export type {
+  DividerProps,
+  DividerBaseProps,
+  DividerOrientation,
+  DividerVariant,
+  DividerLabelPosition,
+} from './components/Divider';
 export type { InputProps } from './components/Input';
 export type { CardProps, CardVariant, CardBaseProps } from './components/Card';
 export type {
@@ -90,6 +113,12 @@ export type {
   ToastContextValue,
 } from './components/Toast';
 export type { BadgeProps, BadgeVariant } from './components/Badge';
+export type {
+  BreadcrumbsProps,
+  BreadcrumbsBaseProps,
+  BreadcrumbItemProps,
+  BreadcrumbItemBaseProps,
+} from './components/Breadcrumbs';
 export type { TooltipProps, TooltipPlacement } from './components/Tooltip';
 export type { TreeProps, TreeNode, TreeItemProps, TreeContextValue } from './components/Tree';
 export type {
@@ -127,6 +156,7 @@ export type {
 } from './components/Tabs';
 export { Avatar } from './components/Avatar';
 export type { AvatarProps, AvatarSize, AvatarStatus } from './components/Avatar';
+
 export type {
   Theme,
   ResolvedTheme,
@@ -136,6 +166,15 @@ export type {
 } from './components/ThemeProvider';
 export type { ErrorBoundaryProps, FallbackProps } from './components/ErrorBoundary';
 export type { NavProps, NavBaseProps, NavItemProps, NavItemBaseProps } from './components/Nav';
+export type { HeaderProps } from './components/Header';
+export type {
+  SidebarProps,
+  SidebarHeaderProps,
+  SidebarNavProps,
+  SidebarItemProps,
+  SidebarContextValue,
+} from './components/Sidebar';
+export type { AppShellProps } from './components/AppShell';
 export type {
   HeroProps,
   HeroBaseProps,
@@ -158,6 +197,28 @@ export type { SpinnerProps } from './components/Spinner';
 
 // EmptyState types
 export type { EmptyStateProps } from './components/EmptyState';
+
+// Image types
+export type { ImageProps, ImageObjectFit } from './components/Image';
+
+// Video types
+export type {
+  VideoProps,
+  VideoCaption,
+  PlaybackRate,
+  VideoControlsProps,
+} from './components/Video';
+
+// Audio types
+export type {
+  AudioProps,
+  AudioBaseProps,
+  SingleAudioProps,
+  PlaylistAudioProps,
+  AudioTrack,
+  AudioControlsProps,
+  AudioWaveformProps,
+} from './components/Audio';
 
 // Primitive types
 export type { PopoverProps, ModalProps, DrawerProps, OverlayProps } from './components/primitives/types';

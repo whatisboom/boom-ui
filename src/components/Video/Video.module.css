@@ -1,0 +1,330 @@
+/* Video wrapper */
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  background-color: var(--boom-theme-bg-primary);
+  border-radius: var(--boom-border-radius-md);
+  overflow: hidden;
+  font-family: var(--boom-font-sans);
+}
+
+/* Video element */
+.video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Hide native controls */
+.video::-webkit-media-controls {
+  display: none !important;
+}
+
+.video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+/* Controls container */
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: var(--boom-spacing-6) var(--boom-spacing-4) var(--boom-spacing-4);
+  transition: opacity var(--boom-transition-base), transform var(--boom-transition-base);
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.videoWrapper:hover .controls,
+.controls:focus-within {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Show controls when video is paused or loading */
+.controls.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progress bar */
+.progressBar {
+  margin-bottom: var(--boom-spacing-3);
+}
+
+/* Control buttons row */
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--boom-spacing-2);
+}
+
+/* Left controls */
+.leftControls {
+  display: flex;
+  align-items: center;
+  gap: var(--boom-spacing-2);
+  flex: 1;
+}
+
+/* Right controls */
+.rightControls {
+  display: flex;
+  align-items: center;
+  gap: var(--boom-spacing-2);
+}
+
+/* Control button */
+.controlButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--boom-theme-text-on-dark);
+  cursor: pointer;
+  padding: var(--boom-spacing-2);
+  border-radius: var(--boom-border-radius-sm);
+  transition: background-color var(--boom-transition-base);
+  min-width: 36px;
+  height: 36px;
+}
+
+.controlButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.controlButton:focus-visible {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: 2px;
+}
+
+.controlButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Icon sizing */
+.controlButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Play button (larger) */
+.playButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Volume control container */
+.volumeControl {
+  display: flex;
+  align-items: center;
+  gap: var(--boom-spacing-1);
+}
+
+.volumeSliderWrapper {
+  width: 0;
+  opacity: 0;
+  overflow: visible;
+  padding: 0;
+  background-color: transparent;
+  border-radius: var(--boom-border-radius-sm);
+  transition: width var(--boom-transition-base),
+              opacity var(--boom-transition-base),
+              padding var(--boom-transition-base),
+              background-color var(--boom-transition-base);
+}
+
+.volumeSliderWrapper.volumeSliderVisible {
+  width: 80px;
+  opacity: 1;
+  padding: var(--boom-spacing-2);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Time display */
+.timeDisplay {
+  font-size: var(--boom-font-size-sm);
+  color: var(--boom-theme-text-on-dark);
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Dropdown menu (for playback rate and captions) */
+.dropdown {
+  position: relative;
+}
+
+.dropdownMenu {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: var(--boom-spacing-2);
+  background-color: var(--boom-theme-bg-elevated);
+  border-radius: var(--boom-border-radius-md);
+  box-shadow: var(--boom-shadow-lg);
+  min-width: 120px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity var(--boom-transition-base), transform var(--boom-transition-base);
+}
+
+.dropdown.open .dropdownMenu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--boom-spacing-2) var(--boom-spacing-3);
+  background: transparent;
+  border: none;
+  color: var(--boom-theme-text-primary);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-size: var(--boom-font-size-sm);
+  transition: background-color var(--boom-transition-base);
+}
+
+.dropdownItem:hover {
+  background-color: var(--boom-theme-bg-secondary);
+}
+
+.dropdownItem:focus-visible {
+  outline: 2px solid var(--boom-theme-focus-ring);
+  outline-offset: -2px;
+}
+
+.dropdownItem.active {
+  background-color: var(--boom-theme-primary);
+  color: var(--boom-theme-text-on-primary);
+}
+
+.dropdownCheckmark {
+  margin-left: var(--boom-spacing-2);
+  opacity: 0;
+}
+
+.dropdownItem.active .dropdownCheckmark {
+  opacity: 1;
+}
+
+/* Loading indicator */
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--boom-theme-text-on-dark);
+  pointer-events: none;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--boom-theme-text-on-dark);
+  border-radius: var(--boom-border-radius-full);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Center play button overlay */
+.playOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity var(--boom-transition-base);
+  pointer-events: none;
+}
+
+.videoWrapper:hover .playOverlay {
+  opacity: 1;
+}
+
+.playOverlay.paused {
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.playOverlayButton {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--boom-border-radius-full);
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 4px solid var(--boom-theme-text-on-dark);
+  color: var(--boom-theme-text-on-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--boom-transition-base), background-color var(--boom-transition-base);
+}
+
+.playOverlayButton:hover {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.playOverlayButton svg {
+  width: 40px;
+  height: 40px;
+}
+
+/* Fullscreen mode */
+.videoWrapper.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  border-radius: 0;
+}
+
+.videoWrapper.fullscreen .video {
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .controls,
+  .playOverlay,
+  .dropdownMenu,
+  .volumeSliderWrapper,
+  .controlButton,
+  .dropdownItem {
+    transition: none;
+  }
+
+  .spinner {
+    animation: none;
+  }
+}

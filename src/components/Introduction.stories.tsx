@@ -89,13 +89,14 @@ function App() {
       </p>
       <ul style={{ fontSize: '1rem', lineHeight: '1.8' }}>
         <li><strong>Getting Started</strong> - Theme system and layout basics</li>
-        <li><strong>Forms & Validation</strong> - Form controls and validation patterns</li>
-        <li><strong>Data & Content</strong> - Tables, cards, typography, and more</li>
-        <li><strong>Navigation & Menus</strong> - Headers, tabs, and navigation components</li>
-        <li><strong>Feedback & Alerts</strong> - Alerts, toasts, and progress indicators</li>
+        <li><strong>Core</strong> - Essential components like buttons, cards, and badges</li>
+        <li><strong>Forms</strong> - Form controls and validation patterns</li>
+        <li><strong>Layout</strong> - Hero sections and layout primitives</li>
+        <li><strong>Navigation</strong> - Headers, tabs, and navigation components</li>
         <li><strong>Overlays & Dialogs</strong> - Modals, drawers, tooltips, and popovers</li>
-        <li><strong>Page Layouts</strong> - Hero sections and layout primitives</li>
-        <li><strong>Examples</strong> - Real-world compositional patterns</li>
+        <li><strong>Feedback & Status</strong> - Alerts, toasts, and progress indicators</li>
+        <li><strong>Media</strong> - Image, video, and audio components</li>
+        <li><strong>Data Display</strong> - Tables, trees, and data visualization</li>
       </ul>
     </div>
   );

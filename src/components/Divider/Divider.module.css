@@ -1,0 +1,97 @@
+/* Base divider (no label) */
+.divider {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Horizontal divider */
+.divider.horizontal {
+  width: 100%;
+  height: 0;
+  border-top: 1px solid var(--boom-theme-border-default);
+}
+
+/* Vertical divider */
+.divider.vertical {
+  width: 0;
+  height: 100%;
+  border-left: 1px solid var(--boom-theme-border-default);
+  display: inline-block;
+}
+
+/* Divider with label */
+.dividerWithLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--boom-spacing-3);
+  width: 100%;
+}
+
+/* Label positioning */
+.dividerWithLabel.left {
+  justify-content: flex-start;
+}
+
+.dividerWithLabel.center {
+  justify-content: center;
+}
+
+.dividerWithLabel.right {
+  justify-content: flex-end;
+}
+
+/* Line segments for labeled dividers */
+.dividerWithLabel .line {
+  flex: 1;
+  height: 0;
+  border-top: 1px solid var(--boom-theme-border-default);
+}
+
+/* Hide the flex-grow on lines when label is left-aligned */
+.dividerWithLabel.left .line:first-child {
+  flex: 0;
+  width: 0;
+  border: none;
+}
+
+/* Hide the flex-grow on lines when label is right-aligned */
+.dividerWithLabel.right .line:last-child {
+  flex: 0;
+  width: 0;
+  border: none;
+}
+
+/* Label text */
+.dividerWithLabel .label {
+  color: var(--boom-theme-text-secondary);
+  font-size: var(--boom-font-size-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Style variants */
+.solid {
+  border-style: solid;
+}
+
+.dashed {
+  border-style: dashed;
+}
+
+.dotted {
+  border-style: dotted;
+}
+
+/* Apply variants to lines in labeled dividers */
+.line.solid {
+  border-top-style: solid;
+}
+
+.line.dashed {
+  border-top-style: dashed;
+}
+
+.line.dotted {
+  border-top-style: dotted;
+}
