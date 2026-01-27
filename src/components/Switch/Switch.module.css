@@ -47,19 +47,19 @@
 .track.sm {
   width: 32px;
   height: 18px;
-  padding: 2px;
+  padding: 1px;
 }
 
 .track.md {
   width: 40px;
   height: 22px;
-  padding: 2px;
+  padding: 1px;
 }
 
 .track.lg {
   width: 48px;
   height: 26px;
-  padding: 2px;
+  padding: 1px;
 }
 
 /* Checked state for track */
@@ -71,7 +71,8 @@
 
 /* Thumb - sliding circle */
 .thumb {
-  position: absolute;
+  position: relative;
+  margin-left: -1px;
   background-color: white;
   border-radius: 50%;
   transition: transform 0.2s ease;
@@ -94,22 +95,17 @@
   height: 22px;
 }
 
-/* Thumb position - unchecked (left) */
-.thumb {
-  transform: translateX(0);
-}
-
 /* Thumb position - checked (right) */
 .thumb.checked.sm {
-  transform: translateX(14px);
+  transform: translateX(13px);
 }
 
 .thumb.checked.md {
-  transform: translateX(18px);
+  transform: translateX(17px);
 }
 
 .thumb.checked.lg {
-  transform: translateX(22px);
+  transform: translateX(21px);
 }
 
 /* Hover state */
