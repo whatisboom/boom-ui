@@ -14,7 +14,7 @@
      ========================================================================== */
 
   /* Base - Neutral colors for backgrounds, text, borders */
-  --boom-hue-base: 210;
+  --boom-hue-base: 50;
 
   /* Accent - Primary brand color for interactive elements */
   --boom-hue-accent: 215;
@@ -30,8 +30,8 @@
      ========================================================================== */
 
   /* Base - Neutral saturation/lightness (reference: base-500) */
-  --boom-sat-base: 13;
-  --boom-light-base: 66;
+  --boom-sat-base: 5;
+  --boom-light-base: 30;
 
   /* Accent - Primary brand saturation/lightness (reference: accent-500) */
   --boom-sat-accent: 47;
