@@ -392,9 +392,9 @@ describe('TableHeaderCell', () => {
         </table>
       );
 
-      // SortIndicator renders an SVG, should not be present
-      const svg = container.querySelector('svg');
-      expect(svg).not.toBeInTheDocument();
+      // SortIndicator has the sortIcon class, should not be present
+      const sortIndicator = container.querySelector('[class*="sortIcon"]');
+      expect(sortIndicator).not.toBeInTheDocument();
     });
   });
 });
