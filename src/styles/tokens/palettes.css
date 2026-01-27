@@ -14,16 +14,16 @@
      ========================================================================== */
 
   /* Base - Neutral colors for backgrounds, text, borders */
-  --boom-hue-base: 50;
+  --boom-hue-base: 45;
 
   /* Accent - Primary brand color for interactive elements */
-  --boom-hue-accent: 215;
+  --boom-hue-accent: 210;
 
   /* Semantic state colors */
   --boom-hue-success: 142;   /* green */
   --boom-hue-warning: 38;    /* amber */
   --boom-hue-error: 0;       /* red */
-  --boom-hue-info: 189;      /* teal */
+  --boom-hue-info: 210;      /* blue */
 
   /* ==========================================================================
      SATURATION & LIGHTNESS VARIABLES - Advanced Theme Customization
@@ -49,9 +49,9 @@
   --boom-sat-error: 84;
   --boom-light-error: 60;
 
-  /* Info - Teal saturation/lightness (reference: info-500) */
-  --boom-sat-info: 80;
-  --boom-light-info: 39;
+  /* Info - Blue saturation/lightness (reference: info-500) */
+  --boom-sat-info: 60;
+  --boom-light-info: 34;
 
   /* ==========================================================================
      DARK THEME (Default)
@@ -139,12 +139,12 @@
 
 :root[data-theme='light'] {
   /* Override HSL variables for light theme */
-  --boom-hue-base: 210;
-  --boom-sat-base: 2;
-  --boom-light-base: 50;
+  --boom-hue-base: 45;
+  --boom-sat-base: 10;
+  --boom-light-base: 40;
   --boom-hue-accent: 210;
-  --boom-sat-accent: 100;
-  --boom-light-accent: 55;
+  --boom-sat-accent: 40;
+  --boom-light-accent: 57;
   --boom-hue-success: 142;
   --boom-sat-success: 63;
   --boom-light-success: 51;
@@ -154,9 +154,9 @@
   --boom-hue-error: 0;
   --boom-sat-error: 84;
   --boom-light-error: 60;
-  --boom-hue-info: 189;
-  --boom-sat-info: 80;
-  --boom-light-info: 52;
+  --boom-hue-info: 210;
+  --boom-sat-info: 60;
+  --boom-light-info: 62;
 
   /* Base - Neutral colors inverted from dark theme */
   --boom-palette-base-50: hsl(0 0% 100%);
