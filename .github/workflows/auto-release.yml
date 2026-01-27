@@ -278,7 +278,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: title,
-              head: 'main',
+              head: mergeStatus === 'conflict' ? branch : 'main',
               base: 'develop',
               body: body
             });
