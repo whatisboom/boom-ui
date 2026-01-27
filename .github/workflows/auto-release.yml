@@ -191,7 +191,11 @@ jobs:
           fi
 
           # Merge succeeded, now try to push
-          if git push origin develop 2>&1 | tee push_output.log; then
+          # Capture push output and exit code separately to avoid pipeline exit code masking
+          git push origin develop 2>&1 | tee push_output.log
+          PUSH_EXIT_CODE=${PIPESTATUS[0]}
+
+          if [ $PUSH_EXIT_CODE -eq 0 ]; then
             echo "merge_status=success" >> $GITHUB_OUTPUT
             echo "Successfully merged main to develop"
           else
