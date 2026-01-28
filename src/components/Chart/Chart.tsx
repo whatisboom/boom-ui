@@ -1,9 +1,18 @@
 import { forwardRef, useMemo } from 'react';
-// import { useTheme } from '@/components/ThemeProvider';
-import { ResponsiveContainer } from 'recharts';
+import { useTheme } from '@/components/ThemeProvider';
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from 'recharts';
 import { cn } from '@/utils/classnames';
 import type { ChartProps } from './Chart.types';
-import { extractDataKeys } from './utils/colorPalette';
+import { generateChartPalette, extractDataKeys, mapSeriesToColors } from './utils/colorPalette';
 import styles from './Chart.module.css';
 
 export const Chart = forwardRef<HTMLDivElement, ChartProps>(
@@ -27,23 +36,22 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
     },
     ref
   ) => {
-    // Theme colors will be used when chart types are implemented
-    // const { colors: themeColors } = useTheme();
+    const { colors: themeColors } = useTheme();
 
-    // Generate color palette from theme (will be used when chart types are implemented)
-    // const defaultPalette = useMemo(
-    //   () => generateChartPalette(themeColors),
-    //   [themeColors]
-    // );
+    // Generate color palette from theme
+    const defaultPalette = useMemo(
+      () => generateChartPalette(themeColors),
+      [themeColors]
+    );
 
     // Extract data series keys
     const dataKeys = useMemo(() => extractDataKeys(data), [data]);
 
-    // Map series to colors (will be used when chart types are implemented)
-    // const seriesColors = useMemo(
-    //   () => mapSeriesToColors(dataKeys, colors, defaultPalette),
-    //   [dataKeys, colors, defaultPalette]
-    // );
+    // Map series to colors
+    const seriesColors = useMemo(
+      () => mapSeriesToColors(dataKeys, colors, defaultPalette),
+      [dataKeys, colors, defaultPalette]
+    );
 
     // Build ARIA description from data
     const description = useMemo(() => {
@@ -58,6 +66,76 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
     // Determine numeric height for Recharts
     const numericHeight: number = typeof height === 'string' ? 300 : height;
 
+    // Axis defaults
+    const {
+      showXAxis = true,
+      showYAxis = true,
+      xAxisLabel,
+      yAxisLabel,
+      xAxisKey = 'name',
+    } = axis;
+
+    // Common props for all chart types
+    const commonChartProps = {
+      data,
+      margin: { top: 5, right: 30, left: 20, bottom: 5 },
+    };
+
+    // Render chart based on type
+    const renderChart = () => {
+      if (type === 'line') {
+        return (
+          <LineChart {...commonChartProps}>
+            {grid.show && (
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke={themeColors.border.subtle}
+                horizontal={grid.horizontal}
+                vertical={grid.vertical}
+              />
+            )}
+            {showXAxis && (
+              <XAxis
+                dataKey={xAxisKey}
+                stroke={themeColors.text.secondary}
+                label={xAxisLabel ? { value: xAxisLabel, position: 'insideBottom' } : undefined}
+              />
+            )}
+            {showYAxis && (
+              <YAxis
+                stroke={themeColors.text.secondary}
+                label={yAxisLabel ? { value: yAxisLabel, angle: -90, position: 'insideLeft' } : undefined}
+              />
+            )}
+            {tooltip.show && (
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: themeColors.bg.elevated,
+                  border: `1px solid ${themeColors.border.default}`,
+                  color: themeColors.text.primary,
+                }}
+                formatter={tooltip.formatter}
+              />
+            )}
+            {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
+            {dataKeys.map((key) => (
+              <Line
+                key={key}
+                type="monotone"
+                dataKey={key}
+                stroke={seriesColors[key]}
+                strokeWidth={2}
+                dot={{ fill: seriesColors[key] }}
+                isAnimationActive={!disableAnimation}
+              />
+            ))}
+          </LineChart>
+        );
+      }
+
+      return null;
+    };
+
     return (
       <div
         ref={ref}
@@ -68,7 +146,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
         {...props}
       >
         <ResponsiveContainer width={width} height={numericHeight}>
-          <div>Chart type: {type}</div>
+          {renderChart()}
         </ResponsiveContainer>
       </div>
     );
