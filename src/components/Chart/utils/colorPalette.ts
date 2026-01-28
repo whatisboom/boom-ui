@@ -7,7 +7,9 @@ import type { ChartDataPoint, ChartColors } from '../Chart.types';
  */
 function parseHSL(hslString: string): { h: number; s: number; l: number } | null {
   const match = hslString.match(/hsl\(\s*(\d+)\s+(\d+)%\s+(\d+)%\s*\)/);
-  if (!match) return null;
+  if (!match) {
+    return null;
+  }
   return {
     h: parseInt(match[1]),
     s: parseInt(match[2]),
@@ -80,7 +82,9 @@ export function generateChartPalette(themeColors: ThemeColors): string[] {
  * (Excludes 'name' key which is typically the X-axis)
  */
 export function extractDataKeys(data: ChartDataPoint[]): string[] {
-  if (data.length === 0) return [];
+  if (data.length === 0) {
+    return [];
+  }
 
   const firstItem = data[0];
   return Object.keys(firstItem).filter(key => key !== 'name');

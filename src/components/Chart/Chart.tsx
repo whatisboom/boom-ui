@@ -67,7 +67,9 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
 
     // Build ARIA description from data
     const description = useMemo(() => {
-      if (ariaDescription) return ariaDescription;
+      if (ariaDescription) {
+        return ariaDescription;
+      }
 
       const seriesCount = dataKeys.length;
       const pointCount = data.length;
@@ -284,8 +286,8 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
         );
       }
 
-      if (type === 'radar') {
-        return (
+      // type === 'radar'
+      return (
           <RadarChart {...commonChartProps}>
             <PolarGrid stroke={themeColors.border.subtle} />
             <PolarAngleAxis dataKey={xAxisKey} stroke={themeColors.text.secondary} />
@@ -312,10 +314,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
               />
             ))}
           </RadarChart>
-        );
-      }
-
-      return null;
+      );
     };
 
     return (
@@ -324,7 +323,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
         className={cn(styles.chartContainer, className)}
         role="img"
         aria-label={ariaLabel || `${type} chart`}
-        aria-description={description}
+        title={description}
         {...props}
       >
         <ResponsiveContainer width={width} height={numericHeight}>
