@@ -1,0 +1,46 @@
+/**
+ * Storybook Docs Theme Integration
+ * Applies boom-ui theme tokens to Storybook UI elements
+ */
+
+/* Docs wrapper */
+.sb-wrapper,
+.sb-argstableBlock {
+  background-color: var(--boom-theme-bg-primary);
+  color: var(--boom-theme-text-primary);
+}
+
+/* Tables */
+.sb-argstableBlock table {
+  background-color: var(--boom-theme-bg-primary);
+  border-color: var(--boom-theme-border-default);
+}
+
+.sb-argstableBlock thead,
+.sb-argstableBlock th {
+  background-color: var(--boom-theme-bg-secondary);
+  color: var(--boom-theme-text-primary);
+  border-color: var(--boom-theme-border-default);
+}
+
+.sb-argstableBlock tbody tr {
+  background-color: var(--boom-theme-bg-primary);
+  border-color: var(--boom-theme-border-default);
+}
+
+.sb-argstableBlock td {
+  color: var(--boom-theme-text-primary);
+  border-color: var(--boom-theme-border-default);
+}
+
+/* Preview blocks */
+.sb-previewBlock {
+  background-color: var(--boom-theme-bg-primary);
+}
+
+/* Headings */
+.sb-wrapper h1,
+.sb-wrapper h2,
+.sb-wrapper h3 {
+  color: var(--boom-theme-text-primary);
+}

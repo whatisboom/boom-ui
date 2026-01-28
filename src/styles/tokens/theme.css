@@ -88,6 +88,9 @@
   /* Primary disabled state */
   --boom-theme-primary-disabled: var(--boom-palette-base-600);
 
+  /* Primary as text/border color (higher contrast for backgrounds) */
+  --boom-theme-primary-text: var(--boom-palette-accent-200);
+
   /* ==========================================================================
      SECONDARY INTERACTIVE COLORS
      ========================================================================== */
@@ -207,6 +210,9 @@
   --boom-theme-primary-hover: var(--boom-palette-accent-700);
   --boom-theme-primary-active: var(--boom-palette-accent-800);
   --boom-theme-primary-disabled: var(--boom-palette-base-400);
+
+  /* Primary as text/border color (higher contrast for backgrounds) */
+  --boom-theme-primary-text: var(--boom-palette-accent-700);
 
   /* Secondary interactive */
   --boom-theme-secondary: var(--boom-palette-base-200);
