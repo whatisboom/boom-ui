@@ -4,6 +4,18 @@ import {
   ResponsiveContainer,
   LineChart,
   Line,
+  BarChart,
+  Bar,
+  AreaChart,
+  Area,
+  PieChart,
+  Pie,
+  Cell,
+  RadarChart,
+  Radar,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -130,6 +142,181 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
               />
             ))}
           </LineChart>
+        );
+      }
+
+      if (type === 'bar') {
+        return (
+          <BarChart {...commonChartProps}>
+            {grid.show && (
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke={themeColors.border.subtle}
+                horizontal={grid.horizontal}
+                vertical={grid.vertical}
+              />
+            )}
+            {showXAxis && (
+              <XAxis
+                dataKey={xAxisKey}
+                stroke={themeColors.text.secondary}
+                label={xAxisLabel ? { value: xAxisLabel, position: 'insideBottom' } : undefined}
+              />
+            )}
+            {showYAxis && (
+              <YAxis
+                stroke={themeColors.text.secondary}
+                label={yAxisLabel ? { value: yAxisLabel, angle: -90, position: 'insideLeft' } : undefined}
+              />
+            )}
+            {tooltip.show && (
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: themeColors.bg.elevated,
+                  border: `1px solid ${themeColors.border.default}`,
+                  color: themeColors.text.primary,
+                }}
+                formatter={tooltip.formatter}
+              />
+            )}
+            {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
+            {dataKeys.map((key) => (
+              <Bar
+                key={key}
+                dataKey={key}
+                fill={seriesColors[key]}
+                isAnimationActive={!disableAnimation}
+              />
+            ))}
+          </BarChart>
+        );
+      }
+
+      if (type === 'area') {
+        return (
+          <AreaChart {...commonChartProps}>
+            {grid.show && (
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke={themeColors.border.subtle}
+                horizontal={grid.horizontal}
+                vertical={grid.vertical}
+              />
+            )}
+            {showXAxis && (
+              <XAxis
+                dataKey={xAxisKey}
+                stroke={themeColors.text.secondary}
+                label={xAxisLabel ? { value: xAxisLabel, position: 'insideBottom' } : undefined}
+              />
+            )}
+            {showYAxis && (
+              <YAxis
+                stroke={themeColors.text.secondary}
+                label={yAxisLabel ? { value: yAxisLabel, angle: -90, position: 'insideLeft' } : undefined}
+              />
+            )}
+            {tooltip.show && (
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: themeColors.bg.elevated,
+                  border: `1px solid ${themeColors.border.default}`,
+                  color: themeColors.text.primary,
+                }}
+                formatter={tooltip.formatter}
+              />
+            )}
+            {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
+            {dataKeys.map((key) => (
+              <Area
+                key={key}
+                type="monotone"
+                dataKey={key}
+                stroke={seriesColors[key]}
+                fill={seriesColors[key]}
+                fillOpacity={0.6}
+                isAnimationActive={!disableAnimation}
+              />
+            ))}
+          </AreaChart>
+        );
+      }
+
+      if (type === 'pie') {
+        // Pie config defaults
+        const {
+          innerRadius = 0,
+          outerRadius = 80,
+          showLabels = true,
+        } = pieConfig;
+
+        // For pie charts, transform data - each data point becomes a slice
+        const pieData = data.map((item) => ({
+          name: item.name,
+          value: item[dataKeys[0]] as number, // Use first data key as value
+        }));
+
+        return (
+          <PieChart>
+            <Pie
+              data={pieData}
+              cx="50%"
+              cy="50%"
+              innerRadius={`${innerRadius}%`}
+              outerRadius={`${outerRadius}%`}
+              fill="#8884d8"
+              dataKey="value"
+              label={showLabels}
+              isAnimationActive={!disableAnimation}
+            >
+              {pieData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={defaultPalette[index % defaultPalette.length]} />
+              ))}
+            </Pie>
+            {tooltip.show && (
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: themeColors.bg.elevated,
+                  border: `1px solid ${themeColors.border.default}`,
+                  color: themeColors.text.primary,
+                }}
+                formatter={tooltip.formatter}
+              />
+            )}
+            {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
+          </PieChart>
+        );
+      }
+
+      if (type === 'radar') {
+        return (
+          <RadarChart {...commonChartProps}>
+            <PolarGrid stroke={themeColors.border.subtle} />
+            <PolarAngleAxis dataKey={xAxisKey} stroke={themeColors.text.secondary} />
+            <PolarRadiusAxis stroke={themeColors.text.secondary} />
+            {tooltip.show && (
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: themeColors.bg.elevated,
+                  border: `1px solid ${themeColors.border.default}`,
+                  color: themeColors.text.primary,
+                }}
+                formatter={tooltip.formatter}
+              />
+            )}
+            {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
+            {dataKeys.map((key) => (
+              <Radar
+                key={key}
+                name={key}
+                dataKey={key}
+                stroke={seriesColors[key]}
+                fill={seriesColors[key]}
+                fillOpacity={0.6}
+                isAnimationActive={!disableAnimation}
+              />
+            ))}
+          </RadarChart>
         );
       }
 

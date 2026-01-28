@@ -104,4 +104,112 @@ describe('Chart', () => {
       expect(await axe(container)).toHaveNoViolations();
     });
   });
+
+  describe('Bar chart', () => {
+    it('should render bar chart with recharts elements', () => {
+      const { container } = renderChart(
+        <Chart type="bar" data={mockData} ariaLabel="Sales" />
+      );
+      expect(container.querySelector('.recharts-responsive-container')).toBeInTheDocument();
+    });
+
+    it('should render multiple bars for multiple series', () => {
+      const { container} = renderChart(
+        <Chart type="bar" data={mockData} ariaLabel="Sales" />
+      );
+      expect(container.querySelector('.recharts-responsive-container')).toBeInTheDocument();
+    });
+
+    it('should have no accessibility violations', async () => {
+      const { container } = renderChart(
+        <Chart type="bar" data={mockData} ariaLabel="Sales chart" />
+      );
+      expect(await axe(container)).toHaveNoViolations();
+    });
+  });
+
+  describe('Area chart', () => {
+    it('should render area chart with recharts elements', () => {
+      const { container } = renderChart(
+        <Chart type="area" data={mockData} ariaLabel="Sales" />
+      );
+      expect(container.querySelector('.recharts-responsive-container')).toBeInTheDocument();
+    });
+
+    it('should have no accessibility violations', async () => {
+      const { container } = renderChart(
+        <Chart type="area" data={mockData} ariaLabel="Sales chart" />
+      );
+      expect(await axe(container)).toHaveNoViolations();
+    });
+  });
+
+  describe('Pie chart', () => {
+    const pieData = [
+      { name: 'Group A', value: 400 },
+      { name: 'Group B', value: 300 },
+      { name: 'Group C', value: 300 },
+    ];
+
+    it('should render pie chart with recharts elements', () => {
+      const { container } = renderChart(
+        <Chart type="pie" data={pieData} ariaLabel="Distribution" />
+      );
+      expect(container.querySelector('.recharts-responsive-container')).toBeInTheDocument();
+    });
+
+    it('should render donut chart with inner radius', () => {
+      const { container } = renderChart(
+        <Chart type="pie" data={pieData} pieConfig={{ innerRadius: 50 }} />
+      );
+      expect(container.querySelector('.recharts-responsive-container')).toBeInTheDocument();
+    });
+
+    it('should have no accessibility violations', async () => {
+      const { container } = renderChart(
+        <Chart type="pie" data={pieData} ariaLabel="Distribution chart" />
+      );
+      expect(await axe(container)).toHaveNoViolations();
+    });
+  });
+
+  describe('Radar chart', () => {
+    it('should render radar chart with recharts elements', () => {
+      const { container } = renderChart(
+        <Chart type="radar" data={mockData} ariaLabel="Performance" />
+      );
+      expect(container.querySelector('.recharts-responsive-container')).toBeInTheDocument();
+    });
+
+    it('should have no accessibility violations', async () => {
+      const { container } = renderChart(
+        <Chart type="radar" data={mockData} ariaLabel="Performance chart" />
+      );
+      expect(await axe(container)).toHaveNoViolations();
+    });
+  });
+
+  describe('Configuration', () => {
+    it('should hide legend when configured', () => {
+      const { container } = renderChart(
+        <Chart type="line" data={mockData} legend={{ show: false }} />
+      );
+      expect(container.querySelector('.recharts-legend-wrapper')).not.toBeInTheDocument();
+    });
+
+    it('should handle empty data gracefully', () => {
+      const { container } = renderChart(
+        <Chart type="line" data={[]} ariaLabel="Empty chart" />
+      );
+      expect(container.querySelector('.recharts-responsive-container')).toBeInTheDocument();
+    });
+
+    it('should accept custom width and height', () => {
+      const { container } = renderChart(
+        <Chart type="line" data={mockData} width="100%" height={400} />
+      );
+      const responsiveContainer = container.querySelector('.recharts-responsive-container');
+      expect(responsiveContainer).toBeInTheDocument();
+    });
+  });
 });
