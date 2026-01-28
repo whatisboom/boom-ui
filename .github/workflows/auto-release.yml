@@ -173,6 +173,7 @@ jobs:
       - name: Merge main to develop
         if: steps.version-check.outputs.version_changed == 'true' && steps.tag-check.outputs.tag_exists == 'false' && steps.source-branch.outputs.source_branch != ''
         id: merge-to-develop
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -191,14 +192,17 @@ jobs:
           fi
 
           # Merge succeeded, now try to push
-          if git push origin develop 2>&1 | tee push_output.log; then
+          # Capture push output and exit code separately to avoid pipeline exit code masking
+          git push origin develop 2>&1 | tee push_output.log
+          PUSH_EXIT_CODE=${PIPESTATUS[0]}
+
+          if [ $PUSH_EXIT_CODE -eq 0 ]; then
             echo "merge_status=success" >> $GITHUB_OUTPUT
             echo "Successfully merged main to develop"
           else
             # Push failed - could be branch protection or other rules
             echo "merge_status=push_failed" >> $GITHUB_OUTPUT
             echo "Merge succeeded but push failed (likely branch protection rules)"
-            cat push_output.log
           fi
 
       - name: Delete release branch
