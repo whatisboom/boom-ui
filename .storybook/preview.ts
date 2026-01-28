@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 import { themes } from 'storybook/theming';
 import '../src/styles/index.css';
+import './storybook-theme.css';
 import { ThemeDecorator } from './decorators/ThemeDecorator';
 import { DocsContainer } from './containers/DocsContainer';
 
@@ -29,19 +30,6 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/,
       },
-    },
-    backgrounds: {
-      options: {
-        dark: {
-          name: 'dark',
-          value: '#1e293b',
-        },
-
-        light: {
-          name: 'light',
-          value: '#ffffff',
-        }
-      }
     },
     docs: {
       container: DocsContainer,
@@ -76,12 +64,6 @@ const preview: Preview = {
       // 'off' - skip a11y checks entirely
       test: 'todo'
     },
-  },
-
-  initialGlobals: {
-    backgrounds: {
-      value: 'dark'
-    }
   },
 
   tags: ['autodocs']
