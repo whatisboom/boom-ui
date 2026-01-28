@@ -31,7 +31,6 @@ describe('colorPalette', () => {
     primaryHover: 'hsl(210 60% 40%)',
     primaryActive: 'hsl(210 60% 60%)',
     primaryDisabled: 'hsl(0 0% 30%)',
-    primaryText: 'hsl(210 60% 70%)',
     secondary: 'hsl(0 0% 20%)',
     secondaryHover: 'hsl(0 0% 30%)',
     secondaryActive: 'hsl(0 0% 40%)',
