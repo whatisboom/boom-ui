@@ -126,7 +126,6 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                   border: `1px solid ${themeColors.border.default}`,
                   color: themeColors.text.primary,
                 }}
-                formatter={tooltip.formatter}
               />
             )}
             {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
@@ -176,7 +175,6 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                   border: `1px solid ${themeColors.border.default}`,
                   color: themeColors.text.primary,
                 }}
-                formatter={tooltip.formatter}
               />
             )}
             {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
@@ -223,7 +221,6 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                   border: `1px solid ${themeColors.border.default}`,
                   color: themeColors.text.primary,
                 }}
-                formatter={tooltip.formatter}
               />
             )}
             {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
@@ -269,7 +266,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
               label={showLabels}
               isAnimationActive={!disableAnimation}
             >
-              {pieData.map((entry, index) => (
+              {pieData.map((_entry, index) => (
                 <Cell key={`cell-${index}`} fill={defaultPalette[index % defaultPalette.length]} />
               ))}
             </Pie>
@@ -280,7 +277,6 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                   border: `1px solid ${themeColors.border.default}`,
                   color: themeColors.text.primary,
                 }}
-                formatter={tooltip.formatter}
               />
             )}
             {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
@@ -301,7 +297,6 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                   border: `1px solid ${themeColors.border.default}`,
                   color: themeColors.text.primary,
                 }}
-                formatter={tooltip.formatter}
               />
             )}
             {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}

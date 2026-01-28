@@ -93,7 +93,7 @@ export interface ChartTooltipConfig {
   /**
    * Custom tooltip formatter
    */
-  formatter?: (value: number, name: string) => string;
+  formatter?: (value: number | undefined, name: string) => string;
 }
 
 /**
