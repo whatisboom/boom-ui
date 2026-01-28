@@ -157,10 +157,10 @@ export interface BaseChartProps extends MotionProps {
   type: ChartType;
 
   /**
-   * Width of chart
+   * Width of chart (number for pixels, string for percentage like '100%')
    * @default '100%'
    */
-  width?: number | string;
+  width?: number | `${number}%`;
 
   /**
    * Height of chart
