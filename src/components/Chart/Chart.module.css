@@ -1,0 +1,26 @@
+.chartContainer {
+  width: 100%;
+  font-family: var(--boom-font-sans);
+  color: var(--boom-theme-text-primary);
+}
+
+/* Theme Recharts text elements */
+.chartContainer :global(.recharts-text) {
+  fill: var(--boom-theme-text-secondary);
+  font-family: var(--boom-font-sans);
+}
+
+.chartContainer :global(.recharts-cartesian-axis-tick-value) {
+  fill: var(--boom-theme-text-secondary);
+}
+
+.chartContainer :global(.recharts-legend-item-text) {
+  color: var(--boom-theme-text-primary) !important;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .chartContainer :global(.recharts-surface) {
+    animation: none !important;
+  }
+}
