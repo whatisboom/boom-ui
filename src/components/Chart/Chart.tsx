@@ -78,7 +78,11 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
     }, [ariaDescription, type, dataKeys.length, data.length]);
 
     // Determine numeric height for Recharts
-    const numericHeight: number = typeof height === 'string' ? 300 : height;
+    const numericHeight: number = typeof height === 'string'
+      ? height.endsWith('%')
+        ? parseInt(height)
+        : 300
+      : height;
 
     // Axis defaults
     const {
@@ -94,6 +98,16 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
       data,
       margin: { top: 5, right: 30, left: 20, bottom: 5 },
     };
+
+    // Map legend position to Recharts props
+    const legendProps = (() => {
+      const pos = legend.position || 'bottom';
+      if (pos === 'left' || pos === 'right') {
+        return { verticalAlign: 'middle' as const, align: pos };
+      }
+      // pos is now 'top' | 'bottom'
+      return { verticalAlign: pos };
+    })();
 
     // Render chart based on type
     const renderChart = () => {
@@ -130,7 +144,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                 }}
               />
             )}
-            {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
+            {legend.show && <Legend {...legendProps} />}
             {dataKeys.map((key) => (
               <Line
                 key={key}
@@ -179,7 +193,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                 }}
               />
             )}
-            {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
+            {legend.show && <Legend {...legendProps} />}
             {dataKeys.map((key) => (
               <Bar
                 key={key}
@@ -225,7 +239,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                 }}
               />
             )}
-            {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
+            {legend.show && <Legend {...legendProps} />}
             {dataKeys.map((key) => (
               <Area
                 key={key}
@@ -281,7 +295,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                 }}
               />
             )}
-            {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
+            {legend.show && <Legend {...legendProps} />}
           </PieChart>
         );
       }
@@ -301,7 +315,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                 }}
               />
             )}
-            {legend.show && <Legend verticalAlign={legend.position as 'top' | 'bottom'} />}
+            {legend.show && <Legend {...legendProps} />}
             {dataKeys.map((key) => (
               <Radar
                 key={key}
