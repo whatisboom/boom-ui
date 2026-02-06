@@ -77,13 +77,6 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
       return `${type} chart with ${seriesCount} data series and ${pointCount} data points`;
     }, [ariaDescription, type, dataKeys.length, data.length]);
 
-    // Determine numeric height for Recharts
-    const numericHeight: number = typeof height === 'string'
-      ? height.endsWith('%')
-        ? parseInt(height)
-        : 300
-      : height;
-
     // Axis defaults
     const {
       showXAxis = true,
@@ -137,6 +130,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
             )}
             {tooltip.show && (
               <Tooltip
+                formatter={tooltip.formatter}
                 contentStyle={{
                   backgroundColor: themeColors.bg.elevated,
                   border: `1px solid ${themeColors.border.default}`,
@@ -186,6 +180,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
             )}
             {tooltip.show && (
               <Tooltip
+                formatter={tooltip.formatter}
                 contentStyle={{
                   backgroundColor: themeColors.bg.elevated,
                   border: `1px solid ${themeColors.border.default}`,
@@ -232,6 +227,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
             )}
             {tooltip.show && (
               <Tooltip
+                formatter={tooltip.formatter}
                 contentStyle={{
                   backgroundColor: themeColors.bg.elevated,
                   border: `1px solid ${themeColors.border.default}`,
@@ -288,6 +284,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
             </Pie>
             {tooltip.show && (
               <Tooltip
+                formatter={tooltip.formatter}
                 contentStyle={{
                   backgroundColor: themeColors.bg.elevated,
                   border: `1px solid ${themeColors.border.default}`,
@@ -308,6 +305,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
             <PolarRadiusAxis stroke={themeColors.text.secondary} />
             {tooltip.show && (
               <Tooltip
+                formatter={tooltip.formatter}
                 contentStyle={{
                   backgroundColor: themeColors.bg.elevated,
                   border: `1px solid ${themeColors.border.default}`,
@@ -340,7 +338,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
         title={description}
         {...props}
       >
-        <ResponsiveContainer width={width} height={numericHeight}>
+        <ResponsiveContainer width={width} height={height}>
           {renderChart()}
         </ResponsiveContainer>
       </div>

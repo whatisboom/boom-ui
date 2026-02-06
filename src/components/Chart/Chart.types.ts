@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+import type { Payload } from 'recharts/types/component/DefaultTooltipContent';
 import type { MotionProps } from '@/types';
 
 /**
@@ -91,9 +93,15 @@ export interface ChartTooltipConfig {
   show?: boolean;
 
   /**
-   * Custom tooltip formatter
+   * Custom tooltip formatter matching Recharts Formatter signature
    */
-  formatter?: (value: number | undefined, name: string) => string;
+  formatter?: (
+    value: number | string | undefined,
+    name: string | undefined,
+    item: Payload<number | string, string>,
+    index: number,
+    payload: ReadonlyArray<Payload<number | string, string>>
+  ) => ReactNode | [ReactNode, string];
 }
 
 /**
@@ -163,10 +171,10 @@ export interface BaseChartProps extends MotionProps {
   width?: number | `${number}%`;
 
   /**
-   * Height of chart
+   * Height of chart in pixels
    * @default 300
    */
-  height?: number | string;
+  height?: number;
 
   /**
    * Color configuration

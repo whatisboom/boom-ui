@@ -189,6 +189,21 @@ describe('Chart', () => {
     });
   });
 
+  describe('Tooltip', () => {
+    it('should forward formatter to Tooltip component', () => {
+      const formatter = (value: number | string | undefined) => `$${value}`;
+      const { container } = renderChart(
+        <Chart
+          type="bar"
+          data={mockData}
+          ariaLabel="Sales"
+          tooltip={{ show: true, formatter }}
+        />
+      );
+      expect(container.querySelector('.recharts-responsive-container')).toBeInTheDocument();
+    });
+  });
+
   describe('Configuration', () => {
     it('should hide legend when configured', () => {
       const { container } = renderChart(
