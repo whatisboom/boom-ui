@@ -82,8 +82,18 @@ describe('colorPalette', () => {
     it('should return valid HSL color strings', () => {
       const palette = generateChartPalette(mockThemeColors);
       palette.forEach((color) => {
-        expect(color).toMatch(/^hsl\(\d+\s+\d+%\s+\d+%\)$/);
+        expect(color).toMatch(/^hsl\(\d+(?:\.\d+)?\s+\d+(?:\.\d+)?%\s+\d+(?:\.\d+)?%\)$/);
       });
+    });
+
+    it('should handle decimal HSL values from computed styles', () => {
+      const decimalThemeColors: ThemeColors = {
+        ...mockThemeColors,
+        accent: 'hsl(210 47.7% 30.8%)',
+      };
+      const palette = generateChartPalette(decimalThemeColors);
+      expect(palette).toHaveLength(8);
+      expect(palette[0]).toBe('hsl(210 47.7% 30.8%)');
     });
   });
 
@@ -145,6 +155,16 @@ describe('colorPalette', () => {
       expect(colorMap).toEqual({
         sales: '#0000ff',
         revenue: '#ff0000',
+      });
+    });
+
+    it('should fall back to default palette when colors array is empty', () => {
+      const dataKeys = ['sales', 'revenue'];
+      const customColors = { colors: [] as string[] };
+      const colorMap = mapSeriesToColors(dataKeys, customColors, defaultPalette);
+      expect(colorMap).toEqual({
+        sales: 'hsl(210 60% 50%)',
+        revenue: 'hsl(142 60% 50%)',
       });
     });
 

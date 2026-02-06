@@ -6,14 +6,14 @@ import type { ChartDataPoint, ChartColors } from '../Chart.types';
  * Example: "hsl(210 47% 28%)" -> { h: 210, s: 47, l: 28 }
  */
 function parseHSL(hslString: string): { h: number; s: number; l: number } | null {
-  const match = hslString.match(/hsl\(\s*(\d+)\s+(\d+)%\s+(\d+)%\s*\)/);
+  const match = hslString.match(/hsl\(\s*(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%\s*\)/);
   if (!match) {
     return null;
   }
   return {
-    h: parseInt(match[1]),
-    s: parseInt(match[2]),
-    l: parseInt(match[3]),
+    h: parseFloat(match[1]),
+    s: parseFloat(match[2]),
+    l: parseFloat(match[3]),
   };
 }
 
@@ -111,7 +111,7 @@ export function mapSeriesToColors(
   }
 
   // Priority 2: Custom colors array
-  const colorsToUse = customColors?.colors || defaultPalette;
+  const colorsToUse = customColors?.colors?.length ? customColors.colors : defaultPalette;
 
   // Assign colors to remaining series
   let colorIndex = 0;

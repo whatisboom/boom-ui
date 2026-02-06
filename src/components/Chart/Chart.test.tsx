@@ -29,16 +29,18 @@ describe('Chart', () => {
       expect(screen.getByRole('img', { name: /bar chart/i })).toBeInTheDocument();
     });
 
-    it('should generate title from data', () => {
+    it('should generate description from data', () => {
       renderChart(<Chart type="line" data={mockData} ariaLabel="Chart" />);
       const chart = screen.getByRole('img');
-      expect(chart).toHaveAttribute(
-        'title',
+      expect(chart).toHaveAttribute('aria-describedby');
+      const descriptionId = chart.getAttribute('aria-describedby')!;
+      const descEl = document.getElementById(descriptionId);
+      expect(descEl).toHaveTextContent(
         'line chart with 2 data series and 5 data points'
       );
     });
 
-    it('should use custom title when provided', () => {
+    it('should use custom description when provided', () => {
       renderChart(
         <Chart
           type="line"
@@ -48,7 +50,9 @@ describe('Chart', () => {
         />
       );
       const chart = screen.getByRole('img');
-      expect(chart).toHaveAttribute('title', 'Custom description');
+      const descriptionId = chart.getAttribute('aria-describedby')!;
+      const descEl = document.getElementById(descriptionId);
+      expect(descEl).toHaveTextContent('Custom description');
     });
   });
 

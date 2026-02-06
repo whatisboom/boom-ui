@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from 'react';
+import { forwardRef, useId, useMemo } from 'react';
 import { useTheme } from '@/components/ThemeProvider';
 import {
   ResponsiveContainer,
@@ -48,6 +48,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
     },
     ref
   ) => {
+    const descriptionId = useId();
     const { colors: themeColors } = useTheme();
 
     // Generate color palette from theme
@@ -260,10 +261,13 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
         } = pieConfig;
 
         // For pie charts, transform data - each data point becomes a slice
-        const pieData = data.map((item) => ({
-          name: item.name,
-          value: item[dataKeys[0]] as number, // Use first data key as value
-        }));
+        const valueKey = dataKeys[0];
+        const pieData = valueKey
+          ? data.map((item) => ({
+              name: item.name,
+              value: Number(item[valueKey] ?? 0),
+            }))
+          : [];
 
         return (
           <PieChart>
@@ -335,9 +339,12 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
         className={cn(styles.chartContainer, className)}
         role="img"
         aria-label={ariaLabel || `${type} chart`}
-        title={description}
+        aria-describedby={descriptionId}
         {...props}
       >
+        <span id={descriptionId} hidden>
+          {description}
+        </span>
         <ResponsiveContainer width={width} height={height}>
           {renderChart()}
         </ResponsiveContainer>
