@@ -136,13 +136,13 @@ export function generateChartPalette(themeColors: ThemeColors): string[] {
  * Extracts data series keys from chart data
  * (Excludes 'name' key which is typically the X-axis)
  */
-export function extractDataKeys(data: ChartDataPoint[]): string[] {
+export function extractDataKeys(data: ChartDataPoint[], xAxisKey: string = 'name'): string[] {
   if (data.length === 0) {
     return [];
   }
 
   const firstItem = data[0];
-  return Object.keys(firstItem).filter(key => key !== 'name');
+  return Object.keys(firstItem).filter(key => key !== xAxisKey);
 }
 
 /**

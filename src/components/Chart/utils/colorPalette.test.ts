@@ -130,6 +130,22 @@ describe('colorPalette', () => {
       const keys = extractDataKeys(data);
       expect(keys).toEqual(['value']);
     });
+
+    it('should exclude custom xAxisKey instead of name', () => {
+      const data = [
+        { name: 'Jan', month: 'January', sales: 100, revenue: 200 },
+      ];
+      const keys = extractDataKeys(data, 'month');
+      expect(keys).toEqual(['name', 'sales', 'revenue']);
+    });
+
+    it('should default to excluding name when xAxisKey not provided', () => {
+      const data = [
+        { name: 'Jan', sales: 100 },
+      ];
+      const keys = extractDataKeys(data);
+      expect(keys).toEqual(['sales']);
+    });
   });
 
   describe('mapSeriesToColors', () => {

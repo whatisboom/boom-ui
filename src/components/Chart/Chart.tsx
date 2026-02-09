@@ -1,5 +1,6 @@
 import { forwardRef, useId, useMemo } from 'react';
 import { useTheme } from '@/components/ThemeProvider';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import {
   ResponsiveContainer,
   LineChart,
@@ -36,9 +37,9 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
       height = 300,
       colors,
       axis = {},
-      legend = { show: true, position: 'bottom' },
-      tooltip = { show: true },
-      grid = { show: true, horizontal: true, vertical: false },
+      legend: legendProp,
+      tooltip: tooltipProp,
+      grid: gridProp,
       pieConfig = {},
       className,
       ariaLabel,
@@ -51,6 +52,15 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
     const descriptionId = useId();
     const { colors: themeColors } = useTheme();
 
+    // Merge partial config with defaults
+    const legend = { show: true, position: 'bottom' as const, ...legendProp };
+    const tooltip = { show: true, ...tooltipProp };
+    const grid = { show: true, horizontal: true, vertical: false, ...gridProp };
+
+    // Respect prefers-reduced-motion
+    const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+    const shouldAnimate = !disableAnimation && !prefersReducedMotion;
+
     // Generate color palette from theme
     const defaultPalette = useMemo(
       () => generateChartPalette(themeColors),
@@ -58,7 +68,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
     );
 
     // Extract data series keys
-    const dataKeys = useMemo(() => extractDataKeys(data), [data]);
+    const dataKeys = useMemo(() => extractDataKeys(data, axis.xAxisKey), [data, axis.xAxisKey]);
 
     // Map series to colors
     const seriesColors = useMemo(
@@ -95,7 +105,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
 
     // Map legend position to Recharts props
     const legendProps = (() => {
-      const pos = legend.position || 'bottom';
+      const pos = legend.position;
       if (pos === 'left' || pos === 'right') {
         return { verticalAlign: 'middle' as const, align: pos };
       }
@@ -148,7 +158,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                 stroke={seriesColors[key]}
                 strokeWidth={2}
                 dot={{ fill: seriesColors[key] }}
-                isAnimationActive={!disableAnimation}
+                isAnimationActive={shouldAnimate}
               />
             ))}
           </LineChart>
@@ -195,7 +205,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                 key={key}
                 dataKey={key}
                 fill={seriesColors[key]}
-                isAnimationActive={!disableAnimation}
+                isAnimationActive={shouldAnimate}
               />
             ))}
           </BarChart>
@@ -245,7 +255,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                 stroke={seriesColors[key]}
                 fill={seriesColors[key]}
                 fillOpacity={0.6}
-                isAnimationActive={!disableAnimation}
+                isAnimationActive={shouldAnimate}
               />
             ))}
           </AreaChart>
@@ -269,6 +279,8 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
             }))
           : [];
 
+        const pieColors = colors?.colors?.length ? colors.colors : defaultPalette;
+
         return (
           <PieChart>
             <Pie
@@ -280,10 +292,13 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
               fill="#8884d8"
               dataKey="value"
               label={showLabels}
-              isAnimationActive={!disableAnimation}
+              isAnimationActive={shouldAnimate}
             >
-              {pieData.map((_entry, index) => (
-                <Cell key={`cell-${index}`} fill={defaultPalette[index % defaultPalette.length]} />
+              {pieData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={colors?.seriesColors?.[String(entry.name)] || pieColors[index % pieColors.length]}
+                />
               ))}
             </Pie>
             {tooltip.show && (
@@ -326,7 +341,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
                 stroke={seriesColors[key]}
                 fill={seriesColors[key]}
                 fillOpacity={0.6}
-                isAnimationActive={!disableAnimation}
+                isAnimationActive={shouldAnimate}
               />
             ))}
           </RadarChart>
