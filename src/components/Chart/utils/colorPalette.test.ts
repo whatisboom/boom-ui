@@ -95,6 +95,19 @@ describe('colorPalette', () => {
       expect(palette).toHaveLength(8);
       expect(palette[0]).toBe('hsl(210 47.7% 30.8%)');
     });
+
+    it('should handle RGB values from getComputedStyle', () => {
+      const rgbThemeColors: ThemeColors = {
+        ...mockThemeColors,
+        accent: 'rgb(50, 100, 200)',
+      };
+      const palette = generateChartPalette(rgbThemeColors);
+      expect(palette).toHaveLength(8);
+      // First color should be the original accent (RGB string)
+      expect(palette[0]).toBe('rgb(50, 100, 200)');
+      // Hue-rotated colors should be generated as HSL from the parsed RGB
+      expect(palette[2]).toMatch(/^hsl\(\d+ \d+% \d+%\)$/);
+    });
   });
 
   describe('extractDataKeys', () => {

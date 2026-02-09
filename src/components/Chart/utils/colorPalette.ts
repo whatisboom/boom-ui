@@ -18,6 +18,61 @@ function parseHSL(hslString: string): { h: number; s: number; l: number } | null
 }
 
 /**
+ * Converts RGB values (0-255) to HSL values
+ */
+function rgbToHSL(r: number, g: number, b: number): { h: number; s: number; l: number } {
+  const rNorm = r / 255;
+  const gNorm = g / 255;
+  const bNorm = b / 255;
+
+  const max = Math.max(rNorm, gNorm, bNorm);
+  const min = Math.min(rNorm, gNorm, bNorm);
+  const l = (max + min) / 2;
+  const delta = max - min;
+
+  if (delta === 0) {
+    return { h: 0, s: 0, l: Math.round(l * 100) };
+  }
+
+  const s = l > 0.5 ? delta / (2 - max - min) : delta / (max + min);
+
+  let h: number;
+  if (max === rNorm) {
+    h = ((gNorm - bNorm) / delta + (gNorm < bNorm ? 6 : 0)) / 6;
+  } else if (max === gNorm) {
+    h = ((bNorm - rNorm) / delta + 2) / 6;
+  } else {
+    h = ((rNorm - gNorm) / delta + 4) / 6;
+  }
+
+  return {
+    h: Math.round(h * 360),
+    s: Math.round(s * 100),
+    l: Math.round(l * 100),
+  };
+}
+
+/**
+ * Parses an RGB color string to HSL values
+ * Example: "rgb(50, 100, 200)" -> { h: 220, s: 60, l: 49 }
+ */
+function parseRGB(rgbString: string): { h: number; s: number; l: number } | null {
+  const match = rgbString.match(/rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/);
+  if (!match) {
+    return null;
+  }
+  return rgbToHSL(parseInt(match[1]), parseInt(match[2]), parseInt(match[3]));
+}
+
+/**
+ * Parses a color string (HSL or RGB) to HSL values.
+ * Handles both raw HSL strings and computed RGB values from getComputedStyle.
+ */
+function parseColor(colorString: string): { h: number; s: number; l: number } | null {
+  return parseHSL(colorString) ?? parseRGB(colorString);
+}
+
+/**
  * Generates a palette of distinct colors for charts
  *
  * Strategy:
@@ -32,8 +87,8 @@ function parseHSL(hslString: string): { h: number; s: number; l: number } | null
 export function generateChartPalette(themeColors: ThemeColors): string[] {
   const palette: string[] = [];
 
-  // Parse accent color as base
-  const accentHSL = parseHSL(themeColors.accent);
+  // Parse accent color as base (handles both HSL and RGB from computed styles)
+  const accentHSL = parseColor(themeColors.accent);
   if (!accentHSL) {
     // Fallback if parsing fails
     return [
