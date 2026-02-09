@@ -93,7 +93,8 @@
   },
   "dependencies": {
     "@storybook-community/storybook-dark-mode": "^7.1.0",
-    "framer-motion": "^12.23.26"
+    "framer-motion": "^12.23.26",
+    "recharts": "^3.7.0"
   },
   "keywords": [
     "react",
