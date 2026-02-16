@@ -19,6 +19,7 @@ export { Textarea } from './components/Textarea';
 export { Select } from './components/Select';
 export { Alert } from './components/Alert';
 export { Progress } from './components/Progress';
+export { Chart } from './components/Chart';
 export { Toast, ToastProvider, useToast } from './components/Toast';
 export { Badge } from './components/Badge';
 export { Breadcrumbs, BreadcrumbItem } from './components/Breadcrumbs';
@@ -103,6 +104,18 @@ export type { TextareaProps } from './components/Textarea';
 export type { SelectProps, SelectOption } from './components/Select';
 export type { AlertProps, AlertVariant } from './components/Alert';
 export type { ProgressProps, ProgressVariant } from './components/Progress';
+export type {
+  ChartProps,
+  ChartType,
+  ChartDataPoint,
+  ChartColors,
+  ChartAxisConfig,
+  ChartLegendConfig,
+  ChartTooltipConfig,
+  ChartGridConfig,
+  PieChartConfig,
+  BaseChartProps,
+} from './components/Chart';
 export type {
   ToastType,
   ToastProps,
