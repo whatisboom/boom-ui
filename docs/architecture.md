@@ -9,7 +9,7 @@ All design tokens live in `src/styles/tokens/`:
 | `colors.css` | Base color definitions |
 | `palettes.css` | Color palettes and schemes |
 | `typography.css` | Font families, sizes, weights |
-| `spacing.css` | Spacing scale (4px increments) |
+| `spacing.css` | Spacing scale (4px increments) and motion tokens (durations, easing curves, stagger) |
 | `shadows.css` | Box shadow definitions |
 | `theme.css` | CSS custom properties for theming |
 
