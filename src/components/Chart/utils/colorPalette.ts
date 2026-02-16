@@ -74,13 +74,29 @@ function resolveColor(colorString: string): { h: number; s: number; l: number } 
     return parseHSL(colorString) ?? parseRGB(colorString);
   }
 
-  const el = document.createElement('div');
-  el.style.color = colorString;
-  document.body.appendChild(el);
-  const computed = getComputedStyle(el).color;
-  document.body.removeChild(el);
+  let el: HTMLDivElement | null = null;
+  try {
+    el = document.createElement('div');
+    el.style.color = colorString;
+    document.body.appendChild(el);
 
-  return parseRGB(computed);
+    const computed = getComputedStyle(el).color;
+
+    if (computed && /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/i.test(computed)) {
+      const parsed = parseRGB(computed);
+      if (parsed) {
+        return parsed;
+      }
+    }
+  } catch {
+    // Swallow DOM-related errors and fall back to direct parsing below.
+  } finally {
+    if (el?.parentNode) {
+      el.parentNode.removeChild(el);
+    }
+  }
+
+  return parseHSL(colorString) ?? parseRGB(colorString);
 }
 
 /**
