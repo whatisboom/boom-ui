@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- compound component pattern using Object.assign */
 import { useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Drawer } from '@/components/primitives/Drawer';
