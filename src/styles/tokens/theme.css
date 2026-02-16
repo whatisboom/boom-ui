@@ -158,9 +158,9 @@
      ========================================================================== */
 
   /* Shadow color tokens - accent-tinted for visual identity */
-  --boom-theme-shadow-color: hsl(var(--boom-hue-accent) 15% 8% / 0.35);
-  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-accent) 10% 8% / 0.12);
-  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-accent) 15% 8% / 0.5);
+  --boom-theme-shadow-color: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.16%) calc(var(--boom-light-accent) * 0.12%) / 0.35);
+  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.11%) calc(var(--boom-light-accent) * 0.12%) / 0.12);
+  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.16%) calc(var(--boom-light-accent) * 0.12%) / 0.5);
 
   /* ==========================================================================
      OVERLAY COLORS
@@ -245,9 +245,9 @@
   --boom-theme-accent-subtle: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.55%) calc(var(--boom-light-accent) * 0.35%) / 0.1);
 
   /* Shadows - light theme with accent tint */
-  --boom-theme-shadow-color: hsl(var(--boom-hue-accent) 12% 15% / 0.18);
-  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-accent) 8% 15% / 0.08);
-  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-accent) 12% 15% / 0.35);
+  --boom-theme-shadow-color: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.13%) calc(var(--boom-light-accent) * 0.22%) / 0.18);
+  --boom-theme-shadow-color-subtle: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.09%) calc(var(--boom-light-accent) * 0.22%) / 0.08);
+  --boom-theme-shadow-color-strong: hsl(var(--boom-hue-accent) calc(var(--boom-sat-accent) * 0.13%) calc(var(--boom-light-accent) * 0.22%) / 0.35);
 
   /* Overlay */
   --boom-theme-overlay-backdrop: hsl(var(--boom-hue-base) calc(var(--boom-sat-base) * 4.7%) calc(var(--boom-light-base) * 0.17%) / 0.6);
