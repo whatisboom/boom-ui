@@ -192,9 +192,11 @@ jobs:
           fi
 
           # Merge succeeded, now try to push
-          # Capture push output and exit code separately to avoid pipeline exit code masking
+          # Temporarily disable errexit so tee pipeline doesn't exit before PIPESTATUS is captured
+          set +e
           git push origin develop 2>&1 | tee push_output.log
           PUSH_EXIT_CODE=${PIPESTATUS[0]}
+          set -e
 
           if [ $PUSH_EXIT_CODE -eq 0 ]; then
             echo "merge_status=success" >> $GITHUB_OUTPUT
