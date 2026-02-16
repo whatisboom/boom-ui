@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- compound component pattern using Object.assign */
 import { forwardRef, useImperativeHandle, useMemo } from 'react';
 import type { DefaultValues } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
