@@ -109,10 +109,23 @@ ComponentName/
 
 ### Design Tokens Location
 - Colors: `src/styles/tokens/colors.css` & `palettes.css`
-- Typography: `src/styles/tokens/typography.css`
-- Spacing: `src/styles/tokens/spacing.css`
-- Shadows: `src/styles/tokens/shadows.css`
+- Typography: `src/styles/tokens/typography.css` (Sora font, display/label weight tokens)
+- Spacing & Motion: `src/styles/tokens/spacing.css` (timing curves, durations, stagger delay)
+- Shadows: `src/styles/tokens/shadows.css` (accent-tinted, vertical presence)
 - Theme variables: `src/styles/tokens/theme.css`
+
+### Motion Tokens
+Use explicit property transitions with motion tokens instead of `transition: all`:
+```css
+transition:
+  background-color var(--boom-duration-quick) var(--boom-ease-in-out),
+  border-color var(--boom-duration-quick) var(--boom-ease-in-out),
+  color var(--boom-duration-quick) var(--boom-ease-in-out),
+  box-shadow var(--boom-duration-base) var(--boom-ease-out);
+```
+- **Timing curves**: `--boom-ease-out` (entrances), `--boom-ease-in` (exits), `--boom-ease-in-out` (property changes)
+- **Durations**: `--boom-duration-quick` (150ms), `--boom-duration-base` (250ms), `--boom-duration-slow` (400ms)
+- **Never use** `transition: all` or hardcoded timing values (e.g., `0.2s ease`)
 
 ### Testing Requirements
 - **Coverage threshold**: 80% minimum (lines, functions, branches, statements)
@@ -208,11 +221,13 @@ ComponentName/
 See [SECURITY.md](./SECURITY.md) for complete policy.
 
 ### Style Implementation
-- Use CSS variables from tokens, never hardcode colors/spacing
+- Use CSS variables from tokens, never hardcode colors/spacing/timing
 - Follow BEM-like naming in CSS modules
 - Support theme switching via ThemeProvider context
 - Prefer CSS Grid/Flexbox with token-based spacing
 - Animation: Use Framer Motion `motion` components
+- Transitions: Use explicit property lists with motion tokens (see Motion Tokens above)
+- Font: Sora (loaded via `src/styles/fonts.css`)
 
 ### Layout and Spacing (CRITICAL)
 
