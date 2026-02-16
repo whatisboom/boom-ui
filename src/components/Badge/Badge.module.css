@@ -38,27 +38,27 @@
 /* Variant colors */
 .primary {
   background-color: var(--boom-theme-primary);
-  color: var(--boom-theme-primary-foreground);
+  color: var(--boom-theme-text-on-primary);
 }
 
 .success {
   background-color: var(--boom-theme-success-border);
-  color: white;
+  color: var(--boom-theme-text-on-primary);
 }
 
 .warning {
   background-color: var(--boom-theme-warning-border);
-  color: white;
+  color: var(--boom-theme-text-on-primary);
 }
 
 .error {
   background-color: var(--boom-theme-error-border);
-  color: white;
+  color: var(--boom-theme-text-on-primary);
 }
 
 .info {
   background-color: var(--boom-theme-info-border);
-  color: white;
+  color: var(--boom-theme-text-on-primary);
 }
 
 .neutral {
