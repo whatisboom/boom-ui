@@ -2,7 +2,9 @@
   display: block;
   background-color: var(--boom-theme-bg-elevated);
   border-radius: var(--boom-border-radius-lg);
-  transition: all var(--boom-transition-base);
+  transition:
+    box-shadow var(--boom-duration-base) var(--boom-ease-out),
+    border-color var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 /* Variants */
