@@ -1,0 +1,56 @@
+name: Auto-update PR branches
+
+on:
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update PR branches and enable auto-merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          BASE_BRANCH="${GITHUB_REF_NAME}"
+          echo "Updating PRs targeting ${BASE_BRANCH}..."
+
+          # Get open PRs targeting this branch
+          prs=$(gh pr list --base "$BASE_BRANCH" --state open --json number,headRefName,reviewDecision --jq '.[]')
+
+          if [ -z "$prs" ]; then
+            echo "No open PRs targeting ${BASE_BRANCH}"
+            exit 0
+          fi
+
+          gh pr list --base "$BASE_BRANCH" --state open --json number,headRefName,reviewDecision --jq '.[] | @base64' | while read -r pr; do
+            number=$(echo "$pr" | base64 -d | jq -r '.number')
+            branch=$(echo "$pr" | base64 -d | jq -r '.headRefName')
+            review=$(echo "$pr" | base64 -d | jq -r '.reviewDecision')
+
+            echo "--- PR #${number} (${branch}) ---"
+
+            # Update branch
+            if gh pr update-branch "$number" 2>&1; then
+              echo "Updated branch for PR #${number}"
+            else
+              echo "::warning::Could not update PR #${number} (${branch}) — may have conflicts"
+            fi
+
+            # Enable auto-merge if approved
+            if [ "$review" = "APPROVED" ]; then
+              if gh pr merge "$number" --auto --squash 2>&1; then
+                echo "Auto-merge enabled for PR #${number}"
+              else
+                echo "::warning::Could not enable auto-merge for PR #${number}"
+              fi
+            else
+              echo "PR #${number} not yet approved (review: ${review}), skipping auto-merge"
+            fi
+          done
