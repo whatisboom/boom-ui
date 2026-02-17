@@ -62,6 +62,6 @@
 }
 
 .neutral {
-  background-color: var(--boom-theme-border-default);
-  color: var(--boom-theme-text-primary);
+  background-color: var(--boom-palette-base-600);
+  color: var(--boom-theme-text-on-primary);
 }
