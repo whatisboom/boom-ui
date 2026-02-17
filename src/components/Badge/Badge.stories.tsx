@@ -28,14 +28,16 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
-  render: () => (
+  args: { size: 'md' },
+  argTypes: { variant: { control: false } },
+  render: (args) => (
     <Stack direction="row" spacing={2}>
-      <Badge variant="primary">Primary</Badge>
-      <Badge variant="success">Success</Badge>
-      <Badge variant="warning">Warning</Badge>
-      <Badge variant="error">Error</Badge>
-      <Badge variant="info">Info</Badge>
-      <Badge variant="neutral">Neutral</Badge>
+      <Badge variant="primary" size={args.size}>Primary</Badge>
+      <Badge variant="success" size={args.size}>Success</Badge>
+      <Badge variant="warning" size={args.size}>Warning</Badge>
+      <Badge variant="error" size={args.size}>Error</Badge>
+      <Badge variant="info" size={args.size}>Info</Badge>
+      <Badge variant="neutral" size={args.size}>Neutral</Badge>
     </Stack>
   ),
 };
@@ -44,6 +46,7 @@ export const Sizes: Story = {
   args: {
     variant: 'primary',
   },
+  argTypes: { size: { control: false } },
   render: (args) => (
     <Stack direction="row" spacing={3} style={{ alignItems: 'center' }}>
       <Badge size="sm" variant={args.variant}>Small</Badge>
@@ -54,29 +57,37 @@ export const Sizes: Story = {
 };
 
 export const NumericContent: Story = {
-  render: () => (
+  args: { size: 'md' },
+  argTypes: { variant: { control: false } },
+  render: (args) => (
     <Stack direction="row" spacing={2}>
-      <Badge>5</Badge>
-      <Badge>99</Badge>
-      <Badge variant="error">999</Badge>
-      <Badge variant="success">1234</Badge>
+      <Badge size={args.size}>5</Badge>
+      <Badge size={args.size}>99</Badge>
+      <Badge variant="error" size={args.size}>999</Badge>
+      <Badge variant="success" size={args.size}>1234</Badge>
     </Stack>
   ),
 };
 
 export const StringContent: Story = {
-  render: () => (
+  args: { size: 'md' },
+  argTypes: { variant: { control: false } },
+  render: (args) => (
     <Stack direction="row" spacing={2}>
-      <Badge variant="info">New</Badge>
-      <Badge variant="warning">Beta</Badge>
-      <Badge variant="error">Hot</Badge>
-      <Badge variant="success">Active</Badge>
-      <Badge variant="neutral">Draft</Badge>
+      <Badge variant="info" size={args.size}>New</Badge>
+      <Badge variant="warning" size={args.size}>Beta</Badge>
+      <Badge variant="error" size={args.size}>Hot</Badge>
+      <Badge variant="success" size={args.size}>Active</Badge>
+      <Badge variant="neutral" size={args.size}>Draft</Badge>
     </Stack>
   ),
 };
 
 export const InlineUsage: Story = {
+  argTypes: {
+    variant: { control: false },
+    size: { control: false },
+  },
   render: () => (
     <Stack direction="column" spacing={3}>
       <h2 style={{ margin: 0 }}>
@@ -100,6 +111,10 @@ export const InlineUsage: Story = {
 };
 
 export const AllSizesAllVariants: Story = {
+  argTypes: {
+    size: { control: false },
+    variant: { control: false },
+  },
   render: () => (
     <Stack direction="column" spacing={3}>
       <Stack direction="row" spacing={2}>
