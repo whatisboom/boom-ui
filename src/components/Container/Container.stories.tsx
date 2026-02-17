@@ -244,6 +244,7 @@ export const NestedContainers: Story = {
 };
 
 export const AllSizes: Story = {
+  argTypes: { size: { control: false } },
   render: () => (
     <Stack spacing={6}>
       <Container size="sm">
