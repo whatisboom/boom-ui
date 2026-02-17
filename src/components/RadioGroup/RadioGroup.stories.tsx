@@ -35,7 +35,7 @@ const planOptions = [
 ];
 
 export const Default: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('medium');
     return (
       <RadioGroup
@@ -43,6 +43,8 @@ export const Default: Story = {
         onChange={setValue}
         options={sizeOptions}
         label="Choose a size"
+        orientation={args.orientation}
+        size={args.size}
       />
     );
   },
@@ -64,7 +66,8 @@ export const Horizontal: Story = {
 };
 
 export const Sizes: Story = {
-  render: () => {
+  argTypes: { size: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState('medium');
     return (
       <Stack direction="column" spacing={4}>
@@ -74,6 +77,7 @@ export const Sizes: Story = {
           options={sizeOptions}
           label="Small size"
           size="sm"
+          orientation={args.orientation}
         />
         <RadioGroup
           value={value}
@@ -81,6 +85,7 @@ export const Sizes: Story = {
           options={sizeOptions}
           label="Medium size (default)"
           size="md"
+          orientation={args.orientation}
         />
         <RadioGroup
           value={value}
@@ -88,6 +93,7 @@ export const Sizes: Story = {
           options={sizeOptions}
           label="Large size"
           size="lg"
+          orientation={args.orientation}
         />
       </Stack>
     );
@@ -95,7 +101,7 @@ export const Sizes: Story = {
 };
 
 export const WithHelperText: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('pro');
     return (
       <RadioGroup
@@ -104,13 +110,15 @@ export const WithHelperText: Story = {
         options={planOptions}
         label="Select your plan"
         helperText="You can change your plan at any time"
+        orientation={args.orientation}
+        size={args.size}
       />
     );
   },
 };
 
 export const WithError: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
     return (
       <RadioGroup
@@ -120,6 +128,8 @@ export const WithError: Story = {
         label="Select your plan"
         error={!value ? "Please select a plan to continue" : undefined}
         required
+        orientation={args.orientation}
+        size={args.size}
       />
     );
   },
@@ -139,7 +149,7 @@ export const Disabled: Story = {
 };
 
 export const WithDisabledOption: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('free');
     const options = [
       { value: 'free', label: 'Free Plan' },
@@ -152,13 +162,15 @@ export const WithDisabledOption: Story = {
         onChange={setValue}
         options={options}
         label="Select your plan"
+        orientation={args.orientation}
+        size={args.size}
       />
     );
   },
 };
 
 export const Required: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
     return (
       <RadioGroup
@@ -167,6 +179,8 @@ export const Required: Story = {
         options={planOptions}
         label="Select your plan"
         required
+        orientation={args.orientation}
+        size={args.size}
       />
     );
   },
