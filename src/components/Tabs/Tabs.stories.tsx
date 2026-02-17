@@ -21,11 +21,11 @@ export default meta;
 type Story = StoryObj<typeof Tabs>;
 
 export const Default: Story = {
-  render: () => {
+  render: (args) => {
     const [activeTab, setActiveTab] = useState('tab1');
 
     return (
-      <Tabs value={activeTab} onChange={setActiveTab}>
+      <Tabs value={activeTab} onChange={setActiveTab} orientation={args.orientation}>
         <TabList>
           <Tab value="tab1">Tab 1</Tab>
           <Tab value="tab2">Tab 2</Tab>
@@ -77,11 +77,11 @@ export const Vertical: Story = {
 };
 
 export const WithDisabledTab: Story = {
-  render: () => {
+  render: (args) => {
     const [activeTab, setActiveTab] = useState('home');
 
     return (
-      <Tabs value={activeTab} onChange={setActiveTab}>
+      <Tabs value={activeTab} onChange={setActiveTab} orientation={args.orientation}>
         <TabList>
           <Tab value="home">Home</Tab>
           <Tab value="about">About</Tab>
@@ -112,11 +112,11 @@ export const WithDisabledTab: Story = {
 };
 
 export const ManyTabs: Story = {
-  render: () => {
+  render: (args) => {
     const [activeTab, setActiveTab] = useState('tab1');
 
     return (
-      <Tabs value={activeTab} onChange={setActiveTab}>
+      <Tabs value={activeTab} onChange={setActiveTab} orientation={args.orientation}>
         <TabList>
           {Array.from({ length: 8 }, (_, i) => (
             <Tab key={i} value={`tab${i + 1}`}>
@@ -136,7 +136,7 @@ export const ManyTabs: Story = {
 };
 
 export const KeyboardNavigation: Story = {
-  render: () => {
+  render: (args) => {
     const [activeTab, setActiveTab] = useState('tab1');
 
     return (
@@ -150,7 +150,7 @@ export const KeyboardNavigation: Story = {
           <br />
           <strong>End:</strong> Go to last tab
         </p>
-        <Tabs value={activeTab} onChange={setActiveTab}>
+        <Tabs value={activeTab} onChange={setActiveTab} orientation={args.orientation}>
           <TabList>
             <Tab value="tab1">Dashboard</Tab>
             <Tab value="tab2">Analytics</Tab>
