@@ -210,6 +210,7 @@ export const UserProfile: Story = {
 };
 
 export const AllVariants: Story = {
+  argTypes: { variant: { control: false } },
   render: () => (
     <Stack spacing={4}>
       <Card variant="flat">
