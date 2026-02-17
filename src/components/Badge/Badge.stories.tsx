@@ -41,11 +41,14 @@ export const Variants: Story = {
 };
 
 export const Sizes: Story = {
-  render: () => (
+  args: {
+    variant: 'primary',
+  },
+  render: (args) => (
     <Stack direction="row" spacing={3} style={{ alignItems: 'center' }}>
-      <Badge size="sm">Small</Badge>
-      <Badge size="md">Medium</Badge>
-      <Badge size="lg">Large</Badge>
+      <Badge size="sm" variant={args.variant}>Small</Badge>
+      <Badge size="md" variant={args.variant}>Medium</Badge>
+      <Badge size="lg" variant={args.variant}>Large</Badge>
     </Stack>
   ),
 };
