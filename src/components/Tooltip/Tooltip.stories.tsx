@@ -20,9 +20,10 @@ export default meta;
 type Story = StoryObj<typeof Tooltip>;
 
 export const Default: Story = {
-  render: () => (
+  args: { content: 'This is a tooltip', placement: 'top' },
+  render: (args) => (
     <div style={{ padding: '4rem', display: 'flex', justifyContent: 'center' }}>
-      <Tooltip content="This is a tooltip">
+      <Tooltip content={args.content} placement={args.placement}>
         <Button>Hover me</Button>
       </Tooltip>
     </div>
@@ -30,6 +31,7 @@ export const Default: Story = {
 };
 
 export const Placements: Story = {
+  argTypes: { placement: { control: false } },
   render: () => (
     <div style={{ padding: '8rem', display: 'flex', justifyContent: 'center', gap: '2rem' }}>
       <Tooltip content="Top tooltip" placement="top">
@@ -49,15 +51,16 @@ export const Placements: Story = {
 };
 
 export const WithDelay: Story = {
-  render: () => (
+  args: { placement: 'top' },
+  render: (args) => (
     <div style={{ padding: '4rem', display: 'flex', justifyContent: 'center', gap: '2rem' }}>
-      <Tooltip content="No delay">
+      <Tooltip content="No delay" placement={args.placement}>
         <Button>No Delay</Button>
       </Tooltip>
-      <Tooltip content="500ms delay" delay={500}>
+      <Tooltip content="500ms delay" delay={500} placement={args.placement}>
         <Button>500ms Delay</Button>
       </Tooltip>
-      <Tooltip content="1 second delay" delay={1000}>
+      <Tooltip content="1 second delay" delay={1000} placement={args.placement}>
         <Button>1s Delay</Button>
       </Tooltip>
     </div>
@@ -65,9 +68,14 @@ export const WithDelay: Story = {
 };
 
 export const LongContent: Story = {
-  render: () => (
+  args: {
+    content:
+      'This is a longer tooltip with more content that demonstrates how the tooltip wraps text when it exceeds the maximum width.',
+    placement: 'top',
+  },
+  render: (args) => (
     <div style={{ padding: '4rem', display: 'flex', justifyContent: 'center' }}>
-      <Tooltip content="This is a longer tooltip with more content that demonstrates how the tooltip wraps text when it exceeds the maximum width.">
+      <Tooltip content={args.content} placement={args.placement}>
         <Button>Hover for long content</Button>
       </Tooltip>
     </div>
@@ -179,6 +187,7 @@ export const InteractiveExample: Story = {
 };
 
 export const AllPlacements: Story = {
+  argTypes: { placement: { control: false } },
   render: () => (
     <div
       style={{
