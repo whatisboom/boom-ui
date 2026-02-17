@@ -222,7 +222,11 @@ export const Gallery: Story = {
 };
 
 export const AllObjectFitOptions: Story = {
-  args: {} as Parameters<typeof Image>[0],
+  args: {
+    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    alt: 'Object-fit demonstration',
+  },
+  argTypes: { objectFit: { control: false } },
   render: () => (
     <Stack spacing={4}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem' }}>
