@@ -28,12 +28,25 @@ export default meta;
 type Story = StoryObj<typeof Modal>;
 
 export const Default: Story = {
-  render: () => {
+  args: {
+    size: 'md',
+    closeOnClickOutside: true,
+    closeOnEscape: true,
+    lockScroll: true,
+  },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
-        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          size={args.size}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
+        >
           <p>This is a basic modal with default settings.</p>
         </Modal>
       </>
@@ -42,7 +55,13 @@ export const Default: Story = {
 };
 
 export const WithTitle: Story = {
-  render: () => {
+  args: {
+    size: 'md',
+    closeOnClickOutside: true,
+    closeOnEscape: true,
+    lockScroll: true,
+  },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
@@ -51,6 +70,10 @@ export const WithTitle: Story = {
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           title="Modal Title"
+          size={args.size}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
         >
           <p>This modal has a title.</p>
         </Modal>
@@ -60,7 +83,13 @@ export const WithTitle: Story = {
 };
 
 export const WithTitleAndDescription: Story = {
-  render: () => {
+  args: {
+    size: 'md',
+    closeOnClickOutside: true,
+    closeOnEscape: true,
+    lockScroll: true,
+  },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
@@ -70,6 +99,10 @@ export const WithTitleAndDescription: Story = {
           onClose={() => setIsOpen(false)}
           title="Confirm Action"
           description="Are you sure you want to proceed with this action?"
+          size={args.size}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
         >
           <p>This modal has both a title and description.</p>
           <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
@@ -85,7 +118,13 @@ export const WithTitleAndDescription: Story = {
 };
 
 export const SmallSize: Story = {
-  render: () => {
+  args: {
+    closeOnClickOutside: true,
+    closeOnEscape: true,
+    lockScroll: true,
+  },
+  argTypes: { size: { control: false } },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
@@ -95,6 +134,9 @@ export const SmallSize: Story = {
           onClose={() => setIsOpen(false)}
           size="sm"
           title="Small Modal"
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
         >
           <p>This is a small modal.</p>
         </Modal>
@@ -104,7 +146,13 @@ export const SmallSize: Story = {
 };
 
 export const LargeSize: Story = {
-  render: () => {
+  args: {
+    closeOnClickOutside: true,
+    closeOnEscape: true,
+    lockScroll: true,
+  },
+  argTypes: { size: { control: false } },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
@@ -114,6 +162,9 @@ export const LargeSize: Story = {
           onClose={() => setIsOpen(false)}
           size="lg"
           title="Large Modal"
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
         >
           <p>This is a large modal with more content space.</p>
           <p>
@@ -127,7 +178,13 @@ export const LargeSize: Story = {
 };
 
 export const FullSize: Story = {
-  render: () => {
+  args: {
+    closeOnClickOutside: true,
+    closeOnEscape: true,
+    lockScroll: true,
+  },
+  argTypes: { size: { control: false } },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
@@ -137,6 +194,9 @@ export const FullSize: Story = {
           onClose={() => setIsOpen(false)}
           size="full"
           title="Full Screen Modal"
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
         >
           <p>This modal takes up the full screen.</p>
           <p>
@@ -151,7 +211,15 @@ export const FullSize: Story = {
 };
 
 export const NonDismissible: Story = {
-  render: () => {
+  args: {
+    size: 'md',
+    lockScroll: true,
+  },
+  argTypes: {
+    closeOnClickOutside: { control: false },
+    closeOnEscape: { control: false },
+  },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
@@ -163,6 +231,8 @@ export const NonDismissible: Story = {
           closeOnEscape={false}
           title="Non-Dismissible Modal"
           description="This modal can only be closed by clicking the close button or Cancel."
+          size={args.size}
+          lockScroll={args.lockScroll}
         >
           <p>You must click a button to close this modal.</p>
           <div style={{ marginTop: '1rem' }}>
@@ -175,7 +245,13 @@ export const NonDismissible: Story = {
 };
 
 export const WithForm: Story = {
-  render: () => {
+  args: {
+    size: 'md',
+    closeOnClickOutside: true,
+    closeOnEscape: true,
+    lockScroll: true,
+  },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
@@ -185,6 +261,10 @@ export const WithForm: Story = {
           onClose={() => setIsOpen(false)}
           title="Contact Form"
           description="Please fill out the form below"
+          size={args.size}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
         >
           <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>

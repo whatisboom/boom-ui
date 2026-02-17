@@ -94,27 +94,28 @@ export const DottedVariant: Story = {
 };
 
 export const AllVariants: Story = {
-  render: () => (
+  argTypes: { variant: { control: false } },
+  render: (args) => (
     <Stack spacing={6}>
       <div>
         <Typography variant="caption" style={{ marginBottom: '8px', display: 'block' }}>
           Solid
         </Typography>
-        <Divider variant="solid" />
+        <Divider variant="solid" labelPosition={args.labelPosition} />
       </div>
 
       <div>
         <Typography variant="caption" style={{ marginBottom: '8px', display: 'block' }}>
           Dashed
         </Typography>
-        <Divider variant="dashed" />
+        <Divider variant="dashed" labelPosition={args.labelPosition} />
       </div>
 
       <div>
         <Typography variant="caption" style={{ marginBottom: '8px', display: 'block' }}>
           Dotted
         </Typography>
-        <Divider variant="dotted" />
+        <Divider variant="dotted" labelPosition={args.labelPosition} />
       </div>
     </Stack>
   ),
@@ -141,27 +142,28 @@ export const WithIconLabel: Story = {
 };
 
 export const LabelPositions: Story = {
-  render: () => (
+  argTypes: { labelPosition: { control: false } },
+  render: (args) => (
     <Stack spacing={6}>
       <div>
         <Typography variant="caption" style={{ marginBottom: '8px', display: 'block' }}>
           Left-aligned label
         </Typography>
-        <Divider label="Left" labelPosition="left" />
+        <Divider label="Left" labelPosition="left" variant={args.variant} />
       </div>
 
       <div>
         <Typography variant="caption" style={{ marginBottom: '8px', display: 'block' }}>
           Center-aligned label (default)
         </Typography>
-        <Divider label="Center" labelPosition="center" />
+        <Divider label="Center" labelPosition="center" variant={args.variant} />
       </div>
 
       <div>
         <Typography variant="caption" style={{ marginBottom: '8px', display: 'block' }}>
           Right-aligned label
         </Typography>
-        <Divider label="Right" labelPosition="right" />
+        <Divider label="Right" labelPosition="right" variant={args.variant} />
       </div>
     </Stack>
   ),

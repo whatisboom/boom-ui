@@ -21,8 +21,21 @@
   --boom-border-radius-xl: 0.75rem;
   --boom-border-radius-full: 9999px;
 
-  /* Transitions */
-  --boom-transition-fast: 150ms ease;
-  --boom-transition-base: 200ms ease;
-  --boom-transition-slow: 300ms ease;
+  /* Motion — timing curves */
+  --boom-ease-out: cubic-bezier(0.16, 1, 0.3, 1);       /* entrances */
+  --boom-ease-in: cubic-bezier(0.7, 0, 0.84, 0);         /* exits */
+  --boom-ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);    /* property changes */
+
+  /* Motion — durations */
+  --boom-duration-quick: 150ms;
+  --boom-duration-base: 250ms;
+  --boom-duration-slow: 400ms;
+
+  /* Motion — stagger */
+  --boom-stagger-delay: 50ms;
+
+  /* Transition aliases (deprecated — use duration + ease tokens) */
+  --boom-transition-fast: var(--boom-duration-quick);
+  --boom-transition-base: var(--boom-duration-base);
+  --boom-transition-slow: var(--boom-duration-slow);
 }

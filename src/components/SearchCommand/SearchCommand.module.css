@@ -61,7 +61,7 @@
   align-items: center;
   gap: 12px;
   text-align: left;
-  transition: background-color 0.15s;
+  transition: background-color var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 .resultItem:hover,

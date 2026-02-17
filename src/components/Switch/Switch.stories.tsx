@@ -23,28 +23,45 @@ export default meta;
 type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {
-  render: () => {
+  render: (args) => {
     const [checked, setChecked] = useState(false);
-    return <Switch checked={checked} onChange={setChecked} label="Enable notifications" />;
+    return (
+      <Switch
+        checked={checked}
+        onChange={setChecked}
+        label="Enable notifications"
+        size={args.size}
+        labelPosition={args.labelPosition}
+      />
+    );
   },
 };
 
 export const Checked: Story = {
-  render: () => {
+  render: (args) => {
     const [checked, setChecked] = useState(true);
-    return <Switch checked={checked} onChange={setChecked} label="Notifications enabled" />;
+    return (
+      <Switch
+        checked={checked}
+        onChange={setChecked}
+        label="Notifications enabled"
+        size={args.size}
+        labelPosition={args.labelPosition}
+      />
+    );
   },
 };
 
 export const WithoutLabel: Story = {
-  render: () => {
+  render: (args) => {
     const [checked, setChecked] = useState(false);
-    return <Switch checked={checked} onChange={setChecked} />;
+    return <Switch checked={checked} onChange={setChecked} size={args.size} />;
   },
 };
 
 export const Sizes: Story = {
-  render: () => {
+  argTypes: { size: { control: false } },
+  render: (args) => {
     const [checked, setChecked] = useState(true);
     return (
       <Stack direction="column" spacing={3}>
@@ -53,18 +70,21 @@ export const Sizes: Story = {
           onChange={setChecked}
           label="Small switch"
           size="sm"
+          labelPosition={args.labelPosition}
         />
         <Switch
           checked={checked}
           onChange={setChecked}
           label="Medium switch (default)"
           size="md"
+          labelPosition={args.labelPosition}
         />
         <Switch
           checked={checked}
           onChange={setChecked}
           label="Large switch"
           size="lg"
+          labelPosition={args.labelPosition}
         />
       </Stack>
     );
@@ -72,7 +92,8 @@ export const Sizes: Story = {
 };
 
 export const LabelPositions: Story = {
-  render: () => {
+  argTypes: { labelPosition: { control: false } },
+  render: (args) => {
     const [checked, setChecked] = useState(true);
     return (
       <Stack direction="column" spacing={3}>
@@ -81,12 +102,14 @@ export const LabelPositions: Story = {
           onChange={setChecked}
           label="Label on right (default)"
           labelPosition="right"
+          size={args.size}
         />
         <Switch
           checked={checked}
           onChange={setChecked}
           label="Label on left"
           labelPosition="left"
+          size={args.size}
         />
       </Stack>
     );
@@ -113,7 +136,7 @@ export const Disabled: Story = {
 };
 
 export const Required: Story = {
-  render: () => {
+  render: (args) => {
     const [checked, setChecked] = useState(false);
     return (
       <Switch
@@ -121,13 +144,15 @@ export const Required: Story = {
         onChange={setChecked}
         label="Accept terms and conditions"
         required
+        size={args.size}
+        labelPosition={args.labelPosition}
       />
     );
   },
 };
 
 export const WithHelperText: Story = {
-  render: () => {
+  render: (args) => {
     const [checked, setChecked] = useState(false);
     return (
       <Switch
@@ -135,13 +160,15 @@ export const WithHelperText: Story = {
         onChange={setChecked}
         label="Email notifications"
         helperText="Receive email updates about your account activity"
+        size={args.size}
+        labelPosition={args.labelPosition}
       />
     );
   },
 };
 
 export const WithError: Story = {
-  render: () => {
+  render: (args) => {
     const [checked, setChecked] = useState(false);
     return (
       <Switch
@@ -150,13 +177,15 @@ export const WithError: Story = {
         label="I agree to the terms and conditions"
         error="You must accept the terms to continue"
         required
+        size={args.size}
+        labelPosition={args.labelPosition}
       />
     );
   },
 };
 
 export const FullWidth: Story = {
-  render: () => {
+  render: (args) => {
     const [checked, setChecked] = useState(false);
     return (
       <div style={{ border: '2px dashed var(--boom-color-border)', padding: '1rem' }}>
@@ -166,6 +195,8 @@ export const FullWidth: Story = {
           label="Full width switch"
           fullWidth
           helperText="This switch takes up the full width of its container"
+          size={args.size}
+          labelPosition={args.labelPosition}
         />
       </div>
     );
@@ -214,6 +245,7 @@ export const SettingsExample: Story = {
 };
 
 export const AllSizesWithStates: Story = {
+  argTypes: { size: { control: false }, labelPosition: { control: false } },
   render: () => {
     const [checked, setChecked] = useState(true);
 

@@ -200,9 +200,11 @@ export const AllVariants: Story = {
   args: {
     heading: 'All Variants',
   },
-  render: () => (
+  argTypes: { variant: { control: false } },
+  render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Hero
+        {...args}
         variant="centered"
         heading="Centered Variant"
         subheading="Content is centered both horizontally and vertically"
@@ -210,6 +212,7 @@ export const AllVariants: Story = {
         primaryCTA={{ children: 'Learn More' }}
       />
       <Hero
+        {...args}
         variant="split-left"
         heading="Split Left Variant"
         subheading="Content aligned to the left side"
@@ -217,6 +220,7 @@ export const AllVariants: Story = {
         primaryCTA={{ children: 'Get Started' }}
       />
       <Hero
+        {...args}
         variant="split-right"
         heading="Split Right Variant"
         subheading="Content aligned to the right side"
@@ -224,6 +228,7 @@ export const AllVariants: Story = {
         primaryCTA={{ children: 'Explore' }}
       />
       <Hero
+        {...args}
         variant="minimal"
         heading="Minimal Variant"
         subheading="Reduced spacing and typography"

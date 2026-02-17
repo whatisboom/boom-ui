@@ -65,10 +65,37 @@ function parseRGB(rgbString: string): { h: number; s: number; l: number } | null
 }
 
 /**
- * Parses a color string (HSL or RGB) to HSL values.
- * Handles both raw HSL strings and computed RGB values from getComputedStyle.
+ * Resolves a CSS color string to a computed RGB value using a temporary DOM element.
+ * Handles var() references, hsl(), rgb(), hex, and any other CSS color format.
+ * Returns null in non-browser environments (SSR).
  */
-function parseColor(colorString: string): { h: number; s: number; l: number } | null {
+function resolveColor(colorString: string): { h: number; s: number; l: number } | null {
+  if (typeof document === 'undefined') {
+    return parseHSL(colorString) ?? parseRGB(colorString);
+  }
+
+  let el: HTMLDivElement | null = null;
+  try {
+    el = document.createElement('div');
+    el.style.color = colorString;
+    document.body.appendChild(el);
+
+    const computed = getComputedStyle(el).color;
+
+    if (computed && /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/i.test(computed)) {
+      const parsed = parseRGB(computed);
+      if (parsed) {
+        return parsed;
+      }
+    }
+  } catch {
+    // Swallow DOM-related errors and fall back to direct parsing below.
+  } finally {
+    if (el?.parentNode) {
+      el.parentNode.removeChild(el);
+    }
+  }
+
   return parseHSL(colorString) ?? parseRGB(colorString);
 }
 
@@ -87,8 +114,8 @@ function parseColor(colorString: string): { h: number; s: number; l: number } | 
 export function generateChartPalette(themeColors: ThemeColors): string[] {
   const palette: string[] = [];
 
-  // Parse accent color as base (handles both HSL and RGB from computed styles)
-  const accentHSL = parseColor(themeColors.accent);
+  // Resolve accent color through DOM to handle var() references
+  const accentHSL = resolveColor(themeColors.accent);
   if (!accentHSL) {
     // Fallback if parsing fails
     return [

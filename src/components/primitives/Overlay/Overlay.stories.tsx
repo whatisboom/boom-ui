@@ -32,13 +32,19 @@ export default meta;
 type Story = StoryObj<typeof Overlay>;
 
 export const Default: Story = {
-  render: () => {
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Overlay</Button>
-        <Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Overlay
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
+        >
           <div
             style={{
               position: 'fixed',
@@ -67,7 +73,11 @@ export const Default: Story = {
 };
 
 export const NonDismissible: Story = {
-  render: () => {
+  argTypes: {
+    closeOnClickOutside: { control: false },
+    closeOnEscape: { control: false },
+  },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -78,6 +88,7 @@ export const NonDismissible: Story = {
           onClose={() => setIsOpen(false)}
           closeOnClickOutside={false}
           closeOnEscape={false}
+          lockScroll={args.lockScroll}
         >
           <div
             style={{
@@ -108,7 +119,10 @@ export const NonDismissible: Story = {
 };
 
 export const WithScrollLock: Story = {
-  render: () => {
+  argTypes: {
+    lockScroll: { control: false },
+  },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -132,7 +146,13 @@ export const WithScrollLock: Story = {
           ))}
         </div>
 
-        <Overlay isOpen={isOpen} onClose={() => setIsOpen(false)} lockScroll={true}>
+        <Overlay
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          lockScroll={true}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+        >
           <div
             style={{
               position: 'fixed',
@@ -163,7 +183,10 @@ export const WithScrollLock: Story = {
 };
 
 export const WithoutScrollLock: Story = {
-  render: () => {
+  argTypes: {
+    lockScroll: { control: false },
+  },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -187,7 +210,13 @@ export const WithoutScrollLock: Story = {
           ))}
         </div>
 
-        <Overlay isOpen={isOpen} onClose={() => setIsOpen(false)} lockScroll={false}>
+        <Overlay
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          lockScroll={false}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+        >
           <div
             style={{
               position: 'fixed',
@@ -217,13 +246,19 @@ export const WithoutScrollLock: Story = {
 };
 
 export const CustomStyledContent: Story = {
-  render: () => {
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Custom Styled Overlay</Button>
-        <Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Overlay
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
+        >
           <div
             style={{
               position: 'fixed',
