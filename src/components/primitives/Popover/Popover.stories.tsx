@@ -23,7 +23,7 @@ export default meta;
 type Story = StoryObj<typeof Popover>;
 
 export const Default: Story = {
-  render: () => {
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -39,6 +39,8 @@ export const Default: Story = {
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           anchorEl={buttonRef}
+          placement={args.placement}
+          offset={args.offset}
         >
           <div style={{ padding: '1rem', minWidth: '200px' }}>
             <Typography>This is a popover with default placement (bottom).</Typography>
@@ -50,7 +52,8 @@ export const Default: Story = {
 };
 
 export const TopPlacement: Story = {
-  render: () => {
+  argTypes: { placement: { control: false } },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -67,6 +70,7 @@ export const TopPlacement: Story = {
           onClose={() => setIsOpen(false)}
           anchorEl={buttonRef}
           placement="top"
+          offset={args.offset}
         >
           <div style={{ padding: '1rem', minWidth: '200px' }}>
             <Typography>This popover appears above the button.</Typography>
@@ -78,7 +82,8 @@ export const TopPlacement: Story = {
 };
 
 export const LeftPlacement: Story = {
-  render: () => {
+  argTypes: { placement: { control: false } },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -95,6 +100,7 @@ export const LeftPlacement: Story = {
           onClose={() => setIsOpen(false)}
           anchorEl={buttonRef}
           placement="left"
+          offset={args.offset}
         >
           <div style={{ padding: '1rem', minWidth: '200px' }}>
             <Typography>This popover appears to the left of the button.</Typography>
@@ -106,7 +112,8 @@ export const LeftPlacement: Story = {
 };
 
 export const RightPlacement: Story = {
-  render: () => {
+  argTypes: { placement: { control: false } },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -123,6 +130,7 @@ export const RightPlacement: Story = {
           onClose={() => setIsOpen(false)}
           anchorEl={buttonRef}
           placement="right"
+          offset={args.offset}
         >
           <div style={{ padding: '1rem', minWidth: '200px' }}>
             <Typography>This popover appears to the right of the button.</Typography>
@@ -134,7 +142,8 @@ export const RightPlacement: Story = {
 };
 
 export const CustomOffset: Story = {
-  render: () => {
+  argTypes: { offset: { control: false } },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -150,6 +159,7 @@ export const CustomOffset: Story = {
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           anchorEl={buttonRef}
+          placement={args.placement}
           offset={24}
         >
           <div style={{ padding: '1rem', minWidth: '200px' }}>
@@ -162,7 +172,7 @@ export const CustomOffset: Story = {
 };
 
 export const WithMenu: Story = {
-  render: () => {
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -185,6 +195,8 @@ export const WithMenu: Story = {
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           anchorEl={buttonRef}
+          placement={args.placement}
+          offset={args.offset}
         >
           <div style={{ minWidth: '180px' }}>
             {menuItems.map((item, index) => (
