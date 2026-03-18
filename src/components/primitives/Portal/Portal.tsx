@@ -1,5 +1,9 @@
-import type { ReactNode } from 'react';
+import { type ReactNode, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
+
+const subscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 export interface PortalProps {
   children: ReactNode;
@@ -7,12 +11,12 @@ export interface PortalProps {
 }
 
 export function Portal({ children, container }: PortalProps) {
-  // Compute mount node directly without state - React can handle this efficiently
-  const mountNode = container || (typeof document !== 'undefined' ? document.body : null);
+  const isClient = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  if (!mountNode) {
+  if (!isClient) {
     return null;
   }
 
+  const mountNode = container || document.body;
   return createPortal(children, mountNode);
 }

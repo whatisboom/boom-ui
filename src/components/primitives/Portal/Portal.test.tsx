@@ -3,7 +3,7 @@ import { render } from '../../../../tests/test-utils';
 import { Portal } from './Portal';
 
 describe('Portal', () => {
-  it('should render children in document.body', () => {
+  it('should render children in document.body after mount', () => {
     const { container } = render(
       <Portal>
         <div data-testid="portal-content">Portal Content</div>
