@@ -145,7 +145,6 @@ function FormComponent<TSchema extends z.ZodObject<z.ZodRawShape>>(
   );
 }
 
-// Export with forwardRef while preserving generics
 const FormWithRef = forwardRef(FormComponent) as <
   TSchema extends z.ZodObject<z.ZodRawShape>
 >(
