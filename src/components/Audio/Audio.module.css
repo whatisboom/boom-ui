@@ -113,7 +113,9 @@
   border-radius: var(--boom-radius-md);
   color: var(--boom-theme-text-primary);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition:
+    background-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    color var(--boom-duration-quick) var(--boom-ease-in-out);
   position: relative;
 }
 
@@ -218,7 +220,7 @@
   font-size: var(--boom-font-size-sm);
   text-align: center;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background-color var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 .playbackRateOption:hover {
@@ -280,7 +282,7 @@
   color: var(--boom-theme-text-primary);
   cursor: pointer;
   text-align: left;
-  transition: background 0.2s ease;
+  transition: background-color var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 .playlistButton:hover {

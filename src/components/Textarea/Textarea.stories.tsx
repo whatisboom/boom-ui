@@ -23,21 +23,21 @@ export default meta;
 type Story = StoryObj<typeof Textarea>;
 
 export const Default: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
-    return <Textarea value={value} onChange={setValue} label="Comment" />;
+    return <Textarea value={value} onChange={setValue} label="Comment" size={args.size} resize={args.resize} />;
   },
 };
 
 export const WithValue: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('This is a multi-line\ntext area with\nexisting content.');
-    return <Textarea value={value} onChange={setValue} label="Description" />;
+    return <Textarea value={value} onChange={setValue} label="Description" size={args.size} resize={args.resize} />;
   },
 };
 
 export const WithPlaceholder: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
     return (
       <Textarea
@@ -45,26 +45,29 @@ export const WithPlaceholder: Story = {
         onChange={setValue}
         label="Feedback"
         placeholder="Tell us what you think..."
+        size={args.size}
+        resize={args.resize}
       />
     );
   },
 };
 
 export const Sizes: Story = {
-  render: () => {
+  argTypes: { size: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState('Sample text');
     return (
       <Stack direction="column" spacing={4}>
-        <Textarea value={value} onChange={setValue} label="Small" size="sm" />
-        <Textarea value={value} onChange={setValue} label="Medium (default)" size="md" />
-        <Textarea value={value} onChange={setValue} label="Large" size="lg" />
+        <Textarea value={value} onChange={setValue} label="Small" size="sm" resize={args.resize} />
+        <Textarea value={value} onChange={setValue} label="Medium (default)" size="md" resize={args.resize} />
+        <Textarea value={value} onChange={setValue} label="Large" size="lg" resize={args.resize} />
       </Stack>
     );
   },
 };
 
 export const WithHelperText: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
     return (
       <Textarea
@@ -72,13 +75,15 @@ export const WithHelperText: Story = {
         onChange={setValue}
         label="Bio"
         helperText="Tell us about yourself (max 500 characters)"
+        size={args.size}
+        resize={args.resize}
       />
     );
   },
 };
 
 export const WithError: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
     return (
       <Textarea
@@ -87,6 +92,8 @@ export const WithError: Story = {
         label="Message"
         error="This field is required"
         required
+        size={args.size}
+        resize={args.resize}
       />
     );
   },
@@ -115,9 +122,9 @@ export const ReadOnly: Story = {
 };
 
 export const Required: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
-    return <Textarea value={value} onChange={setValue} label="Required field" required />;
+    return <Textarea value={value} onChange={setValue} label="Required field" required size={args.size} resize={args.resize} />;
   },
 };
 
@@ -139,21 +146,22 @@ export const AutoResize: Story = {
 };
 
 export const ResizeOptions: Story = {
-  render: () => {
+  argTypes: { resize: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState('Drag the corner to resize');
     return (
       <Stack direction="column" spacing={4}>
-        <Textarea value={value} onChange={setValue} label="No resize" resize="none" />
-        <Textarea value={value} onChange={setValue} label="Vertical resize" resize="vertical" />
-        <Textarea value={value} onChange={setValue} label="Horizontal resize" resize="horizontal" />
-        <Textarea value={value} onChange={setValue} label="Both directions" resize="both" />
+        <Textarea value={value} onChange={setValue} label="No resize" resize="none" size={args.size} />
+        <Textarea value={value} onChange={setValue} label="Vertical resize" resize="vertical" size={args.size} />
+        <Textarea value={value} onChange={setValue} label="Horizontal resize" resize="horizontal" size={args.size} />
+        <Textarea value={value} onChange={setValue} label="Both directions" resize="both" size={args.size} />
       </Stack>
     );
   },
 };
 
 export const FullWidth: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
     return (
       <div style={{ border: '2px dashed var(--boom-theme-border-default)', padding: '1rem' }}>
@@ -162,6 +170,8 @@ export const FullWidth: Story = {
           onChange={setValue}
           label="Full width textarea"
           fullWidth
+          size={args.size}
+          resize={args.resize}
         />
       </div>
     );

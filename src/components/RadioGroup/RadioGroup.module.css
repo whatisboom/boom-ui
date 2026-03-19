@@ -74,7 +74,11 @@
   background-color: var(--boom-theme-bg-elevated);
   position: relative;
   flex-shrink: 0;
-  transition: all 0.2s ease;
+  transition:
+    background-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    border-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    color var(--boom-duration-quick) var(--boom-ease-in-out),
+    box-shadow var(--boom-duration-base) var(--boom-ease-out);
 }
 
 .radioVisual::after {
@@ -87,7 +91,7 @@
   height: 10px;
   border-radius: var(--boom-border-radius-full);
   background-color: var(--boom-theme-primary);
-  transition: transform 0.2s ease;
+  transition: transform var(--boom-duration-quick) var(--boom-ease-out);
 }
 
 .radio:checked + .radioVisual {

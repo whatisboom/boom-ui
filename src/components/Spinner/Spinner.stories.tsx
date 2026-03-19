@@ -39,11 +39,12 @@ export const Large: Story = {
 };
 
 export const AllSizes: Story = {
-  render: () => (
+  argTypes: { size: { control: false } },
+  render: (args) => (
     <Stack direction="row" spacing={4} align="center">
-      <Spinner size="sm" />
-      <Spinner size="md" />
-      <Spinner size="lg" />
+      <Spinner {...args} size="sm" />
+      <Spinner {...args} size="md" />
+      <Spinner {...args} size="lg" />
     </Stack>
   ),
 };
