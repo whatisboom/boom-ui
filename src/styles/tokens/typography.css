@@ -1,6 +1,6 @@
 :root {
   /* Font families */
-  --boom-font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --boom-font-sans: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --boom-font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
 
   /* Font sizes */
@@ -27,7 +27,11 @@
   --boom-line-height-relaxed: 1.7;
 
   /* Letter spacing */
-  --boom-letter-spacing-tight: -0.015em;
+  --boom-letter-spacing-tight: -0.02em;
   --boom-letter-spacing-normal: 0;
-  --boom-letter-spacing-wide: 0.02em;
+  --boom-letter-spacing-wide: 0.025em;
+
+  /* Typographic mode weights */
+  --boom-font-weight-display: 600;   /* headings, large text */
+  --boom-font-weight-label: 500;     /* small text, captions */
 }

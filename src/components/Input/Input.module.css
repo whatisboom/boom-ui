@@ -44,7 +44,11 @@
   color: var(--boom-theme-text-primary);
   background-color: var(--boom-theme-bg-primary);
   border: 1px solid var(--boom-theme-border-default);
-  transition: all var(--boom-transition-base);
+  transition:
+    background-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    border-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    color var(--boom-duration-quick) var(--boom-ease-in-out),
+    box-shadow var(--boom-duration-base) var(--boom-ease-out);
   outline: none;
 }
 

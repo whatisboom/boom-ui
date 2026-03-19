@@ -45,7 +45,9 @@
   outline: none;
   cursor: pointer;
   appearance: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    box-shadow var(--boom-duration-base) var(--boom-ease-out);
 }
 
 .select:hover:not(:disabled) {

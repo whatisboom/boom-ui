@@ -47,6 +47,7 @@ export const Error: Story = {
 };
 
 export const AllVariants: Story = {
+  argTypes: { variant: { control: false } },
   render: () => (
     <Stack direction="column" spacing={4}>
       <Alert variant="info">
@@ -66,6 +67,7 @@ export const AllVariants: Story = {
 };
 
 export const WithTitle: Story = {
+  argTypes: { variant: { control: false } },
   render: () => (
     <Stack direction="column" spacing={4}>
       <Alert variant="info" title="Did you know?">
@@ -85,6 +87,7 @@ export const WithTitle: Story = {
 };
 
 export const Dismissible: Story = {
+  argTypes: { variant: { control: false } },
   render: () => {
     const DismissibleExample = () => {
       const [showInfo, setShowInfo] = useState(true);
@@ -131,6 +134,7 @@ export const Dismissible: Story = {
 };
 
 export const CustomIcon: Story = {
+  argTypes: { variant: { control: false } },
   render: () => (
     <Stack direction="column" spacing={4}>
       <Alert
@@ -162,6 +166,7 @@ export const CustomIcon: Story = {
 };
 
 export const NoIcon: Story = {
+  argTypes: { variant: { control: false } },
   render: () => (
     <Stack direction="column" spacing={4}>
       <Alert variant="info" icon={null}>

@@ -38,70 +38,79 @@ export const WithInitials: Story = {
 };
 
 export const Sizes: Story = {
-  render: () => (
+  argTypes: { size: { control: false } },
+  render: (args) => (
     <Stack direction="row" spacing={3} style={{ alignItems: 'center' }}>
-      <Avatar src={SAMPLE_IMAGE} alt="User" size="sm" />
-      <Avatar src={SAMPLE_IMAGE} alt="User" size="md" />
-      <Avatar src={SAMPLE_IMAGE} alt="User" size="lg" />
-      <Avatar src={SAMPLE_IMAGE} alt="User" size="xl" />
+      <Avatar src={SAMPLE_IMAGE} alt="User" size="sm" status={args.status} showStatus={args.showStatus} />
+      <Avatar src={SAMPLE_IMAGE} alt="User" size="md" status={args.status} showStatus={args.showStatus} />
+      <Avatar src={SAMPLE_IMAGE} alt="User" size="lg" status={args.status} showStatus={args.showStatus} />
+      <Avatar src={SAMPLE_IMAGE} alt="User" size="xl" status={args.status} showStatus={args.showStatus} />
     </Stack>
   ),
 };
 
 export const InitialsSizes: Story = {
-  render: () => (
+  argTypes: { size: { control: false } },
+  render: (args) => (
     <Stack direction="row" spacing={3} style={{ alignItems: 'center' }}>
-      <Avatar alt="User" name="John Doe" size="sm" />
-      <Avatar alt="User" name="Jane Smith" size="md" />
-      <Avatar alt="User" name="Bob Wilson" size="lg" />
-      <Avatar alt="User" name="Alice Brown" size="xl" />
+      <Avatar alt="User" name="John Doe" size="sm" status={args.status} showStatus={args.showStatus} />
+      <Avatar alt="User" name="Jane Smith" size="md" status={args.status} showStatus={args.showStatus} />
+      <Avatar alt="User" name="Bob Wilson" size="lg" status={args.status} showStatus={args.showStatus} />
+      <Avatar alt="User" name="Alice Brown" size="xl" status={args.status} showStatus={args.showStatus} />
     </Stack>
   ),
 };
 
 export const WithStatus: Story = {
-  render: () => (
+  argTypes: { status: { control: false } },
+  render: (args) => (
     <Stack direction="row" spacing={4} style={{ alignItems: 'center' }}>
       <Avatar
         src={SAMPLE_IMAGE}
         alt="Online User"
         status="online"
         showStatus
+        size={args.size}
       />
       <Avatar
         src={SAMPLE_IMAGE}
         alt="Offline User"
         status="offline"
         showStatus
+        size={args.size}
       />
-      <Avatar src={SAMPLE_IMAGE} alt="Away User" status="away" showStatus />
-      <Avatar src={SAMPLE_IMAGE} alt="Busy User" status="busy" showStatus />
+      <Avatar src={SAMPLE_IMAGE} alt="Away User" status="away" showStatus size={args.size} />
+      <Avatar src={SAMPLE_IMAGE} alt="Busy User" status="busy" showStatus size={args.size} />
     </Stack>
   ),
 };
 
 export const WithStatusAndInitials: Story = {
-  render: () => (
+  argTypes: { status: { control: false } },
+  render: (args) => (
     <Stack direction="row" spacing={4} style={{ alignItems: 'center' }}>
       <Avatar
         alt="User"
         name="Online User"
         status="online"
         showStatus
+        size={args.size}
       />
       <Avatar
         alt="User"
         name="Offline User"
         status="offline"
         showStatus
+        size={args.size}
       />
-      <Avatar alt="User" name="Away User" status="away" showStatus />
-      <Avatar alt="User" name="Busy User" status="busy" showStatus />
+      <Avatar alt="User" name="Away User" status="away" showStatus size={args.size} />
+      <Avatar alt="User" name="Busy User" status="busy" showStatus size={args.size} />
     </Stack>
   ),
 };
 
 export const StatusSizes: Story = {
+  argTypes: { size: { control: false }, status: { control: false } },
   render: () => (
     <Stack direction="row" spacing={4} style={{ alignItems: 'center' }}>
       <Avatar
@@ -175,10 +184,11 @@ export const ImageFallback: Story = {
 };
 
 export const AllStatusStates: Story = {
-  render: () => (
+  argTypes: { status: { control: false } },
+  render: (args) => (
     <Stack direction="column" spacing={3}>
       <Stack direction="row" spacing={4} style={{ alignItems: 'center' }}>
-        <Avatar alt="User" name="Online" status="online" showStatus size="lg" />
+        <Avatar alt="User" name="Online" status="online" showStatus size={args.size} />
         <div>
           <strong>Online</strong>
           <p style={{ margin: 0, fontSize: '14px', color: '#666' }}>
@@ -188,7 +198,7 @@ export const AllStatusStates: Story = {
       </Stack>
 
       <Stack direction="row" spacing={4} style={{ alignItems: 'center' }}>
-        <Avatar alt="User" name="Away" status="away" showStatus size="lg" />
+        <Avatar alt="User" name="Away" status="away" showStatus size={args.size} />
         <div>
           <strong>Away</strong>
           <p style={{ margin: 0, fontSize: '14px', color: '#666' }}>
@@ -198,7 +208,7 @@ export const AllStatusStates: Story = {
       </Stack>
 
       <Stack direction="row" spacing={4} style={{ alignItems: 'center' }}>
-        <Avatar alt="User" name="Busy" status="busy" showStatus size="lg" />
+        <Avatar alt="User" name="Busy" status="busy" showStatus size={args.size} />
         <div>
           <strong>Busy</strong>
           <p style={{ margin: 0, fontSize: '14px', color: '#666' }}>
@@ -208,7 +218,7 @@ export const AllStatusStates: Story = {
       </Stack>
 
       <Stack direction="row" spacing={4} style={{ alignItems: 'center' }}>
-        <Avatar alt="User" name="Offline" status="offline" showStatus size="lg" />
+        <Avatar alt="User" name="Offline" status="offline" showStatus size={args.size} />
         <div>
           <strong>Offline</strong>
           <p style={{ margin: 0, fontSize: '14px', color: '#666' }}>

@@ -71,6 +71,7 @@ export const CircularIndeterminate: Story = {
 };
 
 export const Sizes: Story = {
+  argTypes: { size: { control: false }, variant: { control: false } },
   render: () => (
     <Stack direction="column" spacing={6}>
       <div>
@@ -95,17 +96,25 @@ export const Sizes: Story = {
 };
 
 export const WithCustomLabel: Story = {
-  render: () => (
+  args: {
+    variant: 'linear',
+    size: 'md',
+  },
+  render: (args) => (
     <Stack direction="column" spacing={4}>
-      <Progress value={33} label="Uploading..." aria-label="Upload progress" />
-      <Progress value={66} label="Processing..." aria-label="Processing progress" />
-      <Progress value={100} label="Complete!" aria-label="Completion status" />
+      <Progress value={33} label="Uploading..." variant={args.variant} size={args.size} aria-label="Upload progress" />
+      <Progress value={66} label="Processing..." variant={args.variant} size={args.size} aria-label="Processing progress" />
+      <Progress value={100} label="Complete!" variant={args.variant} size={args.size} aria-label="Completion status" />
     </Stack>
   ),
 };
 
 export const AnimatedProgress: Story = {
-  render: () => {
+  args: {
+    size: 'md',
+  },
+  argTypes: { variant: { control: false } },
+  render: (args) => {
     const LinearAnimated = () => {
       const [progress, setProgress] = useState(0);
 
@@ -125,7 +134,7 @@ export const AnimatedProgress: Story = {
         };
       }, []);
 
-      return <Progress value={progress} showLabel aria-label="Animated progress" />;
+      return <Progress value={progress} variant="linear" size={args.size} showLabel aria-label="Animated progress" />;
     };
 
     return (
@@ -140,6 +149,7 @@ export const AnimatedProgress: Story = {
 };
 
 export const CircularAnimated: Story = {
+  argTypes: { variant: { control: false } },
   render: () => {
     const CircularAnimatedDemo = () => {
       const [progress, setProgress] = useState(0);
@@ -167,25 +177,29 @@ export const CircularAnimated: Story = {
 };
 
 export const AllVariants: Story = {
-  render: () => (
+  args: {
+    size: 'md',
+  },
+  argTypes: { variant: { control: false } },
+  render: (args) => (
     <Stack direction="column" spacing={6}>
       <div>
         <h3 style={{ marginBottom: '1rem' }}>Linear Progress</h3>
         <Stack direction="column" spacing={3}>
-          <Progress value={25} aria-label="25% complete" />
-          <Progress value={50} showLabel aria-label="50% complete" />
-          <Progress value={75} label="Almost done..." aria-label="75% complete" />
-          <Progress aria-label="Loading" />
+          <Progress value={25} size={args.size} aria-label="25% complete" />
+          <Progress value={50} size={args.size} showLabel aria-label="50% complete" />
+          <Progress value={75} size={args.size} label="Almost done..." aria-label="75% complete" />
+          <Progress size={args.size} aria-label="Loading" />
         </Stack>
       </div>
 
       <div>
         <h3 style={{ marginBottom: '1rem' }}>Circular Progress</h3>
         <Stack direction="row" spacing={4}>
-          <Progress value={25} variant="circular" aria-label="25% complete" />
-          <Progress value={50} variant="circular" showLabel aria-label="50% complete" />
-          <Progress value={75} variant="circular" label="75%" aria-label="75% complete" />
-          <Progress variant="circular" aria-label="Loading" />
+          <Progress value={25} variant="circular" size={args.size} aria-label="25% complete" />
+          <Progress value={50} variant="circular" size={args.size} showLabel aria-label="50% complete" />
+          <Progress value={75} variant="circular" size={args.size} label="75%" aria-label="75% complete" />
+          <Progress variant="circular" size={args.size} aria-label="Loading" />
         </Stack>
       </div>
     </Stack>
@@ -193,6 +207,7 @@ export const AllVariants: Story = {
 };
 
 export const ValueBoundaries: Story = {
+  argTypes: { size: { control: false }, variant: { control: false } },
   render: () => (
     <Stack direction="column" spacing={3}>
       <div>

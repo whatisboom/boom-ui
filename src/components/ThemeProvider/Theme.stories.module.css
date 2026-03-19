@@ -215,7 +215,10 @@
   cursor: pointer;
   font-family: var(--boom-font-sans);
   font-size: var(--boom-font-size-base);
-  transition: all var(--boom-transition-base);
+  transition:
+    background-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    border-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    color var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 .tabs button:hover {
