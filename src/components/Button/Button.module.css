@@ -7,7 +7,11 @@
   font-weight: var(--boom-font-weight-medium);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all var(--boom-transition-base);
+  transition:
+    background-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    border-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    color var(--boom-duration-quick) var(--boom-ease-in-out),
+    box-shadow var(--boom-duration-base) var(--boom-ease-out);
   white-space: nowrap;
   user-select: none;
 }

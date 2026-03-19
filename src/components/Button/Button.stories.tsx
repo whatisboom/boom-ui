@@ -122,23 +122,25 @@ export const WithBothIcons: Story = {
 };
 
 export const AllVariants: Story = {
-  render: () => (
+  argTypes: { variant: { control: false } },
+  render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start' }}>
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="link">Link</Button>
+      <Button {...args} variant="primary">Primary</Button>
+      <Button {...args} variant="secondary">Secondary</Button>
+      <Button {...args} variant="outline">Outline</Button>
+      <Button {...args} variant="ghost">Ghost</Button>
+      <Button {...args} variant="link">Link</Button>
     </div>
   ),
 };
 
 export const AllSizes: Story = {
-  render: () => (
+  argTypes: { size: { control: false } },
+  render: (args) => (
     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      <Button size="sm">Small</Button>
-      <Button size="md">Medium</Button>
-      <Button size="lg">Large</Button>
+      <Button {...args} size="sm">Small</Button>
+      <Button {...args} size="md">Medium</Button>
+      <Button {...args} size="lg">Large</Button>
     </div>
   ),
 };
