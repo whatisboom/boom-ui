@@ -39,13 +39,13 @@
   height: 100%;
   background-color: var(--boom-theme-primary);
   border-radius: var(--boom-border-radius-full);
-  transition: width 300ms ease-in-out;
+  transition: width var(--boom-duration-base) var(--boom-ease-in-out);
 }
 
 /* Indeterminate linear animation */
 .linearIndeterminate .linearFill {
   width: 40% !important;
-  animation: linearIndeterminate 1.5s ease-in-out infinite;
+  animation: linearIndeterminate 1.5s var(--boom-ease-in-out) infinite;
 }
 
 @keyframes linearIndeterminate {
@@ -95,7 +95,7 @@
   fill: none;
   stroke: var(--boom-theme-primary);
   stroke-linecap: round;
-  transition: stroke-dashoffset 300ms ease-in-out;
+  transition: stroke-dashoffset var(--boom-duration-base) var(--boom-ease-in-out);
 }
 
 /* Indeterminate circular animation */
@@ -104,7 +104,7 @@
 }
 
 .circularIndeterminate .circularFill {
-  animation: circularDash 1.4s ease-in-out infinite;
+  animation: circularDash 1.4s var(--boom-ease-in-out) infinite;
   stroke-dasharray: 80px, 200px;
   stroke-dashoffset: 0;
 }

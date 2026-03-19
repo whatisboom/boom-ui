@@ -164,9 +164,10 @@ export const PhoneInput: Story = {
 };
 
 export const LoginForm: Story = {
-  render: () => (
+  render: (args) => (
     <div style={{ maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <Input
+        {...args}
         label="Email"
         type="email"
         placeholder="you@example.com"
@@ -174,6 +175,7 @@ export const LoginForm: Story = {
         leftIcon="📧"
       />
       <Input
+        {...args}
         label="Password"
         type="password"
         placeholder="Enter your password"
@@ -185,20 +187,23 @@ export const LoginForm: Story = {
 };
 
 export const ValidationStates: Story = {
-  render: () => (
+  render: (args) => (
     <div style={{ maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <Input
+        {...args}
         label="Valid Input"
         placeholder="This is valid"
         helperText="This field is valid"
         rightIcon="✓"
       />
       <Input
+        {...args}
         label="Invalid Input"
         placeholder="This has an error"
         error="This field is required"
       />
       <Input
+        {...args}
         label="Warning Input"
         placeholder="This might need attention"
         helperText="This value seems unusual"
@@ -208,19 +213,23 @@ export const ValidationStates: Story = {
 };
 
 export const AllSizes: Story = {
-  render: () => (
+  argTypes: { size: { control: false } },
+  render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '400px' }}>
       <Input
+        {...args}
         label="Small"
         size="sm"
         placeholder="Small input"
       />
       <Input
+        {...args}
         label="Medium"
         size="md"
         placeholder="Medium input (default)"
       />
       <Input
+        {...args}
         label="Large"
         size="lg"
         placeholder="Large input"

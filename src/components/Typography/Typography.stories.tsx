@@ -88,35 +88,38 @@ export const Label: Story = {
 };
 
 export const AllHeadings: Story = {
-  render: () => (
+  argTypes: { variant: { control: false } },
+  render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <Typography variant="h1">Heading 1 - The largest heading</Typography>
-      <Typography variant="h2">Heading 2 - Second level heading</Typography>
-      <Typography variant="h3">Heading 3 - Third level heading</Typography>
-      <Typography variant="h4">Heading 4 - Fourth level heading</Typography>
-      <Typography variant="h5">Heading 5 - Fifth level heading</Typography>
-      <Typography variant="h6">Heading 6 - Sixth level heading</Typography>
+      <Typography variant="h1" align={args.align} weight={args.weight}>Heading 1 - The largest heading</Typography>
+      <Typography variant="h2" align={args.align} weight={args.weight}>Heading 2 - Second level heading</Typography>
+      <Typography variant="h3" align={args.align} weight={args.weight}>Heading 3 - Third level heading</Typography>
+      <Typography variant="h4" align={args.align} weight={args.weight}>Heading 4 - Fourth level heading</Typography>
+      <Typography variant="h5" align={args.align} weight={args.weight}>Heading 5 - Fifth level heading</Typography>
+      <Typography variant="h6" align={args.align} weight={args.weight}>Heading 6 - Sixth level heading</Typography>
     </div>
   ),
 };
 
 export const Alignment: Story = {
-  render: () => (
+  argTypes: { align: { control: false } },
+  render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <Typography align="left">Left aligned text (default)</Typography>
-      <Typography align="center">Center aligned text</Typography>
-      <Typography align="right">Right aligned text</Typography>
+      <Typography align="left" variant={args.variant} weight={args.weight}>Left aligned text (default)</Typography>
+      <Typography align="center" variant={args.variant} weight={args.weight}>Center aligned text</Typography>
+      <Typography align="right" variant={args.variant} weight={args.weight}>Right aligned text</Typography>
     </div>
   ),
 };
 
 export const FontWeights: Story = {
-  render: () => (
+  argTypes: { weight: { control: false } },
+  render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <Typography weight="normal">Normal weight text</Typography>
-      <Typography weight="medium">Medium weight text</Typography>
-      <Typography weight="semibold">Semibold weight text</Typography>
-      <Typography weight="bold">Bold weight text</Typography>
+      <Typography weight="normal" variant={args.variant} align={args.align}>Normal weight text</Typography>
+      <Typography weight="medium" variant={args.variant} align={args.align}>Medium weight text</Typography>
+      <Typography weight="semibold" variant={args.variant} align={args.align}>Semibold weight text</Typography>
+      <Typography weight="bold" variant={args.variant} align={args.align}>Bold weight text</Typography>
     </div>
   ),
 };
