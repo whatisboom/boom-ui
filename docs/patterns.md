@@ -85,7 +85,11 @@ import { useTheme } from '@whatisboom/boom-ui';
 
 function MyComponent() {
   const { colors } = useTheme();
-  return <Box style={{ borderColor: colors.border.default, color: colors.primary }}>
+  return (
+    <Box style={{ borderColor: colors.border.default, color: colors.primary }}>
+      Themed content
+    </Box>
+  );
 }
 ```
 

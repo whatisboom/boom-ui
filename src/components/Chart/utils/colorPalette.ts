@@ -67,7 +67,8 @@ function parseRGB(rgbString: string): { h: number; s: number; l: number } | null
 /**
  * Resolves a CSS color string to a computed RGB value using a temporary DOM element.
  * Handles var() references, hsl(), rgb(), hex, and any other CSS color format.
- * Returns null in non-browser environments (SSR).
+ * In non-browser environments (SSR), falls back to direct parsing of hsl()/rgb() literals.
+ * Returns null only when the color string cannot be parsed in any way.
  */
 function resolveColor(colorString: string): { h: number; s: number; l: number } | null {
   if (typeof document === 'undefined') {

@@ -12,7 +12,7 @@
   width: var(--sidebar-width, 280px);
   overflow-y: auto;
   overflow-x: hidden;
-  transition: width var(--boom-transition-base);
+  transition: width var(--boom-duration-base) var(--boom-ease-in-out);
 }
 
 .sidebar.right {
@@ -73,8 +73,9 @@
   text-decoration: none;
   cursor: pointer;
   border-radius: var(--boom-border-radius-md);
-  transition: background-color var(--boom-transition-fast),
-    color var(--boom-transition-fast);
+  transition:
+    background-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    color var(--boom-duration-quick) var(--boom-ease-in-out);
   width: calc(100% - var(--boom-spacing-4));
   text-align: left;
   white-space: nowrap;
@@ -127,7 +128,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: opacity var(--boom-transition-fast);
+  transition: opacity var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 .itemLabel.collapsed {
@@ -151,7 +152,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity var(--boom-transition-fast);
+  transition: opacity var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 .itemBadge.collapsed {
