@@ -90,7 +90,7 @@
   cursor: pointer;
   color: var(--boom-theme-text-primary);
   opacity: 0.7;
-  transition: opacity 150ms ease-in-out;
+  transition: opacity var(--boom-duration-quick) var(--boom-ease-in-out);
   border-radius: var(--boom-border-radius-sm);
   display: flex;
   align-items: center;

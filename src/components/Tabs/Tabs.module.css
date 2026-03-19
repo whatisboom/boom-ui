@@ -40,7 +40,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color var(--boom-duration-quick) var(--boom-ease-in-out);
   white-space: nowrap;
   outline: none;
 }

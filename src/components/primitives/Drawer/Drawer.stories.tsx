@@ -32,12 +32,20 @@ export default meta;
 type Story = StoryObj<typeof Drawer>;
 
 export const Default: Story = {
-  render: () => {
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Drawer</Button>
-        <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Drawer
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          side={args.side}
+          width={args.width}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
+        >
           <div style={{ padding: '1.5rem' }}>
             <Typography variant="h3">Drawer Content</Typography>
             <Typography style={{ marginTop: '1rem' }}>
@@ -51,12 +59,21 @@ export const Default: Story = {
 };
 
 export const RightSide: Story = {
-  render: () => {
+  argTypes: { side: { control: false } },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Right Drawer</Button>
-        <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} side="right">
+        <Drawer
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          side="right"
+          width={args.width}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
+        >
           <div style={{ padding: '1.5rem' }}>
             <Typography variant="h3">Right Drawer</Typography>
             <Typography style={{ marginTop: '1rem' }}>
@@ -70,12 +87,21 @@ export const RightSide: Story = {
 };
 
 export const CustomWidth: Story = {
-  render: () => {
+  argTypes: { width: { control: false } },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Wide Drawer</Button>
-        <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} width="400px">
+        <Drawer
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          side={args.side}
+          width="400px"
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
+        >
           <div style={{ padding: '1.5rem' }}>
             <Typography variant="h3">Wide Drawer</Typography>
             <Typography style={{ marginTop: '1rem' }}>
@@ -89,12 +115,20 @@ export const CustomWidth: Story = {
 };
 
 export const WithNavigation: Story = {
-  render: () => {
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Navigation Drawer</Button>
-        <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Drawer
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          side={args.side}
+          width={args.width}
+          closeOnClickOutside={args.closeOnClickOutside}
+          closeOnEscape={args.closeOnEscape}
+          lockScroll={args.lockScroll}
+        >
           <div style={{ padding: '1.5rem' }}>
             <Typography variant="h3" style={{ marginBottom: '1.5rem' }}>
               Navigation
@@ -128,7 +162,11 @@ export const WithNavigation: Story = {
 };
 
 export const NonDismissible: Story = {
-  render: () => {
+  argTypes: {
+    closeOnClickOutside: { control: false },
+    closeOnEscape: { control: false },
+  },
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
@@ -136,8 +174,11 @@ export const NonDismissible: Story = {
         <Drawer
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
+          side={args.side}
+          width={args.width}
           closeOnClickOutside={false}
           closeOnEscape={false}
+          lockScroll={args.lockScroll}
         >
           <div style={{ padding: '1.5rem' }}>
             <Typography variant="h3">Non-Dismissible Drawer</Typography>

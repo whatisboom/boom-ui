@@ -289,7 +289,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
               cy="50%"
               innerRadius={`${innerRadius}%`}
               outerRadius={`${outerRadius}%`}
-              fill="#8884d8"
+              fill={pieColors[0]}
               dataKey="value"
               label={showLabels}
               isAnimationActive={shouldAnimate}
@@ -357,7 +357,7 @@ export const Chart = forwardRef<HTMLDivElement, ChartProps>(
         aria-describedby={descriptionId}
         {...props}
       >
-        <span id={descriptionId} hidden>
+        <span id={descriptionId} className="sr-only">
           {description}
         </span>
         <ResponsiveContainer width={width} height={height}>
