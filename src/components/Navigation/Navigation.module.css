@@ -39,7 +39,9 @@
   font-size: var(--boom-font-size-sm);
   font-weight: var(--boom-font-weight-medium);
   cursor: pointer;
-  transition: background-color 0.15s, color 0.15s;
+  transition:
+    background-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    color var(--boom-duration-quick) var(--boom-ease-in-out);
   white-space: nowrap;
 }
 
@@ -87,7 +89,7 @@
 
 .dropdownIcon {
   margin-left: 4px;
-  transition: transform 0.2s;
+  transition: transform var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 .dropdownIcon.open {

@@ -35,7 +35,7 @@ const priorityOptions = [
 ];
 
 export const Default: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('us');
     return (
       <Select
@@ -43,13 +43,14 @@ export const Default: Story = {
         onChange={setValue}
         options={countryOptions}
         label="Country"
+        size={args.size}
       />
     );
   },
 };
 
 export const WithPlaceholder: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
     return (
       <Select
@@ -58,12 +59,14 @@ export const WithPlaceholder: Story = {
         options={countryOptions}
         label="Country"
         placeholder="Select a country"
+        size={args.size}
       />
     );
   },
 };
 
 export const Sizes: Story = {
+  argTypes: { size: { control: false } },
   render: () => {
     const [value, setValue] = useState('medium');
     return (
@@ -95,7 +98,7 @@ export const Sizes: Story = {
 };
 
 export const WithHelperText: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('us');
     return (
       <Select
@@ -104,13 +107,14 @@ export const WithHelperText: Story = {
         options={countryOptions}
         label="Country"
         helperText="Select your country of residence"
+        size={args.size}
       />
     );
   },
 };
 
 export const WithError: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
     return (
       <Select
@@ -120,6 +124,7 @@ export const WithError: Story = {
         label="Country"
         error="Please select a country"
         required
+        size={args.size}
       />
     );
   },
@@ -159,7 +164,7 @@ export const WithDisabledOptions: Story = {
 };
 
 export const Required: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('');
     return (
       <Select
@@ -169,13 +174,14 @@ export const Required: Story = {
         label="Country"
         placeholder="Select a country"
         required
+        size={args.size}
       />
     );
   },
 };
 
 export const FullWidth: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState('us');
     return (
       <div style={{ border: '2px dashed var(--boom-theme-border-default)', padding: '1rem' }}>
@@ -185,6 +191,7 @@ export const FullWidth: Story = {
           options={countryOptions}
           label="Country"
           fullWidth
+          size={args.size}
         />
       </div>
     );

@@ -32,7 +32,8 @@ type Story = StoryObj<typeof Slider>;
 
 // Single Mode Stories
 export const SingleValue: Story = {
-  render: () => {
+  argTypes: { mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState(50);
     return (
       <Slider
@@ -41,13 +42,18 @@ export const SingleValue: Story = {
         onChange={setValue}
         min={0}
         max={100}
+        size={args.size}
+        disabled={args.disabled}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
 };
 
 export const WithStep: Story = {
-  render: () => {
+  argTypes: { mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState(50);
     return (
       <Slider
@@ -57,13 +63,18 @@ export const WithStep: Story = {
         min={0}
         max={100}
         step={10}
+        size={args.size}
+        disabled={args.disabled}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
 };
 
 export const WithMarkers: Story = {
-  render: () => {
+  argTypes: { mode: { control: false }, showMarkers: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState(50);
     return (
       <Slider
@@ -74,13 +85,17 @@ export const WithMarkers: Story = {
         max={100}
         step={25}
         showMarkers
+        size={args.size}
+        disabled={args.disabled}
+        readOnly={args.readOnly}
       />
     );
   },
 };
 
 export const CustomFormatting: Story = {
-  render: () => {
+  argTypes: { mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState(50);
     return (
       <Slider
@@ -90,13 +105,18 @@ export const CustomFormatting: Story = {
         min={0}
         max={100}
         formatValue={(v) => `${v}%`}
+        size={args.size}
+        disabled={args.disabled}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
 };
 
 export const SmallSize: Story = {
-  render: () => {
+  argTypes: { size: { control: false }, mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState(30);
     return (
       <Slider
@@ -106,13 +126,17 @@ export const SmallSize: Story = {
         min={0}
         max={100}
         size="sm"
+        disabled={args.disabled}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
 };
 
 export const LargeSize: Story = {
-  render: () => {
+  argTypes: { size: { control: false }, mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState(70);
     return (
       <Slider
@@ -122,13 +146,17 @@ export const LargeSize: Story = {
         min={0}
         max={100}
         size="lg"
+        disabled={args.disabled}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
 };
 
 export const Disabled: Story = {
-  render: () => {
+  argTypes: { disabled: { control: false }, mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState(50);
     return (
       <Slider
@@ -138,13 +166,17 @@ export const Disabled: Story = {
         min={0}
         max={100}
         disabled
+        size={args.size}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
 };
 
 export const ReadOnly: Story = {
-  render: () => {
+  argTypes: { readOnly: { control: false }, mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState(50);
     return (
       <Slider
@@ -154,13 +186,17 @@ export const ReadOnly: Story = {
         min={0}
         max={100}
         readOnly
+        size={args.size}
+        disabled={args.disabled}
+        showMarkers={args.showMarkers}
       />
     );
   },
 };
 
 export const WithError: Story = {
-  render: () => {
+  argTypes: { mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState(30);
     return (
       <Slider
@@ -170,13 +206,18 @@ export const WithError: Story = {
         min={0}
         max={100}
         error="Value must be at least 50"
+        size={args.size}
+        disabled={args.disabled}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
 };
 
 export const WithHelperText: Story = {
-  render: () => {
+  argTypes: { mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState(50);
     return (
       <Slider
@@ -186,6 +227,10 @@ export const WithHelperText: Story = {
         min={0}
         max={100}
         helperText="Adjust the volume level"
+        size={args.size}
+        disabled={args.disabled}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
@@ -193,7 +238,8 @@ export const WithHelperText: Story = {
 
 // Range Mode Stories
 export const RangeValue: Story = {
-  render: () => {
+  argTypes: { mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState<[number, number]>([20, 80]);
     return (
       <Slider
@@ -203,13 +249,18 @@ export const RangeValue: Story = {
         onChange={setValue}
         min={0}
         max={100}
+        size={args.size}
+        disabled={args.disabled}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
 };
 
 export const RangeWithFormatting: Story = {
-  render: () => {
+  argTypes: { mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState<[number, number]>([250, 750]);
     return (
       <Slider
@@ -221,13 +272,18 @@ export const RangeWithFormatting: Story = {
         max={1000}
         step={50}
         formatValue={(v) => `$${v}`}
+        size={args.size}
+        disabled={args.disabled}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
 };
 
 export const RangeWithMarkers: Story = {
-  render: () => {
+  argTypes: { mode: { control: false }, showMarkers: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState<[number, number]>([25, 75]);
     return (
       <Slider
@@ -240,13 +296,17 @@ export const RangeWithMarkers: Story = {
         step={25}
         showMarkers
         formatValue={(v) => `${v}°F`}
+        size={args.size}
+        disabled={args.disabled}
+        readOnly={args.readOnly}
       />
     );
   },
 };
 
 export const RangeDisabled: Story = {
-  render: () => {
+  argTypes: { disabled: { control: false }, mode: { control: false } },
+  render: (args) => {
     const [value, setValue] = useState<[number, number]>([30, 70]);
     return (
       <Slider
@@ -257,6 +317,9 @@ export const RangeDisabled: Story = {
         min={0}
         max={100}
         disabled
+        size={args.size}
+        readOnly={args.readOnly}
+        showMarkers={args.showMarkers}
       />
     );
   },
