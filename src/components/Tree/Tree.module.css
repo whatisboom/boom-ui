@@ -55,7 +55,7 @@
   border: none;
   color: var(--boom-theme-text-secondary);
   cursor: pointer;
-  transition: transform var(--boom-transition-fast);
+  transition: transform var(--boom-duration-quick) var(--boom-ease-out);
   flex-shrink: 0;
 }
 

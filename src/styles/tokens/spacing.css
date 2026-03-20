@@ -35,7 +35,7 @@
   --boom-stagger-delay: 50ms;
 
   /* Transition aliases (deprecated — use duration + ease tokens) */
-  --boom-transition-fast: var(--boom-duration-quick);
-  --boom-transition-base: var(--boom-duration-base);
-  --boom-transition-slow: var(--boom-duration-slow);
+  --boom-transition-fast: var(--boom-duration-quick) ease;
+  --boom-transition-base: var(--boom-duration-base) ease;
+  --boom-transition-slow: var(--boom-duration-slow) ease;
 }

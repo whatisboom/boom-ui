@@ -83,7 +83,7 @@
   height: 4px;
   background-color: var(--boom-theme-bg-tertiary);
   border-radius: var(--boom-border-radius-sm);
-  transition: background-color var(--boom-transition-fast);
+  transition: background-color var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 .stepActive {
