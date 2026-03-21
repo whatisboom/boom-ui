@@ -85,16 +85,11 @@ function resolveColor(colorString: string): { h: number; s: number; l: number } 
     return null;
   }
 
-  const parent = document.body ?? document.documentElement;
-  if (!parent) {
-    return null;
-  }
-
   let el: HTMLDivElement | null = null;
   try {
     el = document.createElement('div');
     el.style.color = colorString;
-    parent.appendChild(el);
+    document.body.appendChild(el);
 
     const computed = getComputedStyle(el).color;
     if (computed) {
