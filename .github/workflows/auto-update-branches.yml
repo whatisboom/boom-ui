@@ -21,15 +21,15 @@ jobs:
           BASE_BRANCH="${GITHUB_REF_NAME}"
           echo "Updating PRs targeting ${BASE_BRANCH}..."
 
-          # Get open PRs targeting this branch
-          prs=$(gh pr list --base "$BASE_BRANCH" --state open --json number,headRefName,reviewDecision --jq '.[]')
+          # Get open PRs targeting this branch (base64-encoded JSON objects, one per line)
+          prs=$(gh pr list --base "$BASE_BRANCH" --state open --json number,headRefName,reviewDecision --jq '.[] | @base64')
 
           if [ -z "$prs" ]; then
             echo "No open PRs targeting ${BASE_BRANCH}"
             exit 0
           fi
 
-          gh pr list --base "$BASE_BRANCH" --state open --json number,headRefName,reviewDecision --jq '.[] | @base64' | while read -r pr; do
+          echo "$prs" | while read -r pr; do
             number=$(echo "$pr" | base64 -d | jq -r '.number')
             branch=$(echo "$pr" | base64 -d | jq -r '.headRefName')
             review=$(echo "$pr" | base64 -d | jq -r '.reviewDecision')
