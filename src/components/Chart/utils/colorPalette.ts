@@ -53,11 +53,14 @@ function rgbToHSL(r: number, g: number, b: number): { h: number; s: number; l: n
 }
 
 /**
- * Parses an RGB color string to HSL values
- * Example: "rgb(50, 100, 200)" -> { h: 220, s: 60, l: 49 }
+ * Parses an RGB/RGBA color string to HSL values.
+ * Supports both comma-separated (CSS3) and space-separated (CSS Color 4) formats:
+ *   "rgb(50, 100, 200)" | "rgb(50 100 200)" | "rgb(50 100 200 / 0.5)" | "rgba(50, 100, 200, 0.5)"
  */
 function parseRGB(rgbString: string): { h: number; s: number; l: number } | null {
-  const match = rgbString.match(/rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/);
+  const match = rgbString.match(
+    /rgba?\(\s*(\d+)\s*[,\s]\s*(\d+)\s*[,\s]\s*(\d+)(?:\s*[,/]\s*[\d.]+%?)?\s*\)/
+  );
   if (!match) {
     return null;
   }
@@ -67,11 +70,19 @@ function parseRGB(rgbString: string): { h: number; s: number; l: number } | null
 /**
  * Resolves a CSS color string to a computed RGB value using a temporary DOM element.
  * Handles var() references, hsl(), rgb(), hex, and any other CSS color format.
- * Returns null in non-browser environments (SSR).
+ * In non-browser environments (SSR), falls back to direct parsing of hsl()/rgb() literals.
+ * Returns null only when the color string cannot be parsed in any way.
  */
 function resolveColor(colorString: string): { h: number; s: number; l: number } | null {
+  // Try direct parsing first to avoid unnecessary DOM round-trips
+  const directParsed = parseHSL(colorString) ?? parseRGB(colorString);
+  if (directParsed) {
+    return directParsed;
+  }
+
+  // For var(), hex, named colors, etc. — resolve via DOM
   if (typeof document === 'undefined') {
-    return parseHSL(colorString) ?? parseRGB(colorString);
+    return null;
   }
 
   let el: HTMLDivElement | null = null;
@@ -81,22 +92,18 @@ function resolveColor(colorString: string): { h: number; s: number; l: number } 
     document.body.appendChild(el);
 
     const computed = getComputedStyle(el).color;
-
-    if (computed && /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/i.test(computed)) {
-      const parsed = parseRGB(computed);
-      if (parsed) {
-        return parsed;
-      }
+    if (computed) {
+      return parseRGB(computed);
     }
   } catch {
-    // Swallow DOM-related errors and fall back to direct parsing below.
+    // Swallow DOM-related errors; color cannot be resolved.
   } finally {
     if (el?.parentNode) {
       el.parentNode.removeChild(el);
     }
   }
 
-  return parseHSL(colorString) ?? parseRGB(colorString);
+  return null;
 }
 
 /**

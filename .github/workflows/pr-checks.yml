@@ -12,6 +12,21 @@ permissions:
   contents: read
 
 jobs:
+  # Enforce git-flow: only release/* and hotfix/* branches can target main
+  branch-gate:
+    name: Branch Gate
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check source branch
+        run: |
+          HEAD_REF="${{ github.head_ref }}"
+          if [[ "$HEAD_REF" != release/* && "$HEAD_REF" != hotfix/* ]]; then
+            echo "::error::PRs targeting main must come from release/* or hotfix/* branches. Got: $HEAD_REF"
+            exit 1
+          fi
+          echo "Branch gate passed: $HEAD_REF"
+
   typecheck:
     name: Type Check
     runs-on: ubuntu-latest
