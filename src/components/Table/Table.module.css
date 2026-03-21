@@ -84,7 +84,7 @@
 
 .hoverable .row:hover {
   background-color: var(--boom-theme-bg-tertiary);
-  transition: background-color var(--boom-transition-fast);
+  transition: background-color var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 /* Cells */
@@ -136,7 +136,7 @@
 .sortable {
   cursor: pointer;
   user-select: none;
-  transition: background-color var(--boom-transition-fast);
+  transition: background-color var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 .sortable:hover {
@@ -178,7 +178,7 @@
 
 .rowSelectable {
   cursor: pointer;
-  transition: background-color var(--boom-transition-fast);
+  transition: background-color var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 .rowSelectable:hover {
@@ -250,7 +250,7 @@
   color: var(--boom-theme-text-primary);
   cursor: pointer;
   border-radius: var(--boom-border-radius-md);
-  transition: background-color var(--boom-transition-fast);
+  transition: background-color var(--boom-duration-quick) var(--boom-ease-in-out);
   font-size: var(--boom-font-size-sm);
 }
 

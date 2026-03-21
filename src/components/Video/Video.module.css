@@ -32,7 +32,7 @@
   right: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
   padding: var(--boom-spacing-6) var(--boom-spacing-4) var(--boom-spacing-4);
-  transition: opacity var(--boom-transition-base), transform var(--boom-transition-base);
+  transition: opacity var(--boom-duration-base) var(--boom-ease-in-out), transform var(--boom-duration-base) var(--boom-ease-in-out);
   opacity: 0;
   transform: translateY(100%);
 }
@@ -87,7 +87,7 @@
   cursor: pointer;
   padding: var(--boom-spacing-2);
   border-radius: var(--boom-border-radius-sm);
-  transition: background-color var(--boom-transition-base);
+  transition: background-color var(--boom-duration-base) var(--boom-ease-in-out);
   min-width: 36px;
   height: 36px;
 }
@@ -132,10 +132,10 @@
   padding: 0;
   background-color: transparent;
   border-radius: var(--boom-border-radius-sm);
-  transition: width var(--boom-transition-base),
-              opacity var(--boom-transition-base),
-              padding var(--boom-transition-base),
-              background-color var(--boom-transition-base);
+  transition: width var(--boom-duration-base) var(--boom-ease-in-out),
+              opacity var(--boom-duration-base) var(--boom-ease-in-out),
+              padding var(--boom-duration-base) var(--boom-ease-in-out),
+              background-color var(--boom-duration-base) var(--boom-ease-in-out);
 }
 
 .volumeSliderWrapper.volumeSliderVisible {
@@ -173,7 +173,7 @@
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
-  transition: opacity var(--boom-transition-base), transform var(--boom-transition-base);
+  transition: opacity var(--boom-duration-base) var(--boom-ease-in-out), transform var(--boom-duration-base) var(--boom-ease-in-out);
 }
 
 .dropdown.open .dropdownMenu {
@@ -194,7 +194,7 @@
   width: 100%;
   text-align: left;
   font-size: var(--boom-font-size-sm);
-  transition: background-color var(--boom-transition-base);
+  transition: background-color var(--boom-duration-base) var(--boom-ease-in-out);
 }
 
 .dropdownItem:hover {
@@ -257,7 +257,7 @@
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.3);
   opacity: 0;
-  transition: opacity var(--boom-transition-base);
+  transition: opacity var(--boom-duration-base) var(--boom-ease-in-out);
   pointer-events: none;
 }
 
@@ -282,7 +282,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform var(--boom-transition-base), background-color var(--boom-transition-base);
+  transition: transform var(--boom-duration-base) var(--boom-ease-in-out), background-color var(--boom-duration-base) var(--boom-ease-in-out);
 }
 
 .playOverlayButton:hover {

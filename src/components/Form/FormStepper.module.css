@@ -38,7 +38,10 @@
   border: 2px solid var(--boom-theme-border-default);
   border-radius: var(--boom-border-radius-md);
   cursor: pointer;
-  transition: all var(--boom-transition-base);
+  transition:
+    background-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    border-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    color var(--boom-duration-quick) var(--boom-ease-in-out);
   font: inherit;
   text-align: left;
 }
@@ -66,7 +69,10 @@
   color: var(--boom-theme-text-secondary);
   font-weight: 600;
   font-size: 0.875rem;
-  transition: all var(--boom-transition-base);
+  transition:
+    background-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    border-color var(--boom-duration-quick) var(--boom-ease-in-out),
+    color var(--boom-duration-quick) var(--boom-ease-in-out);
 }
 
 /* Progress step content */
